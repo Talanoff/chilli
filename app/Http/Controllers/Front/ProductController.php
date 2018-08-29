@@ -11,7 +11,7 @@ class ProductController extends Controller
 {
     public function index(Request $request): View
     {
-        if ($request->has('promotion')) {
+        if (app('router')->currentRouteNamed('app.product.promotion')) {
             //
         }
 
