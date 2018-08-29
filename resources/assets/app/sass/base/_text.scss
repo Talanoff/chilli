@@ -23,3 +23,15 @@ $weight: light 300, normal 400, medium 500, bold 700, heavy 900;
         font-weight: $w !important;
     }
 }
+
+$transforms: none uppercase lowercase capitalize;
+
+@each $transform in $transforms {
+    .text-#{$transform} {
+        text-transform: #{$transform} !important;
+    }
+}
+
+.text-muted {
+    color: $body-color;
+}

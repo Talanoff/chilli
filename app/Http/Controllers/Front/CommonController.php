@@ -14,7 +14,7 @@ class CommonController extends Controller
             ->orderByRaw("FIELD(tag , 'absolute_hit') DESC")
             ->orderByRaw("FIELD(tag , 'special_offer') DESC")
             ->orderByRaw("FIELD(tag , 'newest') DESC")
-            ->take(7)->latest()->get();
+            ->take(6)->latest()->get();
 
         return \view('app.home.index', compact('products'));
     }

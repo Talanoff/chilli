@@ -1,14 +1,82 @@
+.products {
+    margin: 1px -1px;
+
+    .product-item-wrapper {
+        padding: 1px;
+    }
+
+    .is-large, .is-medium, .is-small {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    @media (min-width: map_get($grid-breakpoints, lg)) {
+        .is-large, .is-medium {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+
+        .is-small {
+            flex: 0 0 30%;
+            max-width: 30%;
+        }
+    }
+
+    @media (min-width: map_get($grid-breakpoints, xl)) {
+        .is-large {
+            flex: 0 0 60%;
+            max-width: 60%;
+        }
+
+        .is-medium {
+            flex: 0 0 40%;
+            max-width: 40%;
+        }
+
+        .is-last {
+            margin-top: 100px;
+            height: calc(100% - 100px);
+        }
+    }
+}
+
 .product-item {
+    position: relative;
     background-color: #fefefe;
     color: $product-text-color;
     padding: 40px;
+    overflow: hidden;
+    z-index: 10;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
 
     @media (min-width: map_get($grid-breakpoints, lg)) {
+        padding: 60px;
+    }
+
+    @media (min-width: map_get($grid-breakpoints, xxl)) {
         padding: 80px;
     }
 
+    figure {
+        @extend %abs;
+        margin: 0;
+        z-index: -1;
+        transition: 1s;
+    }
+
+    &:hover {
+        figure {
+            transform: scale(1.15) rotate(-3deg);
+            transition: 3s;
+        }
+    }
+
     &__tag {
-        padding: 10px 15px;
+        padding: 8px 15px 6px;
         background-color: $primary;
         font-size: 12px;
         text-transform: uppercase;
@@ -26,6 +94,50 @@
             border-top: 1px solid $danger;
             content: '';
             margin-top: -1px;
+        }
+    }
+
+    &__title {
+        a {
+            color: $product-text-color;
+            &:hover {
+                color: $primary;
+            }
+        }
+    }
+
+    &.is-large {
+        .product-item__title {
+            font-size: 34 / 16 * 1rem;
+        }
+    }
+
+    &.tag-rotated {
+        @media (min-width: map_get($grid-breakpoints, lg)) {
+            .product-item__tag {
+                position: absolute;
+                left: 10px;
+                top: 0;
+                transform: rotate(-90deg) translateX(-100%);
+                transform-origin: 0 0;
+            }
+        }
+    }
+
+    &--leaders {
+        height: 320px;
+
+        figure {
+            background: #fff url("../../images/leaders-bg.png") 130% 30% / 75% auto no-repeat;
+        }
+    }
+
+    &--all {
+        height: 420px;
+        margin-bottom: -100px;
+
+        figure {
+            background: #fff url("../../images/catalog-bg.jpg") 100% 50% / auto 105% no-repeat;
         }
     }
 }
