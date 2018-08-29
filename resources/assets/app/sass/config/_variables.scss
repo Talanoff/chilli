@@ -1,0 +1,28 @@
+// Colors
+$body-bg: #1d2024;
+$body-color: #787979;
+
+$primary: #f9c66d;
+$secondary: #32363d;
+$danger: #ab1f23;
+
+$product-text-color: #181818;
+
+$font-size-base: 1rem;
+$line-height-base: 22 / 16;
+$font-family-base: 'Gotham Pro', Helvetica, Arial, sans-serif;
+
+$columns: 12;
+
+$grid-breakpoints: (
+    xs: 0,
+    sm: 640px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px
+);
+
+$border-radius: 0.15rem;
+
+$paragraph-margin-bottom: 1.25rem;
+$headings-margin-bottom: $paragraph-margin-bottom * 1.25;

@@ -1,0 +1,24 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+$displays: none, block, flex, inline-flex;
+
+@each $display in $displays {
+    .#{$display} {
+        display: #{$display};
+        @if (#{$display} == 'flex' or #{$display} == 'inline-flex') {
+            flex-wrap: wrap;
+        }
+    }
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+    @media (min-width: map-get($grid-breakpoints, $breakpoint)) {
+        @each $display in $displays {
+            .#{$display}-#{$breakpoint} {
+                display: #{$display};
+            }
+        }
+    }
+}

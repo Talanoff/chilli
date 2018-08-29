@@ -1,0 +1,31 @@
+.product-item {
+    background-color: #fefefe;
+    color: $product-text-color;
+    padding: 40px;
+
+    @media (min-width: map_get($grid-breakpoints, lg)) {
+        padding: 80px;
+    }
+
+    &__tag {
+        padding: 10px 15px;
+        background-color: $primary;
+        font-size: 12px;
+        text-transform: uppercase;
+    }
+
+    &__price {
+        padding-left: 40px;
+        position: relative;
+
+        &::before {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 30px;
+            border-top: 1px solid $danger;
+            content: '';
+            margin-top: -1px;
+        }
+    }
+}

@@ -1,0 +1,28 @@
+.attribute {
+    &-color {
+        width: 20px;
+        height: 20px;
+        margin-top: -4px;
+
+        &--small {
+            width: 16px;
+            height: 16px;
+            margin-top: 0;
+        }
+    }
+
+    &-item {
+        padding: 4px 8px;
+        border: 1px solid $border-color;
+        border-radius: $border-radius;
+        line-height: 1.25;
+        display: inline-flex;
+        align-items: center;
+        height: 30px;
+        transition: 0.35s;
+
+        &:hover {
+            background-color: $body-bg;
+        }
+    }
+}

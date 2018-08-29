@@ -1,0 +1,28 @@
+.item {
+    padding: 20px;
+    margin-bottom: 10px;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    position: relative;
+
+    &:hover {
+        background-color: $body-bg;
+    }
+
+    &-id {
+        position: absolute;
+        height: 20px;
+        background-color: $yellow;
+        top: 20px;
+        right: 100%;
+        margin-right: -10px;
+        min-width: 40px;
+        padding: 0 10px;
+
+        font: 800 0.75rem/20px $font-family-base;
+    }
+
+    &-footer {
+        margin-top: 10px;
+    }
+}

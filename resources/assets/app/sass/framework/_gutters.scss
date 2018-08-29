@@ -1,0 +1,78 @@
+$count: 10;
+$size: 5; // px
+
+@for $gutter from 0 through $count {
+    .p-#{$gutter} {
+        padding: $size / 16 * $gutter * 1rem !important;
+    }
+
+    .px-#{$gutter} {
+        padding: 0 ($size / 16 * $gutter * 1rem) !important;
+    }
+
+    .py-#{$gutter} {
+        padding: ($size / 16 * $gutter * 1rem) 0 !important;
+    }
+
+    .m-#{$gutter} {
+        margin: $size / 16 * $gutter * 1rem !important;
+    }
+
+    .mx-#{$gutter} {
+        margin: 0 ($size / 16 * $gutter * 1rem) !important;
+    }
+
+    .my-#{$gutter} {
+        margin: ($size / 16 * $gutter * 1rem) 0 !important;
+    }
+
+    @each $a, $b in t top, r right, b bottom, l left {
+        .p#{$a}-#{$gutter} {
+            padding-#{$b}: $size / 16 * $gutter * 1rem !important;
+        }
+
+        .m#{$a}-#{$gutter} {
+            margin-#{$b}: $size / 16 * $gutter * 1rem !important;
+        }
+    }
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+    @media (min-width: map-get($grid-breakpoints, $breakpoint)) {
+        @for $gutter from 0 through $count {
+            .p-#{$breakpoint}-#{$gutter} {
+                padding: $size / 16 * $gutter * 1rem !important;
+            }
+
+            .px-#{$breakpoint}-#{$gutter} {
+                padding: 0 ($size / 16 * $gutter * 1rem) !important;
+            }
+
+            .py-#{$breakpoint}-#{$gutter} {
+                padding: ($size / 16 * $gutter * 1rem) 0 !important;
+            }
+
+            .m-#{$breakpoint}-#{$gutter} {
+                margin: $size / 16 * $gutter * 1rem !important;
+            }
+
+            .mx-#{$breakpoint}-#{$gutter} {
+                margin: 0 ($size / 16 * $gutter * 1rem) !important;
+            }
+
+            .my-#{$breakpoint}-#{$gutter} {
+                margin: ($size / 16 * $gutter * 1rem) 0 !important;
+            }
+
+            @each $a, $b in t top, r right, b bottom, l left {
+                .p#{$a}-#{$breakpoint}-#{$gutter} {
+                    padding-#{$b}: $size / 16 * $gutter * 1rem !important;
+                }
+
+                .m#{$a}-#{$breakpoint}-#{$gutter} {
+                    margin-#{$b}: $size / 16 * $gutter * 1rem !important;
+                }
+            }
+        }
+    }
+}

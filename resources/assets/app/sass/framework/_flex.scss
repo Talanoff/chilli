@@ -1,0 +1,50 @@
+$justify: start flex-start, end flex-end, center center, between space-between, around space-around;
+$items-align: stretch stretch, center center, start flex-start, end flex-end, baseline baseline, initial initial, inherit inherit;
+
+@each $j, $f in $justify {
+    .justify-#{$j} {
+        justify-content: #{$f} !important;
+    }
+}
+
+@each $i, $f in $items-align {
+    .align-#{$i} {
+        align-items: #{$f} !important;
+    }
+
+    .align-self-#{$i} {
+        align-self: #{$f};
+    }
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+    @media (min-width: map-get($grid-breakpoints, $breakpoint)) {
+        @each $j, $f in $justify {
+            .justify-#{$breakpoint}-#{$j} {
+                justify-content: #{$f} !important;
+            }
+        }
+
+        @each $i, $f in $items-align {
+            .align-#{$breakpoint}-#{$i} {
+                align-items: #{$f} !important;
+            }
+
+            .align-self-#{$breakpoint}-#{$i} {
+                align-self: #{$f};
+            }
+        }
+    }
+}
+
+.flex-0 {
+    flex: 0;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.flex-no-wrap {
+    flex-wrap: nowrap;
+}

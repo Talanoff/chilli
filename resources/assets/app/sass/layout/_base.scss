@@ -1,0 +1,19 @@
+*, *::before, *::after {
+    outline: none;
+}
+
+html {
+    font-size: 100%;
+    height: 100%;
+    font-weight: normal;
+}
+
+body {
+    font-weight: normal;
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+
+    background-color: $body-bg;
+    color: $body-color;
+}

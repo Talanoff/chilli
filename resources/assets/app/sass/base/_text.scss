@@ -1,0 +1,25 @@
+$aligns: left right center justify;
+
+@each $align in $aligns {
+    .text-#{$align} {
+        text-align: #{$align};
+    }
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+    @media (min-width: map-get($grid-breakpoints, $breakpoint)) {
+        @each $align in $aligns {
+            .text-#{$breakpoint}-#{$align} {
+                text-align: #{$align};
+            }
+        }
+    }
+}
+
+$weight: light 300, normal 400, medium 500, bold 700, heavy 900;
+
+@each $n, $w in $weight {
+    .text-#{$n} {
+        font-weight: $w !important;
+    }
+}

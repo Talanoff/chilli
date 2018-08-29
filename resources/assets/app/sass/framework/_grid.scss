@@ -1,0 +1,41 @@
+.w-1 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+@for $column from 1 through $columns {
+    .w-1\/#{$column} {
+        flex: 0 0 100% / $column;
+        max-width: 100% / $column;
+    }
+}
+
+@for $column from 3 through ($columns / 2) {
+    .w-2\/#{$column} {
+        flex: 0 0 100% / ($column / 2);
+        max-width: 100% / ($column / 2);
+    }
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+    @media (min-width: map-get($grid-breakpoints, $breakpoint)) {
+        .w-#{$breakpoint}-\1 {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+
+        @for $column from 3 through ($columns / 2) {
+            .w-#{$breakpoint}-\2\/#{$column} {
+                flex: 0 0 100% / ($column / 2);
+                max-width: 100% / ($column / 2);
+            }
+        }
+
+        @for $column from 2 through $columns {
+            .w-#{$breakpoint}-\1\/#{$column} {
+                flex: 0 0 100% / $column;
+                max-width: 100% / $column;
+            }
+        }
+    }
+}
