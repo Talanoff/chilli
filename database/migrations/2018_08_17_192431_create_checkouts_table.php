@@ -18,7 +18,7 @@ class CreateCheckoutsTable extends Migration
 
             $table->enum('status', array_keys(App\Models\Order\Checkout::$STATUSES))
                   ->default(array_keys(App\Models\Order\Checkout::$STATUSES)[0]);
-            $table->unsignedInteger('user_id');
+            $table->string('user_id');
             $table->unsignedInteger('product_id');
             $table->unsignedInteger('quantity');
 

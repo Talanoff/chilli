@@ -48,3 +48,7 @@ $items-align: stretch stretch, center center, start flex-start, end flex-end, ba
 .flex-no-wrap {
     flex-wrap: nowrap;
 }
+
+.flex-column {
+    flex-direction: column;
+}

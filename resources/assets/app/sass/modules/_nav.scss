@@ -1,0 +1,7 @@
+.nav {
+    display: flex;
+
+    &-item {
+        margin: 0 $gutter/2;
+    }
+}

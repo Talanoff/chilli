@@ -46,4 +46,15 @@ class Checkout extends Model
     {
         return $this->hasOne(User::class);
     }
+
+    /**
+     * Returns anonymous user checkout
+     *
+     * @return mixed
+     */
+    public static function anonymous()
+    {
+        return self::whereUserId(session()->getId())
+                   ->whereStatus('in_progress');
+    }
 }

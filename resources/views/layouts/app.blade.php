@@ -12,14 +12,17 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-<div id="app">
-    <header></header>
+<div id="app" class="mihv-100 flex flex-column">
+    @include('partials.app.layout.svg')
+    @include('partials.app.layout.header')
 
-    <div class="container">
-        <main>
+    <main class="flex-1">
+        <div class="container">
             @yield('content')
-        </main>
-    </div>
+        </div>
+    </main>
+
+    @include('partials.app.layout.footer')
 </div>
 
 <script src="{{ asset('js/app.js') }}" defer></script>

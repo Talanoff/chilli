@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-$displays: none, block, flex, inline-flex;
+$displays: none block flex inline-flex;
 
 @each $display in $displays {
     .#{$display} {

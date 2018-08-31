@@ -1,0 +1,26 @@
+header {
+    padding: 20px 0;
+}
+
+#app-cart {
+    position: relative;
+
+    .cart-count {
+        position: absolute;
+        right: 0;
+        top: -5px;
+        color: $danger;
+        font-weight: bold;
+        font-size: rem-calc(14);
+    }
+
+    svg {
+        fill: #fff;
+        transition: 0.35s;
+        cursor: pointer;
+
+        &:hover {
+            fill: $primary;
+        }
+    }
+}

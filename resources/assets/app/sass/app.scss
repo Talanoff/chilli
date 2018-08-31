@@ -1,7 +1,8 @@
 @import "~normalize.css";
-
+@import "config/functions";
 @import 'config/variables';
 @import "config/fonts";
+@import "config/placeholders";
 
 @import "framework/displays";
 @import "framework/flex";
@@ -14,8 +15,10 @@
 @import "base/buttons";
 @import "base/text";
 @import "base/links";
+@import "base/images";
 
 @import "layout/base";
+@import "layout/header";
+@import "layout/footer";
 @import "layout/product";
-
-@import "modules/placeholders";
+@import "modules/nav";
