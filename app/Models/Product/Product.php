@@ -25,6 +25,7 @@ class Product extends Model implements HasMedia
     protected $fillable = [
         'slug',
         'title',
+        'subtitle',
         'description',
         'price',
         'discount',
@@ -51,6 +52,7 @@ class Product extends Model implements HasMedia
         'gallery_preview',
         'computed_price',
         'stars',
+        'colors',
     ];
 
     public static $TAGS = [
@@ -71,7 +73,7 @@ class Product extends Model implements HasMedia
     /**
      * @return BelongsToMany
      */
-    public function attribute(): BelongsToMany
+    public function attributes(): BelongsToMany
     {
         return $this->belongsToMany(Attribute::class);
     }
@@ -154,7 +156,12 @@ class Product extends Model implements HasMedia
     public function getStarsAttribute(): string
     {
         $rate = $this->rating ?? $this->ratings()->avg('rate');
-        return number_format($rate, 1);
+        return round($rate);
+    }
+
+    public function getColorsAttribute()
+    {
+        return $this->attribute()->whereType('color')->get();
     }
 
     /**

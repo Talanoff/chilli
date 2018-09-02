@@ -1,26 +1,47 @@
-<div class="product-item-wrapper w-md-1/2 w-lg-1/3">
-    <div class="product-item h-100">
-        <figure
-            style="background: url({{ $product->getFirstMediaUrl('product', isset($large) ? 'large' : 'medium') }}) 50% 50% / cover no-repeat;"></figure>
+@php
+    $large = $large ?? false;
+    $related = $related ?? false;
+@endphp
 
-        @if ($product->tag)
-            <span class="product-item__tag">
-            {{ App\Models\Product\Product::$TAGS[$product->tag] }}
-        </span>
-        @endif
+<div
+    class="product-item-wrapper w-md-1/2{{ !$large && $loop->index > 3 || $related ? ' w-xl-1/4' : request()->get('page') > 1 ? ' w-xl-1/4' : '' }}">
+    <a href="{{ route('app.product.show', $product) }}" class="product-item product-item--squire">
+        <figure class="product-item__link"
+                style="background: url({{ $product->getFirstMediaUrl('product', !$large ? 'medium' : 'large') }}) 50% 50% / cover no-repeat;"></figure>
 
-        <h3 class="product-item__title text-uppercase mt-6 mb-4">
-            <a href="{{ route('app.product.show', $product) }}">
+        <div class="product-item-content">
+            <h6 class="product-item__title text-uppercase {{ $product->subtitle ? 'mb-0' : 'mb-4' }}">
                 {{ $product->title }}
-            </a>
-        </h3>
+            </h6>
 
-        <h4 class="product-item__price mb-4">
-            {{ $product->computed_price }} грн
-        </h4>
+            @if ($product->subtitle)
+                <p class="small text-muted text-uppercase">{{ $product->subtitle }}</p>
+            @endif
 
-        <add-to-cart-button
-            class="btn-secondary"
-            action="{{ route('app.cart.add', $product) }}"></add-to-cart-button>
-    </div>
+            <div class="product-item__stars my-4">
+                @for($i = 0; $i <= 5; $i++)
+                    <svg width="12" height="12" class="{{ $i <= $product->stars ? 'is-filled' : '' }}">
+                        <use xlink:href="#star"></use>
+                    </svg>
+                @endfor
+            </div>
+
+            <h4 class="product-item__price mb-4">
+                {{ $product->computed_price }} грн
+            </h4>
+
+            @if (count($product->colors))
+                <div class="product-item__colors flex mb-5">
+                    @foreach($product->colors as $color)
+                        <div class="{{ !$loop->last ? 'mr-2' : '' }}"
+                             style="background-color: {{ $color->value }};"></div>
+                    @endforeach
+                </div>
+            @endif
+
+            <add-to-cart-button
+                class="btn-secondary"
+                action="{{ route('app.cart.add', $product) }}"></add-to-cart-button>
+        </div>
+    </a>
 </div>

@@ -21,7 +21,7 @@ class ProductController extends Controller
      */
     public function index(Request $request): View
     {
-        $products = Product::query();
+        $products = Product::query()->with('comments', 'ratings', 'category');
 
         if ($request->filled('search')) {
             $products
@@ -67,7 +67,7 @@ class ProductController extends Controller
 
         $this->storeGallery($request, $product);
 
-        $product->attribute()->attach($request->get('attribute'));
+        $product->attributes()->attach($request->get('attribute'));
 
         return redirect()->route('admin.product.index');
     }
@@ -107,7 +107,7 @@ class ProductController extends Controller
 
         $this->storeGallery($request, $product);
 
-        $product->attribute()->sync($request->get('attribute'));
+        $product->attributes()->sync($request->get('attribute'));
 
         return redirect()->route('admin.product.index');
     }
@@ -121,7 +121,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product): RedirectResponse
     {
-        $product->attribute()->detach();
+        $product->attributes()->detach();
 
         $product->delete();
 
@@ -136,6 +136,7 @@ class ProductController extends Controller
     {
         return $request->only(
             'title',
+            'subtitle',
             'description',
             'price',
             'quantity',

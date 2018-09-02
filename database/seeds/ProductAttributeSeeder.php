@@ -13,21 +13,15 @@ class ProductAttributeSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        collect([
-            'Цвет',
-            $faker->word(),
-            implode(' ', $faker->words(2)),
-            $faker->word(),
-            $faker->word(),
-        ])->map(function ($type) {
+        collect(\App\Models\Product\AttributeType::$TYPES)->map(function ($type, $index) {
             \App\Models\Product\AttributeType::create([
-                'slug' => str_slug($type),
+                'slug' => str_slug($index),
                 'title' => ucfirst($type),
             ]);
         });
 
         for ($i = 0; $i < 60; $i++) {
-            $type = rand(1, 5);
+            $type = rand(1, count(\App\Models\Product\AttributeType::$TYPES));
 
             \App\Models\Product\Attribute::create([
                 'type_id' => $type,

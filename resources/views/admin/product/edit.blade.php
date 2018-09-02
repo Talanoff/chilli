@@ -20,6 +20,12 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="subtitle">Подзаголовок</label>
+                        <input type="text" name="subtitle" id="subtitle" class="form-control"
+                               value="{{ old('subtitle') ?? $product->subtitle }}">
+                    </div>
+
+                    <div class="form-group">
                         <label for="category">Категория</label>
                         <select name="category_id" id="category" class="form-control" required>
                             @foreach($categories as $category)
@@ -52,7 +58,7 @@
                                         @foreach($type->attribute as $attribute)
                                             <label class="attribute-item mr-2">
                                                 <input type="checkbox" name="attribute[]"
-                                                       {{ $product->attribute->contains($attribute->id) ? ' checked' : '' }}
+                                                       {{ $product->attributes->contains($attribute->id) ? ' checked' : '' }}
                                                        value="{{ $attribute->id }}" class="mr-1">
                                                 @if ($attribute->type === 'text')
                                                     {{ $attribute->value }}

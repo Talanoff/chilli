@@ -1,20 +1,18 @@
 <header>
     <div class="container">
-        <div class="row">
-            <div class="column w-md-1/2 w-lg-1/3">
-                <nav class="nav text-uppercase">
-                    <a href="{{ route('app.product.index') }}" class="nav-item">
-                        Каталог
+        <div class="row align-center">
+            <a href="{{ url('/') }}" class="logo column-auto">
+                <img src="{{ asset('images/logo.png') }}" alt="Chilli">
+            </a>
+
+            <div class="column w-lg-1/2">
+                <nav class="nav text-uppercase justify-between">
+                    @foreach($nav as $item)
+                        <a href="{{ route($item['route']) }}"
+                           class="nav-item{{ app('router')->currentRouteNamed($item['compare']) ? ' is-active' : '' }}">
+                            {{ $item['name'] }}
                     </a>
-                    <a href="{{ route('app.product.promotions') }}" class="nav-item">
-                        Акции
-                    </a>
-                    <a href="{{ route('app.product.novelties') }}" class="nav-item">
-                        Новинки
-                    </a>
-                    <a href="{{ route('app.review.index') }}" class="nav-item">
-                        Обзоры
-                    </a>
+                    @endforeach
                 </nav>
             </div>
 

@@ -31,4 +31,19 @@
             background-color: lighten($secondary, 10%);
         }
     }
+
+    &-dark {
+        background-color: $body-bg;
+        color: $body-color;
+
+        &:hover {
+            background-color: lighten($body-bg, 10%);
+        }
+    }
+
+    &-disabled {
+        color: $body-color !important;
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
 }

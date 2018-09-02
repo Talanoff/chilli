@@ -10,6 +10,12 @@ class AttributeType extends Model
 {
     use Slugable;
 
+    public static $TYPES = [
+        'color' => 'Цвет',
+        'material' => 'Материал',
+        'weight' => 'Вес',
+    ];
+
     protected $fillable = [
         'slug',
         'title',

@@ -15,7 +15,7 @@ class Attribute extends Model
     ];
 
     protected $with = [
-        'product',
+        'products',
         'type',
     ];
 
@@ -28,7 +28,7 @@ class Attribute extends Model
     /**
      * @return BelongsToMany
      */
-    public function product(): BelongsToMany
+    public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class);
     }

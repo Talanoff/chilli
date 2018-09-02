@@ -11,11 +11,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this->call(AdminUserSeeder::class);
-         $this->call(RolesSeeder::class);
+        $this->call(AdminUserSeeder::class);
+        $this->call(RolesSeeder::class);
 
-         $this->call(ProductCategorySeeder::class);
-         $this->call(ProductAttributeSeeder::class);
-         $this->call(ProductSeeder::class);
+        $this->call(ProductAttributeSeeder::class);
+
+        if (config('app.env') === 'local') {
+            $this->call(ProductCategorySeeder::class);
+            $this->call(ProductSeeder::class);
+        }
     }
 }

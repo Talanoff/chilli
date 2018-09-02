@@ -13,12 +13,13 @@ class ProductSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        for ($i = 0; $i < 10; $i++) {
-            $title = implode(' ', $faker->words(rand(4, 8)));
+        for ($i = 0; $i < 25; $i++) {
+            $title = implode(' ', $faker->words(rand(2, 4)));
 
             $product = App\Models\Product\Product::create([
                 'slug' => str_slug($title),
                 'title' => ucfirst($title),
+                'subtitle' => ucfirst(implode(' ', $faker->words(rand(3, 8)))),
                 'category_id' => rand(1, 4),
                 'description' => $faker->text(),
                 'price' => rand(100, 1000),

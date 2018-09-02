@@ -19,6 +19,12 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="subtitle">Подзаголовок</label>
+                        <input type="text" name="subtitle" id="subtitle" class="form-control"
+                               value="{{ old('subtitle') }}">
+                    </div>
+
+                    <div class="form-group">
                         <label for="category">Категория</label>
                         <select name="category_id" id="category" class="form-control" required>
                             @foreach($categories as $category)

@@ -12,11 +12,11 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-<div id="app" class="mihv-100 flex flex-column">
+<div id="app">
     @include('partials.app.layout.svg')
     @include('partials.app.layout.header')
 
-    <main class="flex-1">
+    <main>
         <div class="container">
             @yield('content')
         </div>
@@ -26,5 +26,6 @@
 </div>
 
 <script src="{{ asset('js/app.js') }}" defer></script>
+@stack('scripts')
 </body>
 </html>

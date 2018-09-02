@@ -3,5 +3,27 @@
 
     &-item {
         margin: 0 $gutter/2;
+        position: relative;
+    }
+}
+
+header {
+    .nav-item {
+        height: 30px;
+        line-height: 30px;
+
+        &.is-active {
+            color: #fff;
+
+            &::before {
+                position: absolute;
+                width: 35px;
+                left: 0;
+                bottom: 100%;
+                margin-bottom: 57px;
+                border-bottom: 2px solid #fff;
+                content: '';
+            }
+        }
     }
 }

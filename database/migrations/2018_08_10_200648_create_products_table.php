@@ -20,7 +20,9 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('category_id');
 
             $table->string('title');
+            $table->string('subtitle')->nullable();
             $table->mediumText('description')->nullable();
+
             $table->float('rating')->nullable();
             $table->string('tag')->nullable();
 

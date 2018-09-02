@@ -26,6 +26,31 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        View::composer('app.*', function () {
+            View::share('nav', [
+                [
+                    'route' => 'app.product.index',
+                    'compare' => 'app.product.*',
+                    'name' => 'Каталог',
+                ],
+                [
+                    'route' => 'app.promotions.index',
+                    'compare' => 'app.promotions.*',
+                    'name' => 'Акции',
+                ],
+                [
+                    'route' => 'app.novelties.index',
+                    'compare' => 'app.novelties.*',
+                    'name' => 'Новинки',
+                ],
+                [
+                    'route' => 'app.review.index',
+                    'compare' => 'app.review.*',
+                    'name' => 'Обзоры',
+                ],
+            ]);
+        });
+
         View::composer('admin.*', function () {
             $nav = [
                 [

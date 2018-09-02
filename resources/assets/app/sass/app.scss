@@ -9,8 +9,8 @@
 @import "framework/grid";
 @import "framework/sizes";
 @import "framework/gutters";
+@import "framework/container";
 
-@import "base/container";
 @import "base/typography";
 @import "base/buttons";
 @import "base/text";
@@ -21,4 +21,6 @@
 @import "layout/header";
 @import "layout/footer";
 @import "layout/product";
+
 @import "modules/nav";
+@import "modules/pagination";

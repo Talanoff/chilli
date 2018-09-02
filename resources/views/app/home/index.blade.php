@@ -42,8 +42,8 @@
 
                 <div class="product-item-wrapper is-large">
                     <a href="{{ route('app.product.index', ['sort' => 'leaders']) }}"
-                       class="product-item product-item--leaders justify-start">
-                        <figure></figure>
+                       class="product-item product-item--promo product-item--leaders justify-start">
+                        <figure class="product-item__link"></figure>
                         <h3 class="product-item__title text-uppercase mb-3">Лидеры продаж</h3>
                         <p class="text-muted small text-uppercase">
                             Самые продаваемы товары
@@ -53,8 +53,8 @@
 
                 <div class="product-item-wrapper is-medium">
                     <a href="{{ route('app.product.index') }}"
-                       class="product-item product-item--all justify-start">
-                        <figure></figure>
+                       class="product-item product-item--promo product-item--all justify-start">
+                        <figure class="product-item__link"></figure>
                         <h3 class="product-item__title text-uppercase mb-3">Смотреть все товары</h3>
                         <p class="text-muted small text-uppercase">
                             Перейти в каталог
@@ -70,5 +70,7 @@
             </div>
         @endforelse
     </section>
+
+    @include('partials.app.review.promo')
 
 @endsection

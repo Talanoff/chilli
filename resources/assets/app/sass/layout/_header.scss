@@ -1,5 +1,25 @@
 header {
     padding: 20px 0;
+    font-size: rem-calc(14);
+    position: relative;
+
+    .logo {
+        @media (min-width: map_get($grid-breakpoints, lg)) {
+            margin-left: -60px;
+        }
+
+        @media (min-width: map_get($grid-breakpoints, xl)) {
+            margin-left: -80px;
+        }
+
+        @media (min-width: map_get($grid-breakpoints, xxl)) {
+            margin-left: -120px;
+        }
+
+        img {
+            height: 108px;
+        }
+    }
 }
 
 #app-cart {

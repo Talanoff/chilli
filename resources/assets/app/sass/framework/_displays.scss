@@ -7,7 +7,7 @@ $displays: none block flex inline-flex;
 @each $display in $displays {
     .#{$display} {
         display: #{$display};
-        @if (#{$display} == 'flex' or #{$display} == 'inline-flex') {
+        @if ($display == 'flex' or $display == 'inline-flex') {
             flex-wrap: wrap;
         }
     }
@@ -18,6 +18,9 @@ $displays: none block flex inline-flex;
         @each $display in $displays {
             .#{$display}-#{$breakpoint} {
                 display: #{$display};
+                @if ($display == 'flex' or $display == 'inline-flex') {
+                    flex-wrap: wrap;
+                }
             }
         }
     }

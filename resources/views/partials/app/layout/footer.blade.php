@@ -9,10 +9,10 @@
                     <a href="{{ route('app.product.index') }}" class="nav-item">
                         Каталог
                     </a>
-                    <a href="{{ route('app.product.promotions') }}" class="nav-item">
+                    <a href="{{ route('app.promotions.index') }}" class="nav-item">
                         Акции
                     </a>
-                    <a href="{{ route('app.product.novelties') }}" class="nav-item">
+                    <a href="{{ route('app.novelties.index') }}" class="nav-item">
                         Новинки
                     </a>
                     <a href="{{ route('app.review.index') }}" class="nav-item">
