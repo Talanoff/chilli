@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Admin\Product;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product\Attribute;
-use App\Models\Product\AttributeType;
+use App\Models\Product\Characteristic;
+use App\Models\Product\CharacteristicType;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class AttributeController extends Controller
+class CharacteristicController extends Controller
 {
     /**
      * @param Request $request
@@ -17,20 +17,20 @@ class AttributeController extends Controller
      */
     public function index(Request $request): View
     {
-        $attributes = Attribute::query();
+        $Characteristics = Characteristic::query();
 
         if ($request->filled('search')) {
-            $attributes
+            $Characteristics
                 ->where('id', $request->get('search'))
                 ->orWhere('title', 'like', '%' . $request->get('search') . '%');
         }
 
         if ($request->filled('category')) {
-            $attributes->where('type_id', '=', $request->get('category'));
+            $Characteristics->where('type_id', '=', $request->get('category'));
         }
 
-        return \view('admin.product.attribute.index', [
-            'attributes' => $attributes->latest('id')->paginate(20),
+        return \view('admin.product.Characteristic.index', [
+            'Characteristics' => $Characteristics->latest('id')->paginate(20),
         ]);
     }
 
@@ -39,9 +39,9 @@ class AttributeController extends Controller
      */
     public function create(): View
     {
-        return \view('admin.product.attribute.create', [
-            'types' => AttributeType::query()->get(),
-            'selectors' => json_encode(Attribute::$TYPES)
+        return \view('admin.product.Characteristic.create', [
+            'types' => CharacteristicType::query()->get(),
+            'selectors' => json_encode(Characteristic::$TYPES),
         ]);
     }
 
@@ -51,45 +51,45 @@ class AttributeController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        Attribute::query()->create($request->only('type', 'value', 'type_id'));
+        Characteristic::query()->create($request->only('type', 'value', 'type_id'));
 
-        return redirect()->route('admin.product.attribute.index');
+        return redirect()->route('admin.product.Characteristic.index');
     }
 
     /**
-     * @param Attribute $attribute
+     * @param Characteristic $Characteristic
      * @return View
      */
-    public function edit(Attribute $attribute): View
+    public function edit(Characteristic $Characteristic): View
     {
-        return \view('admin.product.attribute.edit', [
-            'attribute' => $attribute,
-            'types' => AttributeType::query()->get(),
-            'selectors' => json_encode(Attribute::$TYPES)
+        return \view('admin.product.Characteristic.edit', [
+            'Characteristic' => $Characteristic,
+            'types' => CharacteristicType::query()->get(),
+            'selectors' => json_encode(Characteristic::$TYPES),
         ]);
     }
 
     /**
      * @param Request $request
-     * @param Attribute $attribute
+     * @param Characteristic $Characteristic
      * @return RedirectResponse
      */
-    public function update(Request $request, Attribute $attribute)
+    public function update(Request $request, Characteristic $Characteristic)
     {
-        $attribute->update($request->only('type', 'value', 'type_id'));
+        $Characteristic->update($request->only('type', 'value', 'type_id'));
 
-        return redirect()->route('admin.product.attribute.index');
+        return redirect()->route('admin.product.Characteristic.index');
     }
 
     /**
-     * @param Attribute $attribute
+     * @param Characteristic $Characteristic
      * @return RedirectResponse
      * @throws \Exception
      */
-    public function destroy(Attribute $attribute)
+    public function destroy(Characteristic $Characteristic)
     {
-        $attribute->delete();
+        $Characteristic->delete();
 
-        return redirect()->route('admin.product.attribute.index');
+        return redirect()->route('admin.product.Characteristic.index');
     }
 }

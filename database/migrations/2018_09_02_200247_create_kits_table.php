@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAttributesTable extends Migration
+class CreateKitsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateAttributesTable extends Migration
      */
     public function up()
     {
-        Schema::create('attributes', function (Blueprint $table) {
+        Schema::create('kits', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->enum('type', array_keys(\App\Models\Product\Attribute::$TYPES))->default('text');
-            $table->string('value');
-
-            $table->unsignedInteger('type_id');
+            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('related_id');
+            $table->float('amount');
 
             $table->timestamps();
         });
@@ -32,6 +31,6 @@ class CreateAttributesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attributes');
+        Schema::dropIfExists('kits');
     }
 }

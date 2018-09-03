@@ -10,7 +10,7 @@ h1, h2, h3 {
     margin-bottom: $headings-margin-bottom;
 }
 
-h4, h5, h6 {
+h4, h5, h6, p {
     margin-bottom: $paragraph-margin-bottom;
 }
 
@@ -40,6 +40,10 @@ h6, .h6 {
 
 small, .small {
     font-size: 75%;
+}
+
+.smaller {
+    font-size: 90%;
 }
 
 hr {

@@ -1,0 +1,11 @@
+.comments {
+    &-item {
+        padding: 20px;
+        background-color: $secondary;
+        margin-bottom: 2px;
+
+        @media (min-width: map_get($grid-breakpoints, lg)) {
+            padding: 30px;
+        }
+    }
+}

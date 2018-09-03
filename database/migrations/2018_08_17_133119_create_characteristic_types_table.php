@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateAttributeTypesTable extends Migration
+class CreateCharacteristicTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAttributeTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('attribute_types', function (Blueprint $table) {
+        Schema::create('characteristic_types', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('slug')->unique();
@@ -30,6 +30,6 @@ class CreateAttributeTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attribute_types');
+        Schema::dropIfExists('characteristic_types');
     }
 }

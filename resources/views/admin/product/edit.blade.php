@@ -55,10 +55,10 @@
                                     </label>
 
                                     <div class="d-flex flex-wrap">
-                                        @foreach($type->attribute as $attribute)
+                                        @foreach($type->characteristics as $attribute)
                                             <label class="attribute-item mr-2">
                                                 <input type="checkbox" name="attribute[]"
-                                                       {{ $product->attributes->contains($attribute->id) ? ' checked' : '' }}
+                                                       {{ $product->characteristics->contains($attribute->id) ? ' checked' : '' }}
                                                        value="{{ $attribute->id }}" class="mr-1">
                                                 @if ($attribute->type === 'text')
                                                     {{ $attribute->value }}

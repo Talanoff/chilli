@@ -1,6 +1,19 @@
 $count: 10;
 $size: 5; // px
 
+.ml-auto {
+    margin-left: auto !important;
+}
+
+.mr-auto {
+    margin-right: auto !important;
+}
+
+.mx-auto {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
 @for $gutter from 0 through $count {
     .p-#{$gutter} {
         padding: $size / 16 * $gutter * 1rem !important;

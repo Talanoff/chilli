@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminUserSeeder::class);
         $this->call(RolesSeeder::class);
 
-        $this->call(ProductAttributeSeeder::class);
+        $this->call(ProductCharacteristicSeeder::class);
 
         if (config('app.env') === 'local') {
             $this->call(ProductCategorySeeder::class);

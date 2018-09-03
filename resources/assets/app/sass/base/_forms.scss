@@ -1,0 +1,32 @@
+.form-group {
+    position: relative;
+    margin-bottom: $paragraph-margin-bottom;
+
+    .has-error {
+        box-shadow: 0 2px 12px -4px rgba($danger, 0.5);
+    }
+}
+
+.form-control {
+    width: 100%;
+    max-width: 100%;
+    font: inherit;
+    background-color: $light;
+    border: none;
+    outline: none;
+    padding: 15px 20px;
+
+    &[type="text"],
+    &[type="email"],
+    &[type="tel"] {
+        height: 40px;
+    }
+
+    &:focus {
+        box-shadow: 0 5px 35px -5px rgba(#000, 0.7);
+    }
+}
+
+textarea {
+    min-height: 140px;
+}

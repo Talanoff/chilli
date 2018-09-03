@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Admin\Product;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product\AttributeType;
+use App\Models\Product\CharacteristicType;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class AttributeTypeController extends Controller
+class CharacteristicTypeController extends Controller
 {
     public function index(): View
     {
         return \view('admin.product.type.index', [
-            'types' => AttributeType::query()->get(),
+            'types' => CharacteristicType::query()->get(),
         ]);
     }
 
@@ -31,7 +31,7 @@ class AttributeTypeController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        AttributeType::query()->create([
+        CharacteristicType::query()->create([
             'slug' => str_slug($request->get('title'), '-'),
             'title' => $request->get('title'),
         ]);
@@ -40,20 +40,20 @@ class AttributeTypeController extends Controller
     }
 
     /**
-     * @param AttributeType $type
+     * @param CharacteristicType $type
      * @return View
      */
-    public function edit(AttributeType $type): View
+    public function edit(CharacteristicType $type): View
     {
         return \view('admin.product.type.edit', compact('type'));
     }
 
     /**
      * @param Request $request
-     * @param AttributeType $type
+     * @param CharacteristicType $type
      * @return RedirectResponse
      */
-    public function update(Request $request, AttributeType $type): RedirectResponse
+    public function update(Request $request, CharacteristicType $type): RedirectResponse
     {
         $type->update([
             'slug' => str_slug($request->get('title'), '-'),
@@ -64,11 +64,11 @@ class AttributeTypeController extends Controller
     }
 
     /**
-     * @param AttributeType $type
+     * @param CharacteristicType $type
      * @return RedirectResponse
      * @throws \Exception
      */
-    public function destroy(AttributeType $type): RedirectResponse
+    public function destroy(CharacteristicType $type): RedirectResponse
     {
         $type->delete();
 

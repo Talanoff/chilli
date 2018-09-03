@@ -3,12 +3,13 @@
 namespace App\Models\User;
 
 use App\Models\Order\Checkout;
+use App\Models\Product\Product;
 use App\Models\Product\Rating;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -83,5 +84,14 @@ class User extends Authenticatable
     {
         return $this->checkout()
                     ->whereStatus('in_progress');
+    }
+
+    /**
+     * @param Product $product
+     * @return mixed
+     */
+    public function productRating(Product $product)
+    {
+        return optional($this->ratings()->whereProductId($product->id)->first())->rate;
     }
 }

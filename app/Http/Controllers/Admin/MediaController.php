@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Spatie\MediaLibrary\Models\Media;
 
 class MediaController extends Controller
@@ -16,9 +15,7 @@ class MediaController extends Controller
      */
     public function delete(Media $media): JsonResponse
     {
-        try {
-            $media->delete();
-        } catch (\ErrorException) {}
+        $media->delete();
 
         return response()->json([]);
     }

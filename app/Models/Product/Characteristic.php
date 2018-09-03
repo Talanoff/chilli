@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Attribute extends Model
+class Characteristic extends Model
 {
     protected $fillable = [
         'value',
@@ -38,6 +38,6 @@ class Attribute extends Model
      */
     public function type(): BelongsTo
     {
-        return $this->belongsTo(AttributeType::class);
+        return $this->belongsTo(CharacteristicType::class);
     }
 }

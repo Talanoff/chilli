@@ -192,3 +192,37 @@
         }
     }
 }
+
+.product {
+    background-color: #fff;
+    font-size: rem-calc(14);
+
+    h1, h4 {
+        color: $body-bg;
+    }
+
+    hr {
+        border-color: lighten($body-color, 30%);
+    }
+
+    &-details {
+        padding: 40px;
+
+        @media (min-width: map_get($grid-breakpoints, lg)) {
+            padding: 60px;
+        }
+    }
+
+    &-colors {
+        div {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+    }
+
+    &-price {
+        font-size: rem-calc(30);
+        letter-spacing: 0.01em;
+    }
+}

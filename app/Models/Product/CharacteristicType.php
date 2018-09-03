@@ -6,7 +6,7 @@ use App\Traits\Slugable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class AttributeType extends Model
+class CharacteristicType extends Model
 {
     use Slugable;
 
@@ -24,8 +24,8 @@ class AttributeType extends Model
     /**
      * @return HasMany
      */
-    public function attribute(): HasMany
+    public function characteristics(): HasMany
     {
-        return $this->hasMany(Attribute::class, 'type_id');
+        return $this->hasMany(Characteristic::class, 'type_id');
     }
 }

@@ -3,9 +3,7 @@
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
             <li class="disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
-                <span class="btn btn-disabled" aria-hidden="true">
-                    Назад
-                </span>
+                <span class="btn disabled" aria-hidden="true">Назад</span>
             </li>
         @else
             <li>
@@ -22,7 +20,7 @@
             </li>
         @else
             <li class="disabled mr-3 ml-1" aria-disabled="true" aria-label="@lang('pagination.next')">
-                <span class="btn btn-disabled" aria-hidden="true">Вперед</span>
+                <span class="btn disabled" aria-hidden="true">Вперед</span>
             </li>
         @endif
 

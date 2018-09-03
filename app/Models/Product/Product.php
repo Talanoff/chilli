@@ -55,6 +55,11 @@ class Product extends Model implements HasMedia
         'colors',
     ];
 
+    protected $with = [
+        'comments',
+        'ratings',
+    ];
+
     public static $TAGS = [
         'newest' => 'Новинка',
         'popular' => 'Популярное',
@@ -73,9 +78,9 @@ class Product extends Model implements HasMedia
     /**
      * @return BelongsToMany
      */
-    public function attributes(): BelongsToMany
+    public function characteristics(): BelongsToMany
     {
-        return $this->belongsToMany(Attribute::class);
+        return $this->belongsToMany(Characteristic::class);
     }
 
     /**
@@ -91,7 +96,13 @@ class Product extends Model implements HasMedia
      */
     public function comments(): MorphMany
     {
-        return $this->morphMany(Comment::class, 'commentable');
+        $comments = $this->morphMany(Comment::class, 'commentable');
+
+        if (app('router')->currentRouteNamed('app.*')) {
+            $comments = $comments->whereStatus('approved');
+        }
+
+        return $comments;
     }
 
     /**
@@ -105,9 +116,25 @@ class Product extends Model implements HasMedia
     /**
      * @return HasMany
      */
+    public function kits(): HasMany
+    {
+        return $this->hasMany(Kit::class);
+    }
+
+    /**
+     * @return HasMany
+     */
     public function order(): HasMany
     {
         return $this->hasMany(Checkout::class);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRecommendedAttribute()
+    {
+        return $this->where('id', '!=', $this->id)->inRandomOrder()->take(4)->get();
     }
 
     /**
@@ -159,9 +186,12 @@ class Product extends Model implements HasMedia
         return round($rate);
     }
 
+    /**
+     * @return mixed
+     */
     public function getColorsAttribute()
     {
-        return $this->attribute()->whereType('color')->get();
+        return $this->characteristics()->whereType('color')->get();
     }
 
     /**

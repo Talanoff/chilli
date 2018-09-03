@@ -1,0 +1,14 @@
+.notification {
+    position: fixed;
+    max-width: 300px;
+    padding: 20px;
+    top: 20px;
+    right: 20px;
+    transition: 0.35s;
+    z-index: 999;
+
+    &-success {
+        background-color: $success;
+        color: #fff;
+    }
+}

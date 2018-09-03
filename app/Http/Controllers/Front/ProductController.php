@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CommentRequest;
+use App\Models\Product\CharacteristicType;
 use App\Models\Product\Product;
+use App\Models\User\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class ProductController extends Controller
@@ -15,7 +19,7 @@ class ProductController extends Controller
     {
         $title = 'Каталог';
 
-        $query = Product::query()->latest()->with(['attribute']);
+        $query = Product::query()->latest();
         $latest = $query->first();
         $products = $query->where('id', '<', $latest->id);
 
@@ -47,24 +51,73 @@ class ProductController extends Controller
      */
     public function show(Product $product): View
     {
-        if (!session()->has('viewed')) {
-            session()->put('viewed', []);
-        }
+        $characteristics = collect([]);
+        $media = $product->getMedia('product');
 
-        $viewed = session()->get('viewed');
+        $images = $media->map(function ($i) {
+            return $i->getUrl('large');
+        })->toArray();
 
-        if (in_array($product->id, $viewed)) {
-            array_splice($viewed, array_search($product->id, $viewed), 1);
-            session()->put('viewed', $viewed);
-        }
+        $thumbnails = $media->map(function ($i) {
+            return $i->getUrl('thumb');
+        })->toArray();
 
-        session()->push('viewed', $product->id);
+        $this->addToViewedProducts($product);
+
+        $types = $product->characteristics->filter(function ($attr) {
+            return $attr->type !== 'color' && $attr->type !== 'image';
+        })->pluck('type_id')->unique()->toArray();
+
+        CharacteristicType::whereIn('id', $types)->get()->map(function ($type) use ($product, $characteristics) {
+            $characteristics->put($type->title,
+                $product->characteristics()->whereTypeId($type->id)->get()->pluck('value')->toArray());
+        });
 
         return \view('app.product.show', [
+            'title' => $product->title,
             'product' => $product,
-            'related' => Product::query()->where('id', '<>', $product->id)->take(4)->get(),
-            'comments' => $product->comments()->get(),
+            'characteristics' => $characteristics,
+            'images' => json_encode($images),
+            'thumbnails' => json_encode($thumbnails),
         ]);
+    }
+
+    /**
+     * @param CommentRequest $request
+     * @param Product $product
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function comment(CommentRequest $request, Product $product)
+    {
+        if (!Auth::check()) {
+            $user = User::create([
+                'name' => $request->get('name'),
+                'email' => $request->get('email'),
+                'password' => bcrypt('secret'),
+                'role_id' => 2,
+            ]);
+        } else {
+            /** @var User $user */
+            $user = Auth::user();
+        }
+
+        $product->comments()->create([
+            'message' => $request->get('message'),
+            'user_id' => $user->id,
+        ]);
+
+        if ($request->filled('rating')) {
+            $product->ratings()->updateOrCreate([
+                'user_id' => $user->id,
+            ], [
+                'rate' => $request->get('rating'),
+                'user_id' => $user->id,
+            ]);
+        }
+
+        session()->flash('success', 'Комментарий успешно отправлен на модерацию.');
+
+        return \back();
     }
 
     /**
@@ -81,5 +134,24 @@ class ProductController extends Controller
                              ->take(4)->get();
         }
         return $viewed;
+    }
+
+    /**
+     * @param Product $product
+     */
+    private function addToViewedProducts(Product $product): void
+    {
+        if (!session()->has('viewed')) {
+            session()->put('viewed', []);
+        }
+
+        $viewed = session()->get('viewed');
+
+        if (in_array($product->id, $viewed)) {
+            array_splice($viewed, array_search($product->id, $viewed), 1);
+            session()->put('viewed', $viewed);
+        }
+
+        session()->push('viewed', $product->id);
     }
 }

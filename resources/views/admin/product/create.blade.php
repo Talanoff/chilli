@@ -51,7 +51,7 @@
                                     </label>
 
                                     <div class="d-flex flex-wrap">
-                                        @foreach($type->attribute as $attribute)
+                                        @foreach($type->characteristics as $attribute)
                                             <label class="attribute-item mr-2">
                                                 <input type="checkbox" name="attribute[]" value="{{ $attribute->id }}"
                                                        class="mr-1">

@@ -11,8 +11,6 @@
             {{ $product->title }}
         </h3>
 
-        {{ $product->id }}
-
         <h4 class="product-item__price mb-4">
             {{ $product->computed_price }} грн
         </h4>

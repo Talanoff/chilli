@@ -18,12 +18,8 @@
                 <p class="small text-muted text-uppercase">{{ $product->subtitle }}</p>
             @endif
 
-            <div class="product-item__stars my-4">
-                @for($i = 0; $i <= 5; $i++)
-                    <svg width="12" height="12" class="{{ $i <= $product->stars ? 'is-filled' : '' }}">
-                        <use xlink:href="#star"></use>
-                    </svg>
-                @endfor
+            <div class="my-4">
+                @include('partials.app.product.stars', ['stars' => $product->stars])
             </div>
 
             <h4 class="product-item__price mb-4">

@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateAttributeProductTable extends Migration
+class CreateCharacteristicProductTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateAttributeProductTable extends Migration
      */
     public function up()
     {
-        Schema::create('attribute_product', function (Blueprint $table) {
+        Schema::create('characteristic_product', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->unsignedInteger('attribute_id');
+            $table->unsignedInteger('characteristic_id');
             $table->unsignedInteger('product_id');
 
-            $table->foreign('attribute_id')
-                  ->references('id')->on('attributes')
+            $table->foreign('characteristic_id')
+                  ->references('id')->on('characteristics')
                   ->onDelete('cascade');
 
             $table->foreign('product_id')
@@ -36,6 +36,6 @@ class CreateAttributeProductTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attribute_product');
+        Schema::dropIfExists('characteristic_product');
     }
 }

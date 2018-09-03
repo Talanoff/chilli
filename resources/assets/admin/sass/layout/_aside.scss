@@ -5,6 +5,8 @@
     bottom: 0;
     width: 280px;
     padding: 20px;
+    overflow-y: auto;
+    max-height: 100%;
 
     a {
         text-decoration: none !important;

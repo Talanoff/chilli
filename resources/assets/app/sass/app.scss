@@ -16,11 +16,16 @@
 @import "base/text";
 @import "base/links";
 @import "base/images";
+@import "base/forms";
+@import "base/tables";
 
 @import "layout/base";
 @import "layout/header";
 @import "layout/footer";
-@import "layout/product";
+@import "layout/products";
+@import "layout/comments";
+@import "layout/reviews";
 
 @import "modules/nav";
 @import "modules/pagination";
+@import "modules/notification";

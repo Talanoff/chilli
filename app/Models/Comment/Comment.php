@@ -10,7 +10,9 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 class Comment extends Model
 {
     protected $fillable = [
+        'status',
         'message',
+        'user_id',
     ];
 
     protected $with = [
