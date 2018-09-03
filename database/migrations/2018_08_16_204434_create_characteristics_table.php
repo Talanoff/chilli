@@ -22,6 +22,10 @@ class CreateCharacteristicsTable extends Migration
             $table->unsignedInteger('type_id');
 
             $table->timestamps();
+
+            $table->foreign('type_id')
+                  ->references('id')->on('characteristic_types')
+                  ->onDelete('cascade');
         });
     }
 

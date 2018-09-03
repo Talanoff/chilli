@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateRatingsTable extends Migration
 {
@@ -21,6 +21,14 @@ class CreateRatingsTable extends Migration
             $table->unsignedInteger('rate');
 
             $table->timestamps();
+
+            $table->foreign('product_id')
+                  ->references('id')->on('products')
+                  ->onDelete('cascade');
+
+            $table->foreign('user_id')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
         });
     }
 

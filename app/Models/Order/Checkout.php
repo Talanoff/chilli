@@ -7,12 +7,9 @@ use App\Models\User\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Checkout extends Model
 {
-    use SoftDeletes;
-
     public static $STATUSES = [
         'in_progress' => 'В корзине',
         'finished' => 'Завершен',

@@ -21,6 +21,14 @@ class CreateKitsTable extends Migration
             $table->float('amount');
 
             $table->timestamps();
+
+            $table->foreign('product_id')
+                  ->references('id')->on('products')
+                  ->onDelete('cascade');
+
+            $table->foreign('related_id')
+                  ->references('id')->on('products')
+                  ->onDelete('cascade');
         });
     }
 
