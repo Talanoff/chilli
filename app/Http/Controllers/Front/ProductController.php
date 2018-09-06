@@ -4,44 +4,75 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
+use App\Models\Product\Brand;
+use App\Models\Product\Category;
 use App\Models\Product\CharacteristicType;
 use App\Models\Product\Product;
 use App\Models\User\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class ProductController extends Controller
 {
     /**
+     * @param Request $request
      * @return View
      */
-    public function index(): View
+    public function index(Request $request): View
     {
         $title = 'Каталог';
 
-        $query = Product::query()->latest();
+        $latest = null;
+        $query = Product::query();
+
+        if ($request->filled('price')) {
+            $query = $query->orderBy('price', $request->get('price'));
+        } else {
+            $query = $query->latest();
+        }
+
+        if ($request->filled('brand')) {
+            $brand = optional(Brand::whereSlug($request->get('brand'))->first())->id;
+            $query = $query->where('brand_id', $brand);
+        }
+
+        if ($request->filled('category')) {
+            $category = optional(Category::whereSlug($request->get('category'))->first())->id;
+            $query = $query->where('category_id', $category);
+        }
+
         $latest = $query->first();
-        $products = $query->where('id', '<', $latest->id);
+        $products = $query->where('id', '!=', optional($latest)->id);
 
-        $viewed = $this->handleViewedProducts();
-
-        if (app('router')->currentRouteNamed('app.promotions.index')) {
+        if (app('router')->currentRouteNamed('app.promotions')) {
             $title = 'Акции';
             $products = $products->whereInStock(true);
             $latest = $query->whereInStock(true)->first();
         }
 
-        if (app('router')->currentRouteNamed('app.novelties.index')) {
+        if (app('router')->currentRouteNamed('app.novelties')) {
             $title = 'Новинки';
             $products = $products->whereTag('newest');
             $latest = $query->whereTag('newest')->first();
         }
 
+        $filters = $this->createFilters();
+
+        $viewed = $this->handleViewedProducts();
+
+        $results = count($request->query())
+            ? implode('/', [$products->count() + count($latest), Product::count()])
+            : null;
+
         return \view('app.product.index', [
+            'results' => $results,
             'products' => $products->paginate(12),
             'latest' => $latest,
             'title' => $title,
             'viewed' => $viewed,
+            'filters' => $filters,
         ]);
     }
 
@@ -54,13 +85,13 @@ class ProductController extends Controller
         $characteristics = collect([]);
         $media = $product->getMedia('product');
 
-        $images = $media->map(function ($i) {
-            return $i->getUrl('large');
-        })->toArray();
+        $images = collect([]);
+        $thumbnails = collect([]);
 
-        $thumbnails = $media->map(function ($i) {
-            return $i->getUrl('thumb');
-        })->toArray();
+        $media->map(function ($i, $index) use ($images, $thumbnails) {
+            $images->put($index, $i->getUrl('large'));
+            $thumbnails->put($index, $i->getUrl('thumb'));
+        });
 
         $this->addToViewedProducts($product);
 
@@ -77,8 +108,8 @@ class ProductController extends Controller
             'title' => $product->title,
             'product' => $product,
             'characteristics' => $characteristics,
-            'images' => json_encode($images),
-            'thumbnails' => json_encode($thumbnails),
+            'images' => json_encode($images->toArray()),
+            'thumbnails' => json_encode($thumbnails->toArray()),
         ]);
     }
 
@@ -115,7 +146,7 @@ class ProductController extends Controller
             ]);
         }
 
-        session()->flash('success', 'Комментарий успешно отправлен на модерацию.');
+        \session()->flash('success', 'Комментарий успешно отправлен на модерацию.');
 
         return \back();
     }
@@ -123,7 +154,7 @@ class ProductController extends Controller
     /**
      * @return array|\Illuminate\Support\Collection
      */
-    private function handleViewedProducts()
+    private function handleViewedProducts(): Collection
     {
         $viewed = [];
         if (session()->has('viewed')) {
@@ -153,5 +184,26 @@ class ProductController extends Controller
         }
 
         session()->push('viewed', $product->id);
+    }
+
+    /**
+     * @return Collection
+     */
+    private function createFilters(): Collection
+    {
+        $filters = collect([]);
+
+        $brands = Product::query()->whereNotNull('brand_id')->pluck('brand_id')->unique()->toArray();
+        $filters->put('brands', Brand::query()->whereIn('id', $brands)->get());
+
+        $categories = Product::query()->pluck('category_id')->unique()->toArray();
+        $filters->put('categories', Category::query()->whereIn('id', $categories)->get());
+
+        $filters->put('price', collect([
+            'asc' => 'От дешевых к дорогим',
+            'desc' => 'От дорогих к дешевым',
+        ]));
+
+        return $filters;
     }
 }

@@ -21,3 +21,13 @@ body {
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
 }
+
+#app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}

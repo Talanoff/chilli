@@ -1,13 +1,13 @@
 @php
     $large = $large ?? false;
-    $related = $related ?? false;
+    $default = $default ?? false;
 @endphp
 
 <div
-    class="product-item-wrapper w-md-1/2{{ !$large && $loop->index > 3 || $related ? ' w-xl-1/4' : request()->get('page') > 1 ? ' w-xl-1/4' : '' }}">
+    class="product-item-wrapper w-md-1/2{{ !$large && $loop->index > 3 || $default ? ' w-xl-1/4' : request()->get('page') > 1 ? ' w-xl-1/4' : '' }}">
     <a href="{{ route('app.product.show', $product) }}" class="product-item product-item--squire">
-        <figure class="product-item__link"
-                style="background: url({{ $product->getFirstMediaUrl('product', !$large ? 'medium' : 'large') }}) 50% 50% / cover no-repeat;"></figure>
+        <figure class="product-item__image lozad"
+                data-background-image="{{ $product->getFirstMediaUrl('product', !$large ? 'medium' : 'large') }}"></figure>
 
         <div class="product-item-content">
             <h6 class="product-item__title text-uppercase {{ $product->subtitle ? 'mb-0' : 'mb-4' }}">

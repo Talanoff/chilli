@@ -32,6 +32,7 @@ class Product extends Model implements HasMedia
         'quantity',
         'in_stock',
         'category_id',
+        'brand_id',
         'is_published',
         'rating',
         'tag',
@@ -56,8 +57,8 @@ class Product extends Model implements HasMedia
     ];
 
     protected $with = [
-        'comments',
         'ratings',
+        'brand',
     ];
 
     public static $TAGS = [
@@ -81,6 +82,14 @@ class Product extends Model implements HasMedia
     public function characteristics(): BelongsToMany
     {
         return $this->belongsToMany(Characteristic::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function brand(): BelongsTo
+    {
+        return $this->belongsTo(Brand::class);
     }
 
     /**

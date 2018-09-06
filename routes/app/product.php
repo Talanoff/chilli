@@ -2,8 +2,8 @@
 
 Route::get('products', 'ProductController@index')->name('.product.index');
 
-Route::get('promotions', 'ProductController@index')->name('.promotions.index');
-Route::get('novelties', 'ProductController@index')->name('.novelties.index');
+Route::get('promotions', 'ProductController@index')->name('.promotions');
+Route::get('novelties', 'ProductController@index')->name('.novelties');
 
 Route::group([
     'as' => '.product',

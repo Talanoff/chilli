@@ -6,18 +6,11 @@
             <div class="column w-md-1/5"></div>
             <div class="column w-md-4/5">
                 <nav class="nav text-uppercase justify-between">
-                    <a href="{{ route('app.product.index') }}" class="nav-item">
-                        Каталог
-                    </a>
-                    <a href="{{ route('app.promotions.index') }}" class="nav-item">
-                        Акции
-                    </a>
-                    <a href="{{ route('app.novelties.index') }}" class="nav-item">
-                        Новинки
-                    </a>
-                    <a href="{{ route('app.review.index') }}" class="nav-item">
-                        Обзоры
-                    </a>
+                    @foreach($nav as $item)
+                        <a href="{{ route($item['route']) }}" class="nav-item">
+                            {{ $item['name'] }}
+                        </a>
+                    @endforeach
                     <a href="{{ route('app.warranty') }}" class="nav-item">
                         Гарантии
                     </a>

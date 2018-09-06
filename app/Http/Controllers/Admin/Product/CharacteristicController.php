@@ -17,20 +17,20 @@ class CharacteristicController extends Controller
      */
     public function index(Request $request): View
     {
-        $Characteristics = Characteristic::query();
+        $characteristics = Characteristic::query();
 
         if ($request->filled('search')) {
-            $Characteristics
+            $characteristics
                 ->where('id', $request->get('search'))
                 ->orWhere('title', 'like', '%' . $request->get('search') . '%');
         }
 
         if ($request->filled('category')) {
-            $Characteristics->where('type_id', '=', $request->get('category'));
+            $characteristics->where('type_id', '=', $request->get('category'));
         }
 
-        return \view('admin.product.Characteristic.index', [
-            'Characteristics' => $Characteristics->latest('id')->paginate(20),
+        return \view('admin.product.attribute.index', [
+            'characteristics' => $characteristics->latest('id')->paginate(20),
         ]);
     }
 
@@ -39,7 +39,7 @@ class CharacteristicController extends Controller
      */
     public function create(): View
     {
-        return \view('admin.product.Characteristic.create', [
+        return \view('admin.product.attribute.create', [
             'types' => CharacteristicType::query()->get(),
             'selectors' => json_encode(Characteristic::$TYPES),
         ]);
@@ -53,17 +53,17 @@ class CharacteristicController extends Controller
     {
         Characteristic::query()->create($request->only('type', 'value', 'type_id'));
 
-        return redirect()->route('admin.product.Characteristic.index');
+        return redirect()->route('admin.product.attribute.index');
     }
 
     /**
-     * @param Characteristic $Characteristic
+     * @param Characteristic $characteristic
      * @return View
      */
-    public function edit(Characteristic $Characteristic): View
+    public function edit(Characteristic $characteristic): View
     {
-        return \view('admin.product.Characteristic.edit', [
-            'Characteristic' => $Characteristic,
+        return \view('admin.product.attribute.edit', [
+            'characteristic' => $characteristic,
             'types' => CharacteristicType::query()->get(),
             'selectors' => json_encode(Characteristic::$TYPES),
         ]);
@@ -71,25 +71,25 @@ class CharacteristicController extends Controller
 
     /**
      * @param Request $request
-     * @param Characteristic $Characteristic
+     * @param Characteristic $characteristic
      * @return RedirectResponse
      */
-    public function update(Request $request, Characteristic $Characteristic)
+    public function update(Request $request, Characteristic $characteristic)
     {
-        $Characteristic->update($request->only('type', 'value', 'type_id'));
+        $characteristic->update($request->only('type', 'value', 'type_id'));
 
-        return redirect()->route('admin.product.Characteristic.index');
+        return redirect()->route('admin.product.attribute.index');
     }
 
     /**
-     * @param Characteristic $Characteristic
+     * @param Characteristic $characteristic
      * @return RedirectResponse
      * @throws \Exception
      */
-    public function destroy(Characteristic $Characteristic)
+    public function destroy(Characteristic $characteristic)
     {
-        $Characteristic->delete();
+        $characteristic->delete();
 
-        return redirect()->route('admin.product.Characteristic.index');
+        return redirect()->route('admin.product.attribute.index');
     }
 }

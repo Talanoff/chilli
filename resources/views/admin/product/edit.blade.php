@@ -25,6 +25,21 @@
                                value="{{ old('subtitle') ?? $product->subtitle }}">
                     </div>
 
+                    @if (count($brands))
+                        <div class="form-group">
+                            <label for="brand">Бренд</label>
+                            <select name="brand_id" id="brand" class="form-control">
+                                <option value="">-----</option>
+                                @foreach($brands as $brand)
+                                    <option
+                                        value="{{ $brand->id }}"{{ $brand->id === $product->brand_id ? ' selected' : '' }}>
+                                        {{ $brand->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @endif
+
                     <div class="form-group">
                         <label for="category">Категория</label>
                         <select name="category_id" id="category" class="form-control" required>

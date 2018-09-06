@@ -34,13 +34,13 @@ class RouteServiceProvider extends ServiceProvider
                     'name' => 'Каталог',
                 ],
                 [
-                    'route' => 'app.promotions.index',
-                    'compare' => 'app.promotions.*',
+                    'route' => 'app.promotions',
+                    'compare' => 'app.promotions',
                     'name' => 'Акции',
                 ],
                 [
-                    'route' => 'app.novelties.index',
-                    'compare' => 'app.novelties.*',
+                    'route' => 'app.novelties',
+                    'compare' => 'app.novelties',
                     'name' => 'Новинки',
                 ],
                 [
@@ -70,11 +70,15 @@ class RouteServiceProvider extends ServiceProvider
                             'name' => 'Все товары',
                         ],
                         [
+                            'route' => 'admin.product.brand.index',
+                            'name' => 'Бренды',
+                        ],
+                        [
                             'route' => 'admin.product.category.index',
                             'name' => 'Категории',
                         ],
                         [
-                            'route' => 'admin.product.attribute.index',
+                            'route' => 'admin.product.characteristic.index',
                             'name' => 'Атрибуты',
                         ],
                         [

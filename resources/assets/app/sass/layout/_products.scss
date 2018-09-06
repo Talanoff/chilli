@@ -59,8 +59,8 @@
             color: $primary;
         }
 
-        .product-item__link {
-            transform: scale(1.15) rotate(-3deg);
+        figure {
+            transform: scale(1.15) rotate(-1deg);
             transition: 3s;
         }
     }
@@ -83,6 +83,8 @@
         margin: 0;
         z-index: -1;
         transition: 1s;
+        background-size: cover;
+        background-position: 50% 50%;
     }
 
     &__tag {
@@ -224,5 +226,19 @@
     &-price {
         font-size: rem-calc(30);
         letter-spacing: 0.01em;
+    }
+
+    &-tag {
+        @extend .product-item__tag;
+
+        position: absolute;
+        left: 90px;
+        transform: rotate(-90deg) translateX(-100%);
+        transform-origin: 0 0;
+        margin-left: 10px;
+
+        @media (min-width: map_get($grid-breakpoints, xxl)) {
+            left: 180px;
+        }
     }
 }

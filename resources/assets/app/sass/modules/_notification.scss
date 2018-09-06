@@ -6,6 +6,7 @@
     right: 20px;
     transition: 0.35s;
     z-index: 999;
+    font-size: rem-calc(14);
 
     &-success {
         background-color: $success;

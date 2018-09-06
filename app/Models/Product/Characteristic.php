@@ -22,7 +22,6 @@ class Characteristic extends Model
     public static $TYPES = [
         'text' => 'Текст',
         'color' => 'Цвет',
-        'image' => 'Изображение',
     ];
 
     /**

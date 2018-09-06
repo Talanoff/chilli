@@ -1,7 +1,8 @@
 <div class="product-item-wrapper {{ $classes ?? '' }}">
     <a href="{{ route('app.product.show', $product) }}"
        class="product-item product-item--promo{{ $product_classes ?? '' }}">
-        <figure style="background: url({{ $product->getFirstMediaUrl('product', isset($large) ? 'large' : 'medium') }}) 50% 50% / cover no-repeat;"></figure>
+        <figure class="product-item__image lozad"
+                data-background-image="{{ $product->getFirstMediaUrl('product', !$large ? 'medium' : 'large') }}"></figure>
 
         @if ($product->tag)
             <span class="product-item__tag">{{ App\Models\Product\Product::$TAGS[$product->tag] }}</span>

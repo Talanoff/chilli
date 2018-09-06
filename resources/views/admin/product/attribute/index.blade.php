@@ -5,21 +5,21 @@
     <section class="content">
         <h1 class="mb-5 h2 d-flex align-items-center">
             Атрибуты
-            @if (\App\Models\Product\AttributeType::count())
-                <a href="{{ route('admin.product.attribute.create') }}" class="btn btn-secondary ml-3">
+            @if (\App\Models\Product\CharacteristicType::count())
+                <a href="{{ route('admin.product.characteristic.create') }}" class="btn btn-secondary ml-3">
                     Создать новый
                 </a>
             @endif
         </h1>
-        @if (!\App\Models\Product\AttributeType::count())
+        @if (!\App\Models\Product\CharacteristicType::count())
             <div class="alert alert-info mb-5" style="margin-top: -2rem;">
                 Для начала нужно <a class="btn btn-secondary" href="{{ route('admin.product.type.create') }}">создать
                     типы</a> атрибутов.
             </div>
         @endif
 
-        @forelse($attributes as $attribute)
-            @item(['attr' => $attribute, 'name' => 'product.attribute', 'category' => $attribute->type()->first()])
+        @forelse($characteristics as $attribute)
+            @item(['attr' => $attribute, 'name' => 'product.characteristic', 'category' => $attribute->type()->first()])
             @slot('title')
                 @if ($attribute->type === 'color')
                     <div class="attribute-color mr-2"
@@ -36,13 +36,13 @@
 
         @if(request()->filled('category'))
             <div class="mt-5 text-center">
-                <a href="{{ route('admin.product.attribute.index') }}" class="btn btn-secondary">
+                <a href="{{ route('admin.product.characteristic.index') }}" class="btn btn-secondary">
                     Все атрибуты
                 </a>
             </div>
         @endif
     </section>
 
-    {{ $attributes->appends(request()->except('page'))->links() }}
+    {{ $characteristics->appends(request()->except('page'))->links() }}
 
 @endsection

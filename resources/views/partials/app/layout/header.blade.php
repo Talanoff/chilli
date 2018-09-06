@@ -11,7 +11,7 @@
                         <a href="{{ route($item['route']) }}"
                            class="nav-item{{ app('router')->currentRouteNamed($item['compare']) ? ' is-active' : '' }}">
                             {{ $item['name'] }}
-                    </a>
+                        </a>
                     @endforeach
                 </nav>
             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Product;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
+use App\Models\Product\Brand;
 use App\Models\Product\Category;
 use App\Models\Product\CharacteristicType;
 use App\Models\Product\Product;
@@ -49,6 +50,7 @@ class ProductController extends Controller
             'tags' => Product::$TAGS,
             'types' => CharacteristicType::query()->get(),
             'categories' => Category::query()->latest('id')->get(),
+            'brands' => Brand::query()->latest()->get(),
         ]);
     }
 
@@ -85,6 +87,7 @@ class ProductController extends Controller
             'tags' => Product::$TAGS,
             'types' => CharacteristicType::query()->get(),
             'categories' => Category::query()->latest('id')->get(),
+            'brands' => Brand::query()->latest()->get(),
         ]);
     }
 
@@ -143,6 +146,7 @@ class ProductController extends Controller
             'discount',
             'in_stock',
             'category_id',
+            'brand_id',
             'is_published',
             'rating',
             'tag'

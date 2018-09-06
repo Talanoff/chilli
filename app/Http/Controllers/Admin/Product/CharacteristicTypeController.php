@@ -36,7 +36,7 @@ class CharacteristicTypeController extends Controller
             'title' => $request->get('title'),
         ]);
 
-        return redirect()->route('admin.product.type.index');
+        return \redirect()->route('admin.product.type.index');
     }
 
     /**
@@ -60,7 +60,7 @@ class CharacteristicTypeController extends Controller
             'title' => $request->get('title'),
         ]);
 
-        return redirect()->route('admin.product.type.index');
+        return \redirect()->route('admin.product.type.index');
     }
 
     /**
@@ -72,6 +72,6 @@ class CharacteristicTypeController extends Controller
     {
         $type->delete();
 
-        return redirect()->route('admin.product.type.index');
+        return \redirect()->route('admin.product.type.index');
     }
 }

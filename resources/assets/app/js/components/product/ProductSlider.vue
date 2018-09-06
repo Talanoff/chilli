@@ -18,6 +18,8 @@
                 <img :data-flickity-lazyload-src="image">
             </div>
         </div>
+
+        <slot></slot>
     </div>
 </template>
 
@@ -66,6 +68,8 @@
     @import "../../../sass/config/variables";
 
     .product-slider {
+        position: relative;
+
         &-nav {
             flex: 0 0 90px;
             max-width: 90px;
@@ -96,6 +100,7 @@
         }
 
         &-items {
+            position: relative;
             height: 100%;
             min-height: 400px;
             max-height: 600px;

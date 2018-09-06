@@ -17,9 +17,10 @@ Route::group([
     Route::delete('{product}/delete', 'ProductController@destroy')->name('.delete');
 
     $routes = [
-        'attribute' => 'Attribute',
+        'characteristic' => 'Characteristic',
         'category' => 'Category',
-        'type' => 'AttributeType',
+        'type' => 'CharacteristicType',
+        'brand' => 'Brand',
     ];
 
     foreach ($routes as $key => $value) {

@@ -9,7 +9,11 @@
     @endif
 
     <section class="product flex justify-between">
-        <product-slider class="w-lg-1/2" images="{{ $images }}" thumbnails="{{ $thumbnails }}"></product-slider>
+        <product-slider class="w-lg-1/2" images="{{ $images }}" thumbnails="{{ $thumbnails }}">
+            @if ($product->tag)
+                <span class="product-tag">{{ App\Models\Product\Product::$TAGS[$product->tag] }}</span>
+            @endif
+        </product-slider>
 
         <div class="product-details w-lg-1/2">
             <h1 class="h3 mb-0 text-uppercase">{{ $product->title }}</h1>
@@ -84,7 +88,7 @@
 
             <div class="products flex">
                 @foreach($product->recommended as $product)
-                    @include('partials.app.product.single', ['related' => true])
+                    @include('partials.app.product.single', ['default' => true])
                 @endforeach
             </div>
         </section>
@@ -158,7 +162,7 @@
                     <star-rating old="{{ old('rating') }}"></star-rating>
 
                     <label class="small flex">
-                        <input type="checkbox" name="confirmation" required>
+                        <input type="checkbox" name="confirmation" checked required>
                         <span class="ml-1">Отправляя отзыв, вы соглашаетесь с правилами модерации</span>
                     </label>
                 </div>

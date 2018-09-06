@@ -17,7 +17,9 @@
     @include('partials.app.layout.header')
 
     <main>
-        <div class="container">
+        <div class="container position-relative">
+            @include('partials.app.layout.aside-left')
+            @include('partials.app.product.filters')
             @yield('content')
         </div>
     </main>

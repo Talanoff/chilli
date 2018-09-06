@@ -26,6 +26,8 @@
                     action: this.action
                 });
 
+                VBUS.$emit('openCart');
+
                 setTimeout(() => this.inAction = false, 2000);
             }
         }
