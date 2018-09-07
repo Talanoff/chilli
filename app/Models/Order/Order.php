@@ -11,4 +11,10 @@ class Order extends Model
         'finished' => 'Завершен',
         'declined' => 'Отклонен',
     ];
+
+    public static $DELIVERY = [
+        'self' => 'Самовывоз',
+        'np' => 'Новая почта',
+        'courier' => 'Курьер',
+    ];
 }

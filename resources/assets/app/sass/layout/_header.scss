@@ -2,6 +2,7 @@ header {
     padding: 20px 0;
     font-size: rem-calc(14);
     position: relative;
+    z-index: 100;
 
     .logo {
         @media (min-width: map_get($grid-breakpoints, lg)) {
@@ -18,29 +19,6 @@ header {
 
         img {
             height: 108px;
-        }
-    }
-}
-
-#app-cart {
-    position: relative;
-
-    .cart-count {
-        position: absolute;
-        right: 0;
-        top: -5px;
-        color: $danger;
-        font-weight: bold;
-        font-size: rem-calc(14);
-    }
-
-    svg {
-        fill: #fff;
-        transition: 0.35s;
-        cursor: pointer;
-
-        &:hover {
-            fill: $primary;
         }
     }
 }

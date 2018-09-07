@@ -1,0 +1,50 @@
+@extends('layouts.app', ['app_title' => 'Оформление заказа'])
+
+@section('content')
+
+    <section class="checkout">
+        <div class="row">
+            <div class="column w-md-2/3">
+                <form action="{{ route('app.checkout.store') }}" method="post">
+                    @csrf
+
+                    @guest
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                            <input type="text" name="name" class="form-control"
+                                   placeholder="Ваше имя" value="{{ old('name') }}" required>
+                            <div class="small text-danger">
+                                {{ $errors->has('name') ? $errors->get('name')[0] : '' }}
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <input type="email" name="email" class="form-control"
+                                   placeholder="E-mail" value="{{ old('email') }}" required>
+                            <div class="small text-danger">
+                                {{ $errors->has('email') ? $errors->get('email')[0] : '' }}
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                            <input type="tel" name="phone" class="form-control"
+                                   placeholder="Телефон" value="{{ old('phone') }}" required>
+                            <div class="small text-danger">
+                                {{ $errors->has('phone') ? $errors->get('phone')[0] : '' }}
+                            </div>
+                        </div>
+
+                        <birth-day></birth-day>
+                    @endguest
+
+                    <delivery></delivery>
+                </form>
+            </div>
+
+            <div class="column w-md-1/3">
+                В корзине:
+
+            </div>
+        </div>
+    </section>
+
+@endsection

@@ -52,6 +52,9 @@ class Review extends Model
         return $this->morphMany(Comment::class, 'commentable');
     }
 
+    /**
+     * @return mixed
+     */
     public function getVideoIdAttribute()
     {
         preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $this->video_url, $matches);

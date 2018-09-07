@@ -20,7 +20,8 @@ class ProductResource extends JsonResource
             'title' => $this->title,
             'subtitle' => $this->subtitle,
             'price' => $this->computed_price,
-            'thumbnail' => $this->getFirstMediaUrl('product', 'thumb')
+            'thumbnail' => $this->getFirstMediaUrl('product', 'thumb'),
+            'url' => route('app.product.show', $this),
         ];
     }
 }

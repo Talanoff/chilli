@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('app.*', function () {
+        View::composer('*', function () {
             View::share('nav', [
                 [
                     'route' => 'app.product.index',

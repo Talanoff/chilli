@@ -5,9 +5,14 @@ import {store} from './store';
 import lozad from 'lozad'
 
 import AppCart from './components/cart/AppCart';
+import AppCartTotal from './components/cart/AppCartTotal';
 import AddToCartButton from './components/cart/AddToCartButton';
+
 import StarRating from './components/product/StarRating';
 import ProductSlider from './components/product/ProductSlider';
+
+import BirthDay from './components/profile/BirthDay';
+import Delivery from './components/cart/Delivery';
 
 window.VBUS = new Vue();
 
@@ -15,9 +20,12 @@ new Vue({
     el: '#app',
     components: {
         AppCart,
+        AppCartTotal,
         AddToCartButton,
         StarRating,
-        ProductSlider
+        ProductSlider,
+        BirthDay,
+        Delivery
     },
     methods: {
         getCart() {
@@ -72,6 +80,28 @@ new Vue({
                     filters.classList.remove('is-active');
                     removeEventListener('click', filterOuter);
                 }
+            })
+        }
+
+        const iframes = document.getElementsByTagName('iframe');
+        window.onload = function () {
+            calculateIframeSize();
+        };
+        window.onresize = function () {
+            calculateIframeSize()
+        };
+
+        function calculateIframeSize() {
+            [].forEach.call(iframes, (frame) => {
+                const parent = getComputedStyle(frame.parentElement);
+
+                let width = frame.width,
+                    height = frame.height,
+                    ratio = height / width,
+                    parentWidth = parseFloat(parent.width) - (parseFloat(parent.paddingLeft) + parseFloat(parent.paddingRight));
+
+                frame.width = parentWidth;
+                frame.height = parentWidth * ratio;
             })
         }
     },

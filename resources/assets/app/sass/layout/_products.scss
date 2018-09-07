@@ -56,7 +56,7 @@
     &:hover {
         .product-item__title {
             transition: 0.35s;
-            color: $primary;
+            color: mix($dark, $primary);
         }
 
         figure {

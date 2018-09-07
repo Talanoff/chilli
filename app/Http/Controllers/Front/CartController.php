@@ -8,9 +8,18 @@ use App\Models\Order\Checkout;
 use App\Models\Product\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class CartController extends Controller
 {
+    public function index(): View
+    {
+        return \view('app.cart.cart', [
+            'cart' => $this::handleUserCart(),
+            'viewed' => ProductController::handleViewedProducts(),
+        ]);
+    }
+
     /**
      * Get all cart items
      *
@@ -18,13 +27,13 @@ class CartController extends Controller
      */
     public function getCart(): JsonResponse
     {
-        $cart = $this->handleUserCart();
+        $cart = $this::handleUserCart();
 
         return response()->json([
             'cart' => CartResource::collection($cart),
             'summary' => [
                 'count' => $cart->sum('quantity'),
-                'summary' => $cart->map(function ($item) {
+                'amount' => $cart->map(function ($item) {
                     return $item->product->price * $item->quantity;
                 })->sum(),
             ],
@@ -37,7 +46,7 @@ class CartController extends Controller
      */
     public function addProductToCart(Product $product): JsonResponse
     {
-        $cart = $this->handleUserCart();
+        $cart = $this::handleUserCart();
 
         if (in_array($product->id, $cart->pluck('product_id')->toArray())) {
             $checkout = Auth::check() ? Auth::user()->checkout() : Checkout::anonymous();
@@ -59,10 +68,44 @@ class CartController extends Controller
     }
 
     /**
+     * @param Checkout $checkout
+     * @param $action
+     * @return JsonResponse
+     */
+    public function quantity(Checkout $checkout, $action): JsonResponse
+    {
+        if ($action === 'add') {
+            $checkout->update([
+                'quantity' => $checkout->quantity + 1,
+            ]);
+        } else {
+            if ($action === 'remove' && $checkout->quantity > 1) {
+                $checkout->update([
+                    'quantity' => $checkout->quantity - 1,
+                ]);
+            }
+        }
+
+        return $this->getCart();
+    }
+
+    /**
+     * @param Checkout $checkout
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function delete(Checkout $checkout): JsonResponse
+    {
+        $checkout->delete();
+
+        return $this->getCart();
+    }
+
+    /**
      * @return mixed
      */
-    private function handleUserCart()
+    public static function handleUserCart()
     {
-        return Auth::check() ? Auth::user()->cart()->get() : Checkout::anonymous()->get();
+        return Auth::check() ? Auth::user()->cart()->latest()->get() : Checkout::anonymous()->latest()->get();
     }
 }

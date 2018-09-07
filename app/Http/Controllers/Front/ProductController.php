@@ -58,10 +58,6 @@ class ProductController extends Controller
             $latest = $query->whereTag('newest')->first();
         }
 
-        $filters = $this->createFilters();
-
-        $viewed = $this->handleViewedProducts();
-
         $results = count($request->query())
             ? implode('/', [$products->count() + count($latest), Product::count()])
             : null;
@@ -71,8 +67,8 @@ class ProductController extends Controller
             'products' => $products->paginate(12),
             'latest' => $latest,
             'title' => $title,
-            'viewed' => $viewed,
-            'filters' => $filters,
+            'viewed' => $this::handleViewedProducts(),
+            'filters' => $this::createFilters(),
         ]);
     }
 
@@ -154,7 +150,7 @@ class ProductController extends Controller
     /**
      * @return array|\Illuminate\Support\Collection
      */
-    private function handleViewedProducts(): Collection
+    public static function handleViewedProducts(): Collection
     {
         $viewed = [];
         if (session()->has('viewed')) {
@@ -189,7 +185,7 @@ class ProductController extends Controller
     /**
      * @return Collection
      */
-    private function createFilters(): Collection
+    private static function createFilters(): Collection
     {
         $filters = collect([]);
 

@@ -1,9 +1,181 @@
 #app-cart {
     position: relative;
+
+    .cart-count {
+        position: absolute;
+        right: 0;
+        top: -5px;
+        color: $danger;
+        font-weight: bold;
+        font-size: rem-calc(14);
+    }
+
+    .cart-icon {
+        fill: #fff;
+        transition: 0.35s;
+        cursor: pointer;
+
+        &:hover {
+            fill: $primary;
+        }
+    }
+}
+
+.cart {
+    background-color: $light;
+
+    &-item-image {
+        width: 200px;
+    }
+
+    &-footer {
+        background-color: #fff;
+    }
+
+    .remove {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 1px solid $secondary;
+        transform: rotate(45deg);
+        background-color: transparent;
+
+        &::before,
+        &::after {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            content: '';
+            border-bottom: 1px solid $secondary;
+            width: 15px;
+            margin-left: -7px;
+        }
+
+        &::after {
+            transform: rotate(90deg);
+        }
+
+        &:hover {
+            background-color: $secondary;
+
+            &::before,
+            &::after {
+                border-bottom-color: $light;
+            }
+        }
+    }
+
+    tr {
+        border-bottom: 2px solid #fff;
+    }
 }
 
 .cart-entry {
     position: absolute;
-    right: 0;
+    right: -40px;
     top: 100%;
+    background-color: $light;
+    width: 100vw;
+    max-width: 650px;
+    color: $dark;
+    margin-top: 20px;
+    box-shadow: -5px 20px 60px rgba(#000, 0.2);
+
+    @media (min-width: map_get($grid-breakpoints, xxl)) {
+        max-width: 900px;
+    }
+
+    &::before {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        top: -5px;
+        right: 49px;
+        content: '';
+        background-color: $light;
+        transform: rotate(45deg);
+    }
+
+    &-header,
+    &-footer {
+        a:not(.btn-secondary) {
+            color: $dark;
+
+            svg {
+                fill: $dark;
+                transition: 0.35s;
+            }
+
+            &:hover {
+                color: mix($dark, $primary);
+                svg {
+                    fill: mix($dark, $primary);
+                }
+            }
+        }
+    }
+
+    &-footer {
+        background-color: #fff;
+    }
+
+    &-items {
+        max-height: 400px;
+        overflow-y: auto;
+
+        @media (min-width: map_get($grid-breakpoints, xxl)) {
+            max-height: 600px;
+        }
+    }
+
+    &-item {
+        a {
+            color: $dark;
+
+            &:hover {
+                color: mix($dark, $primary);
+            }
+        }
+
+        &__thumbnail {
+            background-color: #fff;
+            img {
+                width: 100px;
+
+                @media (min-width: map_get($grid-breakpoints, xxl)) {
+                    width: 200px;
+                }
+            }
+        }
+    }
+}
+
+.product-quantity {
+    .quantity-counter {
+        width: 40px;
+        line-height: 40px;
+        text-align: center;
+        background-color: mix($body-color, $secondary);
+        color: #fff;
+    }
+
+    .btn {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        font-size: 18px;
+
+        &:first-child {
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+        }
+
+        &:last-child {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    }
 }

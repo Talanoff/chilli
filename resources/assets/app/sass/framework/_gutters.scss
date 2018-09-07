@@ -20,11 +20,13 @@ $size: 5; // px
     }
 
     .px-#{$gutter} {
-        padding: 0 ($size / 16 * $gutter * 1rem) !important;
+        padding-left: $size / 16 * $gutter * 1rem !important;
+        padding-right: $size / 16 * $gutter * 1rem !important;
     }
 
     .py-#{$gutter} {
-        padding: ($size / 16 * $gutter * 1rem) 0 !important;
+        padding-top: $size / 16 * $gutter * 1rem !important;
+        padding-bottom: $size / 16 * $gutter * 1rem !important;
     }
 
     .m-#{$gutter} {
@@ -32,11 +34,13 @@ $size: 5; // px
     }
 
     .mx-#{$gutter} {
-        margin: 0 ($size / 16 * $gutter * 1rem) !important;
+        margin-left: $size / 16 * $gutter * 1rem !important;
+        margin-right: $size / 16 * $gutter * 1rem !important;
     }
 
     .my-#{$gutter} {
-        margin: ($size / 16 * $gutter * 1rem) 0 !important;
+        margin-top: $size / 16 * $gutter * 1rem !important;
+        margin-bottom: $size / 16 * $gutter * 1rem !important;
     }
 
     @each $a, $b in t top, r right, b bottom, l left {
@@ -58,11 +62,13 @@ $size: 5; // px
             }
 
             .px-#{$breakpoint}-#{$gutter} {
-                padding: 0 ($size / 16 * $gutter * 1rem) !important;
+                padding-left: $size / 16 * $gutter * 1rem !important;
+                padding-right: $size / 16 * $gutter * 1rem !important;
             }
 
             .py-#{$breakpoint}-#{$gutter} {
-                padding: ($size / 16 * $gutter * 1rem) 0 !important;
+                padding-top: $size / 16 * $gutter * 1rem !important;
+                padding-bottom: $size / 16 * $gutter * 1rem !important;
             }
 
             .m-#{$breakpoint}-#{$gutter} {
@@ -70,11 +76,13 @@ $size: 5; // px
             }
 
             .mx-#{$breakpoint}-#{$gutter} {
-                margin: 0 ($size / 16 * $gutter * 1rem) !important;
+                margin-left: $size / 16 * $gutter * 1rem !important;
+                margin-right: $size / 16 * $gutter * 1rem !important;
             }
 
             .my-#{$breakpoint}-#{$gutter} {
-                margin: ($size / 16 * $gutter * 1rem) 0 !important;
+                margin-top: $size / 16 * $gutter * 1rem !important;
+                margin-bottom: $size / 16 * $gutter * 1rem !important;
             }
 
             @each $a, $b in t top, r right, b bottom, l left {

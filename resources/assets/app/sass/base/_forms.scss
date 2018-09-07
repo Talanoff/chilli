@@ -2,6 +2,11 @@
     position: relative;
     margin-bottom: $paragraph-margin-bottom;
 
+    label {
+        display: inline-block;
+        margin-bottom: rem-calc(5);
+    }
+
     .has-error {
         box-shadow: 0 2px 12px -4px rgba($danger, 0.5);
     }
@@ -14,13 +19,12 @@
     background-color: $light;
     border: none;
     outline: none;
-    padding: 15px 20px;
+    padding: 10px 20px;
+    height: 40px;
+    border-radius: 0;
 
-    &[type="text"],
-    &[type="email"],
-    &[type="tel"] {
-        height: 40px;
-    }
+    -webkit-appearance: none;
+    -webkit-border-radius: 0px;
 
     &:focus {
         box-shadow: 0 5px 35px -5px rgba(#000, 0.7);
@@ -28,5 +32,7 @@
 }
 
 textarea {
+    height: auto;
     min-height: 140px;
+    padding: 15px 20px;
 }
