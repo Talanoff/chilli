@@ -45,12 +45,12 @@
     position: relative;
     background-color: #fefefe;
     color: $product-text-color;
-    padding: 20px;
+    padding: rem-calc(20);
     overflow: hidden;
     z-index: 10;
 
     @media (min-width: map_get($grid-breakpoints, lg)) {
-        padding: 30px;
+        padding: rem-calc(30);
     }
 
     &:hover {
@@ -88,15 +88,15 @@
     }
 
     &__tag {
-        padding: 8px 15px 6px;
-        background-color: $primary;
-        font-size: 12px;
+        font-size: rem-calc(12);
         text-transform: uppercase;
+        padding: rem-calc(8) rem-calc(15) rem-calc(6);
+        background-color: $primary;
         color: $product-text-color;
     }
 
     &__price {
-        padding-left: 40px;
+        padding-left: 2.5rem;
         position: relative;
         color: $product-text-color;
         line-height: 1;
@@ -138,7 +138,7 @@
 
     &.is-large {
         .product-item__title {
-            font-size: 34 / 16 * 1rem;
+            font-size: rem-calc(34);
         }
     }
 
@@ -146,7 +146,7 @@
         @media (min-width: map_get($grid-breakpoints, lg)) {
             .product-item__tag {
                 position: absolute;
-                left: 10px;
+                left: rem-calc(10);
                 top: 0;
                 transform: rotate(-90deg) translateX(-100%);
                 transform-origin: 0 0;
@@ -162,18 +162,18 @@
     }
 
     &--promo {
-        padding: 40px;
+        padding: 2.5rem;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
         align-items: flex-start;
 
         @media (min-width: map_get($grid-breakpoints, lg)) {
-            padding: 60px;
+            padding: rem-calc(60);
         }
 
         @media (min-width: map_get($grid-breakpoints, xxl)) {
-            padding: 80px;
+            padding: rem-calc(80);
         }
     }
 
@@ -208,17 +208,17 @@
     }
 
     &-details {
-        padding: 40px;
+        padding: 2.5rem;
 
         @media (min-width: map_get($grid-breakpoints, lg)) {
-            padding: 60px;
+            padding: rem-calc(60);
         }
     }
 
     &-colors {
         div {
-            width: 12px;
-            height: 12px;
+            width: rem-calc(12);
+            height: rem-calc(12);
             border-radius: 50%;
         }
     }
@@ -232,7 +232,7 @@
         @extend .product-item__tag;
 
         position: absolute;
-        left: 90px;
+        left: rem-calc(90);
         transform: rotate(-90deg) translateX(-100%);
         transform-origin: 0 0;
         margin-left: 10px;

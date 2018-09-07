@@ -20,6 +20,8 @@ class CreateCheckoutsTable extends Migration
                   ->default(array_keys(App\Models\Order\Checkout::$STATUSES)[0]);
             $table->string('user_id');
             $table->unsignedInteger('product_id');
+            $table->unsignedInteger('order_id')->nullable();
+
             $table->unsignedInteger('quantity');
 
             $table->timestamps();

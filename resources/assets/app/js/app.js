@@ -12,7 +12,7 @@ import StarRating from './components/product/StarRating';
 import ProductSlider from './components/product/ProductSlider';
 
 import BirthDay from './components/profile/BirthDay';
-import Delivery from './components/cart/Delivery';
+import Checkout from './components/cart/CheckoutComponent';
 
 window.VBUS = new Vue();
 
@@ -25,7 +25,7 @@ new Vue({
         StarRating,
         ProductSlider,
         BirthDay,
-        Delivery
+        Checkout
     },
     methods: {
         getCart() {

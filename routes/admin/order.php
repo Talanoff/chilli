@@ -6,5 +6,6 @@ Route::group([
 ], function() {
 
     Route::get('/', 'OrderController@index')->name('.index');
+    Route::get('{order}', 'OrderController@show')->name('.show');
 
 });

@@ -54,4 +54,6 @@
 
     </section>
 
+    {{ $users->appends(request()->except('page'))->links() }}
+
 @endsection

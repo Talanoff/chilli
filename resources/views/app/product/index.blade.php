@@ -10,7 +10,7 @@
         @forelse($products as $product)
             @include('partials.app.product.single')
         @empty
-            @include('partials.app.product.empty')
+            @include('partials.app.layout.empty')
         @endforelse
     </section>
 

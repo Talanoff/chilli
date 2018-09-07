@@ -27,6 +27,7 @@
         "popper.js": "^1.14.4",
         "vue-color": "^2.6.0",
         "vue-quill-editor": "^3.0.6",
+        "vue-search-select": "^2.6.2",
         "vuejs-datepicker": "^1.5.3",
         "vuex": "^3.0.1"
     }

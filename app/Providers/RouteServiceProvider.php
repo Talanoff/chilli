@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Comment\Comment;
-use App\Models\Order\Checkout;
+use App\Models\Order\Order;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('*', function () {
+        View::composer(['app.*', 'auth.*'], function () {
             View::share('nav', [
                 [
                     'route' => 'app.product.index',
@@ -92,18 +92,14 @@ class RouteServiceProvider extends ServiceProvider
                     'compare' => 'admin.order.*',
                     'name' => 'Заказы',
                     'icon' => 'orders',
-                    'unread' => Checkout::query()
-                                        ->whereStatus('in_processing')
-                                        ->count(),
+                    'unread' => Order::query()->whereStatus('processing')->count(),
                 ],
                 [
                     'route' => 'admin.comment.index',
                     'compare' => 'admin.comment.*',
                     'name' => 'Комментарии',
                     'icon' => 'comments',
-                    'unread' => Comment::query()
-                                       ->whereStatus('agreement')
-                                       ->count(),
+                    'unread' => Comment::query()->whereStatus('agreement')->count(),
                 ],
                 [
                     'route' => 'admin.review.index',

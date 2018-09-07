@@ -23,11 +23,17 @@
     height: 40px;
     border-radius: 0;
 
-    -webkit-appearance: none;
-    -webkit-border-radius: 0px;
-
     &:focus {
         box-shadow: 0 5px 35px -5px rgba(#000, 0.7);
+    }
+}
+
+.custom-select {
+    position: relative;
+
+    .form-control {
+        -webkit-appearance: none;
+        -webkit-border-radius: 0;
     }
 }
 

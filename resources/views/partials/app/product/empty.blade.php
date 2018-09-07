@@ -1,3 +1,0 @@
-<div class="h1 text-center my-10 w-100">
-    Пока не созрело...
-</div>

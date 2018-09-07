@@ -34,15 +34,24 @@
                         </div>
 
                         <birth-day></birth-day>
+                    @else
+                        <h3>Добрый день, {{ auth()->user()->name }}!</h3>
                     @endguest
 
-                    <delivery></delivery>
+                    <checkout params="{{ json_encode(App\Models\Order\Order::$DELIVERY) }}"></checkout>
                 </form>
             </div>
 
             <div class="column w-md-1/3">
-                В корзине:
+                <h6 class="text-uppercase">В корзине:</h6>
 
+                @include('partials.app.checkout.products', ['size' => 50])
+
+                <div class="text-center">
+                    <a href="{{ route('app.cart.index') }}" class="btn btn-secondary">
+                        Редактировать заказ
+                    </a>
+                </div>
             </div>
         </div>
     </section>

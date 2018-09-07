@@ -45,7 +45,7 @@
             </div>
 
             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                <input type="email" name="email" class="form-control"
+                <input type="email  " name="email" class="form-control"
                        placeholder="E-mail" value="{{ old('email') }}" required>
                 <div class="small text-danger">
                     {{ $errors->has('email') ? $errors->get('email')[0] : '' }}

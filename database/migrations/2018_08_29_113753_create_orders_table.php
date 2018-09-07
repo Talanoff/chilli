@@ -23,9 +23,10 @@ class CreateOrdersTable extends Migration
             $table->enum('delivery', array_keys(App\Models\Order\Order::$DELIVERY))
                   ->default(array_keys(App\Models\Order\Order::$DELIVERY)[0]);
             $table->string('city')->nullable();
-            $table->string('state')->nullable();
             $table->string('warehouse')->nullable();
             $table->string('address')->nullable();
+
+            $table->text('message')->nullable();
 
             $table->timestamps();
         });

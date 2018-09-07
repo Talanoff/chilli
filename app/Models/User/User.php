@@ -3,6 +3,7 @@
 namespace App\Models\User;
 
 use App\Models\Order\Checkout;
+use App\Models\Order\Order;
 use App\Models\Product\Product;
 use App\Models\Product\Rating;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -42,6 +43,7 @@ class User extends Authenticatable
         'created_at',
         'updated_at',
         'deleted_at',
+        'birthday',
     ];
 
     /**
@@ -78,12 +80,27 @@ class User extends Authenticatable
     }
 
     /**
-     * @return BelongsTo
+     * @return mixed
      */
     public function cart()
     {
         return $this->checkout()
                     ->whereStatus('in_progress');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function processedCheckout()
+    {
+        return $this->checkout()
+                    ->whereStatus('processing');
+    }
+
+    public function order(): HasMany
+    {
+        return $this->hasMany(Order::class)
+                    ->whereStatus('processing');
     }
 
     /**

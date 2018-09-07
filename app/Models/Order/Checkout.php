@@ -12,6 +12,7 @@ class Checkout extends Model
 {
     public static $STATUSES = [
         'in_progress' => 'В корзине',
+        'processing' => 'Обрабатывается',
         'finished' => 'Завершен',
     ];
 
@@ -19,6 +20,7 @@ class Checkout extends Model
         'status',
         'user_id',
         'product_id',
+        'order_id',
         'quantity',
     ];
 
@@ -53,5 +55,13 @@ class Checkout extends Model
     {
         return self::whereUserId(session()->getId())
                    ->whereStatus('in_progress');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function order(): BelongsTo
+    {
+        return $this->belongsTo(Order::class);
     }
 }

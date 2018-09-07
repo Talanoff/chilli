@@ -7,7 +7,8 @@ export const store = new Vuex.Store({
     state: {
         cart: [],
         amount: 0,
-        count: 0
+        count: 0,
+        checkout: true
     },
     mutations: {
         storeCart(state, cart) {
@@ -15,6 +16,9 @@ export const store = new Vuex.Store({
             state.count = cart.summary.count;
             state.amount = cart.summary.amount
         },
+        updateCheckout(state, status) {
+            state.checkout = status;
+        }
     },
     actions: {
         addToCart(context, payload) {
@@ -28,6 +32,6 @@ export const store = new Vuex.Store({
         removeFromCart(context, id) {
             axios.delete(`/cart/delete/${id}`)
                 .then(({data}) => this.commit('storeCart', data));
-        }
+        },
     }
 });

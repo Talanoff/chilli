@@ -1,0 +1,19 @@
+.alert {
+    font-size: rem-calc(12);
+    text-transform: uppercase;
+    padding: rem-calc(8) rem-calc(15) rem-calc(6);
+}
+
+.order-status {
+    @extend .alert;
+
+    &--processing {
+        color: $dark;
+        background-color: $primary;
+    }
+
+    &--finished {
+        color: #fff;
+        background-color: $success;
+    }
+}

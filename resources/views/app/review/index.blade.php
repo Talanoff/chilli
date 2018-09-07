@@ -7,6 +7,7 @@
             {{ $review->title }}
         </a>
     @empty
+        @include('partials.app.layout.empty')
     @endforelse
 
 @endsection
