@@ -193,7 +193,7 @@ class Product extends Model implements HasMedia
     {
         $rate = $this->rating ?? $this->ratings()->avg('rate');
         return round($rate);
-    }˚
+    }
 
     /**
      * @return mixed
