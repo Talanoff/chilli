@@ -41,7 +41,7 @@
                 </div><!-- 2/3 close -->
 
                 <div class="product-item-wrapper is-large">
-                    <a href="{{ route('app.product.index', ['sort' => 'leaders']) }}"
+                    <a href="{{ route('app.product.index', ['leaders' => 'true']) }}"
                        class="product-item product-item--promo product-item--leaders justify-start">
                         <figure class="product-item__link"></figure>
                         <h3 class="product-item__title text-uppercase mb-3">Лидеры продаж</h3>

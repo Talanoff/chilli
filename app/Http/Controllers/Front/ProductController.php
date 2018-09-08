@@ -43,6 +43,12 @@ class ProductController extends Controller
             $query = $query->where('category_id', $category);
         }
 
+        if ($request->get('leaders')) {
+            $query = $query->whereHas('checkout', function($q) {
+                $q->checkout()->count();
+            });
+        }
+
         $latest = $query->first();
         $products = $query->where('id', '!=', optional($latest)->id);
 

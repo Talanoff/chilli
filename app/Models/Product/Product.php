@@ -133,7 +133,7 @@ class Product extends Model implements HasMedia
     /**
      * @return HasMany
      */
-    public function order(): HasMany
+    public function checkout(): HasMany
     {
         return $this->hasMany(Checkout::class);
     }
