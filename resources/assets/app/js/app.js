@@ -113,10 +113,10 @@ new Vue({
             phone.addEventListener('focus', (e) => {
                 e.target.value = '+38 (';
             });
+            new IMask(phone, {
+                mask: '+{38} (000) 000-00-00'
+            });
         }
-        new IMask(phone, {
-            mask: '+{38} (000) 000-00-00'
-        });
     },
     store
 });
