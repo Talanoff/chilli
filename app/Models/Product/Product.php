@@ -191,7 +191,7 @@ class Product extends Model implements HasMedia
      */
     public function getStarsAttribute(): string
     {
-        $rate = $this->rating ?? $this->ratings()->avg('rate');
+        $rate = $this->rating ?? $this->ratings()->avg('rate') ?? [];
         return round($rate);
     }
 
