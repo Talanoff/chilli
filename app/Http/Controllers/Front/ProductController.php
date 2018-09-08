@@ -43,7 +43,7 @@ class ProductController extends Controller
             $query = $query->where('category_id', $category);
         }
 
-        if ($request->get('leaders')) {
+        if ($request->filled('leaders')) {
             $query = $query;
         }
 
