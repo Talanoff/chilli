@@ -44,9 +44,7 @@ class ProductController extends Controller
         }
 
         if ($request->get('leaders')) {
-            $query = $query->whereHas('checkout', function($q) {
-                $q->checkout()->count();
-            });
+            $query = $query;
         }
 
         $latest = $query->first();
