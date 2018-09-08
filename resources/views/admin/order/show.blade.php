@@ -10,7 +10,7 @@
 
         <p>
             <span
-                class="px-2 py-1 bg-{{ $order->status === 'processing' ? 'warning' : ($order->status === 'finished' ? 'success' : 'danger') }}">
+                class="rounded px-2 py-1 bg-{{ $order->status === 'processing' ? 'warning' : ($order->status === 'finished' ? 'success' : 'danger') }}">
             {{ App\Models\Order\Order::$STATUSES[$order->status] }}
             </span>
         </p>
@@ -29,19 +29,23 @@
                     </tr>
                     <tr>
                         <td class="pl-0">Телефон:</td>
-                        <td>{{ $order->user->phone }}</td>
+                        <td>
+                            <a href="tel:{{ $order->user->phone }}" class="link link-underline">
+                                {{ $order->user->formatted_phone }}
+                            </a>
+                        </td>
                     </tr>
                     <tr>
                         <td class="pl-0">E-mail:</td>
                         <td>
-                            <a href="mailto:{{ $order->user->email }}">
+                            <a href="mailto:{{ $order->user->email }}" class="link link-underline">
                                 {{ $order->user->email }}
                             </a>
                         </td>
                     </tr>
                     <tr>
                         <td class="pl-0">Д.Р.</td>
-                        <td>{{ $order->user->birthday->format('d.m.Y') }}</td>
+                        <td>{{ optional($order->user->birthday)->format('d.m.Y') }}</td>
                     </tr>
                 </table>
             </div>
@@ -50,12 +54,12 @@
                 <h5>Доставка:</h5>
 
                 @if ($order->delivery === 'np')
-                    Доставка «Новой Почтой» по адресу:
+                    <strong>Доставка «Новой Почтой» по адресу:</strong><br>
                     {{ $order->city }}, {{ $order->warehouse }}
                 @endif
 
                 @if ($order->delivery === 'courier')
-                    Доставка курьером по адресу:
+                    <strong>Доставка курьером по адресу:</strong><br>
                     {{ $order->address }}
                 @endif
 
@@ -92,6 +96,23 @@
         <h5 class="text-right">
             ИТОГО: <strong>{{ $order->amount }} грн</strong>
         </h5>
+
+        <div class="mt-5 d-flex">
+            <form action="{{ route('admin.order.update', $order) }}" method="post">
+                @csrf
+                <input type="hidden" name="status"
+                       value="{{ $order->status === 'processing' ? 'finished' : 'processing' }}">
+                <button class="btn btn-{{ $order->status === 'processing' ? 'success' : 'warning' }}">
+                    {{ $order->status === 'processing' ? 'Подтвердить' : 'Вернуть' }}
+                </button>
+            </form>
+
+            <form action="{{ route('admin.order.update', $order) }}" class="ml-2" method="post">
+                @csrf
+                <input type="hidden" name="status" value="declined">
+                <button class="btn btn-danger">Отклонить</button>
+            </form>
+        </div>
 
     </section>
 

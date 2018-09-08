@@ -40,7 +40,7 @@
 
                     @if ($product->in_stock)
                         <div class="col">
-                            <div><span class="bg-success text-white px-2 py-1">Акционный</span></div>
+                            <div><span class="bg-success text-white rounded px-2 py-1">Акционный</span></div>
                             <div>Скидка в <strong>{{ $product->discount ?? 0 }}%</strong></div>
                         </div>
                     @endif

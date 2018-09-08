@@ -6,10 +6,17 @@
             </a>
         </li>
         <li class="ml-auto">
-            Выйти
-            <svg width="20" height="20" style="transform: scale(-1)">
-                <use xlink:href="#exit"></use>
-            </svg>
+            <a href="{{ route('logout') }}"
+               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                Выйти
+                <svg width="20" height="20" style="transform: scale(-1)">
+                    <use xlink:href="#exit"></use>
+                </svg>
+            </a>
         </li>
     </ul>
 </header>
+
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf
+</form>

@@ -39,26 +39,32 @@
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                 <input type="text" name="name" class="form-control"
                        placeholder="Ваше имя" value="{{ old('name') }}" required>
-                <div class="small text-danger">
-                    {{ $errors->has('name') ? $errors->get('name')[0] : '' }}
-                </div>
+                @if ($errors->has('name'))
+                    <div class="small text-danger" role="alert">
+                        {{ $errors->first('name') }}
+                    </div>
+                @endif
             </div>
 
             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                 <input type="email  " name="email" class="form-control"
                        placeholder="E-mail" value="{{ old('email') }}" required>
-                <div class="small text-danger">
-                    {{ $errors->has('email') ? $errors->get('email')[0] : '' }}
-                </div>
+                @if ($errors->has('email'))
+                    <div class="small text-danger" role="alert">
+                        {{ $errors->first('email') }}
+                    </div>
+                @endif
             </div>
         @endguest
 
         <div class="form-group{{ $errors->has('message') ? ' has-error' : '' }}">
                 <textarea name="message" class="form-control"
                           placeholder="Сообщение" required>{{ old('message') }}</textarea>
-            <div class="small text-danger">
-                {{ $errors->has('message') ? $errors->get('message')[0] : '' }}
-            </div>
+            @if ($errors->has('message'))
+                <div class="small text-danger" role="alert">
+                    {{ $errors->first('message') }}
+                </div>
+            @endif
         </div>
 
         <div class="row">

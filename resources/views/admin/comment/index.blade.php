@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-md-auto">
                         <span
-                            class="px-2 py-1 bg-{{ $comment->status === 'agreement' ? 'warning' : ($comment->status === 'approved' ? 'success text-white' : 'danger text-white') }}">
+                            class="rounded px-2 py-1 bg-{{ $comment->status === 'agreement' ? 'warning' : ($comment->status === 'approved' ? 'success text-white' : 'danger text-white') }}">
                         {{ App\Models\Comment\Comment::$STATUSES[$comment->status] }}
                         </span>
                     </div>

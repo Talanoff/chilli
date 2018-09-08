@@ -32,12 +32,10 @@
                         </div>
                     </div>
                     <div class="col-auto">
-                        <strong>{{ App\Models\Order\Order::$DELIVERY[$order->delivery] }}</strong>
-                    </div>
-                    <div class="col-auto">
+                        <h3 class="font-weight-bold">{{ $order->amount }} грн</h3>
                         <p>
                             <span
-                                class="px-2 py-1 bg-{{ $order->status === 'processing' ? 'warning' : ($order->status === 'finished' ? 'success' : 'danger') }}">
+                                class="rounded px-2 py-1 bg-{{ $order->status === 'processing' ? 'warning' : ($order->status === 'finished' ? 'success' : 'danger') }}">
                             {{ App\Models\Order\Order::$STATUSES[$order->status] }}
                             </span>
                         </p>

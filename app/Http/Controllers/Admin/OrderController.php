@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order\Order;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class OrderController extends Controller
@@ -14,7 +15,10 @@ class OrderController extends Controller
     public function index(): View
     {
         return \view('admin.order.index', [
-            'orders' => Order::query()->latest()->paginate(20),
+            'orders' => Order::query()
+                ->orderByRaw("FIELD(status , 'processing') DESC")
+                ->orderByRaw("FIELD(status , 'finished') DESC")
+                ->latest()->paginate(20),
         ]);
     }
 
@@ -25,5 +29,12 @@ class OrderController extends Controller
     public function show(Order $order): View
     {
         return \view('admin.order.show', compact('order'));
+    }
+
+    public function update(Request $request, Order $order)
+    {
+        $order->update($request->only('status'));
+
+        return \back();
     }
 }

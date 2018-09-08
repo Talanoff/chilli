@@ -1,0 +1,13 @@
+.auth {
+    &-container {
+        padding: 160px 0;
+    }
+
+    &-logo {
+        position: absolute;
+        left: 50%;
+        top: 20px;
+        width: 120px;
+        margin-left: -60px;
+    }
+}

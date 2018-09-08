@@ -51,7 +51,7 @@
             </tr>
         </table>
 
-        <div class="cart-footer flex justify-end align-center p-4 px-md-8 py-md-6">
+        <div class="cart-footer flex justify-end align-center p-4 px-md-8 py-md-6" v-if="amount">
             <h4 class="text-normal mb-0 mr-6">
                 <span class="text-muted mr-3">Итого:</span>
                 <span class="text-bold text-dark">
@@ -59,9 +59,20 @@
                 </span>
             </h4>
 
-            <a href="/checkout" class="btn btn-secondary">
+            <a href="/checkout" class="btn btn-secondary" v-if="amount">
                 Оформить заказ
             </a>
+        </div>
+
+        <div class="cart-footer text-center py-10" v-if="!amount">
+            <h5 class="text-normal">
+                У Вас в корзине пусто...
+            </h5>
+            <p class="mb-0">
+                <a href="/products" class="btn btn-primary">
+                    Перейти к товарам
+                </a>
+            </p>
         </div>
     </section>
 </template>

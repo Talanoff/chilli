@@ -2,9 +2,9 @@
 
 @section('content')
 
-    <section class="checkout-details">
+    <section class="checkout-details w-lg-3/4 w-xl-1/2 mx-auto">
         @if($order)
-            <h4>ID заказа: {{ $order->id }}</h4>
+            <h4>ID заказа: <span class="text-white">{{ $order->id }}</span></h4>
 
             <p>
                 <span class="order-status order-status--{{ $order->status }}">
@@ -12,19 +12,21 @@
                 </span>
             </p>
 
+            <p class="my-8">
             @if ($order->delivery === 'np')
-                Доставка «Новой Почтой» по адресу:
-                {{ $order->city }}, {{ $order->warehouse }}
+                Доставка «Новой Почтой» по адресу:<br>
+                <span class="text-white">{{ $order->city }}, {{ $order->warehouse }}</span>
             @endif
 
             @if ($order->delivery === 'courier')
-                Доставка курьером по адресу:
-                {{ $order->address }}
+                Доставка курьером по адресу:<br>
+                <span class="text-white">{{ $order->address }}</span>
             @endif
+            </p>
 
             <h5>Детали заказа:</h5>
 
-            <div class="w-lg-3/4 w-xl-1/2">
+            <div>
                 @include('partials.app.checkout.products', ['cart' => $order->checkout, 'amount' => $order->amount, 'size' => 100])
             </div>
         @else

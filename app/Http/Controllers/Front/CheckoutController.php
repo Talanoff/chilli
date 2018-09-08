@@ -48,10 +48,13 @@ class CheckoutController extends Controller
             $user = User::query()->create([
                 'name' => $request->get('name'),
                 'email' => $request->get('email'),
-                'phone' => $request->get('phone'),
+                'phone' => str_replace([' ', '(', ')', '-'], '', $request->get('phone')),
                 'birthday' => $request->get('birthday'),
                 'password' => bcrypt(str_random(16)),
+                'role_id' => 2,
             ]);
+
+            Auth::login($user);
         }
 
         /** @var Order $order */
@@ -65,7 +68,7 @@ class CheckoutController extends Controller
             Checkout::find($item->id)->update([
                 'user_id' => $user->id,
                 'order_id' => $order->id,
-                'status' => 'processing',
+                'status' => 'finished',
             ]);
         });
 
@@ -79,9 +82,9 @@ class CheckoutController extends Controller
     }
 
     /**
-     * @return View
+     * @return \Illuminate\Contracts\View\Factory|RedirectResponse|View
      */
-    public function details(): View
+    public function details()
     {
         if (!Auth::check()) {
             return redirect()->route('app.home');

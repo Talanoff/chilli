@@ -19,19 +19,19 @@ class User extends Authenticatable
 
     /**
      * The attributes that are mass assignable.
-     *
      * @var array
      */
     protected $fillable = [
         'name',
         'email',
+        'phone',
+        'birthday',
         'role_id',
         'password',
     ];
 
     /**
      * The attributes that should be hidden for arrays.
-     *
      * @var array
      */
     protected $hidden = [
@@ -39,11 +39,19 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    /**
+     * Array of dates that could be formatted by Carbon
+     * @var array
+     */
     protected $dates = [
         'created_at',
         'updated_at',
         'deleted_at',
         'birthday',
+    ];
+
+    protected $appends = [
+        'formatted_phone'
     ];
 
     /**
@@ -94,13 +102,16 @@ class User extends Authenticatable
     public function processedCheckout()
     {
         return $this->checkout()
-                    ->whereStatus('processing');
+                    ->where('status', '!=', 'in_progress');
     }
 
+    /**
+     * @return HasMany
+     */
     public function order(): HasMany
     {
         return $this->hasMany(Order::class)
-                    ->whereStatus('processing');
+                    ->where('status', '!=', 'in_progress');
     }
 
     /**
@@ -110,5 +121,10 @@ class User extends Authenticatable
     public function productRating(Product $product)
     {
         return optional($this->ratings()->whereProductId($product->id)->first())->rate;
+    }
+
+    public function getFormattedPhoneAttribute() {
+        preg_match('/^\+([0-9]{1,3})([0-9]{3})([0-9]{3})([0-9]{2})([0-9]{2})/', $this->phone, $matches);
+        return "+{$matches[1]} ({$matches[2]}) {$matches[3]}-{$matches[4]}-{$matches[5]}";
     }
 }

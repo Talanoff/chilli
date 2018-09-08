@@ -12,7 +12,6 @@ class Checkout extends Model
 {
     public static $STATUSES = [
         'in_progress' => 'В корзине',
-        'processing' => 'Обрабатывается',
         'finished' => 'Завершен',
     ];
 

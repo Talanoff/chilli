@@ -1,9 +1,14 @@
 .link {
     transition: 0.35s;
 
+    &:hover {
+        color: mix($primary, $body-color, 90%);
+    }
+
     &-dashed {
         border-bottom: 1px dashed rgba($primary, 0.4);
     }
+
     &-underline {
         border-bottom: 1px solid rgba($primary, 0.4);
     }

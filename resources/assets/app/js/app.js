@@ -2,7 +2,8 @@ require('./bootstrap');
 
 import Vue from 'vue';
 import {store} from './store';
-import lozad from 'lozad'
+import lozad from 'lozad';
+import IMask from 'imask';
 
 import AppCart from './components/cart/AppCart';
 import AppCartTotal from './components/cart/AppCartTotal';
@@ -12,7 +13,7 @@ import StarRating from './components/product/StarRating';
 import ProductSlider from './components/product/ProductSlider';
 
 import BirthDay from './components/profile/BirthDay';
-import Checkout from './components/cart/CheckoutComponent';
+import Checkout from './components/cart/Checkout';
 
 window.VBUS = new Vue();
 
@@ -83,6 +84,7 @@ new Vue({
             })
         }
 
+        // iFrames
         const iframes = document.getElementsByTagName('iframe');
         window.onload = function () {
             calculateIframeSize();
@@ -104,6 +106,15 @@ new Vue({
                 frame.height = parentWidth * ratio;
             })
         }
+
+        // Phone mask
+        const element = document.querySelector('[name="phone"]');
+        element.addEventListener('focus', (e) => {
+            e.target.value = '+38 (';
+        });
+        new IMask(element, {
+            mask: '+{38} (000) 000-00-00'
+        });
     },
     store
 });

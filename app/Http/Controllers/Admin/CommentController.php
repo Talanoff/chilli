@@ -19,8 +19,7 @@ class CommentController extends Controller
             'comments' => Comment::query()
                                  ->orderByRaw("FIELD(status , 'agreement') DESC")
                                  ->orderByRaw("FIELD(status , 'approved') DESC")
-                                 ->latest()
-                                 ->paginate(20)
+                                 ->latest()->paginate(20)
         ]);
     }
 

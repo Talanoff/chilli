@@ -16,7 +16,9 @@
                 </nav>
             </div>
 
-            <div class="column"></div>
+            <div class="column">
+                {{-- search --}}
+            </div>
 
             <div class="column-auto">
                 <app-cart></app-cart>

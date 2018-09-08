@@ -150,7 +150,7 @@ class ProductController extends Controller
     /**
      * @return array|\Illuminate\Support\Collection
      */
-    public static function handleViewedProducts(): Collection
+    public static function handleViewedProducts()
     {
         $viewed = [];
         if (session()->has('viewed')) {

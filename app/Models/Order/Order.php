@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Order extends Model
 {
@@ -58,14 +57,6 @@ class Order extends Model
     {
         return $this->hasMany(Checkout::class);
     }
-
-    /**
-     * @return HasManyThrough
-     */
-    //    public function products(): HasManyThrough
-    //    {
-    //        return $this->hasManyThrough(Product::class, Checkout::class);
-    //    }
 
     /**
      * @return number

@@ -29,6 +29,10 @@ class CreateOrdersTable extends Migration
             $table->text('message')->nullable();
 
             $table->timestamps();
+
+            $table->foreign('user_id')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
         });
     }
 

@@ -1,4 +1,4 @@
-@extends('layouts.error', ['app_title' => 'Ошибка'])
+@extends('layouts.simple', ['app_title' => 'Ошибка'])
 
 @section('content')
 

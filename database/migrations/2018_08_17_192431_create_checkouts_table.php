@@ -18,6 +18,7 @@ class CreateCheckoutsTable extends Migration
 
             $table->enum('status', array_keys(App\Models\Order\Checkout::$STATUSES))
                   ->default(array_keys(App\Models\Order\Checkout::$STATUSES)[0]);
+
             $table->string('user_id');
             $table->unsignedInteger('product_id');
             $table->unsignedInteger('order_id')->nullable();
@@ -28,6 +29,10 @@ class CreateCheckoutsTable extends Migration
 
             $table->foreign('product_id')
                   ->references('id')->on('products')
+                  ->onDelete('cascade');
+
+            $table->foreign('user_id')
+                  ->references('id')->on('users')
                   ->onDelete('cascade');
         });
     }
