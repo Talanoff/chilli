@@ -59,8 +59,8 @@
 
                     <hr class="mt-5">
 
+                    <!-- FILTERS -->
                     <div class="form-group">
-
                         <ul class="list-unstyled">
                             @foreach($types as $type)
                                 <li class="{{ $loop->index > 0 ? 'mt-3' : '' }}">
@@ -88,6 +88,11 @@
                             @endforeach
                         </ul>
                     </div>
+                    <!-- .FILTERS -->
+
+                    <hr class="mt-4 mb-3">
+
+                    <product-kits product="{{ $product->slug }}"></product-kits>
                 </div>
 
                 <div class="col-lg-4">

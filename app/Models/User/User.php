@@ -108,7 +108,7 @@ class User extends Authenticatable
     /**
      * @return HasMany
      */
-    public function order(): HasMany
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class)
                     ->where('status', '!=', 'in_progress');
@@ -123,6 +123,9 @@ class User extends Authenticatable
         return optional($this->ratings()->whereProductId($product->id)->first())->rate;
     }
 
+    /**
+     * @return string
+     */
     public function getFormattedPhoneAttribute() {
         preg_match('/^\+([0-9]{1,3})([0-9]{3})([0-9]{3})([0-9]{2})([0-9]{2})/', $this->phone, $matches);
         return "+{$matches[1]} ({$matches[2]}) {$matches[3]}-{$matches[4]}-{$matches[5]}";

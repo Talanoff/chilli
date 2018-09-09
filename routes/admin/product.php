@@ -16,6 +16,17 @@ Route::group([
 
     Route::delete('{product}/delete', 'ProductController@destroy')->name('.delete');
 
+    Route::group([
+        'as' => '.kit',
+        'prefix' => 'kit'
+    ], function () {
+
+        Route::get('{product}', 'KitController@list')->name('.list');
+        Route::post('{product}/add', 'KitController@add')->name('.add');
+        Route::delete('{product}/{kit}/delete', 'KitController@remove')->name('.delete');
+
+    });
+
     $routes = [
         'characteristic' => 'Characteristic',
         'category' => 'Category',
