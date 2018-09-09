@@ -49,7 +49,6 @@ class CheckoutController extends Controller
                 'name' => $request->get('name'),
                 'email' => $request->get('email'),
                 'phone' => str_replace([' ', '(', ')', '-'], '', $request->get('phone')),
-                'birthday' => $request->get('birthday'),
                 'password' => bcrypt(str_random(16)),
                 'role_id' => 2,
             ]);

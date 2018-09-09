@@ -39,7 +39,7 @@
                             $type = strtolower(class_basename($comment->commentable_type));
                             @endphp
 
-                            <span class="text-muted">{{ $type === 'product' ? 'Продукт' : 'Обзор' }}:</span>
+                            <strong class="text-muted">{{ $type === 'product' ? 'Продукт' : 'Обзор' }}:</strong>
                             <a href="{{ route('app.'. $type .'.show', $comment->commentable) }}"
                                class="font-weight-bold link link-underline">
                                 {{ $comment->commentable->title }}

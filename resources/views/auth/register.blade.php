@@ -47,8 +47,6 @@
             @endif
         </div>
 
-        <birth-day></birth-day>
-
         <div class="form-group row">
             <div class="column w-100 w-lg-1/2">
                 <label for="password">Пароль</label>

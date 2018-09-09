@@ -94,6 +94,6 @@
         </section>
     @endif
 
-    @include('partials.app.comment.comments')
+    @include('partials.app.comment.product')
 
 @endsection

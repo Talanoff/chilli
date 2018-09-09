@@ -8,5 +8,6 @@ Route::group([
 ], function () {
 
     Route::get('{review}', 'ReviewController@show')->name('.show');
+    Route::post('{review}/comment', 'ReviewController@comment')->name('.comment');
 
 });

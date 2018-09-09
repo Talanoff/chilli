@@ -32,8 +32,6 @@
                                 {{ $errors->has('phone') ? $errors->get('phone')[0] : '' }}
                             </div>
                         </div>
-
-                        <birth-day></birth-day>
                     @else
                         <h3>Добрый день, {{ auth()->user()->name }}!</h3>
                     @endguest

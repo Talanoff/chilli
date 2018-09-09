@@ -24,7 +24,7 @@ class Review extends Model
 
     protected $with = [
         'product',
-        'comment',
+        'comments',
     ];
 
     protected $casts = [
@@ -47,7 +47,7 @@ class Review extends Model
     /**
      * @return MorphMany
      */
-    public function comment(): MorphMany
+    public function comments(): MorphMany
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
