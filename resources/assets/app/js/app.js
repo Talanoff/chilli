@@ -2,8 +2,9 @@ require('./bootstrap');
 
 import Vue from 'vue';
 import {store} from './store';
-import lozad from 'lozad';
-import IMask from 'imask';
+
+import lozad from 'lozad'; // Lazy load
+import IMask from 'imask'; // Masked inputs
 
 import AppCart from './components/cart/AppCart';
 import AppCartTotal from './components/cart/AppCartTotal';
@@ -11,6 +12,7 @@ import AddToCartButton from './components/cart/AddToCartButton';
 
 import StarRating from './components/product/StarRating';
 import ProductSlider from './components/product/ProductSlider';
+import FastBuy from './components/product/FastBuy';
 
 import BirthDay from './components/profile/BirthDay';
 import Checkout from './components/cart/Checkout';
@@ -26,7 +28,8 @@ new Vue({
         StarRating,
         ProductSlider,
         BirthDay,
-        Checkout
+        Checkout,
+        FastBuy
     },
     methods: {
         getCart() {

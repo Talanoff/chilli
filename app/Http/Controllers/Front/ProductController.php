@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
+use App\Http\Requests\FastBuyRequest;
+use App\Mail\FashBuy;
 use App\Models\Product\Brand;
 use App\Models\Product\Category;
 use App\Models\Product\CharacteristicType;
@@ -12,6 +14,7 @@ use App\Models\User\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class ProductController extends Controller
@@ -165,6 +168,13 @@ class ProductController extends Controller
                              ->take(4)->get();
         }
         return $viewed;
+    }
+
+    public function fastBuy(FastBuyRequest $request, Product $product)
+    {
+        $user = Auth::check() ? Auth::user()->toArray() : $request->only('name', 'email', 'phone');
+
+        Mail::to(env('ADMIN_EMAIL'))->send(new FashBuy($product, $user));
     }
 
     /**

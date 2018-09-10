@@ -1,0 +1,47 @@
+<?php
+
+namespace App\Mail;
+
+use App\Models\Product\Product;
+use App\Models\User\User;
+use Illuminate\Bus\Queueable;
+use Illuminate\Http\Request;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldQueue;
+
+class FashBuy extends Mailable
+{
+    use Queueable, SerializesModels;
+    /**
+     * @var array
+     */
+    private $user;
+    /**
+     * @var Product
+     */
+    private $product;
+
+    /**
+     * Create a new message instance.
+     *
+     * @param Product $product
+     * @param array $user
+     */
+    public function __construct(Product $product, $user)
+    {
+        $this->user = $user;
+        $this->product = $product;
+    }
+
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
+    public function build()
+    {
+        return $this->view('mail.fast-buy')
+            ->subject('Быстрый заказ');
+    }
+}

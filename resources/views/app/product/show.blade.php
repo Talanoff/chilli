@@ -70,9 +70,45 @@
                     <h3 class="mb-0 text-dark product-price">{{ $product->computed_price }} грн</h3>
                 </div>
                 <div class="column w-xxl-1/2 flex mt-xl-3">
-                    <button class="btn btn-danger text-bold mr-1">
-                        Быстрая покупка
-                    </button>
+                    <fast-buy opened="{{ count($errors) }}">
+                        <form action="{{ route('app.product.fast-buy', $product) }}" method="post">
+                            @csrf
+
+                            @guest
+                                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                                    <input type="text" name="name" class="form-control"
+                                           placeholder="Ваше имя" value="{{ old('name') }}" required>
+                                    <div class="small text-danger">
+                                        {{ $errors->has('name') ? $errors->get('name')[0] : '' }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                    <input type="email" name="email" class="form-control"
+                                           placeholder="E-mail" value="{{ old('email') }}" required>
+                                    <div class="small text-danger">
+                                        {{ $errors->has('email') ? $errors->get('email')[0] : '' }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                                    <input type="tel" name="phone" class="form-control"
+                                           placeholder="Телефон" value="{{ old('phone') }}" required>
+                                    <div class="small text-danger">
+                                        {{ $errors->has('phone') ? $errors->get('phone')[0] : '' }}
+                                    </div>
+                                </div>
+                            @else
+                                <h5 class="text-uppercase">
+                                    Быстрая покупка
+                                </h5>
+
+                                <p>Вы авторизированы, как {{ auth()->user()->name }}. Для оформления заказа будут использованы Ваши контактные данные.</p>
+
+                                <button class="btn btn-secondary">Продолжить</button>
+                            @endguest
+                        </form>
+                    </fast-buy>
 
                     <add-to-cart-button class="btn-secondary ml-1" action="{{ route('app.cart.add', $product) }}">
                         В корзину
