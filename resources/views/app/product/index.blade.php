@@ -3,7 +3,7 @@
 @section('content')
 
     <section class="products products-list flex">
-        @if (count($products) && $latest)
+        @if (count($products) || $latest)
             @if (request()->get('page') < 2 && $latest)
                 @include('partials.app.product.single', ['large' => true, 'product' => $latest])
             @endif
