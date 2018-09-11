@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin\Product;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
+use App\Http\Resources\ProductResource;
 use App\Models\Product\Brand;
 use App\Models\Product\Category;
 use App\Models\Product\CharacteristicType;
 use App\Models\Product\Product;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -37,6 +39,14 @@ class ProductController extends Controller
         return \view('admin.product.index', [
             'products' => $products->latest('id')->paginate(20),
         ]);
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function list(): JsonResponse
+    {
+        return response()->json(ProductResource::collection(Product::latest()->get()));
     }
 
     /**

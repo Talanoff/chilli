@@ -3,6 +3,7 @@
 return [
     'whitelist' => [
         'admin.media.*',
-        'admin.product.kit.*'
-    ]
+        'admin.product.list',
+        'admin.product.kit.*',
+    ],
 ];

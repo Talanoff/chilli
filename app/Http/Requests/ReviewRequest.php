@@ -25,7 +25,13 @@ class ReviewRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'video_url' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'Обязательно укажите заголовок'
         ];
     }
 }

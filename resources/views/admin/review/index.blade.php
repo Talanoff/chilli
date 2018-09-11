@@ -17,35 +17,44 @@
                         <div class="item-id">{{ $review->id }}</div>
                         <div class="item-header">
                             <a href="{{ route('admin.review.edit', $review) }}" class="video-preview"
-                               style="background: url(https://img.youtube.com/vi/{{ $review->video_id }}/sddefault.jpg) 50% 50% / cover no-repeat;">
+                               style="background: url({{ $review->thumbnail }}) 50% 50% / cover no-repeat;">
                             </a>
 
-                            <h3>
-                                <a href="{{ route('admin.review.edit', $review) }}" class="link link-underline">
-                                    {{ $review->title }}
-                                </a>
-                            </h3>
-                        </div>
-                        <div class="item-footer mt-3 text-right">
-                            <a href="{{ route('admin.review.edit', $review) }}"
-                               class="btn btn-warning btn-sm">
-                                <svg width="23" height="23">
-                                    <use xlink:href="#refresh"></use>
-                                </svg>
-                            </a>
+                            <div class="row align-items-end">
+                                <div class="col">
+                                    <h3 class="mb-1">
+                                        <a href="{{ route('admin.review.edit', $review) }}" class="link link-underline">
+                                            {{ $review->title }}
+                                        </a>
+                                    </h3>
+                                    <p class="mb-0 text-secondary">
+                                        {{ App\Models\Review\Review::$CATEGORIES[$review->type] }}
+                                    </p>
+                                </div>
 
-                            <a href="{{ route('admin.review.delete', $review) }}"
-                               onclick="confirmDelete()"
-                               class="btn btn-danger btn-sm">
-                                <svg width="23" height="23" style="fill: #fff;">
-                                    <use xlink:href="#delete"></use>
-                                </svg>
-                            </a>
-                            <form action="{{ route('admin.review.delete', $review) }}"
-                                  id="delete-form" method="post" style="display: none;">
-                                @csrf
-                                @method('delete')
-                            </form>
+                                <div class="col-auto">
+                                    <a href="{{ route('admin.review.edit', $review) }}"
+                                       class="btn btn-warning btn-sm">
+                                        <svg width="23" height="23">
+                                            <use xlink:href="#refresh"></use>
+                                        </svg>
+                                    </a>
+
+                                    <a href="{{ route('admin.review.delete', $review) }}"
+                                       onclick="confirmDelete()"
+                                       class="btn btn-danger btn-sm">
+                                        <svg width="23" height="23" style="fill: #fff;">
+                                            <use xlink:href="#delete"></use>
+                                        </svg>
+                                    </a>
+                                    <form action="{{ route('admin.review.delete', $review) }}"
+                                          id="delete-form" method="post" style="display: none;">
+                                        @csrf
+                                        @method('delete')
+                                    </form>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>

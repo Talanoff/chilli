@@ -7,6 +7,7 @@ Route::group([
 ], function () {
 
     Route::get('/', 'ProductController@index')->name('.index');
+    Route::get('list', 'ProductController@list')->name('.list');
 
     Route::get('create', 'ProductController@create')->name('.create');
     Route::post('create', 'ProductController@store')->name('.store');
@@ -18,7 +19,7 @@ Route::group([
 
     Route::group([
         'as' => '.kit',
-        'prefix' => 'kit'
+        'prefix' => 'kit',
     ], function () {
 
         Route::get('{product}', 'KitController@list')->name('.list');

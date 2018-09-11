@@ -10,6 +10,9 @@ use Illuminate\View\View;
 
 class ReviewController extends Controller
 {
+    /**
+     * @return View
+     */
     public function index(): View
     {
         return \view('admin.review.index', [
@@ -17,25 +20,47 @@ class ReviewController extends Controller
         ]);
     }
 
+    /**
+     * @return View
+     */
     public function create(): View
     {
         return \view('admin.review.create');
     }
 
+    /**
+     * @param ReviewRequest $request
+     * @return RedirectResponse
+     */
     public function store(ReviewRequest $request): RedirectResponse
     {
-        Review::query()->create(array_merge([
+        /** @var Review $review */
+        $review = Review::query()->create(array_merge([
             'slug' => str_slug($request->get('title')),
         ], $this->handleReviewParams($request)));
+
+        if ($request->hasFile('image')) {
+            $review->addMediaFromRequest('image')
+                ->toMediaCollection('review');
+        }
 
         return redirect()->route('admin.review.index');
     }
 
+    /**
+     * @param Review $review
+     * @return View
+     */
     public function edit(Review $review): View
     {
         return \view('admin.review.edit', compact('review'));
     }
 
+    /**
+     * @param ReviewRequest $request
+     * @param Review $review
+     * @return RedirectResponse
+     */
     public function update(ReviewRequest $request, Review $review): RedirectResponse
     {
         $review->update($this->handleReviewParams($request));
@@ -46,9 +71,21 @@ class ReviewController extends Controller
             ]);
         }
 
+        if ($request->hasFile('image')) {
+            $review->clearMediaCollection('review');
+
+            $review->addMediaFromRequest('image')
+                   ->toMediaCollection('review');
+        }
+
         return redirect()->route('admin.review.index');
     }
 
+    /**
+     * @param Review $review
+     * @return RedirectResponse
+     * @throws \Exception
+     */
     public function destroy(Review $review): RedirectResponse
     {
         $review->delete();
@@ -62,7 +99,7 @@ class ReviewController extends Controller
      */
     private function handleReviewParams(ReviewRequest $request): array
     {
-        return $request->only('title', 'description', 'video_url', 'product_id', 'is_published');
+        return $request->only('title', 'description', 'video_url', 'product_id', 'is_published', 'type');
     }
 
     /**

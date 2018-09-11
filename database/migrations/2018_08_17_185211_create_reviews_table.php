@@ -17,6 +17,8 @@ class CreateReviewsTable extends Migration
             $table->increments('id');
 
             $table->string('slug')->unique();
+            $table->enum('type', array_keys(App\Models\Review\Review::$CATEGORIES))
+                ->default(array_keys(App\Models\Review\Review::$CATEGORIES)[0]);
 
             $table->string('title');
             $table->mediumText('description')->nullable();
