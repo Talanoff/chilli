@@ -3,15 +3,19 @@
 @section('content')
 
     <section class="products products-list flex">
-        @if (request()->get('page') < 2 && $latest)
-            @include('partials.app.product.single', ['large' => true, 'product' => $latest])
-        @endif
+        @if (count($products) && $latest)
+            @if (request()->get('page') < 2 && $latest)
+                @include('partials.app.product.single', ['large' => true, 'product' => $latest])
+            @endif
 
-        @forelse($products as $product)
-            @include('partials.app.product.single')
-        @empty
+            @if (count($products))
+                @foreach($products as $product)
+                    @include('partials.app.product.single')
+                @endforeach
+            @endif
+        @else
             @include('partials.app.layout.empty')
-        @endforelse
+        @endif
     </section>
 
     {{ $products->appends(request()->except('page'))->links() }}
