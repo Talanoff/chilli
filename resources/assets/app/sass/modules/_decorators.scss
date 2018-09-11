@@ -1,0 +1,21 @@
+.decorator {
+    position: relative;
+
+    &::after {
+        position: absolute;
+        height: 0;
+        border-bottom: 1px solid $danger;
+        top: 50%;
+        width: 30px;
+        content: '';
+        margin-top: -2px;
+    }
+
+    &--right {
+        padding-right: 45px;
+
+        &::after {
+            right: 0;
+        }
+    }
+}

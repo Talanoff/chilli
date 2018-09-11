@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRatingsTable extends Migration
+class CreateSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,14 @@ class CreateRatingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ratings', function (Blueprint $table) {
+        Schema::create('settings', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('product_id');
-            $table->unsignedInteger('rate');
+            $table->enum('type', array_keys(App\Models\Setting\Setting::$TYPES));
+            $table->string('name')->nullable();
+            $table->text('value');
 
             $table->timestamps();
-
-            $table->foreign('product_id')
-                  ->references('id')->on('products')
-                  ->onDelete('cascade');
         });
     }
 
@@ -35,6 +31,6 @@ class CreateRatingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ratings');
+        Schema::dropIfExists('settings');
     }
 }

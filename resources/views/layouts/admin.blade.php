@@ -27,7 +27,7 @@
     </main>
 </div>
 
-<script src="{{ asset('js/admin.js') }}" defer></script>
+<script src="{{ asset('js/admin.js') }}" async defer></script>
 @stack('scripts')
 @routes
 </body>

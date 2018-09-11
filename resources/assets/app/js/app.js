@@ -5,7 +5,6 @@ import {store} from './store';
 
 import lozad from 'lozad'; // Lazy load
 import IMask from 'imask'; // Masked inputs
-
 import AppCart from './components/cart/AppCart';
 import AppCartTotal from './components/cart/AppCartTotal';
 import AddToCartButton from './components/cart/AddToCartButton';
@@ -16,6 +15,8 @@ import FastBuy from './components/product/FastBuy';
 
 import BirthDay from './components/profile/BirthDay';
 import Checkout from './components/cart/Checkout';
+
+import Carousel from './components/modules/CarouselComponent';
 
 window.VBUS = new Vue();
 
@@ -29,7 +30,8 @@ new Vue({
         ProductSlider,
         BirthDay,
         Checkout,
-        FastBuy
+        FastBuy,
+        Carousel
     },
     methods: {
         getCart() {

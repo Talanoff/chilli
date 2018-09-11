@@ -1,6 +1,6 @@
 <footer>
     <div class="container">
-        <hr>
+        <hr class="{{ app('router')->currentRouteName('app.home') ? 'mt-0' : '' }}">
 
         <div class="row">
             <div class="column w-md-1/5"></div>

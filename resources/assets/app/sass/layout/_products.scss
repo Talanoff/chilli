@@ -53,6 +53,15 @@
         padding: rem-calc(30);
     }
 
+    figure {
+        @extend %abs;
+        margin: 0;
+        z-index: -1;
+        background-size: cover;
+        transition: transform 1s ease;
+        background-position: 50% 50%;
+    }
+
     &:hover {
         .product-item__title {
             transition: 0.35s;
@@ -61,7 +70,7 @@
 
         figure {
             transform: scale(1.15) rotate(-1deg);
-            transition: 3s;
+            transition-duration: 3s;
         }
     }
 
@@ -76,15 +85,6 @@
             right: 30px;
             top: 30px;
         }
-    }
-
-    figure {
-        @extend %abs;
-        margin: 0;
-        z-index: -1;
-        transition: 1s;
-        background-size: cover;
-        background-position: 50% 50%;
     }
 
     &__tag {

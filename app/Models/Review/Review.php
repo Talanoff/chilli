@@ -77,10 +77,21 @@ class Review extends Model implements HasMedia
 
     public function getThumbnailAttribute()
     {
-        $thumb = $this->hasMedia('review') ? $this->getFirstMediaUrl('review') : asset('images/no-image.png');
+        $thumb = $this->hasMedia('review') ? $this->getFirstMediaUrl('review', 'medium') : asset('images/no-image.png');
 
         if ($this->video_url && !$this->hasMedia('review')) {
             $thumb = 'https://img.youtube.com/vi/' . $this->getVideoIdAttribute() . '/sddefault.jpg';
+        }
+
+        return $thumb;
+    }
+
+    public function getLargeImageAttribute()
+    {
+        $thumb = $this->hasMedia('review') ? $this->getFirstMediaUrl('review', 'large') : asset('images/no-image.png');
+
+        if ($this->video_url && !$this->hasMedia('review')) {
+            $thumb = 'https://img.youtube.com/vi/' . $this->getVideoIdAttribute() . '/maxresdefault.jpg';
         }
 
         return $thumb;

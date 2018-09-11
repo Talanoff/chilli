@@ -13,7 +13,12 @@
         @forelse($products as $product)
             <div class="item">
                 <div class="item-id">{{ $product->id }}</div>
-                <div class="item-header row justify-content-between">
+                <div class="item-header row">
+                    <div class="col-auto">
+                        <a href="{{ route('admin.product.edit', $product) }}">
+                            <img src="{{ $product->thumbnail }}" style="width: 100px">
+                        </a>
+                    </div>
                     <div class="col-sm-9 col-lg-6">
                         <h3>
                             <a href="{{ route('admin.product.edit', $product) }}"
@@ -39,23 +44,28 @@
                     </div>
 
                     @if ($product->in_stock)
-                        <div class="col">
+                        <div class="col ml-auto">
                             <div><span class="bg-success text-white rounded px-2 py-1">Акционный</span></div>
                             <div>Скидка в <strong>{{ $product->discount ?? 0 }}%</strong></div>
                         </div>
                     @endif
 
-                    <div class="col-md-auto">
+                    <div class="col-md-auto ml-auto">
                         <h2 class="font-weight-bold">{{ $product->computed_price }} грн</h2>
                     </div>
                 </div>
-                <div class="item-footer row justify-content-end mt-3">
-                    <h5 class="mb-0 col">
-                        <a class="link link-dashed"
-                           href="{{ route('admin.product.index', ['category' => $product->category->id]) }}">
-                            {{ $product->category->title }}
-                        </a>
-                    </h5>
+
+                <hr>
+
+                <div class="item-footer row justify-content-end">
+                    <div class="col">
+                        <p class="mb-0 h5">
+                            <a class="link link-dashed"
+                               href="{{ route('admin.product.index', ['category' => $product->category->id]) }}">
+                                {{ $product->category->title }}
+                            </a>
+                        </p>
+                    </div>
 
                     <div class="col text-right">
                         <a href="{{ route('admin.product.edit', $product) }}"

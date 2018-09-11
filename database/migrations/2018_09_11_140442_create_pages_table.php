@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRatingsTable extends Migration
+class CreatePagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,14 @@ class CreateRatingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ratings', function (Blueprint $table) {
+        Schema::create('pages', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('product_id');
-            $table->unsignedInteger('rate');
+            $table->string('slug')->unique();
+            $table->string('title');
+            $table->mediumText('body')->nullable();
 
             $table->timestamps();
-
-            $table->foreign('product_id')
-                  ->references('id')->on('products')
-                  ->onDelete('cascade');
         });
     }
 
@@ -35,6 +31,6 @@ class CreateRatingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ratings');
+        Schema::dropIfExists('pages');
     }
 }

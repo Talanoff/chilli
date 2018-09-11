@@ -71,6 +71,39 @@
         @endforelse
     </section>
 
-    @include('partials.app.review.promo')
+    @if (count($reviews))
+        <section class="reviews-promo flex">
+            <div class="reviews-promo__slider">
+                <carousel id="reviews-carousel">
+                    @each('partials.app.review.promo', $reviews, 'review')
+                </carousel>
+            </div>
+
+            <a href="{{ route('app.review.index') }}" class="reviews-promo__all text-uppercase">
+                <strong>смотреть все обзоры</strong>
+            </a>
+        </section>
+    @endif
+
+    <section class="about flex">
+        <div class="w-md-1/2 py-8 pr-8">
+            <h3 class="text-uppercase text-white">
+                <span class="decorator decorator--right">
+                    {{ $settings['about'][0]->name }}
+                </span>
+            </h3>
+
+            <p class="mb-0">{!! nl2br($settings['about'][0]->value) !!}</p>
+
+            <h3 class="text-uppercase text-white mt-10">
+                <span class="decorator decorator--right">
+                    {{ $settings['mission'][0]->name }}
+                </span>
+            </h3>
+
+            <p class="mb-0">{!! nl2br($settings['mission'][0]->value) !!}</p>
+        </div>
+        <div class="w-md-1/2"></div>
+    </section>
 
 @endsection

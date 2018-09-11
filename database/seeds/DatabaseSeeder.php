@@ -15,10 +15,12 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesSeeder::class);
 
         $this->call(ProductCharacteristicSeeder::class);
+        $this->call(SettingsSeeder::class);
 
         if (config('app.env') === 'local') {
             $this->call(ProductCategorySeeder::class);
             $this->call(ProductSeeder::class);
+            $this->call(ReviewSeeder::class);
         }
     }
 }

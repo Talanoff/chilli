@@ -29,10 +29,6 @@ class CreateReviewsTable extends Migration
             $table->boolean('is_published')->default(0);
 
             $table->timestamps();
-
-            $table->foreign('product_id')
-                  ->references('id')->on('products')
-                  ->onDelete('cascade');
         });
     }
 

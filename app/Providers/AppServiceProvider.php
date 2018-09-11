@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Setting\Setting;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,10 @@ class AppServiceProvider extends ServiceProvider
         Carbon::setLocale(app()->getLocale());
 
         Blade::component('components.item', 'item');
+
+        View::composer(['app.*', 'auth.*'], function () {
+            View::share('settings', Setting::query()->get()->groupBy('type'));
+        });
     }
 
     /**

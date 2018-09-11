@@ -138,6 +138,7 @@ class ProductController extends Controller
         $product->comments()->create([
             'message' => $request->get('message'),
             'user_id' => $user->id,
+            'status' => $user->hasRole('administrator') ? 'approved' : 'agreement',
         ]);
 
         if ($request->filled('rating')) {

@@ -25,7 +25,6 @@
 
 <script>
     import Flickity from 'flickity';
-    import 'flickity/css/flickity.css';
 
     export default {
         props: {

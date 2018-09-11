@@ -13,7 +13,7 @@ class ProductSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        for ($i = 0; $i < 25; $i++) {
+        for ($i = 0; $i < 6; $i++) {
             $title = implode(' ', $faker->words(rand(2, 4)));
 
             $product = App\Models\Product\Product::create([
@@ -29,9 +29,10 @@ class ProductSeeder extends Seeder
                 'is_published' => 1,
             ]);
 
-            factory(App\Models\Comment\Comment::class, rand(10, 20))->create([
+            factory(App\Models\Comment\Comment::class, rand(2, 5))->create([
                 'commentable_type' => 'App\Models\Product\Product',
                 'commentable_id' => $product->id,
+                'status' => ['approved', 'agreement'][rand(0, 1)],
             ]);
 
             $u = rand(2, 5);

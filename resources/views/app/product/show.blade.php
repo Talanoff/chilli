@@ -118,18 +118,7 @@
         </div>
     </section>
 
-    @if (count($product->recommended))
-        <section class="recommended mt-10">
-            <h4 class="text-white text-uppercase mb-2">Возможно вам будет интересно</h4>
-
-            <div class="products flex">
-                @foreach($product->recommended as $product)
-                    @include('partials.app.product.single', ['default' => true])
-                @endforeach
-            </div>
-        </section>
-    @endif
-
+    @include('partials.app.product.recommended', ['recommended' => $product->recommended])
     @include('partials.app.comment.product')
 
 @endsection

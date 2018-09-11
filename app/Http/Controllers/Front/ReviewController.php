@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
+use App\Models\Product\Product;
 use App\Models\Review\Review;
 use App\Models\User\User;
 use Illuminate\Support\Facades\Auth;
@@ -11,17 +12,25 @@ use Illuminate\View\View;
 
 class ReviewController extends Controller
 {
+    /**
+     * @return View
+     */
     public function index(): View
     {
         return \view('app.review.index', [
-            'reviews' => Review::query()->latest()->paginate(12),
+            'reviews' => Review::query()->latest()->paginate(9),
         ]);
     }
 
+    /**
+     * @param Review $review
+     * @return View
+     */
     public function show(Review $review): View
     {
         return \view('app.review.show', [
             'review' => $review,
+            'recommended' => Product::query()->inRandomOrder()->take(4)->get(),
         ]);
     }
 

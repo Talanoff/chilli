@@ -51,6 +51,7 @@ class Product extends Model implements HasMedia
         'sku',
         'gallery',
         'gallery_preview',
+        'thumbnail',
         'computed_price',
         'stars',
         'colors',
@@ -184,6 +185,14 @@ class Product extends Model implements HasMedia
     public function getGalleryPreviewAttribute()
     {
         return ImageResource::collection($this->getMedia('product'));
+    }
+
+    /**
+     * @return string
+     */
+    public function getThumbnailAttribute()
+    {
+        return $this->getFirstMediaUrl('product', 'thumb');
     }
 
     /**

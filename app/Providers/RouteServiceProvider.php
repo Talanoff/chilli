@@ -113,6 +113,12 @@ class RouteServiceProvider extends ServiceProvider
                     'name' => 'Пользователи',
                     'icon' => 'users',
                 ],
+                [
+                    'route' => 'admin.settings.index',
+                    'compare' => 'admin.settings.*',
+                    'name' => 'Настройки',
+                    'icon' => 'settings',
+                ],
             ];
 
             View::share('nav', $nav);
