@@ -5,6 +5,10 @@
         margin: 0 $gutter/2;
         position: relative;
     }
+
+    &-container {
+        height: 60px;
+    }
 }
 
 header {

@@ -8390,6 +8390,10 @@ footer {
   position: relative;
 }
 
+.nav-container {
+  height: 60px;
+}
+
 header .nav-item {
   height: 30px;
   line-height: 30px;
