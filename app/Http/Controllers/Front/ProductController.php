@@ -47,7 +47,7 @@ class ProductController extends Controller
         }
 
         if ($request->filled('leaders')) {
-            $query = $query;
+            //            $query = $query;
         }
 
         $latest = $query->first();
@@ -66,7 +66,7 @@ class ProductController extends Controller
         }
 
         $results = count($request->query())
-            ? implode('/', [$products->count() + count($latest), Product::count()])
+            ? implode('/', [$products->count() + $latest->count(), Product::count()])
             : null;
 
         return \view('app.product.index', [
