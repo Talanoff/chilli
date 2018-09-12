@@ -140,6 +140,14 @@ class Product extends Model implements HasMedia
     }
 
     /**
+     * @return HasMany
+     */
+    public function favourites(): HasMany
+    {
+        return $this->hasMany(Favourite::class);
+    }
+
+    /**
      * @return mixed
      */
     public function getRecommendedAttribute()

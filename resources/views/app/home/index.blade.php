@@ -35,9 +35,9 @@
 
             @if ($loop->index === 1)
                 <div class="is-medium">
-                    @endif
+            @endif
 
-                    @if ($loop->index === 3)
+            @if ($loop->index === 3)
                 </div><!-- 2/3 close -->
 
                 <div class="product-item-wrapper is-large">

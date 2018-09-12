@@ -13,6 +13,10 @@
             @if ($product->tag)
                 <span class="product-tag">{{ App\Models\Product\Product::$TAGS[$product->tag] }}</span>
             @endif
+
+            <div class="product-shared">
+                <add-to-favourites-button product="{{ $product->slug }}"></add-to-favourites-button>
+            </div>
         </product-slider>
 
         <div class="product-details w-lg-1/2">
@@ -103,7 +107,8 @@
                                     Быстрая покупка
                                 </h5>
 
-                                <p>Вы авторизированы, как {{ auth()->user()->name }}. Для оформления заказа будут использованы Ваши контактные данные.</p>
+                                <p>Вы авторизированы, как {{ auth()->user()->name }}. Для оформления заказа будут
+                                    использованы Ваши контактные данные.</p>
 
                                 <button class="btn btn-secondary">Продолжить</button>
                             @endguest
@@ -117,6 +122,12 @@
             </div>
         </div>
     </section>
+
+    @if ($product->review)
+        <section class="reviews reviews--single">
+            @include('partials.app.review.promo', ['review' => $product->review])
+        </section>
+    @endif
 
     @include('partials.app.product.recommended', ['recommended' => $product->recommended])
     @include('partials.app.comment.product')

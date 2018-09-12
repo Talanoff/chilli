@@ -30,5 +30,6 @@ Route::group([
     require_once(__DIR__ . '/app/cart.php');
     require_once(__DIR__ . '/app/checkout.php');
     require_once(__DIR__ . '/app/profile.php');
+    require_once(__DIR__ . '/app/favourites.php');
 
 });

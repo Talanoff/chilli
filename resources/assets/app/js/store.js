@@ -8,21 +8,26 @@ export const store = new Vuex.Store({
         cart: [],
         amount: 0,
         count: 0,
-        checkout: true
+        checkout: true,
+        favourites: []
     },
     mutations: {
         storeCart(state, cart) {
             state.cart = cart.cart;
             state.count = cart.summary.count;
-            state.amount = cart.summary.amount
+            state.amount = cart.summary.amount;
+            state.favourites = cart.favourites
         },
         updateCheckout(state, status) {
             state.checkout = status;
+        },
+        updateFavourites(state, items) {
+            state.favourites = items
         }
     },
     actions: {
-        addToCart(context, payload) {
-            axios.post(payload.action)
+        addToCart(context, action) {
+            axios.post(action)
                 .then(({data}) => this.commit('storeCart', data));
         },
         handleQuantity(context, payload) {
@@ -30,8 +35,16 @@ export const store = new Vuex.Store({
                 .then(({data}) => this.commit('storeCart', data));
         },
         removeFromCart(context, id) {
-            axios.delete(`/cart/delete/${id}`)
+            axios.delete(`/cart/${id}/delete`)
                 .then(({data}) => this.commit('storeCart', data));
         },
+        handleFavourites(context, action) {
+            axios.post(action)
+                .then(({data}) => this.commit('updateFavourites', data))
+        },
+        removeFromFavourites(context, id) {
+            axios.post(`favourites/${id}/remove`)
+                .then(({data}) => this.commit('updateFavourites', data));
+        }
     }
 });

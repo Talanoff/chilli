@@ -16,11 +16,16 @@
                 </nav>
             </div>
 
-            <div class="column">
-                {{-- search --}}
+            <div class="column flex align-center justify-end">
+                <form action="{{ route('app.search') }}" method="post" class="flex-1">
+                    @csrf
+                    <app-search></app-search>
+                </form>
+
+                <app-favourites class="ml-4"></app-favourites>
             </div>
 
-            <div class="column-auto">
+            <div class="column-auto pl-0">
                 <app-cart></app-cart>
             </div>
         </div>

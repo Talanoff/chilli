@@ -241,4 +241,14 @@
             left: 180px;
         }
     }
+
+    &-shared {
+        position: absolute;
+        bottom: 50px;
+        left: 140px;
+
+        @media (min-width: map_get($grid-breakpoints, xxl)) {
+            left: 230px;
+        }
+    }
 }

@@ -22,9 +22,7 @@
         methods: {
             addToCart() {
                 this.inAction = true;
-                this.$store.dispatch('addToCart', {
-                    action: this.action
-                });
+                this.$store.dispatch('addToCart', this.action);
 
                 VBUS.$emit('openCart');
 

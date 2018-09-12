@@ -17,10 +17,13 @@ class ProductResource extends JsonResource
         return [
             'id' => $this->id,
             'sku' => $this->sku,
+            'slug' => $this->slug,
             'title' => $this->title,
             'subtitle' => $this->subtitle,
             'price' => $this->computed_price,
             'thumbnail' => $this->getFirstMediaUrl('product', 'thumb'),
+            'colors' => $this->colors,
+            'rate' => $this->stars,
             'url' => route('app.product.show', $this),
         ];
     }

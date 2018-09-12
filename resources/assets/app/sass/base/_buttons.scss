@@ -56,6 +56,38 @@
         }
     }
 
+    &-light {
+        background-color: $lighten;
+        color: $body-color;
+
+        &:hover,
+        &:disabled {
+            background-color: darken($lighten, 10%);
+        }
+    }
+
+    &-favourites,
+    &-search {
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: block;
+        background-color: $body-color;
+        border-radius: 50%;
+
+        svg {
+            margin: 7px;
+            fill: #fff;
+        }
+
+        &:hover {
+            background-color: #fff;
+            svg {
+                fill: $secondary;
+            }
+        }
+    }
+
     &.disabled {
         color: $body-color !important;
         cursor: not-allowed;

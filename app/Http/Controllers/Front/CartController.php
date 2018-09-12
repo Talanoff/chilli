@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CartResource;
+use App\Http\Resources\FavouriteResource;
 use App\Models\Order\Checkout;
+use App\Models\Product\Favourite;
 use App\Models\Product\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +39,7 @@ class CartController extends Controller
                     return $item->product->computed_price * $item->quantity;
                 })->sum(),
             ],
+            'favourites' => FavouriteResource::collection(Favourite::favourites())
         ]);
     }
 

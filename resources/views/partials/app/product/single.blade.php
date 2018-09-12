@@ -4,7 +4,7 @@
 @endphp
 
 <div
-    class="product-item-wrapper w-md-1/2{{ !$large && $loop->index > 3 || $default ? ' w-xl-1/4' : request()->get('page') > 1 ? ' w-xl-1/4' : '' }}">
+    class="product-item-wrapper w-md-1/2{{ !$large && $loop->index > 3 || $default ? ' w-lg-1/3 w-xl-1/4' : (request()->get('page') > 1 ? ' w-lg-1/3 w-xl-1/4' : '') }}">
     <a href="{{ route('app.product.show', $product) }}" class="product-item product-item--squire">
         <figure class="product-item__image lozad"
                 data-background-image="{{ $product->getFirstMediaUrl('product', !$large ? 'medium' : 'large') }}"></figure>

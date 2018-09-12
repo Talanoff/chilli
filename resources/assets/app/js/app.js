@@ -5,18 +5,24 @@ import {store} from './store';
 
 import lozad from 'lozad'; // Lazy load
 import IMask from 'imask'; // Masked inputs
+
 import AppCart from './components/cart/AppCart';
 import AppCartTotal from './components/cart/AppCartTotal';
 import AddToCartButton from './components/cart/AddToCartButton';
+import Checkout from './components/cart/Checkout';
 
 import StarRating from './components/product/StarRating';
 import ProductSlider from './components/product/ProductSlider';
 import FastBuy from './components/product/FastBuy';
 
+import FavouritesList from './components/favourites/FavouritesList';
+import AppFavourites from './components/favourites/AppFavourites';
+import AddToFavouritesButton from './components/favourites/AddToFavouritesButton';
+
 import BirthDay from './components/profile/BirthDay';
-import Checkout from './components/cart/Checkout';
 
 import Carousel from './components/modules/CarouselComponent';
+import AppSearch from './components/modules/AppSearch';
 
 window.VBUS = new Vue();
 
@@ -31,7 +37,11 @@ new Vue({
         BirthDay,
         Checkout,
         FastBuy,
-        Carousel
+        Carousel,
+        FavouritesList,
+        AppFavourites,
+        AddToFavouritesButton,
+        AppSearch,
     },
     methods: {
         getCart() {
