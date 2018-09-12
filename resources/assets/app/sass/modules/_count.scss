@@ -1,0 +1,14 @@
+.count {
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    color: $danger;
+    font-weight: bold;
+    font-size: rem-calc(11);
+    background-color: $product-text-color;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 17px;
+}

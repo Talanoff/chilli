@@ -1,4 +1,13 @@
 footer {
     font-size: rem-calc(14);
     padding-bottom: 20px;
+
+    .logo {
+        height: 90px;
+        display: block;
+
+        img {
+            max-height: 100%;
+        }
+    }
 }

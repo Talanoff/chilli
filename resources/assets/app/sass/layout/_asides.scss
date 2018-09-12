@@ -28,4 +28,16 @@
             left: 38px;
         }
     }
+
+    @media (min-width: map_get($grid-breakpoints, xxl)) {
+        width: 140px;
+
+        .nav {
+            left: 56px;
+        }
+
+        &--right .nav {
+            left: 64px;
+        }
+    }
 }

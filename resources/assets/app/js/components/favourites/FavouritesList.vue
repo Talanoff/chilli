@@ -38,7 +38,8 @@
                             class="btn-secondary"
                             :action="addToCartRoute(item.product.slug)"/>
 
-                        <svg class="btn-delete ml-3" @click.prevent="removeFromFavourites(item.id)">
+                        <svg class="btn-delete ml-3"
+                             @click.prevent="removeFromFavourites(item.id)">
                             <use xlink:href="#delete"></use>
                         </svg>
                     </div>
@@ -77,7 +78,6 @@
         height: 30px;
         fill: #ab1f23;
         transition: 0.35s;
-        position: relative;
         z-index: 10;
 
         &:hover {

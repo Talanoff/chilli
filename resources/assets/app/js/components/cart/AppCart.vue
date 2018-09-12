@@ -1,12 +1,14 @@
 <template>
     <div id="app-cart" class="flex align-center">
         <div class="mr-3 text-white" v-if="amount">{{ amount }} грн</div>
-        <div class="cart-count" v-if="count">{{ count }}</div>
+        <div class="count" v-if="count">{{ count }}</div>
         <svg width="30" height="30"
              class="cart-icon"
              @click="cartVisible = !cartVisible">
             <use xlink:href="#cart"></use>
         </svg>
+
+        <div class="cart-mask" v-if="cartVisible" @click="cartVisible = false"></div>
 
         <div class="cart-entry" v-if="cartVisible">
             <div class="cart-entry-header p-4 px-md-8 py-md-6" v-if="cart.length">
@@ -103,7 +105,7 @@
                 if (e.keyCode === 27) {
                     this.cartVisible = false;
                 }
-            })
+            });
         }
     }
 </script>

@@ -34,17 +34,19 @@ class CommonController extends Controller
      */
     public function search(Request $request): View
     {
+        $search = $request->get('search');
+
         $products = Product::query()
-                           ->where('title', 'like', "%{$request->get('search')}%")
-                           ->orWhere('subtitle', 'link', "%{$request->get('search')}%")
-                           ->orWhereHas('brand', function ($q) use ($request) {
-                               $q->where('name', 'like', "%{$request->get('search')}%");
+                           ->where('title', 'like', "%{$search}%")
+                           ->orWhere('subtitle', 'like', "%{$search}%")
+                           ->orWhereHas('brand', function ($q) use ($search) {
+                               $q->where('name', 'like', "%{$search}%");
                            })
                            ->paginate(12);
 
         return \view('app.search.index', [
             'products' => $products,
-            'viewed' => ProductController::handleViewedProducts()
+            'viewed' => ProductController::handleViewedProducts(),
         ]);
     }
 }

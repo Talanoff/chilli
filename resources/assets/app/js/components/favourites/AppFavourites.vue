@@ -1,7 +1,6 @@
 <template>
-    <a href="/favourites"
-               class="btn btn-favourites position-relative">
-        <span class="favourites-count" v-if="count">{{ count }}</span>
+    <a href="/favourites" class="btn btn-favourites position-relative">
+        <span class="count" v-if="count">{{ count }}</span>
         <svg width="16" height="16">
             <use xlink:href="#like"></use>
         </svg>

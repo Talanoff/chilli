@@ -1,5 +1,5 @@
 <template>
-    <div class="autocomplete flex flex-no-wrap align-center">
+    <div class="flex flex-no-wrap align-center">
         <a href="/search" class="btn btn-search ml-auto"
            @click.prevent="show = !show">
             <svg width="16" height="16">
@@ -7,12 +7,16 @@
             </svg>
         </a>
 
-        <div class="position-relative text-uppercase flex-1 ml-2" v-if="show">
-            <input type="hidden" name="search" :value="word">
+        <transition name="slide">
+            <div class="autocomplete position-relative text-uppercase flex-1 ml-2" v-if="show">
+                <input type="hidden" name="search" :value="word">
 
-            <input type="text" v-model="input" @input="autocomplete" class="form-control autocomplete-input text-uppercase">
-            <div class="autocomplete-result text-left">{{ word }}</div>
-        </div>
+                <input type="text" v-model="input" @input="autocomplete"
+                       class="form-control autocomplete-input text-uppercase"
+                       placeholder="Поиск">
+                <div class="autocomplete-result text-left">{{ word }}</div>
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -48,7 +52,7 @@
                 });
 
                 if (result.length) this.word = result[0];
-                else this.word = '';
+                else this.word = this.input;
 
                 if (this.input.length === 0) this.word = '';
             }
@@ -58,6 +62,7 @@
 
 <style lang="scss">
     .autocomplete {
+        transition: 0.35s ease;
         &-input {
             background-color: transparent !important;
             position: relative;
@@ -66,6 +71,11 @@
             height: 30px;
             padding-top: 0;
             padding-bottom: 0;
+            border-bottom: 1px solid rgba(#fff, 0.65);
+
+            &:focus {
+                box-shadow: none;
+            }
         }
 
         &-result {
@@ -77,5 +87,19 @@
             opacity: 0.5;
             padding: 6px 20px;
         }
+    }
+
+    .slide-enter {
+        opacity: 0;
+    }
+
+    .slide-leave-active {
+        opacity: 0;
+    }
+
+    .slide-enter .slide-container,
+    .slide-leave-active .slide-container {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
     }
 </style>

@@ -1,15 +1,6 @@
 #app-cart {
     position: relative;
 
-    .cart-count {
-        position: absolute;
-        right: 0;
-        top: -5px;
-        color: $danger;
-        font-weight: bold;
-        font-size: rem-calc(14);
-    }
-
     .cart-icon {
         fill: #fff;
         transition: 0.35s;
@@ -23,6 +14,15 @@
 
 .cart {
     background-color: $light;
+
+    &-mask {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-color: transparent;
+    }
 
     &-item-image {
         width: 200px;
