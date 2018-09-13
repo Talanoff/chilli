@@ -10,6 +10,9 @@ Route::group([
     Route::get('create', 'ReviewController@create')->name('.create');
     Route::post('create', 'ReviewController@store')->name('.store');
 
+    Route::get('meta', 'ReviewController@meta')->name('.meta');
+    Route::post('meta', 'ReviewController@metaStore')->name('.meta.store');
+
     Route::get('{review}/edit', 'ReviewController@edit')->name('.edit');
     Route::patch('{review}/update', 'ReviewController@update')->name('.update');
 

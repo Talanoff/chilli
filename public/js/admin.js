@@ -71994,7 +71994,7 @@ var render = function() {
     "div",
     { staticClass: "form-group" },
     [
-      _c("label", [_vm._v("Наборы")]),
+      _c("h5", [_vm._v("Наборы")]),
       _vm._v(" "),
       _vm._l(_vm.kits, function(kit) {
         return _vm.kits.length

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\FastBuyRequest;
 use App\Mail\FashBuy;
+use App\Models\Meta\Meta;
 use App\Models\Product\Brand;
 use App\Models\Product\Category;
 use App\Models\Product\CharacteristicType;
@@ -76,6 +77,7 @@ class ProductController extends Controller
             'title' => $title,
             'viewed' => $this::handleViewedProducts(),
             'filters' => $this::createFilters(),
+            'meta' => Meta::whereMetableId(0)->whereMetableType(Product::class)->first(),
         ]);
     }
 
@@ -113,6 +115,7 @@ class ProductController extends Controller
             'characteristics' => $characteristics,
             'images' => json_encode($images->toArray()),
             'thumbnails' => json_encode($thumbnails->toArray()),
+            'meta' => $product->meta()->first(),
         ]);
     }
 

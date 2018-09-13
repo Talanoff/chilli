@@ -3,6 +3,7 @@
 namespace App\Models\Review;
 
 use App\Models\Comment\Comment;
+use App\Models\Meta\Meta;
 use App\Models\Product\Product;
 use App\Traits\Slugable;
 use Illuminate\Database\Eloquent\Builder;
@@ -63,6 +64,14 @@ class Review extends Model implements HasMedia
     public function comments(): MorphMany
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    /**
+     * @return MorphMany
+     */
+    public function meta(): MorphMany
+    {
+        return $this->morphMany(Meta::class, 'metable');
     }
 
     /**

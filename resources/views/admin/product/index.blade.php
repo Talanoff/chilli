@@ -8,6 +8,9 @@
             <a href="{{ route('admin.product.create') }}" class="btn btn-secondary ml-3">
                 Создать новый
             </a>
+            <a href="{{ route('admin.product.meta') }}" class="btn btn-outline-primary ml-3">
+                Мета информация раздела
+            </a>
         </h1>
 
         @forelse($products as $product)

@@ -25,6 +25,8 @@
 
                     <image-uploader src="{{ $review->getFirstMediaUrl('review') }}"
                                     image-id="{{ optional($review->getFirstMedia('review'))->id }}"></image-uploader>
+
+                    @include('partials.admin.meta.meta')
                 </div>
 
                 <div class="col-lg-4">

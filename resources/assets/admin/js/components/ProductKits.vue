@@ -1,6 +1,6 @@
 <template>
     <div class="form-group">
-        <label>Наборы</label>
+        <h5>Наборы</h5>
 
         <kit-item
             v-if="kits.length"

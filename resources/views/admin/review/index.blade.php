@@ -8,6 +8,9 @@
             <a href="{{ route('admin.review.create') }}" class="btn btn-secondary ml-3">
                 Новый обзор
             </a>
+            <a href="{{ route('admin.review.meta') }}" class="btn btn-outline-primary ml-3">
+                Мета информация раздела
+            </a>
         </h1>
 
         <div class="row">

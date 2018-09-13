@@ -1,5 +1,9 @@
 @extends('layouts.app', ['app_title' => $title])
 
+@section('meta')
+    @include('partials.app.meta.meta')
+@endsection
+
 @section('content')
 
     <section class="products products-list flex">

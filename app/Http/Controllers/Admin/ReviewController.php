@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ReviewRequest;
+use App\Models\Meta\Meta;
 use App\Models\Review\Review;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ReviewController extends Controller
@@ -41,7 +43,11 @@ class ReviewController extends Controller
 
         if ($request->hasFile('image')) {
             $review->addMediaFromRequest('image')
-                ->toMediaCollection('review');
+                   ->toMediaCollection('review');
+        }
+
+        if ($request->filled('meta')) {
+            $review->meta()->create($request->get('meta'));
         }
 
         return redirect()->route('admin.review.index');
@@ -53,7 +59,10 @@ class ReviewController extends Controller
      */
     public function edit(Review $review): View
     {
-        return \view('admin.review.edit', compact('review'));
+        return \view('admin.review.edit', [
+            'review' => $review,
+            'meta' => $review->meta()->first(),
+        ]);
     }
 
     /**
@@ -78,6 +87,10 @@ class ReviewController extends Controller
                    ->toMediaCollection('review');
         }
 
+        if ($request->filled('meta')) {
+            $review->meta()->updateOrCreate([], $request->get('meta'));
+        }
+
         return redirect()->route('admin.review.index');
     }
 
@@ -88,9 +101,37 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review): RedirectResponse
     {
+        $review->meta()->delete();
         $review->delete();
 
-        return redirect()->route('admin.review.index');
+        return \redirect()->route('admin.review.index');
+    }
+
+    /**
+     * @return View
+     */
+    public function meta(): View
+    {
+        return \view('admin.review.meta', [
+            'meta' => Meta::whereMetableId(0)->whereMetableType(Review::class)->first(),
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function metaStore(Request $request): RedirectResponse
+    {
+        Meta::query()->updateOrCreate([
+            'metable_id' => 0,
+            'metable_type' => Review::class,
+        ], array_merge([
+            'metable_id' => 0,
+            'metable_type' => Review::class,
+        ], $request->get('meta')));
+
+        return \redirect()->route('admin.review.index');
     }
 
     /**

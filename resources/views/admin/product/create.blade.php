@@ -82,6 +82,8 @@
                             @endforeach
                         </ul>
                     </div>
+
+                    @include('partials.admin.meta.meta')
                 </div>
 
                 <div class="col-lg-4">

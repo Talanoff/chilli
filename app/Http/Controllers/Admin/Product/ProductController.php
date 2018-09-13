@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Product;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
+use App\Models\Meta\Meta;
 use App\Models\Product\Brand;
 use App\Models\Product\Category;
 use App\Models\Product\CharacteristicType;
@@ -79,6 +80,10 @@ class ProductController extends Controller
 
         $this->storeGallery($request, $product);
 
+        if ($request->filled('meta')) {
+            $product->meta()->create($request->get('meta'));
+        }
+
         $product->characteristics()->attach($request->get('attribute'));
 
         return redirect()->route('admin.product.index');
@@ -98,6 +103,7 @@ class ProductController extends Controller
             'types' => CharacteristicType::query()->get(),
             'categories' => Category::query()->latest('id')->get(),
             'brands' => Brand::query()->latest()->get(),
+            'meta' => $product->meta()->first(),
         ]);
     }
 
@@ -120,6 +126,10 @@ class ProductController extends Controller
 
         $this->storeGallery($request, $product);
 
+        if ($request->filled('meta')) {
+            $product->meta()->updateOrCreate([], $request->get('meta'));
+        }
+
         $product->characteristics()->sync($request->get('attribute'));
 
         return redirect()->route('admin.product.index');
@@ -135,10 +145,37 @@ class ProductController extends Controller
     public function destroy(Product $product): RedirectResponse
     {
         $product->characteristics()->detach();
-
+        $product->meta()->delete();
         $product->delete();
 
         return redirect()->route('admin.product.index');
+    }
+
+    /**
+     * @return View
+     */
+    public function meta(): View
+    {
+        return \view('admin.product.meta', [
+            'meta' => Meta::whereMetableId(0)->whereMetableType(Product::class)->first(),
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function metaStore(Request $request): RedirectResponse
+    {
+        Meta::query()->updateOrCreate([
+            'metable_id' => 0,
+            'metable_type' => Product::class,
+        ], array_merge([
+            'metable_id' => 0,
+            'metable_type' => Product::class,
+        ], $request->get('meta')));
+
+        return \redirect()->route('admin.product.index');
     }
 
     /**

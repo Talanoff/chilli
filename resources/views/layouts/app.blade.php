@@ -9,7 +9,10 @@
 
     <title>{{ config('app.name', 'Chilli') . (isset($app_title) ? ' | ' . $app_title : '') }}</title>
 
+    @yield('meta')
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="canonical" href="{{ url()->current() }}"/>
 </head>
 <body>
 <div id="app">

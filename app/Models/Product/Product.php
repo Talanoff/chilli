@@ -4,6 +4,7 @@ namespace App\Models\Product;
 
 use App\Http\Resources\ImageResource;
 use App\Models\Comment\Comment;
+use App\Models\Meta\Meta;
 use App\Models\Order\Checkout;
 use App\Models\Review\Review;
 use App\Traits\Slugable;
@@ -145,6 +146,14 @@ class Product extends Model implements HasMedia
     public function favourites(): HasMany
     {
         return $this->hasMany(Favourite::class);
+    }
+
+    /**
+     * @return MorphMany
+     */
+    public function meta(): MorphMany
+    {
+        return $this->morphMany(Meta::class, 'metable');
     }
 
     /**

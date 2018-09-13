@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
+use App\Models\Meta\Meta;
 use App\Models\Product\Product;
 use App\Models\Review\Review;
 use App\Models\User\User;
@@ -19,6 +20,7 @@ class ReviewController extends Controller
     {
         return \view('app.review.index', [
             'reviews' => Review::query()->latest()->paginate(9),
+            'meta' => Meta::whereMetableId(0)->whereMetableType(Review::class)->first(),
         ]);
     }
 
@@ -31,6 +33,7 @@ class ReviewController extends Controller
         return \view('app.review.show', [
             'review' => $review,
             'recommended' => Product::query()->inRandomOrder()->take(4)->get(),
+            'meta' => $review->meta()->first(),
         ]);
     }
 

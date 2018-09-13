@@ -12,6 +12,9 @@ Route::group([
     Route::get('create', 'ProductController@create')->name('.create');
     Route::post('create', 'ProductController@store')->name('.store');
 
+    Route::get('meta', 'ProductController@meta')->name('.meta');
+    Route::post('meta', 'ProductController@metaStore')->name('.meta.store');
+
     Route::get('{product}/edit', 'ProductController@edit')->name('.edit');
     Route::patch('{product}/edit', 'ProductController@update')->name('.update');
 

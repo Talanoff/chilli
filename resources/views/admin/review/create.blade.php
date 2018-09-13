@@ -21,6 +21,8 @@
                     <wysiwyg id="body" name="description" label="Описание" content="{{ old('description') }}"></wysiwyg>
 
                     <image-uploader></image-uploader>
+
+                    @include('partials.admin.meta.meta')
                 </div>
 
                 <div class="col-lg-4">

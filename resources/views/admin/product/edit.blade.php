@@ -90,6 +90,8 @@
                     </div>
                     <!-- .FILTERS -->
 
+                    @include('partials.admin.meta.meta')
+
                     <hr class="mt-4 mb-3">
 
                     <product-kits product="{{ $product->slug }}"></product-kits>
