@@ -108,10 +108,22 @@ class RouteServiceProvider extends ServiceProvider
                     'icon' => 'video',
                 ],
                 [
+                    'route' => 'admin.page.index',
+                    'compare' => 'admin.page.*',
+                    'name' => 'Страницы',
+                    'icon' => 'pages',
+                ],
+                [
                     'route' => 'admin.user.index',
                     'compare' => 'admin.user.*',
                     'name' => 'Пользователи',
                     'icon' => 'users',
+                ],
+                [
+                    'route' => 'admin.subscribe.index',
+                    'compare' => 'admin.subscribe.*',
+                    'name' => 'Подписки',
+                    'icon' => 'envelope',
                 ],
                 [
                     'route' => 'admin.settings.index',

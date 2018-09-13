@@ -2,6 +2,21 @@
 
 @section('content')
 
+    @if (session()->has('success'))
+        <div class="notification notification-success">
+            {{ session()->get('success') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="notification notification-danger">
+            @foreach($errors->all() as $error)
+                <div>{{ $error }}</div>
+            @endforeach
+        </div>
+    @endif
+
+
     <section class="products products--home flex">
         @forelse($products as $product)
             @php

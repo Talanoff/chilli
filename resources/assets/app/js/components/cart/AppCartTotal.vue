@@ -45,7 +45,7 @@
                         {{ item.amount }} грн
                     </h4>
 
-                    <a href="#" class="remove" role="button"
+                    <a href="#" class="remove-cart-item" role="button"
                        @click.prevent="removeFromCart(item.id)"></a>
                 </td>
             </tr>

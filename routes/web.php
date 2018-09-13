@@ -15,7 +15,9 @@ Route::group([
     require_once(__DIR__ . '/admin/user.php');
     require_once(__DIR__ . '/admin/review.php');
     require_once(__DIR__ . '/admin/settings.php');
+    require_once(__DIR__ . '/admin/page.php');
     require_once(__DIR__ . '/admin/common.php');
+    require_once(__DIR__ . '/admin/subscribe.php');
 
 });
 

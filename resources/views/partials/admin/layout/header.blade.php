@@ -1,8 +1,8 @@
 <header id="app-header">
     <ul class="d-flex align-items-center list-unstyled mb-0">
         <li>
-            <a href="{{ route('app.home') }}" class="font-weight-bold">
-                На главную
+            <a href="{{ route('app.home') }}" class="font-weight-bold" target="_blank">
+                Перейти на сайт
             </a>
         </li>
         <li class="ml-auto">

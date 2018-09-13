@@ -30,7 +30,8 @@
             </div>
         </div>
 
-        <ul class="flex justify-end unstyled">
+        @if (count($settings['phone']))
+        <ul class="flex justify-end unstyled phones">
             @foreach($settings['phone'] as $phone)
                 <li class="ml-4">
                     <svg width="14" height="14" style="margin-top: -2px;">
@@ -42,5 +43,6 @@
                 </li>
             @endforeach
         </ul>
+        @endif
     </div>
 </header>

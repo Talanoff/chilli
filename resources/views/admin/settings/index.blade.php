@@ -7,7 +7,6 @@
             Настройки
         </h1>
 
-
         @forelse($settings as $key => $setting)
             <div class="mb-5">
                 <h4>{{ App\Models\Setting\Setting::$TYPES[$key] }}</h4>

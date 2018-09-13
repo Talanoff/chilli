@@ -37,7 +37,10 @@
                     </a>
                 </div>
 
-                <app-cart-item v-for="item in cart" :product="item.product" :key="item.id"/>
+                <app-cart-item v-for="item in cart"
+                               :item="item.id"
+                               :product="item.product"
+                               :key="item.id"/>
             </div>
 
             <div class="cart-entry-footer p-4 px-md-8 py-md-6" v-if="cart.length">

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SubscribeRequest;
 use App\Models\Product\Product;
 use App\Models\Review\Review;
+use App\Models\User\Subscribe;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
@@ -36,17 +39,30 @@ class CommonController extends Controller
     {
         $search = $request->get('search');
 
-        $products = Product::query()
-                           ->where('title', 'like', "%{$search}%")
-                           ->orWhere('subtitle', 'like', "%{$search}%")
-                           ->orWhereHas('brand', function ($q) use ($search) {
-                               $q->where('name', 'like', "%{$search}%");
-                           })
-                           ->paginate(12);
+        $products = Product::query();
+
+        if (intval($search) > 0) {
+            $products = $products->where('id', '=', intval($search) - 1000);
+        } else {
+            $products = $products->orWhere('title', 'like', "%{$search}%")
+                                 ->orWhere('subtitle', 'like', "%{$search}%")
+                                 ->orWhereHas('brand', function ($q) use ($search) {
+                                     $q->where('name', 'like', "%{$search}%");
+                                 });
+        }
 
         return \view('app.search.index', [
-            'products' => $products,
+            'products' => $products->paginate(12),
             'viewed' => ProductController::handleViewedProducts(),
         ]);
+    }
+
+    public function subscribe(SubscribeRequest $request): RedirectResponse
+    {
+        Subscribe::query()->create($request->only('email'));
+
+        session()->flash('success', 'Ваш e-mail успешно добавлен в нашу базу');
+
+        return \back();
     }
 }
