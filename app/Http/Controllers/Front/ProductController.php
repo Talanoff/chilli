@@ -45,7 +45,7 @@ class ProductController extends Controller
             $query = $query->where('category_id', $category);
         }
 
-        $latest = $query->first();
+        $latest = $query->latest()->first();
         $products = $query->where('id', '!=', optional($latest)->id);
 
         if ($request->filled('leaders')) {
