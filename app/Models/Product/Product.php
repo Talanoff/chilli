@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Facades\DB;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\{HasMedia\HasMedia, HasMedia\HasMediaTrait, Models\Media};
 
@@ -135,7 +136,7 @@ class Product extends Model implements HasMedia
     /**
      * @return HasMany
      */
-    public function checkout(): HasMany
+    public function checkouts(): HasMany
     {
         return $this->hasMany(Checkout::class);
     }
@@ -231,7 +232,8 @@ class Product extends Model implements HasMedia
 
     public function scopeLeaders($query)
     {
-
+        return $query->withCount('checkouts')
+                     ->orderBy('checkouts_count', 'desc');
     }
 
     /**

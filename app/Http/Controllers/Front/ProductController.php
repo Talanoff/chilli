@@ -33,8 +33,6 @@ class ProductController extends Controller
 
         if ($request->filled('price')) {
             $query = $query->orderBy('price', $request->get('price'));
-        } else {
-            $query = $query->latest();
         }
 
         if ($request->filled('brand')) {
@@ -47,12 +45,14 @@ class ProductController extends Controller
             $query = $query->where('category_id', $category);
         }
 
-        if ($request->filled('leaders')) {
-            //            $query = $query;
-        }
-
         $latest = $query->first();
         $products = $query->where('id', '!=', optional($latest)->id);
+
+        if ($request->filled('leaders')) {
+            $products = $products->leaders();
+        } else {
+            $query = $query->latest();
+        }
 
         if (app('router')->currentRouteNamed('app.promotions')) {
             $title = 'Акции';
