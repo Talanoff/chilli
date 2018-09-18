@@ -146,6 +146,8 @@ class ProductController extends Controller
     {
         $product->characteristics()->detach();
         $product->meta()->delete();
+        $product->checkouts()->delete();
+
         $product->delete();
 
         return redirect()->route('admin.product.index');
