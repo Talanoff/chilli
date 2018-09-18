@@ -229,6 +229,11 @@ class Product extends Model implements HasMedia
         return $this->characteristics()->whereType('color')->get();
     }
 
+    public function scopeLeaders($query)
+    {
+
+    }
+
     /**
      * Boot media for products
      */

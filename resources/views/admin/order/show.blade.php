@@ -71,25 +71,62 @@
 
         <table class="table mt-5">
             @foreach($order->checkout as $item)
-                <tr>
-                    <td width="100">
-                        <img src="{{ $item->product->getFirstMediaUrl('product', 'thumb') }}" alt="">
-                    </td>
-                    <td>
-                        <p class="small text-muted mb-1">Название</p>
-                        <h6 class="text-uppercase mb-0">
-                            <a href="{{ route('app.product.show', $item->product) }}">{{ $item->product->title }}</a>
-                        </h6>
-                        <p class="mb-0 small">Артикул № {{ $item->product->sku }}</p>
-                    </td>
-                    <td class="text-right">
-                        <p class="small text-muted mb-1">Цена</p>
-                        <h6 class="mb-0 no-wrap">
-                            <span class="text-normal smaller">{{ $item->quantity }} x</span>
-                            {{ $item->product->computed_price }} грн
-                        </h6>
-                    </td>
-                </tr>
+                @if ($item->product)
+                    <tr>
+                        <td width="100">
+                            <a href="{{ route('app.product.show', $item->product) }}">
+                                <img src="{{ $item->product->getFirstMediaUrl('product', 'thumb') }}" alt="">
+                            </a>
+                        </td>
+                        <td>
+                            <p class="small text-muted mb-3">Артикул № {{ $item->product->sku }}</p>
+                            <h6 class="text-uppercase mb-0">
+                                <a href="{{ route('app.product.show', $item->product) }}"
+                                   class="link link-underline">{{ $item->product->title }}</a>
+                            </h6>
+                        </td>
+                        <td class="text-right">
+                            <p class="small text-muted mb-1">Цена</p>
+                            <h6 class="mb-0 no-wrap">
+                                <span class="text-normal smaller">{{ $item->quantity }} x</span>
+                                {{ $item->product->computed_price }} грн
+                            </h6>
+                        </td>
+                    </tr>
+                @else
+                    <tr>
+                        <td width="100" class="position-relative">
+                            <div class="d-flex pt-4">
+                                <a href="{{ route('app.product.show', $item->kit->product) }}" class="d-block">
+                                    <img src="{{ $item->kit->product->getFirstMediaUrl('product', 'thumb') }}" alt="">
+                                </a>
+
+                                <a href="{{ route('app.product.show', $item->kit->related) }}"
+                                   class="d-block ">
+                                    <img src="{{ $item->kit->related->getFirstMediaUrl('product', 'thumb') }}" alt="">
+                                </a>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="small text-muted mb-3">Набор № {{ $item->kit->sku }}</p>
+                            <h6 class="text-uppercase mb-2">
+                                <a href="{{ route('app.product.show', $item->kit->product) }}"
+                                   class="link link-underline">{{ $item->kit->product->title }}</a>
+                            </h6>
+                            <h6 class="text-uppercase mb-0">
+                                <a href="{{ route('app.product.show', $item->kit->related) }}"
+                                   class="link link-underline">{{ $item->kit->related->title }}</a>
+                            </h6>
+                        </td>
+                        <td class="text-right">
+                            <p class="small text-muted mb-1">Цена</p>
+                            <h6 class="mb-0 no-wrap">
+                                <span class="text-normal smaller">{{ $item->quantity }} x</span>
+                                {{ $item->kit->amount }} грн
+                            </h6>
+                        </td>
+                    </tr>
+                @endif
             @endforeach
         </table>
 

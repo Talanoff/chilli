@@ -25,7 +25,7 @@
         @else
             <tr>
                 <td width="{{ $size ?? 200 }}" class="position-relative">
-                    <a href="{{ route('app.product.show', $item->kit->product) }}">
+                    <a href="{{ route('app.product.show', $item->kit->product) }}" class="block">
                         <img src="{{ $item->kit->product->getFirstMediaUrl('product', 'thumb') }}" alt="">
                     </a>
 
@@ -35,7 +35,7 @@
                     </a>
                 </td>
                 <td>
-                    <p class="small text-muted mb-1">Названия</p>
+                    <p class="small text-muted mb-1">Товары</p>
                     <h6 class="text-uppercase mb-1">
                         <a href="{{ route('app.product.show', $item->kit->product) }}">{{ $item->kit->product->title }}</a>
                     </h6>
