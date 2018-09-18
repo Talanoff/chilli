@@ -11,10 +11,13 @@
 
     @yield('meta')
 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/loader.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="canonical" href="{{ url()->current() }}"/>
 </head>
 <body>
+@include('partials.app.layout.loader')
+
 <div id="app" v-cloak>
     @include('partials.app.layout.svg')
     @include('partials.app.layout.header')
