@@ -11,7 +11,7 @@
 
 .column {
     @extend %column;
-    flex: 1 0 auto;
+    flex: 1 1 auto;
     max-width: 100%;
 }
 

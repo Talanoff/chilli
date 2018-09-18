@@ -29,7 +29,12 @@ class CheckoutController extends Controller
         return \view('app.cart.checkout', [
             'cart' => $cart,
             'amount' => $cart->map(function ($item) {
-                return $item->product->price * $item->quantity;
+                if ($item->product_id) {
+                    $amount = $item->product->computed_price * $item->quantity;
+                } else {
+                    $amount = $item->kit->amount * $item->quantity;
+                }
+                return $amount;
             })->sum(),
         ]);
     }
@@ -90,7 +95,7 @@ class CheckoutController extends Controller
         }
 
         return \view('app.cart.details', [
-            'order' => Auth::user()->order()->latest()->first(),
+            'order' => Auth::user()->orders()->latest()->first(),
         ]);
     }
 

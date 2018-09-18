@@ -38,13 +38,21 @@ export const store = new Vuex.Store({
             axios.delete(`/cart/${id}/delete`)
                 .then(({data}) => this.commit('storeCart', data));
         },
+
+        // Favourites
         handleFavourites(context, action) {
             axios.post(action)
                 .then(({data}) => this.commit('updateFavourites', data))
         },
         removeFromFavourites(context, id) {
-            axios.post(`favourites/${id}/remove`)
+            axios.post(`/favourites/${id}/remove`)
                 .then(({data}) => this.commit('updateFavourites', data));
+        },
+
+        // Kits
+        addKitToCart(context, id) {
+            axios.post(`/cart/kit/${id}/add`)
+                .then(({data}) => this.commit('storeCart', data))
         }
     }
 });

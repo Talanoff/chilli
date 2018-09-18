@@ -2,7 +2,7 @@
 
 Route::group([
     'as' => '.cart',
-    'prefix' => 'cart'
+    'prefix' => 'cart',
 ], function () {
 
     Route::get('/', 'CartController@index')->name('.index');
@@ -12,5 +12,6 @@ Route::group([
 
     Route::get('get', 'CartController@getCart')->name('.get');
     Route::post('{product}/add', 'CartController@addProductToCart')->name('.add');
+    Route::post('kit/{kit}/add', 'CartController@addKitToCart')->name('.kit.add');
 
 });

@@ -15,7 +15,7 @@
     <link rel="canonical" href="{{ url()->current() }}"/>
 </head>
 <body>
-<div id="app">
+<div id="app" v-cloak>
     @include('partials.app.layout.svg')
     @include('partials.app.layout.header')
 

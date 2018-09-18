@@ -2,6 +2,7 @@
 
 namespace App\Models\Order;
 
+use App\Models\Product\Kit;
 use App\Models\Product\Product;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Model;
@@ -19,6 +20,7 @@ class Checkout extends Model
         'status',
         'user_id',
         'product_id',
+        'kit_id',
         'order_id',
         'quantity',
     ];
@@ -26,7 +28,6 @@ class Checkout extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at',
     ];
 
     /**
@@ -35,6 +36,14 @@ class Checkout extends Model
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function kit(): BelongsTo
+    {
+        return $this->belongsTo(Kit::class);
     }
 
     /**

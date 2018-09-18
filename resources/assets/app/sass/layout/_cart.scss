@@ -26,6 +26,14 @@
 
     &-item-image {
         width: 200px;
+        height: 200px;
+        vertical-align: top;
+
+        &__related {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
     }
 
     &-footer {
@@ -136,6 +144,13 @@
     }
 
     &-item {
+        min-height: 100px;
+        margin-bottom: 2px;
+
+        .add-sign {
+            margin-top: 50px - 18px;
+        }
+
         a {
             color: $dark;
 
@@ -145,7 +160,7 @@
         }
 
         &__wrapper {
-            flex: 0 1 auto;
+            flex: 1 1 auto;
             max-width: 100%;
             position: relative;
         }

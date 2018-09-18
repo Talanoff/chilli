@@ -3,51 +3,111 @@
         <table class="table">
             <tr class="align-center"
                 v-for="item in cart" :key="cart.id">
-                <td class="p-0 cart-item-image">
-                    <a :href="item.product.url">
-                        <img :src="item.product.thumbnail"
-                             :alt="item.product.title" width="200">
-                    </a>
-                </td>
-                <td class="pl-6">
-                    <h4 class="text-uppercase mb-1 text-normal">
+                <template v-if="!!item.product">
+                    <td class="p-0 cart-item-image">
                         <a :href="item.product.url">
-                            {{ item.product.title }}
+                            <img :src="item.product.thumbnail"
+                                 :alt="item.product.title" width="200">
                         </a>
-                    </h4>
-                    <p class="mb-0 text-muted smaller text-uppercase">
-                        Артикул № {{ item.product.sku }}
-                    </p>
-                </td>
-                <td>
-                    <h4 class="mb-0 text-normal text-dark text-center">
-                        {{ item.product.price }} грн
-                    </h4>
-                </td>
-                <td>
-                    <div class="product-quantity flex justify-center">
-                        <button class="btn btn-dark"
-                                :disabled="item.quantity < 2"
-                                @click.prevent="changeQuantity(item.id, 'remove')">
-                            -
-                        </button>
-                        <div class="quantity-counter">
-                            {{ item.quantity }}
+                    </td>
+                    <td class="pl-6">
+                        <h4 class="text-uppercase mb-1 text-normal">
+                            <a :href="item.product.url">
+                                {{ item.product.title }}
+                            </a>
+                        </h4>
+                        <p class="mb-0 text-muted smaller text-uppercase">
+                            Артикул № {{ item.product.sku }}
+                        </p>
+                    </td>
+                    <td>
+                        <h4 class="mb-0 text-normal text-dark text-center">
+                            {{ item.product.price }} грн
+                        </h4>
+                    </td>
+                    <td>
+                        <div class="product-quantity flex justify-center">
+                            <button class="btn btn-dark"
+                                    :disabled="item.quantity < 2"
+                                    @click.prevent="changeQuantity(item.id, 'remove')">
+                                -
+                            </button>
+                            <div class="quantity-counter">
+                                {{ item.quantity }}
+                            </div>
+                            <button class="btn btn-dark"
+                                    @click.prevent="changeQuantity(item.id, 'add')">
+                                +
+                            </button>
                         </div>
-                        <button class="btn btn-dark"
-                                @click.prevent="changeQuantity(item.id, 'add')">
-                            +
-                        </button>
-                    </div>
-                </td>
-                <td class="position-relative">
-                    <h4 class="mb-0 text-dark">
-                        {{ item.amount }} грн
-                    </h4>
+                    </td>
+                    <td class="position-relative">
+                        <h4 class="mb-0 text-dark">
+                            {{ item.amount }} грн
+                        </h4>
 
-                    <a href="#" class="remove-cart-item" role="button"
-                       @click.prevent="removeFromCart(item.id)"></a>
-                </td>
+                        <a href="#" class="remove-cart-item" role="button"
+                           @click.prevent="removeFromCart(item.id)"></a>
+                    </td>
+                </template>
+
+                <template v-if="!!item.kit">
+                    <td class="p-0 cart-item-image position-relative">
+                        <a :href="item.kit.product.url">
+                            <img :src="item.kit.product.thumbnail"
+                                 :alt="item.kit.product.title" width="120">
+                        </a>
+
+                        <a :href="item.kit.related.url" class="cart-item-image__related">
+                            <img :src="item.kit.related.thumbnail"
+                                 :alt="item.kit.related.title" width="120">
+                        </a>
+                    </td>
+                    <td class="pl-6">
+                        <h4 class="text-uppercase mb-1 text-normal">
+                            <a :href="item.kit.product.url">
+                                {{ item.kit.product.title }}
+                            </a>
+                        </h4>
+                        <h4 class="text-uppercase mb-1 text-normal">
+                            <a :href="item.kit.related.url">
+                                {{ item.kit.related.title }}
+                            </a>
+                        </h4>
+                        <p class="mb-0 text-muted smaller text-uppercase">
+                            Набор № {{ item.kit.sku }}
+                        </p>
+                    </td>
+                    <td>
+                        <h4 class="mb-0 text-normal text-dark text-center">
+                            {{ item.kit.amount }} грн
+                        </h4>
+                    </td>
+                    <td>
+                        <div class="product-quantity flex justify-center">
+                            <button class="btn btn-dark"
+                                    :disabled="item.quantity < 2"
+                                    @click.prevent="changeQuantity(item.id, 'remove')">
+                                -
+                            </button>
+                            <div class="quantity-counter">
+                                {{ item.quantity }}
+                            </div>
+                            <button class="btn btn-dark"
+                                    @click.prevent="changeQuantity(item.id, 'add')">
+                                +
+                            </button>
+                        </div>
+                    </td>
+                    <td class="position-relative">
+                        <h4 class="mb-0 text-dark">
+                            {{ item.amount }} грн
+                        </h4>
+
+                        <a href="#" class="remove-cart-item" role="button"
+                           @click.prevent="removeFromCart(item.id)"></a>
+                    </td>
+                </template>
             </tr>
         </table>
 

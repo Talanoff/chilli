@@ -1,0 +1,43 @@
+#kits {
+    background-color: #fff;
+    color: $product-text-color;
+    padding: 2.5rem 0;
+}
+
+.kit {
+    &-total {
+        position: relative;
+        background-color: #e9f7fe;
+        height: 100%;
+    }
+
+    &-sku {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+    }
+
+    &-images {
+        width: 60px;
+        height: 60px;
+
+        &__related {
+            position: absolute;
+            left: 40px;
+            top: 40px;
+        }
+    }
+}
+
+.kits-item {
+    transition: 1s;
+}
+
+.kits-carousel {
+    &-button {
+        cursor: pointer;
+        &:hover {
+            fill: $primary;
+        }
+    }
+}

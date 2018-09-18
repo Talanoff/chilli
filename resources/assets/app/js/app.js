@@ -14,6 +14,7 @@ import Checkout from './components/cart/Checkout';
 import StarRating from './components/product/StarRating';
 import ProductSlider from './components/product/ProductSlider';
 import FastBuy from './components/product/FastBuy';
+import KitsCarousel from './components/product/KitsCarousel';
 
 import FavouritesList from './components/favourites/FavouritesList';
 import AppFavourites from './components/favourites/AppFavourites';
@@ -31,6 +32,7 @@ new Vue({
     components: {
         AppCart,
         AppCartTotal,
+        AppSearch,
         AddToCartButton,
         StarRating,
         ProductSlider,
@@ -41,7 +43,7 @@ new Vue({
         FavouritesList,
         AppFavourites,
         AddToFavouritesButton,
-        AppSearch,
+        KitsCarousel
     },
     methods: {
         getCart() {

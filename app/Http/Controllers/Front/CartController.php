@@ -7,6 +7,7 @@ use App\Http\Resources\CartResource;
 use App\Http\Resources\FavouriteResource;
 use App\Models\Order\Checkout;
 use App\Models\Product\Favourite;
+use App\Models\Product\Kit;
 use App\Models\Product\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -36,10 +37,15 @@ class CartController extends Controller
             'summary' => [
                 'count' => $cart->sum('quantity'),
                 'amount' => $cart->map(function ($item) {
-                    return $item->product->computed_price * $item->quantity;
+                    if ($item->product_id) {
+                        $amount = $item->product->computed_price * $item->quantity;
+                    } else {
+                        $amount = $item->kit->amount * $item->quantity;
+                    }
+                    return $amount;
                 })->sum(),
             ],
-            'favourites' => FavouriteResource::collection(Favourite::favourites())
+            'favourites' => FavouriteResource::collection(Favourite::favourites()),
         ]);
     }
 
@@ -63,6 +69,33 @@ class CartController extends Controller
             Checkout::query()->create([
                 'user_id' => Auth::check() ? Auth::user()->id : session()->getId(),
                 'product_id' => $product->id,
+                'quantity' => 1,
+            ]);
+        }
+
+        return $this->getCart();
+    }
+
+    /**
+     * @param Kit $kit
+     * @return JsonResponse
+     */
+    public function addKitToCart(Kit $kit): JsonResponse
+    {
+        $cart = $this::handleUserCart();
+
+        if (count($cart) && in_array($kit->id, $cart->pluck('kit_id')->toArray())) {
+            $checkout = Auth::check() ? Auth::user()->checkout() : Checkout::anonymous();
+
+            $checkout = $checkout->whereKitId($kit->id)->first();
+
+            $checkout->update([
+                'quantity' => $checkout->quantity + 1,
+            ]);
+        } else {
+            Checkout::query()->create([
+                'user_id' => Auth::check() ? Auth::user()->id : session()->getId(),
+                'kit_id' => $kit->id,
                 'quantity' => 1,
             ]);
         }

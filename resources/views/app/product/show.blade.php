@@ -127,10 +127,24 @@
         </div>
     </section>
 
-    @if ($product->review)
-        <section class="reviews reviews--single">
-            @include('partials.app.review.promo', ['review' => $product->review])
+    @if (count($product->kits))
+        <h4 class="text-white text-uppercase text-center mt-10 mb-2">Вместе дешевле</h4>
+
+        </div><!-- .container -->
+
+        <section id="kits">
+            <div class="container">
+                <kits-carousel kits="{{ json_encode(\App\Http\Resources\KitResource::collection($product->kits)) }}"></kits-carousel>
+            </div>
         </section>
+
+        <div class="container">
+            @endif
+
+            @if ($product->review)
+                <section class="reviews reviews--single">
+                    @include('partials.app.review.promo', ['review' => $product->review])
+                </section>
     @endif
 
     @include('partials.app.product.recommended', ['recommended' => $product->recommended])

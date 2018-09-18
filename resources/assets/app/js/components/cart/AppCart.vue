@@ -38,8 +38,7 @@
                 </div>
 
                 <app-cart-item v-for="item in cart"
-                               :item="item.id"
-                               :product="item.product"
+                               :item="item"
                                :key="item.id"/>
             </div>
 

@@ -9,7 +9,6 @@ use App\Models\Review\Review;
 use App\Models\User\Subscribe;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class CommonController extends Controller
@@ -57,6 +56,10 @@ class CommonController extends Controller
         ]);
     }
 
+    /**
+     * @param SubscribeRequest $request
+     * @return RedirectResponse
+     */
     public function subscribe(SubscribeRequest $request): RedirectResponse
     {
         Subscribe::query()->create($request->only('email'));

@@ -44,8 +44,8 @@ class ProductSeeder extends Seeder
                 $u--;
             }
 
-            $product->addMediaFromUrl('http://placeimg.com/800/800/tech')
-                    ->usingFileName('product.png')
+            $product->addMediaFromUrl('https://store.storeimages.cdn-apple.com/4981/as-images.apple.com/is/image/AppleInc/aos/published/images/M/QG/MQGX2/MQGX2?wid=445&hei=445&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1516399367562')
+//                    ->usingFileName('product.png')
                     ->toMediaCollection('product');
         }
     }

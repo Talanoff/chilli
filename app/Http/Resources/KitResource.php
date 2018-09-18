@@ -17,8 +17,11 @@ class KitResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'sku' => $this->sku,
             'product' => new ProductResource(Product::find($this->product_id)),
             'related' => new ProductResource(Product::find($this->related_id)),
+            'old_price' => Product::where('id', $this->product_id)->first()->computed_price + Product::where('id',
+                    $this->related_id)->first()->computed_price,
             'amount' => $this->amount,
         ];
     }

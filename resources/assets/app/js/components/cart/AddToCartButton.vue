@@ -13,6 +13,12 @@
     export default {
         props: {
             action: String,
+            kit: {
+                type: Boolean,
+                default() {
+                    return false;
+                }
+            }
         },
         data() {
             return {
@@ -21,8 +27,10 @@
         },
         methods: {
             addToCart() {
+                const route = !this.kit ? 'addToCart' : 'addKitToCart';
+
                 this.inAction = true;
-                this.$store.dispatch('addToCart', this.action);
+                this.$store.dispatch(route, this.action);
 
                 VBUS.$emit('openCart');
 
