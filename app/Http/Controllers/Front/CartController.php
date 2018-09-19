@@ -35,8 +35,15 @@ class CartController extends Controller
         return response()->json([
             'cart' => CartResource::collection($cart),
             'summary' => [
-                'count' => $cart->sum('quantity'),
-
+//                'count' => $cart->sum('quantity'),
+//                'amount' => $cart->map(function ($item) {
+//                    if (isset($item->product_id)) {
+//                        $amount = $item->product->computed_price * $item->quantity;
+//                    } else {
+//                        $amount = $item->kit->amount * $item->quantity;
+//                    }
+//                    return $amount;
+//                })->sum(),
             ],
         ]);
 
