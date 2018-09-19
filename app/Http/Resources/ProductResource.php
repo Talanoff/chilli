@@ -20,11 +20,11 @@ class ProductResource extends JsonResource
             'slug' => $this->slug,
             'title' => $this->title,
             'subtitle' => $this->subtitle,
-            'price' => $this->computed_price,
-            'thumbnail' => $this->getFirstMediaUrl('product', 'thumb'),
-            'colors' => $this->colors,
+//            'price' => $this->computed_price,
+//            'thumbnail' => $this->getFirstMediaUrl('product', 'thumb'),
+//            'colors' => $this->colors,
 //            'rate' => (int) $this->stars,
-            'url' => route('app.product.show', $this),
+//            'url' => route('app.product.show', $this),
         ];
     }
 }
