@@ -32,7 +32,20 @@ class CartController extends Controller
     {
         $cart = self::handleUserCart();
 
-        return response()->json($cart);
+        return response()->json([
+            'cart' => CartResource::collection($cart),
+            'summary' => [
+                'count' => $cart->sum('quantity'),
+                'amount' => $cart->map(function ($item) {
+                    if ($item->product_id) {
+                        $amount = $item->product->computed_price * $item->quantity;
+                    } else {
+                        $amount = $item->kit->amount * $item->quantity;
+                    }
+                    return $amount;
+                })->sum(),
+            ],
+        ]);
 
         return response()->json([
             'cart' => CartResource::collection($cart),
