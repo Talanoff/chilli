@@ -18,7 +18,7 @@ class CartController extends Controller
     public function index(): View
     {
         return \view('app.cart.cart', [
-            'cart' => $this::handleUserCart(),
+            'cart' => self::handleUserCart(),
             'viewed' => ProductController::handleViewedProducts(),
         ]);
     }
@@ -30,7 +30,7 @@ class CartController extends Controller
      */
     public function getCart(): JsonResponse
     {
-        $cart = $this::handleUserCart();
+        $cart = self::handleUserCart();
 
         return response()->json([
             'cart' => CartResource::collection($cart),
@@ -55,7 +55,7 @@ class CartController extends Controller
      */
     public function addProductToCart(Product $product): JsonResponse
     {
-        $cart = $this::handleUserCart();
+        $cart = self::handleUserCart();
 
         if (in_array($product->id, $cart->pluck('product_id')->toArray())) {
             $checkout = Auth::check() ? Auth::user()->checkout() : Checkout::anonymous();
@@ -82,7 +82,7 @@ class CartController extends Controller
      */
     public function addKitToCart(Kit $kit): JsonResponse
     {
-        $cart = $this::handleUserCart();
+        $cart = self::handleUserCart();
 
         if (count($cart) && in_array($kit->id, $cart->pluck('kit_id')->toArray())) {
             $checkout = Auth::check() ? Auth::user()->checkout() : Checkout::anonymous();
