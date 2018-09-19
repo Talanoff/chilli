@@ -14,11 +14,6 @@ class Characteristic extends Model
         'type_id',
     ];
 
-    protected $with = [
-        'products',
-        'type',
-    ];
-
     public static $TYPES = [
         'text' => 'Текст',
         'color' => 'Цвет',
