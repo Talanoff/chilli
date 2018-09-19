@@ -37,7 +37,7 @@ class CartController extends Controller
             'summary' => [
                 'count' => $cart->sum('quantity'),
                 'amount' => $cart->map(function ($item) {
-                    if ($item->product_id) {
+                    if (isset($item->product_id)) {
                         $amount = $item->product->computed_price * $item->quantity;
                     } else {
                         $amount = $item->kit->amount * $item->quantity;
