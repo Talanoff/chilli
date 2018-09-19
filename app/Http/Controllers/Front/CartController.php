@@ -32,7 +32,7 @@ class CartController extends Controller
     {
         $cart = self::handleUserCart();
 
-        return response()->json([]);
+        return response()->json($cart);
 
         return response()->json([
             'cart' => CartResource::collection($cart),
