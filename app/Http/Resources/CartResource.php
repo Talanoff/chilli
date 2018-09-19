@@ -16,8 +16,8 @@ class CartResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'product' => new ProductResource($this->product()->first()),
-            'kit' => new KitResource($this->kit()->first()),
+//            'product' => new ProductResource($this->product),
+            'kit' => new KitResource($this->kit),
             'quantity' => $this->quantity,
             'amount' => ($this->product_id ? $this->product->computed_price : $this->kit->amount) * $this->quantity,
         ];
