@@ -86,7 +86,7 @@
         },
         methods: {
             removeFromCart() {
-                this.$store.dispatch('removeFromCart', this.item)
+                this.$store.dispatch('removeFromCart', this.item.id)
             }
         }
     }
