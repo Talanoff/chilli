@@ -61,7 +61,8 @@ class Checkout extends Model
      */
     public static function anonymous()
     {
-        return self::whereUserId(session()->getId())
+        dd(session()->getId());
+        return self::where('user_id', session()->getId())
                    ->whereStatus('in_progress');
     }
 
