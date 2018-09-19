@@ -13,7 +13,7 @@ class ProductSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        for ($i = 0; $i < 6; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $title = implode(' ', $faker->words(rand(2, 4)));
 
             $product = App\Models\Product\Product::create([
