@@ -22,9 +22,9 @@ class ProductResource extends JsonResource
             'subtitle' => $this->subtitle,
             'price' => $this->computed_price,
 //            'thumbnail' => $this->getFirstMediaUrl('product', 'thumb'),
-//            'colors' => $this->colors,
-//            'rate' => (int) $this->stars,
-//            'url' => route('app.product.show', $this),
+            'colors' => $this->colors,
+            'rate' => (int) $this->stars,
+            'url' => route('app.product.show', $this),
         ];
     }
 }
