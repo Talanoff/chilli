@@ -66,6 +66,9 @@
                 @if ($order->delivery === 'self')
                     Самовывоз
                 @endif
+
+                <h5 class="mt-4">Оплата:</h5>
+                <p>{{ App\Models\Order\Order::$PAYMENT[$order->payment] }}</p>
             </div>
         </div>
 

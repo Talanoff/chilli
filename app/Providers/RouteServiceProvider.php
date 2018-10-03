@@ -92,14 +92,14 @@ class RouteServiceProvider extends ServiceProvider
                     'compare' => 'admin.order.*',
                     'name' => 'Заказы',
                     'icon' => 'orders',
-                    'unread' => Order::query()->whereStatus('processing')->count(),
+                    'unread' => Order::query()->where('status', 'processing')->OrWhere('status', 'no_dial')->count(),
                 ],
                 [
                     'route' => 'admin.comment.index',
                     'compare' => 'admin.comment.*',
                     'name' => 'Комментарии',
                     'icon' => 'comments',
-                    'unread' => Comment::query()->whereStatus('agreement')->count(),
+                    'unread' => Comment::query()->where('status', 'agreement')->count(),
                 ],
                 [
                     'route' => 'admin.review.index',
