@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubscribeRequest;
+use App\Models\Page\Page;
 use App\Models\Product\Product;
 use App\Models\Review\Review;
 use App\Models\User\Subscribe;
@@ -67,5 +68,13 @@ class CommonController extends Controller
         session()->flash('success', 'Ваш e-mail успешно добавлен в нашу базу');
 
         return \back();
+    }
+
+    public function page(Page $page): View
+    {
+        return \view('app.page.show', [
+            'page' => $page,
+            'meta' => $page->meta()->first(),
+        ]);
     }
 }

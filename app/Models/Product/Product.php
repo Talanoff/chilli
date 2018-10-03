@@ -230,6 +230,10 @@ class Product extends Model implements HasMedia
         return $this->characteristics()->whereType('color')->get();
     }
 
+    /**
+     * @param $query
+     * @return mixed
+     */
     public function scopeLeaders($query)
     {
         return $query->withCount('checkouts')

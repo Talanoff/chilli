@@ -1,12 +1,12 @@
 <aside class="aside aside--left">
     <nav class="nav align-center text-uppercase">
-        <a href="{{ route('app.warranty') }}" class="nav-item">
+        <a href="{{ route('app.page', ['page' => 'warranty']) }}" class="nav-item">
             Гарантии
         </a>
-        <a href="{{ route('app.delivery') }}" class="nav-item">
+        <a href="{{ route('app.page', ['page' => 'delivery']) }}" class="nav-item">
             Оплата и доставка
         </a>
-        <a href="{{ route('app.contacts') }}" class="nav-item">
+        <a href="{{ route('app.page', ['page' => 'contacts']) }}" class="nav-item">
             Контакты
         </a>
 

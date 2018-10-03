@@ -19,6 +19,7 @@ class CreatePagesTable extends Migration
             $table->string('slug')->unique();
             $table->string('title');
             $table->mediumText('body')->nullable();
+            $table->json('params')->nullable();
 
             $table->timestamps();
         });

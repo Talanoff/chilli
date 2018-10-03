@@ -31,13 +31,13 @@
                             {{ $item['name'] }}
                         </a>
                     @endforeach
-                    <a href="{{ route('app.warranty') }}" class="nav-item">
+                    <a href="{{ route('app.page', ['page' => 'warranty']) }}" class="nav-item">
                         Гарантии
                     </a>
-                    <a href="{{ route('app.delivery') }}" class="nav-item">
+                    <a href="{{ route('app.page', ['page' => 'delivery']) }}" class="nav-item">
                         Оплата и доставка
                     </a>
-                    <a href="{{ route('app.contacts') }}" class="nav-item mr-0">
+                    <a href="{{ route('app.page', ['page' => 'contacts']) }}" class="nav-item">
                         Контакты
                     </a>
                 </nav>
@@ -46,7 +46,8 @@
                     @if (count($settings['phone']))
                         <div class="column-auto">
                             <p class="mb-1">Телефон</p>
-                            <a class="text-bold text-white" href="tel:{{ phone_link($settings['phone']->last()->value) }}">
+                            <a class="text-bold text-white"
+                               href="tel:{{ phone_link($settings['phone']->last()->value) }}">
                                 {{ $settings['phone']->last()->value }}
                             </a>
                         </div>

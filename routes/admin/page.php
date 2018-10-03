@@ -6,6 +6,7 @@ Route::group([
 ], function () {
 
     Route::get('/', 'PageController@index')->name('.index');
-
+    Route::get('{page}/edit', 'PageController@edit')->name('.edit');
+    Route::patch('{page}/update', 'PageController@update')->name('.update');
 
 });

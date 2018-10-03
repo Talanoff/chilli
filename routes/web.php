@@ -26,12 +26,12 @@ Route::group([
     'namespace' => 'Front',
 ], function () {
 
-    require_once(__DIR__ . '/app/common.php');
     require_once(__DIR__ . '/app/product.php');
     require_once(__DIR__ . '/app/review.php');
     require_once(__DIR__ . '/app/cart.php');
     require_once(__DIR__ . '/app/checkout.php');
     require_once(__DIR__ . '/app/profile.php');
     require_once(__DIR__ . '/app/favourites.php');
+    require_once(__DIR__ . '/app/common.php');
 
 });

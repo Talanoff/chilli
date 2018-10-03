@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(ProductCharacteristicSeeder::class);
         $this->call(SettingsSeeder::class);
+        $this->call(PageSeeder::class);
 
         if (config('app.env') === 'local') {
             $this->call(ProductCategorySeeder::class);
