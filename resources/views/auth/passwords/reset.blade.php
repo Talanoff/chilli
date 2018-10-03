@@ -6,7 +6,7 @@
 
         <input type="hidden" name="token" value="{{ $token }}">
 
-        <div class="form-group row">
+        <div class="form-group">
             <label for="email">E-mail</label>
 
             <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"

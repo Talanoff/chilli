@@ -21,10 +21,13 @@
         components: {
             Datepicker
         },
+        props: {
+            storedDate: String
+        },
         data() {
             return {
                 date: {
-                    start: moment().subtract(18, 'years').format(),
+                    start: '',
                     formatted: '',
                     lang: ru
                 }
@@ -32,8 +35,17 @@
         },
         methods: {
             formatDate(date) {
-                this.date.formatted = moment(date).format('YYYY-MM-DD')
+                this.date.formatted = moment(date).format('YYYY-MM-DD');
             }
+        },
+        mounted() {
+            if (this.storedDate !== '') {
+                this.date.start = moment(this.storedDate).format('YYYY-MM-DD');
+            } else {
+                this.date.start = moment().subtract(18, 'years').format();
+            }
+
+            this.formatDate(this.date.start);
         }
     }
 </script>

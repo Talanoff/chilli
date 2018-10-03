@@ -111,6 +111,10 @@
         transform: rotate(45deg);
     }
 
+    &.is-fixed::before {
+        display: none;
+    }
+
     &-header,
     &-footer {
         a:not(.btn-secondary) {

@@ -8,6 +8,7 @@ Route::group([
 
     Route::get('/', 'ProductController@index')->name('.index');
     Route::get('list', 'ProductController@list')->name('.list');
+    Route::post('search', 'ProductController@search')->name('.search');
 
     Route::get('create', 'ProductController@create')->name('.create');
     Route::post('create', 'ProductController@store')->name('.store');

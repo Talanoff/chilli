@@ -27,18 +27,27 @@ class ProductController extends Controller
     {
         $products = Product::query()->with('category');
 
-        if ($request->filled('search')) {
-            $products
-                ->where('id', ltrim($request->get('search'), '0'))
-                ->orWhere('title', 'like', '%' . $request->get('search') . '%');
-        }
-
         if ($request->filled('category')) {
             $products->where('category_id', '=', $request->get('category'));
         }
 
         return \view('admin.product.index', [
             'products' => $products->latest('id')->paginate(20),
+        ]);
+    }
+
+    public function search(Request $request): View
+    {
+        $products = Product::query()->with('category');
+
+        if ($request->filled('search')) {
+            $products = Product::where('id', ltrim($request->get('search'), '0'))
+                               ->orWhere('title', 'like', '%' . $request->get('search') . '%');
+        }
+
+        return \view('admin.product.index', [
+            'products' => $products->latest('id')->paginate(20),
+            'search' => $request->get('search'),
         ]);
     }
 

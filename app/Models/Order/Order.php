@@ -13,6 +13,7 @@ class Order extends Model
 {
     public static $STATUSES = [
         'processing' => 'В обработке',
+        'no_dial' => 'Не дозвон',
         'finished' => 'Завершен',
         'declined' => 'Отклонен',
     ];
@@ -23,6 +24,11 @@ class Order extends Model
         'courier' => 'Курьер',
     ];
 
+    public static $PAYMENT = [
+        'receipt' => 'Оплата при получении',
+        'transfer' => 'Оплата на карту',
+    ];
+
     protected $fillable = [
         'user_id',
         'status',
@@ -31,6 +37,7 @@ class Order extends Model
         'warehouse',
         'address',
         'message',
+        'payment',
     ];
 
     protected $with = [

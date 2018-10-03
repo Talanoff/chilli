@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FastBuyRequest extends FormRequest
+class EditUserProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,7 @@ class FastBuyRequest extends FormRequest
     {
         return [
             'name' => 'required|min:2',
-            'email' => 'required|email',
-            'phone' => 'required|min:12',
+            'phone' => 'required|min:12'
         ];
     }
 
@@ -35,7 +34,6 @@ class FastBuyRequest extends FormRequest
         return [
             'name.required' => 'Обязательно укажите свое имя.',
             'name.min' => 'Минимальная длинна имени :min буквы.',
-            'email.required' => 'Обязательно укажите свой e-mail.',
             'phone.required' => 'Обязательно укажите телефон.',
             'phone.min' => 'Это не похоже на номер телефона.',
         ];

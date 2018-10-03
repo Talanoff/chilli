@@ -4,6 +4,9 @@
 
     <section class="checkout-details w-lg-3/4 w-xl-1/2 mx-auto">
         @if($order)
+            <h1 class="h2 text-center mb-0 text-white">Спасибо!</h1>
+            <h4 class="text-center">Ваш заказ принят!</h4>
+
             <h4>ID заказа: <span class="text-white">{{ $order->id }}</span></h4>
 
             <p>

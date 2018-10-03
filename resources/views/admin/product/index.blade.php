@@ -3,15 +3,31 @@
 @section('content')
 
     <section class="content">
-        <h1 class="mb-5 h2 d-flex align-items-center">
-            Товары
-            <a href="{{ route('admin.product.create') }}" class="btn btn-secondary ml-3">
-                Создать новый
-            </a>
-            <a href="{{ route('admin.product.meta') }}" class="btn btn-outline-primary ml-3">
-                Мета информация раздела
-            </a>
-        </h1>
+        <div class="d-lg-flex">
+            <h1 class="mb-5 h2 d-flex align-items-center">
+                Товары
+                <a href="{{ route('admin.product.create') }}" class="btn btn-secondary ml-3">
+                    Создать новый
+                </a>
+                <a href="{{ route('admin.product.meta') }}" class="btn btn-outline-primary ml-3">
+                    Мета информация раздела
+                </a>
+            </h1>
+
+            <form method="post" action="{{ route('admin.product.search') }}"
+                  class="ml-lg-5 flex-grow-1">
+                @csrf
+                <div class="d-flex">
+                    <div class="flex-grow-1 mr-2">
+                        <input type="search" name="search" placeholder="Артикл"
+                               class="form-control" value="{{ $search ?? '' }}">
+                    </div>
+                    <div>
+                        <button class="btn btn-secondary">Найти</button>
+                    </div>
+                </div>
+            </form>
+        </div>
 
         @forelse($products as $product)
             <div class="item">
@@ -95,7 +111,11 @@
             </div>
         @empty
             <div class="text-center">
-                Товары пока не добавлены
+                @if ($search)
+                    Товара с таким ID не найдено
+                @else
+                    Товары пока не добавлены
+                @endif
             </div>
         @endforelse
 

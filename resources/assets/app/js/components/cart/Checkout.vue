@@ -9,7 +9,7 @@
                         id="delivery"
                         class="form-control"
                         @change="handleDelivery"
-                        v-model="selected.type">
+                v-model="selected">
                     <option v-for="option in delivery" :value="option.type">
                         {{ option.label }}
                     </option>
@@ -17,7 +17,7 @@
             </div>
         </div>
 
-        <div class="form-group" v-if="selected.type === 'np'">
+        <div class="form-group" v-if="selected === 'np'">
             <label>Город</label>
             <list-select
                 :list="cities"
@@ -30,7 +30,7 @@
             <input type="hidden" name="city" :value="city.DescriptionRu">
         </div>
 
-        <div class="form-group" v-if="warehouses.length && selected.type === 'np'">
+        <div class="form-group" v-if="warehouses.length && selected === 'np'">
             <label>Отделение</label>
             <list-select
                 :list="warehouses"
@@ -43,7 +43,7 @@
             <input type="hidden" name="warehouse" :value="warehouse.DescriptionRu">
         </div>
 
-        <div class="form-group" v-if="selected.type === 'courier'">
+        <div class="form-group" v-if="selected === 'courier'">
             <label for="address">Адрес доставки</label>
             <input type="text" id="address" name="address" class="form-control" v-model="address" required>
         </div>
@@ -87,14 +87,14 @@
                 warehouse: {},
                 cities: [],
                 warehouses: [],
-                selected: params[0],
+                selected: params[0].type,
                 delivery: params,
                 address: ''
             }
         },
         methods: {
             handleDelivery() {
-                if (this.selected.type === 'np') {
+                if (this.selected === 'np') {
                     axios.get('/checkout/cities')
                         .then(({data}) => this.cities = data.data)
                 }

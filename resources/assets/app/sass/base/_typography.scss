@@ -50,4 +50,10 @@ hr {
     margin: 2.5rem 0;
     border: none;
     border-bottom: 1px solid $hr-border-color;
+
+    &.hr {
+        &-primary {
+            border-bottom-color: $primary;
+        }
+    }
 }

@@ -10,7 +10,7 @@
 
         <div class="cart-mask" v-if="cartVisible" @click="cartVisible = false"></div>
 
-        <div class="cart-entry" v-if="cartVisible">
+        <div class="cart-entry" v-if="cartVisible" ref="cart">
             <div class="cart-entry-header p-4 px-md-8 py-md-6" v-if="cart.length">
                 <div class="row flex-no-wrap align-center">
                     <div class="column-auto text-uppercase">
@@ -97,10 +97,6 @@
         mounted() {
             VBUS.$on('openCart', () => {
                 this.cartVisible = true;
-
-                // if (document.body.scrollTop !== 0 || document.documentElement.scrollTop !== 0) {
-                //     document.body.scrollIntoView({block: 'start', behavior: 'smooth'});
-                // }
             });
 
             document.addEventListener('keyup', (e) => {
@@ -108,6 +104,19 @@
                     this.cartVisible = false;
                 }
             });
+
+            document.addEventListener('scroll', (e) => {
+                if (this.cartVisible) {
+                    const cart = this.$refs.cart;
+                    if (window.pageYOffset > 40) {
+                        cart.style.marginTop = window.pageYOffset - 40 + 'px';
+                        cart.classList.add('is-fixed');
+                    } else {
+                        cart.style.marginTop = 20 + 'px';
+                        cart.classList.remove('is-fixed');
+                    }
+                }
+            })
         }
     }
 </script>

@@ -36,6 +36,15 @@
                         <h3>Добрый день, {{ auth()->user()->name }}!</h3>
                     @endguest
 
+                    <div class="form-group">
+                        <label for="payment">Форма оплаты</label>
+                        <select name="payment" id="payment" class="form-control" required>
+                            @foreach(App\Models\Order\Order::$PAYMENT as $key => $value)
+                                <option value="{{ $key }}">{{ $value }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     <checkout params="{{ json_encode(App\Models\Order\Order::$DELIVERY) }}"></checkout>
                 </form>
             </div>

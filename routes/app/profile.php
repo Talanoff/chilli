@@ -10,4 +10,6 @@ Route::group([
     Route::get('edit', 'ProfileController@edit')->name('.edit');
     Route::patch('update', 'ProfileController@update')->name('.update');
 
+    Route::get('reset-password', 'ProfileController@passwordReset')->name('.password.request');
+
 });

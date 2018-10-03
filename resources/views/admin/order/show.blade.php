@@ -10,7 +10,7 @@
 
         <p>
             <span
-                class="rounded px-2 py-1 bg-{{ $order->status === 'processing' ? 'warning' : ($order->status === 'finished' ? 'success' : 'danger') }}">
+                class="rounded px-2 py-1 bg-{{ $order->status !== 'declined' ? 'warning' : ($order->status === 'finished' ? 'success' : 'danger') }}">
             {{ App\Models\Order\Order::$STATUSES[$order->status] }}
             </span>
         </p>
@@ -79,7 +79,7 @@
                             </a>
                         </td>
                         <td>
-                            <p class="small text-muted mb-3">Артикул № {{ $item->product->sku }}</p>
+                            <p class="small text-muted mb-3">Артикл № {{ $item->product->sku }}</p>
                             <h6 class="text-uppercase mb-0">
                                 <a href="{{ route('app.product.show', $item->product) }}"
                                    class="link link-underline">{{ $item->product->title }}</a>
@@ -134,20 +134,19 @@
             ИТОГО: <strong>{{ $order->amount }} грн</strong>
         </h5>
 
-        <div class="mt-5 d-flex">
-            <form action="{{ route('admin.order.update', $order) }}" method="post">
+        <div class="mt-5 row">
+            <form action="{{ route('admin.order.update', $order) }}" method="post" class="col-lg-5 d-flex">
                 @csrf
-                <input type="hidden" name="status"
-                       value="{{ $order->status === 'processing' ? 'finished' : 'processing' }}">
-                <button class="btn btn-{{ $order->status === 'processing' ? 'success' : 'warning' }}">
-                    {{ $order->status === 'processing' ? 'Подтвердить' : 'Вернуть' }}
-                </button>
-            </form>
 
-            <form action="{{ route('admin.order.update', $order) }}" class="ml-2" method="post">
-                @csrf
-                <input type="hidden" name="status" value="declined">
-                <button class="btn btn-danger">Отклонить</button>
+                <select name="status" id="status" class="form-control mr-2">
+                    @foreach(App\Models\Order\Order::$STATUSES as $key => $status)
+                        <option value="{{ $key }}" {{ $key === $order->$status ? 'selected' : '' }}>
+                            {{ $status }}
+                        </option>
+                    @endforeach
+                </select>
+
+                <button class="btn btn-primary">Сохранить</button>
             </form>
         </div>
 
