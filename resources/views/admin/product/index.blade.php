@@ -95,14 +95,14 @@
                         </a>
 
                         <a href="{{ route('admin.product.delete', $product) }}"
-                           onclick="confirmDelete()"
+                           onclick="confirmDelete({{ $product->id }})"
                            class="btn btn-danger btn-sm">
                             <svg width="23" height="23" style="fill: #fff;">
                                 <use xlink:href="#delete"></use>
                             </svg>
                         </a>
                         <form action="{{ route('admin.product.delete', $product) }}"
-                              id="delete-form" method="post" style="display: none;">
+                              id="delete-form-{{ $product->id }}" method="post" style="display: none;">
                             @csrf
                             @method('delete')
                         </form>
@@ -134,13 +134,13 @@
 
 @push('scripts')
     <script>
-        function confirmDelete() {
+        function confirmDelete(id) {
             event.preventDefault();
 
             const agree = confirm('Уверены?');
 
             if (agree) {
-                document.getElementById('delete-form').submit();
+                document.getElementById('delete-form-' + id).submit();
             }
         }
     </script>

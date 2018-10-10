@@ -38,12 +38,12 @@
                         </a>
 
                         <a href="{{ route('admin.user.delete', $user) }}"
-                           onclick="confirmDelete()"
+                           onclick="confirmDelete({{ $user->id }})"
                            class="btn btn-danger btn-sm">
                             Удалить
                         </a>
                         <form action="{{ route('admin.user.delete', $user) }}"
-                              id="delete-form" method="post" style="display: none;">
+                              id="delete-form-{{ $user->id }}" method="post" style="display: none;">
                             @csrf
                             @method('delete')
                         </form>
@@ -57,3 +57,17 @@
     {{ $users->appends(request()->except('page'))->links() }}
 
 @endsection
+
+@push('scripts')
+    <script>
+        function confirmDelete(id) {
+            event.preventDefault();
+
+            const agree = confirm('Уверены?');
+
+            if (agree) {
+                document.getElementById('delete-form-' + id).submit();
+            }
+        }
+    </script>
+@endpush
