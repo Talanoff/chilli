@@ -48,8 +48,9 @@ class ProductController extends Controller
         }
 
         if ($request->filled('category')) {
-            $category = optional(Category::whereSlug($request->get('category'))->first())->id;
-            $query = $query->where('category_id', $category);
+            $query = $query->whereHas('category', function ($q) use ($request) {
+                $q->whereSlug($request->get('category'));
+            });
         }
 
         $latest = $query->latest()->first();
