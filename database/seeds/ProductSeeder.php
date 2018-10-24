@@ -16,6 +16,7 @@ class ProductSeeder extends Seeder
         for ($i = 0; $i < 20; $i++) {
             $title = implode(' ', $faker->words(rand(2, 4)));
 
+            /** @var App\Models\Product\Product $product */
             $product = App\Models\Product\Product::create([
                 'slug' => str_slug($title),
                 'title' => ucfirst($title),
@@ -27,6 +28,7 @@ class ProductSeeder extends Seeder
                 'quantity' => rand(10, 100),
                 'in_stock' => 0,
                 'is_published' => 1,
+                'brand_id' => \App\Models\Product\Brand::inRandomOrder()->take(1)->first()->id,
             ]);
 
             factory(App\Models\Comment\Comment::class, rand(2, 5))->create([
@@ -44,9 +46,9 @@ class ProductSeeder extends Seeder
                 $u--;
             }
 
-            $product->addMediaFromUrl('https://store.storeimages.cdn-apple.com/4981/as-images.apple.com/is/image/AppleInc/aos/published/images/M/QG/MQGX2/MQGX2?wid=445&hei=445&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1516399367562')
-//                    ->usingFileName('product.png')
-                    ->toMediaCollection('product');
+            $product->addMediaFromUrl('https://store.storeimages.cdn-apple.com/4981/as-images.apple.com/is/image/AppleInc/aos/published/images/M/QG/MQGX2/MQGX2?wid=445&hei=445&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1516399367562')->toMediaCollection('product');
+
+            $product->series()->attach(\App\Models\Product\Series::where('brand_id', $product->brand_id)->take(1)->inRandomOrder()->pluck('id')->toArray());
         }
     }
 }

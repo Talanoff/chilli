@@ -48,6 +48,7 @@
     padding: rem-calc(20);
     overflow: hidden;
     z-index: 10;
+    min-height: 280px;
 
     @media (min-width: map_get($grid-breakpoints, lg)) {
         padding: rem-calc(30);
@@ -168,14 +169,15 @@
         flex-direction: column;
         justify-content: flex-end;
         align-items: flex-start;
+        height: 100%;
 
-        @media (min-width: map_get($grid-breakpoints, lg)) {
-            padding: rem-calc(60);
-        }
+        //@media (min-width: map_get($grid-breakpoints, lg)) {
+        //    padding: rem-calc(60);
+        //}
 
-        @media (min-width: map_get($grid-breakpoints, xxl)) {
-            padding: rem-calc(80);
-        }
+        //@media (min-width: map_get($grid-breakpoints, xxl)) {
+        //    padding: rem-calc(80);
+        //}
     }
 
     &--leaders {

@@ -8,7 +8,7 @@
             <span class="product-item__tag">{{ App\Models\Product\Product::$TAGS[$product->tag] }}</span>
         @endif
 
-        <h3 class="product-item__title text-uppercase mt-6 mb-4">
+        <h3 class="product-item__title text-uppercase mb-4">
             {{ $product->title }}
         </h3>
 

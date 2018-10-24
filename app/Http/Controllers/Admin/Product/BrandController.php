@@ -16,7 +16,7 @@ class BrandController extends Controller
     public function index(): View
     {
         return \view('admin.product.brand.index', [
-            'brands' => Brand::query()->latest()->paginate(20),
+            'brands' => Brand::query()->paginate(20),
         ]);
     }
 
@@ -35,14 +35,14 @@ class BrandController extends Controller
     public function store(Request $request): RedirectResponse
     {
         /** @var Brand $brand */
-        $brand = Brand::query()->create([
-            'slug' => str_slug($request->get('name'), '-'),
-            'name' => $request->get('name'),
-        ]);
+        $brand = Brand::query()->create($request->only('title'));
 
         if ($request->hasFile('image')) {
             $brand->addMediaFromRequest('image')
-                  ->usingFileName($brand->slug . '.' . $request->file('image')->getClientOriginalExtension())
+                  ->usingFileName($brand->slug
+                                  . '.'
+                                  . $request->file('image')->getClientOriginalExtension()
+                  )
                   ->toMediaCollection('brand');
         }
 
@@ -65,13 +65,15 @@ class BrandController extends Controller
      */
     public function update(Request $request, Brand $brand): RedirectResponse
     {
-        $brand->update($request->only('name'));
+        $brand->update($request->only('title'));
 
         if ($request->hasFile('image')) {
             $brand->clearMediaCollection('brand');
-
             $brand->addMediaFromRequest('image')
-                  ->usingFileName($brand->slug . '.' . $request->file('image')->getClientOriginalExtension())
+                  ->usingFileName($brand->slug
+                                  . '.'
+                                  . $request->file('image')->getClientOriginalExtension()
+                  )
                   ->toMediaCollection('brand');
         }
 

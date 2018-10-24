@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 Route::group([
     'as' => '.product',
     'prefix' => 'product',
@@ -37,6 +39,7 @@ Route::group([
         'category' => 'Category',
         'type' => 'CharacteristicType',
         'brand' => 'Brand',
+        'series' => 'Series',
     ];
 
     foreach ($routes as $key => $value) {
@@ -57,4 +60,6 @@ Route::group([
 
         });
     }
+
+    Route::get('series/{id}/list', 'SeriesController@list')->name('.series.list');
 });

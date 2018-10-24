@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Product;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
+use App\Http\Resources\SeriesResource;
 use App\Models\Meta\Meta;
 use App\Models\Product\Brand;
 use App\Models\Product\Category;
@@ -94,6 +95,7 @@ class ProductController extends Controller
         }
 
         $product->characteristics()->attach($request->get('attribute'));
+        $product->series()->attach($request->get('series'));
 
         return redirect()->route('admin.product.index');
     }
@@ -113,6 +115,7 @@ class ProductController extends Controller
             'categories' => Category::query()->latest('id')->get(),
             'brands' => Brand::query()->latest()->get(),
             'meta' => $product->meta()->first(),
+            'series' => json_encode(SeriesResource::collection($product->series))
         ]);
     }
 
@@ -140,6 +143,7 @@ class ProductController extends Controller
         }
 
         $product->characteristics()->sync($request->get('attribute'));
+        $product->series()->sync($request->get('series'));
 
         return redirect()->route('admin.product.index');
     }

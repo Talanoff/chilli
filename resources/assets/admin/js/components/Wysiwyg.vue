@@ -55,3 +55,11 @@
         }
     }
 </script>
+
+<style>
+    .ql-toolbar.ql-snow .ql-align .ql-picker-label svg {
+        position: relative;
+        right: initial;
+        top: -4px;
+    }
+</style>

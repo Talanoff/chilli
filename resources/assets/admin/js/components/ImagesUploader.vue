@@ -63,7 +63,9 @@
             }
         },
         mounted() {
-            this.images.push(...JSON.parse(this.existedImages));
+            if (this.existedImages) {
+                this.images.push(...JSON.parse(this.existedImages));
+            }
         }
     }
 </script>

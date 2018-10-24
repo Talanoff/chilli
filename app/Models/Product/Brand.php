@@ -14,7 +14,7 @@ class Brand extends Model implements HasMedia
     use HasMediaTrait;
 
     protected $fillable = [
-        'name',
+        'title',
         'slug',
     ];
 
@@ -24,6 +24,14 @@ class Brand extends Model implements HasMedia
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function series(): HasMany
+    {
+        return $this->hasMany(Series::class);
     }
 
     /**

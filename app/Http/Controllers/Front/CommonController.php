@@ -37,7 +37,7 @@ class CommonController extends Controller
      */
     public function search(Request $request): View
     {
-        $search = $request->get('search');
+        $search = trim($request->get('search'));
 
         $products = Product::query();
 

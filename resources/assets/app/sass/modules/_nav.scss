@@ -1,5 +1,8 @@
 .nav {
     display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 
     &-item {
         margin: 0 $gutter/2;
@@ -11,13 +14,91 @@
     }
 }
 
+.submenu {
+    position: absolute;
+    left: -20px;
+    top: -10px;
+    padding: 50px 0 20px;
+    background-color: darken($body-bg, 2%);
+    z-index: -1;
+    list-style: none;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.35s;
+
+    > li {
+        padding: 0 20px;
+        margin: 4px 0;
+    }
+
+    .has-submenu {
+        position: relative;
+
+        &:hover {
+            .models-menu {
+                opacity: 1;
+                pointer-events: auto;
+            }
+        }
+    }
+}
+
+.models-menu {
+    position: absolute;
+    left: 100%;
+    top: -10px;
+    background-color: darken($body-bg, 2%);
+    padding: 10px 20px;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.35s;
+
+    width: 50vw;
+    //max-width: 70vw;
+
+    &__brand {
+        max-width: 120px;
+        max-height: 60px;
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        columns: 3 auto;
+
+        li {
+            padding: 5px 0;
+            line-height: 1.15;
+        }
+    }
+}
+
 header {
     .nav-item {
         height: 30px;
         line-height: 30px;
+        position: relative;
+        z-index: 10;
+
+        &:hover {
+            .submenu {
+                opacity: 1;
+                pointer-events: auto;
+            }
+        }
 
         &.is-active {
             color: #fff;
+
+            a {
+                color: inherit;
+                &:hover {
+                    color: $primary;
+                }
+            }
 
             &::before {
                 position: absolute;

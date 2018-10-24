@@ -1,10 +1,6 @@
 @if (in_array(app('router')->currentRouteName(), ['app.product.index', 'app.promotions', 'app.novelties']))
     <div class="filters flex">
         <ul class="filters-list unstyled">
-            @if ($results)
-                <li class="text-right mb-6">{{ $results }}</li>
-            @endif
-
             <li class="filters-list-item mb-4">
                 <a href="{{ route('app.novelties') }}" class="text-uppercase">
                     Новинки
@@ -24,7 +20,7 @@
                 <ul class="unstyled submenu" id="price-sort">
                     @foreach($filters['price'] as $key => $filter)
                         <li>
-                            <a href="{{ route(app('router')->currentRouteName(), array_replace(request()->query(), ['price' => $key])) }}">
+                            <a href="{{ build_filter_url(app('router')->currentRouteName(), ['price' => $key]) }}">
                                 {{ $filter }}
                             </a>
                         </li>
@@ -46,7 +42,7 @@
                     <ul class="unstyled submenu" id="category-sort">
                         @foreach($filters['categories'] as $category)
                             <li>
-                                <a href="{{ route(app('router')->currentRouteName(), array_replace(request()->query(), ['category' => $category->slug])) }}">
+                                <a href="{{ build_filter_url(app('router')->currentRouteName(), ['category' => $category->slug]) }}">
                                     {{ $category->title }}
                                 </a>
                             </li>
@@ -54,19 +50,13 @@
                     </ul>
                 </li>
             @endisset
-
-            @if ($results)
-                <li>
-
-                </li>
-            @endif
         </ul>
 
         @isset($filters['brands'])
             <ul class="filters-brands unstyled text-center">
                 @foreach($filters['brands'] as $brand)
                     <li{!! request('brand') === $brand->slug ? ' class="is-active"' : '' !!}>
-                        <a href="{{ route('app.product.index', array_replace(request()->query(), ['brand' => $brand->slug])) }}">
+                        <a href="{{ build_filter_url('app.product.index', ['brand' => $brand->slug]) }}">
                             <img src="{{ $brand->getFirstMediaUrl('brand') }}" alt="{{ $brand->name }}">
                         </a>
                     </li>

@@ -28,17 +28,20 @@
                     @if (count($brands))
                         <div class="form-group">
                             <label for="brand">Бренд</label>
-                            <select name="brand_id" id="brand" class="form-control">
+                            <select name="brand_id" id="brand" class="form-control"
+                                    ref="brand" @change="updateBrand()">
                                 <option value="">-----</option>
                                 @foreach($brands as $brand)
                                     <option
                                         value="{{ $brand->id }}"{{ $brand->id === $product->brand_id ? ' selected' : '' }}>
-                                        {{ $brand->name }}
+                                        {{ $brand->title }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
                     @endif
+
+                    <series-selector :old="{{ $series }}"></series-selector>
 
                     <div class="form-group">
                         <label for="category">Категория</label>

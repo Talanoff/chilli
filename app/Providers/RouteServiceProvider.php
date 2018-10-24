@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Comment\Comment;
 use App\Models\Order\Order;
+use App\Models\Product\Brand;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
@@ -27,11 +28,35 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer(['app.*', 'auth.*'], function () {
+            $submenu = [];
+
+            foreach (Brand::has('products')->get() as $brand) {
+                $item = [
+                    'name' => $brand->title,
+                    'brand' => $brand->slug,
+                ];
+
+                if (count($brand->series)) {
+                    $item['models'] = [];
+                    $item['models']['series'] = [];
+                    $item['models']['brand'] = $brand->getFirstMediaUrl('brand');
+                    foreach ($brand->series as $series) {
+                        array_push($item['models']['series'], [
+                            'model' => $series->slug,
+                            'name' => $series->title,
+                        ]);
+                    }
+                }
+
+                array_push($submenu, $item);
+            }
+
             View::share('nav', [
                 [
                     'route' => 'app.product.index',
                     'compare' => 'app.product.*',
                     'name' => 'Каталог',
+                    'submenu' => $submenu,
                 ],
                 [
                     'route' => 'app.promotions',
@@ -72,6 +97,10 @@ class RouteServiceProvider extends ServiceProvider
                         [
                             'route' => 'admin.product.brand.index',
                             'name' => 'Бренды',
+                        ],
+                        [
+                            'route' => 'admin.product.series.index',
+                            'name' => 'Модели',
                         ],
                         [
                             'route' => 'admin.product.category.index',

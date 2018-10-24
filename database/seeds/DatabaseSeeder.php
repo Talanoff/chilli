@@ -11,17 +11,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(AdminUserSeeder::class);
-        $this->call(RolesSeeder::class);
-
-        $this->call(ProductCharacteristicSeeder::class);
-        $this->call(SettingsSeeder::class);
-        $this->call(PageSeeder::class);
+        $this->call([
+            AdminUserSeeder::class,
+            RolesSeeder::class,
+            BrandsTableSeeder::class,
+            ProductCharacteristicSeeder::class,
+            SettingsSeeder::class,
+            PageSeeder::class,
+        ]);
 
         if (config('app.env') === 'local') {
-            $this->call(ProductCategorySeeder::class);
-            $this->call(ProductSeeder::class);
-            $this->call(ReviewSeeder::class);
+            $this->call([
+                SeriesTableSeeder::class,
+                ProductCategorySeeder::class,
+                ProductSeeder::class,
+                ReviewSeeder::class,
+            ]);
         }
     }
 }

@@ -33,3 +33,13 @@ if (!function_exists('phone_link')) {
         return '+38' . str_replace(['(', ')', '-', ' '], '', $phone);
     }
 }
+
+if (!function_exists('build_filter_url')) {
+    function build_filter_url($route, $array) {
+        if (!$array) {
+            return null;
+        }
+
+        return route($route, array_merge(request()->except('page'), $array));
+    }
+}

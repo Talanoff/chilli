@@ -21,7 +21,8 @@ trait Slugable
      */
     public function setSlugAttribute($value)
     {
-        if (static::whereSlug($slug = str_slug($value))->exists()) {
+        if (static::whereSlug($slug = str_slug($value))->exists()
+            && static::whereSlug(str_slug($value))->count() > 1) {
             $slug = $this->incrementSlug($slug);
         }
         $this->attributes['slug'] = $slug;
@@ -41,6 +42,15 @@ trait Slugable
                 return $matches[1] + 1;
             }, $max);
         }
-        return "{$slug}-2";
+        return "{$slug}-{$max}";
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($model) {
+            $model->slug = str_slug($model->title);
+        });
     }
 }

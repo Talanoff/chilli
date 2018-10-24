@@ -20,7 +20,7 @@
 
             <div class="form-group">
                 <label for="name">Название</label>
-                <input type="text" name="name" class="form-control" value="{{ old('name') ?? $brand->name }}">
+                <input type="text" name="title" class="form-control" value="{{ old('title') ?? $brand->title }}">
             </div>
 
             <div class="form-group">
@@ -29,7 +29,7 @@
             </div>
 
             <div class="mt-5">
-                <button class="btn btn-success">Сохранить</button>
+                <button class="btn btn-primary">Сохранить</button>
             </div>
         </form>
     </section>

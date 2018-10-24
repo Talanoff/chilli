@@ -158,6 +158,14 @@ class Product extends Model implements HasMedia
     }
 
     /**
+     * @return BelongsToMany
+     */
+    public function series(): BelongsToMany
+    {
+        return $this->belongsToMany(Series::class);
+    }
+
+    /**
      * @return mixed
      */
     public function getRecommendedAttribute()

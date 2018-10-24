@@ -7,6 +7,9 @@ import SingleImageUploader from './components/SIngleImageUploader';
 
 import ProductKits from './components/ProductKits';
 import ProductSelector from './components/ProductSelector';
+import SeriesSelector from './components/SeriesSelector';
+
+window.Bus = new Vue();
 
 new Vue({
     el: '#app',
@@ -16,7 +19,13 @@ new Vue({
         ImagesUploader,
         ProductKits,
         ProductSelector,
+        SeriesSelector,
         ImageUploader: SingleImageUploader
+    },
+    methods: {
+        updateBrand() {
+            Bus.$emit('updateBrand');
+        }
     },
     mounted() {
         const field = document.getElementById('video-link');

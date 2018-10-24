@@ -66,12 +66,7 @@ class ProductController extends Controller
             $latest = $query->whereTag('newest')->first();
         }
 
-        $results = count($request->query())
-            ? implode('/', [$products->count() + $latest->count(), Product::count()])
-            : null;
-
         return \view('app.product.index', [
-            'results' => $results,
             'products' => $products->paginate(12),
             'latest' => $latest,
             'title' => $title,
@@ -207,11 +202,8 @@ class ProductController extends Controller
     {
         $filters = collect([]);
 
-        $brands = Product::query()->whereNotNull('brand_id')->pluck('brand_id')->unique()->toArray();
-        $filters->put('brands', Brand::query()->whereIn('id', $brands)->get());
-
-        $categories = Product::query()->pluck('category_id')->unique()->toArray();
-        $filters->put('categories', Category::query()->whereIn('id', $categories)->get());
+        $filters->put('brands', Brand::query()->has('products')->get());
+        $filters->put('categories', Category::query()->has('product')->get());
 
         $filters->put('price', collect([
             'asc' => 'От дешевых к дорогим',

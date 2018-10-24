@@ -16,7 +16,7 @@
             </div>
 
             <div class="mt-5">
-                <button class="btn btn-success">Сохранить</button>
+                <button class="btn btn-primary">Сохранить</button>
             </div>
         </form>
     </section>

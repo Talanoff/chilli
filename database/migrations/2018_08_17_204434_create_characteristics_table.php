@@ -15,12 +15,9 @@ class CreateCharacteristicsTable extends Migration
     {
         Schema::create('characteristics', function (Blueprint $table) {
             $table->increments('id');
-
             $table->enum('type', array_keys(\App\Models\Product\Characteristic::$TYPES))->default('text');
             $table->string('value');
-
             $table->unsignedInteger('type_id');
-
             $table->timestamps();
 
             $table->foreign('type_id')
