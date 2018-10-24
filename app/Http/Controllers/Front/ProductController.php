@@ -40,6 +40,12 @@ class ProductController extends Controller
             $query = $query->where('brand_id', $brand);
         }
 
+        if ($request->filled('model')) {
+            $query = $query->whereHas('series', function ($q) use ($request) {
+                $q->whereSlug($request->get('model'));
+            });
+        }
+
         if ($request->filled('category')) {
             $category = optional(Category::whereSlug($request->get('category'))->first())->id;
             $query = $query->where('category_id', $category);
