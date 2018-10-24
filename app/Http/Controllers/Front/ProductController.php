@@ -36,8 +36,9 @@ class ProductController extends Controller
         }
 
         if ($request->filled('brand')) {
-            $brand = optional(Brand::whereSlug($request->get('brand'))->first())->id;
-            $query = $query->where('brand_id', $brand);
+            $query = $query->whereHas('brand', function ($q) use ($request) {
+                $q->whereSlug($request->get('brand'));
+            });
         }
 
         if ($request->filled('model')) {
