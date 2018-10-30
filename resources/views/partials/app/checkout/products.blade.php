@@ -53,14 +53,11 @@
                 </td>
             </tr>
         @endif
-        <tr>
-            <td colspan="3">
-                <hr class="my-2">
-            </td>
-        </tr>
     @endforeach
 </table>
 @isset($amount)
+    <hr class="my-2">
+
     <h5 class="text-right">
         ИТОГО: {{ $amount }} грн
     </h5>
