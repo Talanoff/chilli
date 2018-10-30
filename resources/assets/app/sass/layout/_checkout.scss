@@ -2,13 +2,18 @@
     &-products {
         tr {
             background-color: $light;
-            margin-bottom: 1px;
+            border-bottom: 1px solid;
 
             td:first-child {
                 padding-left: .625rem;
             }
+
             td:last-child {
                 padding-right: .625rem;
+            }
+
+            &:last-child {
+                border-bottom: none;
             }
         }
     }
