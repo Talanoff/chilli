@@ -25,26 +25,36 @@
                 @endif
             </div>
             <div class="column w-md-4/5">
-                <nav class="nav text-uppercase justify-between my-5">
-                    @foreach($nav as $item)
-                        <a href="{{ route($item['route']) }}" class="nav-item{{ $loop->index === 0 ? ' ml-0' : '' }}">
-                            {{ $item['name'] }}
-                        </a>
-                    @endforeach
-                    <a href="{{ route('app.page', ['page' => 'warranty']) }}" class="nav-item">
-                        Гарантии
-                    </a>
-                    <a href="{{ route('app.page', ['page' => 'delivery']) }}" class="nav-item">
-                        Оплата и доставка
-                    </a>
-                    <a href="{{ route('app.page', ['page' => 'contacts']) }}" class="nav-item">
-                        Контакты
-                    </a>
+                <nav>
+                    <ul class="nav block flex-md flex-wrap text-uppercase justify-between my-5">
+                        @foreach($nav as $item)
+                            <li class="nav-item my-3 my-md-0 text-center text-md-left">
+                                <a href="{{ route($item['route']) }}">
+                                    {{ $item['name'] }}
+                                </a>
+                            </li>
+                        @endforeach
+                        <li class="nav-item my-3 my-md-0 text-center text-md-left">
+                            <a href="{{ route('app.page', ['page' => 'warranty']) }}">
+                                Гарантии
+                            </a>
+                        </li>
+                        <li class="nav-item my-3 my-md-0 text-center text-md-left">
+                            <a href="{{ route('app.page', ['page' => 'delivery']) }}">
+                                Оплата и доставка
+                            </a>
+                        </li>
+                        <li class="nav-item my-3 my-md-0 text-center text-md-left">
+                            <a href="{{ route('app.page', ['page' => 'contacts']) }}">
+                                Контакты
+                            </a>
+                        </li>
+                    </ul>
                 </nav>
 
-                <div class="row text-uppercase contacts">
+                <div class="row text-uppercase text-center text-md-left contacts">
                     @if (count($settings['phone']))
-                        <div class="column-auto">
+                        <div class="column column-md-auto my-3 my-md-0">
                             <p class="mb-1">Телефон</p>
                             <a class="text-bold text-white"
                                href="tel:{{ phone_link($settings['phone']->last()->value) }}">
@@ -53,7 +63,7 @@
                         </div>
                     @endif
                     @if ($settings['email'])
-                        <div class="column-auto">
+                        <div class="column column-md-auto mb-3 mb-md-0">
                             <p class="mb-1">Почта</p>
                             <a class="text-bold text-white" href="mailto:{{ $settings['email']->first()->value }}">
                                 {{ $settings['email']->first()->value }}

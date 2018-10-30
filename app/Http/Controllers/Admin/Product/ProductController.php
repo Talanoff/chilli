@@ -69,9 +69,9 @@ class ProductController extends Controller
     {
         return \view('admin.product.create', [
             'tags' => Product::$TAGS,
-            'types' => CharacteristicType::query()->get(),
-            'categories' => Category::query()->latest('id')->get(),
-            'brands' => Brand::query()->latest()->get(),
+            'types' => CharacteristicType::all(),
+            'categories' => Category::all(),
+            'brands' => Brand::all(),
         ]);
     }
 
@@ -86,7 +86,7 @@ class ProductController extends Controller
         /** @var Product $product */
         $product = Product::query()->create(array_merge([
             'slug' => str_slug($request->get('title')),
-        ], $this->handleProductParams($request)));
+        ], $request->all()));
 
         $this->storeGallery($request, $product);
 
@@ -111,11 +111,11 @@ class ProductController extends Controller
         return \view('admin.product.edit', [
             'product' => $product,
             'tags' => Product::$TAGS,
-            'types' => CharacteristicType::query()->get(),
-            'categories' => Category::query()->latest('id')->get(),
-            'brands' => Brand::query()->latest()->get(),
+            'types' => CharacteristicType::all(),
+            'categories' => Category::all(),
+            'brands' => Brand::all(),
             'meta' => $product->meta()->first(),
-            'series' => json_encode(SeriesResource::collection($product->series))
+            'series' => json_encode(SeriesResource::collection($product->series)),
         ]);
     }
 
@@ -128,7 +128,7 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product): RedirectResponse
     {
-        $product->update($this->handleProductParams($request));
+        $product->update($request->all());
 
         if ($this->compareTitle($request, $product)) {
             $product->update([
@@ -191,28 +191,6 @@ class ProductController extends Controller
         ], $request->get('meta')));
 
         return \redirect()->route('admin.product.index');
-    }
-
-    /**
-     * @param ProductRequest $request
-     * @return array
-     */
-    private function handleProductParams(ProductRequest $request): array
-    {
-        return $request->only(
-            'title',
-            'subtitle',
-            'description',
-            'price',
-            'quantity',
-            'discount',
-            'in_stock',
-            'category_id',
-            'brand_id',
-            'is_published',
-            'rating',
-            'tag'
-        );
     }
 
     /**

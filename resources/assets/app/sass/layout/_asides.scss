@@ -5,6 +5,11 @@
     height: 100%;
     min-height: 460px;
     z-index: 500;
+    display: none;
+
+    @media (min-width: map_get($grid-breakpoints, lg)) {
+        display: block;
+    }
 
     .nav {
         position: absolute;

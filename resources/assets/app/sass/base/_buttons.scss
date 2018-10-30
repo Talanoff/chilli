@@ -66,6 +66,7 @@
         }
     }
 
+    &-nav,
     &-favourites,
     &-search {
         padding: 0;
@@ -85,6 +86,28 @@
             svg {
                 fill: $secondary;
             }
+        }
+    }
+
+    &-nav {
+        position: relative;
+        background-color: #fff;
+
+        &::before, &::after {
+            position: absolute;
+            width: 16px;
+            height: 2px;
+            content: '';
+            background-color: $body-bg;
+            left: 7px;
+            top: 50%;
+        }
+        &::before {
+            margin-top: -5px;
+        }
+
+        &::after {
+            margin-top: 3px;
         }
     }
 

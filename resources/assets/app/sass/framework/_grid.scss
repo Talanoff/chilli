@@ -1,12 +1,22 @@
 .row {
     @extend .flex;
-    margin-left: -$gutter/2;
-    margin-right: -$gutter/2;
+    margin-left: rem-calc(-10);
+    margin-right: rem-calc(-10);
+
+    @media (min-width: map_get($grid-breakpoints, md)) {
+        margin-left: -$gutter/2;
+        margin-right: -$gutter/2;
+    }
 }
 
 %column {
-    padding-left: $gutter/2;
-    padding-right: $gutter/2;
+    padding-left: rem-calc(10);
+    padding-right: rem-calc(10);
+
+    @media (min-width: map_get($grid-breakpoints, md)) {
+        padding-left: $gutter/2;
+        padding-right: $gutter/2;
+    }
 }
 
 .column {

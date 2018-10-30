@@ -6,7 +6,7 @@ $displays: none block flex inline-flex;
 
 @each $display in $displays {
     .#{$display} {
-        display: #{$display};
+        display: #{$display} !important;
         @if ($display == 'flex' or $display == 'inline-flex') {
             flex-wrap: wrap;
         }
@@ -17,7 +17,7 @@ $displays: none block flex inline-flex;
     @media (min-width: map-get($grid-breakpoints, $breakpoint)) {
         @each $display in $displays {
             .#{$display}-#{$breakpoint} {
-                display: #{$display};
+                display: #{$display} !important;
                 @if ($display == 'flex' or $display == 'inline-flex') {
                     flex-wrap: wrap;
                 }

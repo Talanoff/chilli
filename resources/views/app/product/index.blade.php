@@ -6,6 +6,17 @@
 
 @section('content')
 
+    <div class="mb-6 text-center none-lg">
+        <a href="#filter" class="filter-link filter-link--mobile" ref="filter">
+            Фильтр
+            <svg width="26" height="26" class="ml-2 filter-icon">
+                <use xlink:href="#filter"></use>
+            </svg>
+        </a>
+    </div>
+
+    @include('partials.app.product.filters')
+
     <section class="products products-list flex">
         @if (count($products) || $latest)
             @if (request()->get('page') < 2 && $latest)

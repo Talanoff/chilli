@@ -5,66 +5,26 @@
                 <img src="{{ asset('images/logo.png') }}" alt="Chilli">
             </a>
 
-            <div class="column w-lg-1/2">
-                <ul class="nav text-uppercase justify-between">
-                    @foreach($nav as $item)
-                        <li class="nav-item{{ app('router')->currentRouteNamed($item['compare']) ? ' is-active' : '' }}">
-                            <a href="{{ route($item['route']) }}">
-                                {{ $item['name'] }}
-                            </a>
-
-                            @if (!empty($item['submenu']))
-                                <ul class="submenu">
-                                    @foreach($item['submenu'] as $submenu)
-                                        <li class="{{ !empty($submenu['models']) ? 'has-submenu' : '' }}">
-                                            <a href="{{ build_filter_url('app.product.index', ['brand' => $submenu['brand']]) }}">
-                                                {{ $submenu['name'] }}
-                                            </a>
-                                            @if (!empty($submenu['models']))
-                                                <div class="models-menu">
-                                                    <div class="mb-3">
-                                                        <a href="{{ build_filter_url('app.product.index', ['brand' => $submenu['brand']]) }}">
-                                                            <img src="{{ $submenu['models']['brand'] }}" class="models-menu__brand">
-                                                        </a>
-                                                    </div>
-                                                    <ul>
-                                                        @foreach($submenu['models']['series'] as $model)
-                                                            <li>
-                                                                <a href="{{ build_filter_url('app.product.index', ['brand' => $submenu['brand'], 'model' => $model['model']]) }}">
-                                                                    {{ $model['name'] }}
-                                                                </a>
-                                                            </li>
-                                                        @endforeach
-                                                    </ul>
-                                                </div>
-                                            @endif
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            @endif
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
+            @include('partials.app.layout.nav-desktop')
 
             <div class="column flex align-center justify-end">
-                <form action="{{ route('app.search') }}" method="post" class="flex-1">
+                <form action="{{ route('app.search') }}" method="post" class="flex-1 none block-lg">
                     @csrf
                     <app-search></app-search>
                 </form>
 
-                <app-favourites class="ml-4"></app-favourites>
-            </div>
+                <app-favourites class="ml-3"></app-favourites>
 
-            <div class="column-auto pl-0">
-                <app-cart></app-cart>
+                <app-cart class="ml-3"></app-cart>
+
+                @include('partials.app.layout.nav-mobile')
             </div>
         </div>
 
         @if (count($settings['phone']))
-            <ul class="flex justify-end unstyled phones">
+            <ul class="flex justify-center justify-lg-end unstyled phones mt-8 mt-lg-0    ">
                 @foreach($settings['phone'] as $phone)
-                    <li class="ml-4">
+                    <li class="mx-2 {{ $loop->last ? ' mr-lg-0' : '' }}">
                         <svg width="14" height="14" style="margin-top: -2px;">
                             <use xlink:href="#{{ phone_icon($phone->value) }}"></use>
                         </svg>

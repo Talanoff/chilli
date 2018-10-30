@@ -18,7 +18,7 @@ module.exports = function(app) {
 
         app.$refs.filter.addEventListener('click', event => {
             event.preventDefault();
-            filters.classList.add('is-active');
+            filters.classList.toggle('is-active');
         });
 
         const filterOuter = document.addEventListener('click', event => {

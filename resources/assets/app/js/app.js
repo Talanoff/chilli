@@ -23,6 +23,7 @@ import BirthDay from './components/profile/BirthDay';
 
 import Carousel from './components/modules/CarouselComponent';
 import AppSearch from './components/modules/AppSearch';
+import AppMobileNav from './components/modules/AppMobileNav';
 
 window.VBUS = new Vue();
 
@@ -42,7 +43,8 @@ new Vue({
         FavouritesList,
         AppFavourites,
         AddToFavouritesButton,
-        KitsCarousel
+        KitsCarousel,
+        AppMobileNav
     },
     methods: {
         getCart() {

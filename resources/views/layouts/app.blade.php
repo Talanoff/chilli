@@ -25,7 +25,6 @@
     <main>
         <div class="container position-relative">
             @include('partials.app.layout.aside-left')
-            @include('partials.app.product.filters')
             @yield('content')
             @include('partials.app.layout.aside-right')
         </div>

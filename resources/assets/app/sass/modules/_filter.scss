@@ -1,8 +1,10 @@
 .filter {
     &-icon {
-        transform: rotate(90deg);
         fill: $body-color;
         transition: fill 0.35s;
+        @media (min-width: map_get($grid-breakpoints, lg)) {
+            transform: rotate(90deg);
+        }
     }
 
     &-link {
@@ -12,32 +14,41 @@
 }
 
 .filters {
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 100;
-    width: 100%;
-    max-width: 560px;
-    max-height: 80vh;
-    flex-wrap: nowrap;
-
     box-shadow: 5px 20px 60px rgba(#000, 0.2);
     background-color: $secondary;
-    padding-left: 90px;
     font-size: rem-calc(14);
     color: #8b98a5;
-
-    transform: translateX(-100%);
     transition: 0.35s;
+    height: 0;
+    overflow: hidden;
 
     &.is-active {
-        transform: translateX(0);
+        height: 300px;
+        margin-bottom: rem-calc(40);
     }
 
     a {
         color: inherit;
         &:hover {
             color: #fff;
+        }
+    }
+
+    @media (min-width: map_get($grid-breakpoints, lg)) {
+        padding-left: 90px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 100;
+        width: 100%;
+        max-width: 560px;
+        max-height: 60vh;
+        transform: translateX(-100%);
+        margin-bottom: 0 !important;
+
+        &.is-active {
+            height: auto;
+            transform: translateX(0);
         }
     }
 
@@ -48,7 +59,7 @@
     &-list {
         flex: 1 0 auto;
         max-width: 100%;
-        padding: 30px 20px 30px 0;
+        padding: 30px 20px 30px;
 
         @media (min-width: map_get($grid-breakpoints, lg)) {
             padding: 60px 50px 60px 0;
