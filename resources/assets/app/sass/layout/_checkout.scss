@@ -1,0 +1,15 @@
+.checkout {
+    &-products {
+        tr {
+            background-color: $light;
+            margin-bottom: 1px;
+
+            td:first-child {
+                padding-left: .625rem;
+            }
+            td:last-child {
+                padding-right: .625rem;
+            }
+        }
+    }
+}
