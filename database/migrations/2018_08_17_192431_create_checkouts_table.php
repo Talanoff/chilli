@@ -23,7 +23,7 @@ class CreateCheckoutsTable extends Migration
             $table->unsignedInteger('product_id')->nullable();
             $table->unsignedInteger('kit_id')->nullable();
             $table->unsignedInteger('order_id')->nullable();
-
+            $table->float('price');
             $table->unsignedInteger('quantity');
 
             $table->timestamps();

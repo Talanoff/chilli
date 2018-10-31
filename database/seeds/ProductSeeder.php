@@ -8,6 +8,7 @@ class ProductSeeder extends Seeder
      * Run the database seeds.
      *
      * @return void
+     * @throws \Spatie\MediaLibrary\Exceptions\FileCannotBeAdded
      */
     public function run()
     {
@@ -25,7 +26,7 @@ class ProductSeeder extends Seeder
                 'description' => $faker->text(),
                 'price' => rand(100, 1000),
                 'discount' => null,
-                'quantity' => rand(10, 100),
+                'quantity' => rand(0, 50),
                 'in_stock' => 0,
                 'is_published' => 1,
                 'brand_id' => \App\Models\Product\Brand::inRandomOrder()->take(1)->first()->id,

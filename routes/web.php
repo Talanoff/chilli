@@ -18,6 +18,7 @@ Route::group([
     require_once(__DIR__ . '/admin/page.php');
     require_once(__DIR__ . '/admin/common.php');
     require_once(__DIR__ . '/admin/subscribe.php');
+    require_once(__DIR__ . '/admin/notification.php');
 
 });
 
@@ -32,6 +33,7 @@ Route::group([
     require_once(__DIR__ . '/app/checkout.php');
     require_once(__DIR__ . '/app/profile.php');
     require_once(__DIR__ . '/app/favourites.php');
+    require_once(__DIR__ . '/app/notification.php');
     require_once(__DIR__ . '/app/common.php');
 
 });

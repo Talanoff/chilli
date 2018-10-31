@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Comment\Comment;
 use App\Models\Order\Order;
 use App\Models\Product\Brand;
+use App\Models\Product\Notification;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
@@ -121,26 +122,20 @@ class RouteServiceProvider extends ServiceProvider
                     'compare' => 'admin.order.*',
                     'name' => 'Заказы',
                     'icon' => 'orders',
-                    'unread' => Order::query()->where('status', 'processing')->OrWhere('status', 'no_dial')->count(),
+                    'unread' => Order::whereStatus('processing')->OrWhere('status', 'no_dial')->count(),
                 ],
                 [
                     'route' => 'admin.comment.index',
                     'compare' => 'admin.comment.*',
                     'name' => 'Комментарии',
                     'icon' => 'comments',
-                    'unread' => Comment::query()->where('status', 'agreement')->count(),
+                    'unread' => Comment::whereStatus('agreement')->count(),
                 ],
                 [
                     'route' => 'admin.review.index',
                     'compare' => 'admin.review.*',
                     'name' => 'Обзоры',
                     'icon' => 'video',
-                ],
-                [
-                    'route' => 'admin.page.index',
-                    'compare' => 'admin.page.*',
-                    'name' => 'Страницы',
-                    'icon' => 'pages',
                 ],
                 [
                     'route' => 'admin.user.index',
@@ -153,6 +148,19 @@ class RouteServiceProvider extends ServiceProvider
                     'compare' => 'admin.subscribe.*',
                     'name' => 'Подписки',
                     'icon' => 'envelope',
+                ],
+                [
+                    'route' => 'admin.notification.index',
+                    'compare' => 'admin.notification.*',
+                    'name' => 'Уведомления',
+                    'icon' => 'bell',
+                    'unread' => Notification::whereStatus('processing')->count(),
+                ],
+                [
+                    'route' => 'admin.page.index',
+                    'compare' => 'admin.page.*',
+                    'name' => 'Страницы',
+                    'icon' => 'pages',
                 ],
                 [
                     'route' => 'admin.settings.index',

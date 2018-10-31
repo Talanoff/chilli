@@ -166,6 +166,14 @@ class Product extends Model implements HasMedia
     }
 
     /**
+     * @return HasMany
+     */
+    public function notifications(): HasMany
+    {
+        return $this->hasMany(Notification::class);
+    }
+
+    /**
      * @return mixed
      */
     public function getRecommendedAttribute()

@@ -4,6 +4,7 @@ namespace App\Models\User;
 
 use App\Models\Order\Checkout;
 use App\Models\Order\Order;
+use App\Models\Product\Notification;
 use App\Models\Product\Product;
 use App\Models\Product\Rating;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -51,7 +52,7 @@ class User extends Authenticatable
     ];
 
     protected $appends = [
-        'formatted_phone'
+        'formatted_phone',
     ];
 
     /**
@@ -85,6 +86,14 @@ class User extends Authenticatable
     public function checkout(): HasMany
     {
         return $this->hasMany(Checkout::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function notifications(): HasMany
+    {
+        return $this->hasMany(Notification::class);
     }
 
     /**
@@ -126,7 +135,8 @@ class User extends Authenticatable
     /**
      * @return string
      */
-    public function getFormattedPhoneAttribute() {
+    public function getFormattedPhoneAttribute()
+    {
         preg_match('/^\+([0-9]{1,3})([0-9]{3})([0-9]{3})([0-9]{2})([0-9]{2})/', $this->phone, $matches);
         return "+{$matches[1]} ({$matches[2]}) {$matches[3]}-{$matches[4]}-{$matches[5]}";
     }

@@ -88,4 +88,15 @@ class Order extends Model
         $products = $this->user->processedCheckout->pluck('product_id');
         return Product::query()->whereIn('id', $products)->get();
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        self::addGlobalScope('ordered', function () {
+            self::orderByRaw("FIELD(status , 'processing') DESC")
+                ->orderByRaw("FIELD(status , 'no_dial') DESC")
+                ->orderByRaw("FIELD(status , 'finished') DESC");
+        });
+    }
 }

@@ -70,6 +70,7 @@ class CartController extends Controller
                 'user_id' => Auth::check() ? Auth::user()->id : session()->getId(),
                 'product_id' => $product->id,
                 'quantity' => 1,
+                'price' => $product->computed_price,
             ]);
         }
 
@@ -97,6 +98,7 @@ class CartController extends Controller
                 'user_id' => Auth::check() ? Auth::user()->id : session()->getId(),
                 'kit_id' => $kit->id,
                 'quantity' => 1,
+                'price' => $kit->amount,
             ]);
         }
 

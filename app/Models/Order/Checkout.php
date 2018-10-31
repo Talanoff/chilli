@@ -23,6 +23,7 @@ class Checkout extends Model
         'kit_id',
         'order_id',
         'quantity',
+        'price',
     ];
 
     protected $dates = [

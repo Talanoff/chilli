@@ -58,7 +58,7 @@
                 </table>
             @endif
 
-            <div class="my-6 text-uppercase text-{{ $product->quantity > 0 ? 'dark text-bold' : 'muted' }}">
+            <div class="my-6 text-uppercase text-bold text-{{ $product->quantity > 0 ? 'dark' : 'danger' }}">
                 {{ $product->quantity > 0 ? 'Есть' : 'Нет' }} в наличии
             </div>
 
@@ -75,53 +75,79 @@
             <div class="row">
                 <div class="column w-xxl-1/2 flex align-center">
                     <span class="mr-3 text-uppercase">Цена</span>
-                    <h3 class="mb-0 text-dark product-price">{{ $product->computed_price }} грн</h3>
+                    <h3 class="mb-0 {{ $product->quantity < 1 ? 'text-muted' : 'text-dark' }} product-price">{{ $product->computed_price }}
+                        грн</h3>
                 </div>
                 <div class="column w-xxl-1/2 flex mt-xl-3">
-                    <fast-buy opened="{{ count($errors) }}">
-                        <form action="{{ route('app.product.fast-buy', $product) }}" method="post">
-                            @csrf
+                    @if ($product->quantity)
+                        <fast-buy opened="{{ count($errors) }}">
+                            <form action="{{ route('app.product.fast-buy', $product) }}" method="post">
+                                @csrf
 
-                            @guest
-                                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                    <input type="text" name="name" class="form-control"
-                                           placeholder="Ваше имя" value="{{ old('name') }}" required>
-                                    <div class="small text-danger">
-                                        {{ $errors->has('name') ? $errors->get('name')[0] : '' }}
+                                @guest
+                                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                                        <input type="text" name="name" class="form-control"
+                                               placeholder="Ваше имя" value="{{ old('name') }}" required>
+                                        <div class="small text-danger">
+                                            {{ $errors->has('name') ? $errors->get('name')[0] : '' }}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                    <input type="email" name="email" class="form-control"
-                                           placeholder="E-mail" value="{{ old('email') }}" required>
-                                    <div class="small text-danger">
-                                        {{ $errors->has('email') ? $errors->get('email')[0] : '' }}
+                                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                        <input type="email" name="email" class="form-control"
+                                               placeholder="E-mail" value="{{ old('email') }}" required>
+                                        <div class="small text-danger">
+                                            {{ $errors->has('email') ? $errors->get('email')[0] : '' }}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                                    <input type="tel" name="phone" class="form-control"
-                                           placeholder="Телефон" value="{{ old('phone') }}" required>
-                                    <div class="small text-danger">
-                                        {{ $errors->has('phone') ? $errors->get('phone')[0] : '' }}
+                                    <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                                        <input type="tel" name="phone" class="form-control"
+                                               placeholder="Телефон" value="{{ old('phone') }}" required>
+                                        <div class="small text-danger">
+                                            {{ $errors->has('phone') ? $errors->get('phone')[0] : '' }}
+                                        </div>
                                     </div>
-                                </div>
-                            @else
-                                <h5 class="text-uppercase">
-                                    Быстрая покупка
-                                </h5>
+                                @else
+                                    <h5 class="text-uppercase">
+                                        Быстрая покупка
+                                    </h5>
 
-                                <p>Вы авторизированы, как {{ auth()->user()->name }}. Для оформления заказа будут
-                                    использованы Ваши контактные данные.</p>
+                                    <p>Вы авторизированы, как {{ auth()->user()->name }}. Для оформления заказа будут
+                                        использованы Ваши контактные данные.</p>
 
-                                <button class="btn btn-secondary">Продолжить</button>
-                            @endguest
-                        </form>
-                    </fast-buy>
+                                    <button class="btn btn-secondary">Продолжить</button>
+                                @endguest
+                            </form>
+                        </fast-buy>
 
-                    <add-to-cart-button class="btn-secondary ml-1" action="{{ route('app.cart.add', $product) }}">
-                        В корзину
-                    </add-to-cart-button>
+                        <add-to-cart-button
+                            class="btn-secondary ml-1"
+                            action="{{ route('app.cart.add', $product) }}">
+                            В корзину
+                        </add-to-cart-button>
+                    @else
+                        @if (auth()->check() && !auth()->user()->notifications()->count())
+                            <form action="{{ route('app.notification.add', $product) }}" method="post">
+                                @csrf
+
+                                @guest
+                                    <div class="form-group{{ $errors->has('email') ? ' is-invalid' : '' }}">
+                                        <label for="email">Ваше e-mail</label>
+                                        <input type="text" class="form-control" id="email" name="email"
+                                               value="{{ old('email') }}" required>
+                                        @if($errors->has('email'))
+                                            <div class="mt-1 text-danger">
+                                                {{ $errors->first('email') }}
+                                            </div>
+                                        @endif
+                                    </div>
+                                @endguest
+
+                                <button class="btn btn-primary">Уведомить о наличии</button>
+                            </form>
+                        @endif
+                    @endif
                 </div>
             </div>
         </div>
@@ -134,7 +160,8 @@
 
         <section id="kits">
             <div class="container">
-                <kits-carousel kits="{{ json_encode(\App\Http\Resources\KitResource::collection($product->kits)) }}"></kits-carousel>
+                <kits-carousel
+                    kits="{{ json_encode(\App\Http\Resources\KitResource::collection($product->kits)) }}"></kits-carousel>
             </div>
         </section>
 

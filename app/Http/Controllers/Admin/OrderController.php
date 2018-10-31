@@ -15,11 +15,7 @@ class OrderController extends Controller
     public function index(): View
     {
         return \view('admin.order.index', [
-            'orders' => Order::query()
-                ->orderByRaw("FIELD(status , 'processing') DESC")
-                ->orderByRaw("FIELD(status , 'no_dial') DESC")
-                ->orderByRaw("FIELD(status , 'finished') DESC")
-                ->latest()->paginate(20),
+            'orders' => Order::latest()->paginate(20),
         ]);
     }
 
