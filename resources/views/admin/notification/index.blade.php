@@ -13,7 +13,7 @@
                         Пользователь:<br>
                         @if ($notification->user_id)
                             <span
-                                class="bg-warning px-1 rounded text-white small mr-2">{{ $notification->user->id }}</span>
+                                class="bg-warning px-1 rounded-circle small mr-1">{{ $notification->user->id }}</span>
                             <a href="{{ route('admin.user.edit', $notification->user) }}"
                                class="link link-underline">
                                 {{ $notification->user->name }}
