@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use App\Models\Comment\Comment;
 use App\Models\Order\Checkout;
 use App\Models\Order\Order;
 use App\Models\Product\Notification;
@@ -121,6 +122,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class)
                     ->where('status', '!=', 'in_progress');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
 
     /**

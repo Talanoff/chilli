@@ -1,4 +1,9 @@
-module.exports = function(app) {
+module.exports = function (app) {
+    let bar;
+    if (window.innerWidth > 992 && document.querySelector('.simplebar')) {
+        bar = new SimpleBar(document.querySelector('.simplebar'));
+    }
+
     const togglers = document.querySelectorAll('.filters-list-item .toggler-link');
     if (togglers.length) {
         [].forEach.call(togglers, t => {
@@ -9,11 +14,15 @@ module.exports = function(app) {
                 const el = document.getElementById(link);
                 el.classList.toggle('is-visible');
                 el.parentNode.classList.toggle('is-active');
+
+                if (window.innerWidth > 992 && document.querySelector('.simplebar')) {
+                    bar.recalculate();
+                }
             });
         });
     }
 
-    if (app.$refs.hasOwnProperty('filter')) {
+    if (app.$refs.hasOwnProperty('filter') || app.$refs.hasOwnProperty('filterDesktop')) {
         const filters = document.querySelector('.filters');
 
         app.$refs.filter.addEventListener('click', event => {
@@ -21,12 +30,16 @@ module.exports = function(app) {
             filters.classList.toggle('is-active');
         });
 
+        app.$refs.filterDesktop.addEventListener('click', event => {
+            event.preventDefault();
+            filters.classList.toggle('is-active');
+        });
+
         const filterOuter = document.addEventListener('click', event => {
-            if (!filters.contains(event.target) && event.target !== app.$refs.filter) {
+            if (!filters.contains(event.target) && event.target !== app.$refs.filter && event.target !== app.$refs.filterDesktop) {
                 filters.classList.remove('is-active');
                 removeEventListener('click', filterOuter);
             }
         })
     }
-
-}
+};

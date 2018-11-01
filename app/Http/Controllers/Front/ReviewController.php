@@ -34,6 +34,7 @@ class ReviewController extends Controller
             'review' => $review,
             'recommended' => Product::query()->inRandomOrder()->take(4)->get(),
             'meta' => $review->meta()->first(),
+            'image' => $review->thumbnail // for meta
         ]);
     }
 

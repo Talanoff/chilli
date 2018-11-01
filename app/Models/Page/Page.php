@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Page extends Model
 {
-    use Slugable;
-
     protected $fillable = [
         'title',
         'body',
@@ -20,6 +18,15 @@ class Page extends Model
     protected $casts = [
         'params' => 'array',
     ];
+
+    /**
+     * Set key for model
+     * @return string
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
     /**
      * @return MorphMany

@@ -5,8 +5,8 @@ use Illuminate\Database\Seeder;
 class RolesSeeder extends Seeder
 {
     protected $roles = [
-        'administrator' => 'Administrator',
-        'customer' => 'Customer',
+        'administrator' => 'Администратор',
+        'customer' => 'Покупатель',
     ];
 
     /**

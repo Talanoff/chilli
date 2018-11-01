@@ -19,11 +19,20 @@
         margin-right: -10px;
         min-width: 40px;
         padding: 0 10px;
+        color: $body-color;
 
         font: 800 0.75rem/20px $font-family-base;
     }
 
     &-footer {
         margin-top: 10px;
+    }
+
+    &.is-deleted {
+        background-color: $body-color;
+        color: $body-bg;
+        .link {
+            color: inherit;
+        }
     }
 }

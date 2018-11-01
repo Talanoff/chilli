@@ -17,6 +17,13 @@ class SettingsSeeder extends Seeder
             'youtube' => 'https://youtube.com',
         ];
 
+        $advantages = [
+            'item-1' => 'Item 1',
+            'item-2' => 'Item 2',
+            'item-3' => 'Item 3',
+            'item-4' => 'Item 4',
+        ];
+
         foreach (['099 111 22 33', '098 111 22 33', '063 111 22 33', '044 111 22 33'] as $phone) {
             App\Models\Setting\Setting::create([
                 'type' => 'phone',
@@ -29,6 +36,14 @@ class SettingsSeeder extends Seeder
                 'type' => 'social',
                 'name' => $key,
                 'value' => $social,
+            ]);
+        }
+
+        foreach ($advantages as $key => $val) {
+            App\Models\Setting\Setting::create([
+                'type' => 'advantages',
+                'name' => $key,
+                'value' => $val,
             ]);
         }
 

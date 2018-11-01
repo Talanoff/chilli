@@ -1,9 +1,5 @@
 @extends('layouts.app', ['app_title' => $title])
 
-@section('meta')
-    @include('partials.app.meta.meta')
-@endsection
-
 @section('content')
 
     <div class="mb-6 text-center none-lg">

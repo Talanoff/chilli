@@ -42,7 +42,7 @@ trait Slugable
                 return $matches[1] + 1;
             }, $max);
         }
-        return "{$slug}-{$max}";
+        return "{$slug}-2";
     }
 
     protected static function boot()

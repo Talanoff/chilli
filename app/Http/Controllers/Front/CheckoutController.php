@@ -16,9 +16,9 @@ use LisDev\Delivery\NovaPoshtaApi2;
 class CheckoutController extends Controller
 {
     /**
-     * @return View
+     * @return \Illuminate\Contracts\View\Factory|RedirectResponse|View
      */
-    public function index(): View
+    public function index()
     {
         $cart = CartController::handleUserCart();
 

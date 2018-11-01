@@ -13,13 +13,6 @@ class PageSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        // Create about page
-        //        App\Models\Page\Page::create([
-        //            'title' => 'О нас',
-        //            'slug' => 'about',
-        //            'body' => '<p>' . implode('</p><p>', $faker->sentences(4)) . '</p>',
-        //        ]);
-
         // Create contacts page
         App\Models\Page\Page::create([
             'title' => 'Контакты',

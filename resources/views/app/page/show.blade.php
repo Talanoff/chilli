@@ -1,9 +1,5 @@
 @extends('layouts.app', ['app_title' => $page->title])
 
-@section('meta')
-    @include('partials.app.meta.meta')
-@endsection
-
 @section('content')
 
     <section class="page py-6">

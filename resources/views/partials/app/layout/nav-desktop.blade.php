@@ -10,13 +10,13 @@
                     <ul class="submenu">
                         @foreach($item['submenu'] as $submenu)
                             <li class="{{ !empty($submenu['models']) ? 'has-submenu' : '' }}">
-                                <a href="{{ build_filter_url('app.product.index', ['brand' => $submenu['brand']]) }}">
+                                <a href="{{ build_filter_url(['brand' => $submenu['brand'], 'model' => 'any'], 'app.product.index') }}">
                                     {{ $submenu['name'] }}
                                 </a>
                                 @if (!empty($submenu['models']))
                                     <div class="models-menu">
                                         <div class="mb-3">
-                                            <a href="{{ build_filter_url('app.product.index', ['brand' => $submenu['brand']]) }}">
+                                            <a href="{{ build_filter_url(['brand' => $submenu['brand'], 'model' => 'any'], 'app.product.index') }}">
                                                 <img src="{{ $submenu['models']['brand'] }}"
                                                      class="models-menu__brand">
                                             </a>
@@ -24,7 +24,7 @@
                                         <ul>
                                             @foreach($submenu['models']['series'] as $model)
                                                 <li>
-                                                    <a href="{{ build_filter_url('app.product.index', ['brand' => $submenu['brand'], 'model' => $model['model']]) }}">
+                                                    <a href="{{ build_filter_url(['brand' => $submenu['brand'], 'model' => $model['model']], 'app.product.index') }}">
                                                         {{ $model['name'] }}
                                                     </a>
                                                 </li>

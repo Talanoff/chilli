@@ -35,11 +35,12 @@ if (!function_exists('phone_link')) {
 }
 
 if (!function_exists('build_filter_url')) {
-    function build_filter_url($route, $array) {
-        if (!$array) {
+    function build_filter_url($array, $route = null)
+    {
+        if (!$array || !is_array($array)) {
             return null;
         }
 
-        return route($route, array_merge(request()->except('page'), $array));
+        return route($route ?? app('router')->currentRouteName(), array_merge(request()->except('page'), $array));
     }
 }

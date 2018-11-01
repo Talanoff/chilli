@@ -7,29 +7,31 @@
             <h1 class="h2 text-center mb-0 text-white">Спасибо!</h1>
             <h4 class="text-center">Ваш заказ принят!</h4>
 
-            <h4>ID заказа: <span class="text-white">{{ $order->id }}</span></h4>
+            <div class="flex">
+                <h4>ID заказа: <span class="text-white">{{ $order->id }}</span></h4>
 
-            <p>
+                <div class="ml-6">
                 <span class="order-status order-status--{{ $order->status }}">
                     {{ App\Models\Order\Order::$STATUSES[$order->status] }}
                 </span>
-            </p>
+                </div>
+            </div>
 
             <p class="my-8">
-            @if ($order->delivery === 'np')
-                Доставка «Новой Почтой» по адресу:<br>
-                <span class="text-white">{{ $order->city }}, {{ $order->warehouse }}</span>
-            @endif
+                @if ($order->delivery === 'np')
+                    Доставка «Новой Почтой» по адресу:<br>
+                    <span class="text-white">{{ $order->city }}, {{ $order->warehouse }}</span>
+                @endif
 
-            @if ($order->delivery === 'courier')
-                Доставка курьером по адресу:<br>
-                <span class="text-white">{{ $order->address }}</span>
-            @endif
+                @if ($order->delivery === 'courier')
+                    Доставка курьером по адресу:<br>
+                    <span class="text-white">{{ $order->address }}</span>
+                @endif
             </p>
 
             <h5>Детали заказа:</h5>
 
-            <div>
+            <div class="checkout-products">
                 @include('partials.app.checkout.products', ['cart' => $order->checkout, 'amount' => $order->amount, 'size' => 100])
             </div>
         @else

@@ -18,7 +18,7 @@
                     <p class="small text-muted mb-1">Цена</p>
                     <h6 class="mb-0 no-wrap">
                         <span class="text-normal smaller">{{ $item->quantity }} x</span>
-                        {{ $item->product->computed_price }} грн
+                        {{ $item->price }} грн
                     </h6>
                 </td>
             </tr>

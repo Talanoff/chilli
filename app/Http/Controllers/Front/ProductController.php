@@ -11,6 +11,7 @@ use App\Models\Product\Brand;
 use App\Models\Product\Category;
 use App\Models\Product\CharacteristicType;
 use App\Models\Product\Product;
+use App\Models\Product\Series;
 use App\Models\User\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -29,6 +30,7 @@ class ProductController extends Controller
         $title = 'Каталог';
 
         $latest = null;
+        $series = [];
         $query = Product::query();
 
         if ($request->filled('price')) {
@@ -39,9 +41,14 @@ class ProductController extends Controller
             $query = $query->whereHas('brand', function ($q) use ($request) {
                 $q->whereSlug($request->get('brand'));
             });
+
+            $series = Series::has('products')
+                            ->whereHas('brand', function ($q) use ($request) {
+                                $q->whereSlug($request->get('brand'));
+                            })->get();
         }
 
-        if ($request->filled('model')) {
+        if ($request->filled('model') && $request->get('model') !== 'any') {
             $query = $query->whereHas('series', function ($q) use ($request) {
                 $q->whereSlug($request->get('model'));
             });
@@ -81,6 +88,7 @@ class ProductController extends Controller
             'viewed' => $this::handleViewedProducts(),
             'filters' => $this::createFilters(),
             'meta' => Meta::whereMetableId(0)->whereMetableType(Product::class)->first(),
+            'series' => $series,
         ]);
     }
 
@@ -119,6 +127,7 @@ class ProductController extends Controller
             'images' => json_encode($images->toArray()),
             'thumbnails' => json_encode($thumbnails->toArray()),
             'meta' => $product->meta()->first(),
+            'image' => $product->getFirstMediaUrl('product', 'medium') // for meta
         ]);
     }
 

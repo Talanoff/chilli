@@ -1,9 +1,5 @@
 @extends('layouts.app', ['app_title' => 'Обзоры'])
 
-@section('meta')
-    @include('partials.app.meta.meta')
-@endsection
-
 @section('content')
 
     <section class="reviews flex">

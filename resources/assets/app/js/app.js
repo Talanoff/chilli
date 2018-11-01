@@ -2,8 +2,10 @@ require('./bootstrap');
 
 import Vue from 'vue';
 import {store} from './store';
-
 import lozad from 'lozad'; // Lazy load
+import SimpleBar from 'simplebar';
+import 'simplebar/dist/simplebar.css';
+window.SimpleBar = SimpleBar;
 
 import AppCart from './components/cart/AppCart';
 import AppCartTotal from './components/cart/AppCartTotal';
@@ -27,7 +29,7 @@ import AppMobileNav from './components/modules/AppMobileNav';
 
 window.VBUS = new Vue();
 
-new Vue({
+const app = new Vue({
     el: '#app',
     components: {
         AppCart,

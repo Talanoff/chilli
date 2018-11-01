@@ -32,15 +32,6 @@ class ProductController extends Controller
             $products->where('category_id', '=', $request->get('category'));
         }
 
-        return \view('admin.product.index', [
-            'products' => $products->latest('id')->paginate(20),
-        ]);
-    }
-
-    public function search(Request $request): View
-    {
-        $products = Product::query()->with('category');
-
         if ($request->filled('search')) {
             $products = Product::where('id', ltrim($request->get('search'), '0'))
                                ->orWhere('title', 'like', '%' . $request->get('search') . '%');
@@ -84,9 +75,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request): RedirectResponse
     {
         /** @var Product $product */
-        $product = Product::query()->create(array_merge([
-            'slug' => str_slug($request->get('title')),
-        ], $request->all()));
+        $product = Product::query()->create($request->all());
 
         $this->storeGallery($request, $product);
 
@@ -129,12 +118,6 @@ class ProductController extends Controller
     public function update(ProductRequest $request, Product $product): RedirectResponse
     {
         $product->update($request->all());
-
-        if ($this->compareTitle($request, $product)) {
-            $product->update([
-                'slug' => str_slug($request->get('title')),
-            ]);
-        }
 
         $this->storeGallery($request, $product);
 

@@ -10,33 +10,11 @@
                     <div class="row" ref="brands">
                         @foreach($item['submenu'] as $submenu)
                             <div class="w-1/2 flex align-center justify-center brand column">
-                                {{--<a href="{{ build_filter_url('app.product.index', ['brand' => $submenu['brand']]) }}">--}}
-                                {{--{{ $submenu['name'] }}--}}
-                                {{--</a>--}}
                                 @if (!empty($submenu['models']))
-                                    <a href="{{ build_filter_url('app.product.index', ['brand' => $submenu['brand']]) }}">
+                                    <a href="{{ build_filter_url(['brand' => $submenu['brand'], 'model' => 'any'], 'app.product.index') }}">
                                         <img src="{{ $submenu['models']['brand'] }}"
                                              class="models-menu__brand">
                                     </a>
-                                    {{--
-                                        <div class="models-menu">
-                                            <div class="mb-3">
-                                                <a href="{{ build_filter_url('app.product.index', ['brand' => $submenu['brand']]) }}">
-                                                    <img src="{{ $submenu['models']['brand'] }}"
-                                                         class="models-menu__brand">
-                                                </a>
-                                            </div>
-                                            <ul>
-                                                @foreach($submenu['models']['series'] as $model)
-                                                    <li>
-                                                        <a href="{{ build_filter_url('app.product.index', ['brand' => $submenu['brand'], 'model' => $model['model']]) }}">
-                                                            {{ $model['name'] }}
-                                                        </a>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                        --}}
                                 @endif
                             </div>
                         @endforeach

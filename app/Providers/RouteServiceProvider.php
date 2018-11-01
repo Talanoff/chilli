@@ -37,14 +37,16 @@ class RouteServiceProvider extends ServiceProvider
                     'brand' => $brand->slug,
                 ];
 
-                if (count($brand->series)) {
+                $series = $brand->series()->has('products')->get();
+
+                if ($series->count()) {
                     $item['models'] = [];
                     $item['models']['series'] = [];
                     $item['models']['brand'] = $brand->getFirstMediaUrl('brand');
-                    foreach ($brand->series as $series) {
+                    foreach ($series as $serie) {
                         array_push($item['models']['series'], [
-                            'model' => $series->slug,
-                            'name' => $series->title,
+                            'model' => $serie->slug,
+                            'name' => $serie->title,
                         ]);
                     }
                 }

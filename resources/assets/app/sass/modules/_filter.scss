@@ -14,6 +14,7 @@
 }
 
 .filters {
+    position: relative;
     box-shadow: 5px 20px 60px rgba(#000, 0.2);
     background-color: $secondary;
     font-size: rem-calc(14);
@@ -23,7 +24,7 @@
     overflow: hidden;
 
     &.is-active {
-        height: 300px;
+        height: auto;
         margin-bottom: rem-calc(40);
     }
 
@@ -42,7 +43,7 @@
         z-index: 100;
         width: 100%;
         max-width: 560px;
-        max-height: 60vh;
+        height: 420px !important;
         transform: translateX(-100%);
         margin-bottom: 0 !important;
 
@@ -57,12 +58,19 @@
     }
 
     &-list {
-        flex: 1 0 auto;
-        max-width: 100%;
-        padding: 30px 20px 30px;
+        height: 100%;
+        position: relative;
 
         @media (min-width: map_get($grid-breakpoints, lg)) {
-            padding: 60px 50px 60px 0;
+            display: block;
+            margin-right: 162px;
+        }
+
+        .mainmenu {
+            padding: 30px 20px 30px;
+            @media (min-width: map_get($grid-breakpoints, lg)) {
+                padding: 60px 50px 60px 0;
+            }
         }
 
         &-item {
@@ -131,14 +139,25 @@
     }
 
     &-brands {
-        flex: 0 0 90px;
-        max-width: 90px;
-        margin: 2px;
-        overflow-y: auto;
-        max-height: 100%;
+        @media (min-width: map_get($grid-breakpoints, lg)) {
+            position: absolute !important;
+            right: 2px;
+            top: 2px;
+            bottom: 2px;
+            width: 90px !important;
+            height: auto !important;
+        }
+
+        .simplebar-offset {
+            right: 0 !important;
+        }
 
         li {
-            background-color: #d1dae4;
+            background-color: $body-bg;
+
+            @media (min-width: map_get($grid-breakpoints, lg)) {
+                max-width: initial;
+            }
 
             a {
                 padding: 20px;
@@ -146,24 +165,28 @@
             }
 
             &.is-active {
-                background-color: #fff;
+                background-color: $secondary;
             }
         }
 
         img {
             max-height: 48px;
+            max-width: 120px;
         }
 
         @media (min-width: map_get($grid-breakpoints, lg)) {
-            flex: 0 0 160px;
-            max-width: 160px;
+            width: 160px !important;
 
             li {
                 a {
-                    padding: 40px;
+                    padding: 30px 20px;
                 }
             }
         }
+    }
+
+    .simplebar-content {
+        padding: 0 !important;
     }
 }
 

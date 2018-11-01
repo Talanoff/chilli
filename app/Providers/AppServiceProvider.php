@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Setting\Setting;
 use App\Services\Navigation;
 use Carbon\Carbon;
+use DOMDocument;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;

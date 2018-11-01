@@ -13,7 +13,7 @@ class BrandsTableSeeder extends Seeder
     public function run()
     {
         $brands = [
-            'Apple' => 'https://worldvectorlogo.com/download/apple-black.svg',
+            'Apple' => asset('/images/brands/apple.svg'),
             'Samsung' => asset('/images/brands/samsung.svg'),
             'Xiaomi' => 'https://worldvectorlogo.com/download/xiaomi.svg',
             'Meizu' => 'https://worldvectorlogo.com/download/meizu-3.svg',

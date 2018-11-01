@@ -11,7 +11,7 @@
         </a>
 
         @if (in_array(app('router')->currentRouteName(), ['app.product.index', 'app.promotions', 'app.novelties']))
-            <a href="#filter" class="filter-link nav-item" ref="filter">
+            <a href="#filter" class="filter-link nav-item" ref="filterDesktop">
                 Фильтр
                 <svg width="26" height="26" class="ml-2 filter-icon">
                     <use xlink:href="#filter"></use>

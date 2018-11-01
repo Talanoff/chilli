@@ -1,9 +1,5 @@
 @extends('layouts.app', ['app_title' => $title])
 
-@section('meta')
-    @include('partials.app.meta.meta', ['image' => $product->getFirstMediaUrl('product', 'medium')])
-@endsection
-
 @section('content')
 
     @if (session()->has('success'))

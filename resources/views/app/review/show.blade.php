@@ -1,9 +1,5 @@
 @extends('layouts.app', ['app_title' => $review->title])
 
-@section('meta')
-    @include('partials.app.meta.meta', ['image' => $review->thumbnail])
-@endsection
-
 @section('content')
 
     <section class="review">

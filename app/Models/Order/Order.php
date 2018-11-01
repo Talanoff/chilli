@@ -71,12 +71,7 @@ class Order extends Model
     public function getAmountAttribute()
     {
         return $this->checkout->map(function ($item) {
-            if ($item->product_id) {
-                $amount = $item->product->computed_price * $item->quantity;
-            } else {
-                $amount = $item->kit->amount * $item->quantity;
-            }
-            return $amount;
+            return $item->price * $item->quantity;
         })->sum();
     }
 
