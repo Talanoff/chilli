@@ -2,36 +2,31 @@
 
 namespace App\Mail;
 
-use App\Models\Product\Product;
 use App\Models\User\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Http\Request;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class FashBuy extends Mailable
+class UserRegister extends Mailable
 {
     use Queueable, SerializesModels;
     /**
-     * @var array
+     * @var User
      */
     private $user;
-    /**
-     * @var Product
-     */
-    private $product;
+    private $password;
 
     /**
      * Create a new message instance.
      *
-     * @param Product $product
-     * @param array $user
+     * @param User $user
+     * @param $password
      */
-    public function __construct(Product $product, $user)
+    public function __construct(User $user, $password)
     {
         $this->user = $user;
-        $this->product = $product;
+        $this->password = $password;
     }
 
     /**
@@ -41,7 +36,8 @@ class FashBuy extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.fast-buy')
-            ->subject('Быстрый заказ');
+        return $this->to($this->user->email)
+                    ->subject('Автоматическая регистраниция на сайте ' . config('app.name'))
+                    ->view('main.new-user');
     }
 }

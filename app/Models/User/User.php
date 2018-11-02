@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -139,6 +140,11 @@ class User extends Authenticatable
     public function productRating(Product $product)
     {
         return optional($this->ratings()->whereProductId($product->id)->first())->rate;
+    }
+
+    public static function define()
+    {
+        return Auth::check() ? Auth::user()->getKey() : session()->getId();
     }
 
     /**

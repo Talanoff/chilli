@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Mail\UserRegister;
 use App\Models\Order\Checkout;
 use App\Models\Order\Order;
 use App\Models\User\User;
+use App\Services\Cart;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 use LisDev\Delivery\NovaPoshtaApi2;
 
@@ -20,22 +23,15 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        $cart = CartController::handleUserCart();
+        $cart = new Cart();
 
-        if (!$cart->count()) {
+        if (!$cart->items()->count()) {
             return redirect()->route('app.product.index');
         }
 
         return \view('app.cart.checkout', [
-            'cart' => $cart,
-            'amount' => $cart->map(function ($item) {
-                if ($item->product_id) {
-                    $amount = $item->product->computed_price * $item->quantity;
-                } else {
-                    $amount = $item->kit->amount * $item->quantity;
-                }
-                return $amount;
-            })->sum(),
+            'cart' => $cart->items(),
+            'amount' => $cart->amount(),
         ]);
     }
 
@@ -47,16 +43,19 @@ class CheckoutController extends Controller
     {
         /** @var User $user */
         $user = Auth::user();
-        $cart = CartController::handleUserCart();
 
         if (!Auth::check()) {
+            $password = str_random(8);
+
             $user = User::query()->create([
                 'name' => $request->get('name'),
                 'email' => $request->get('email'),
                 'phone' => str_replace([' ', '(', ')', '-'], '', $request->get('phone')),
-                'password' => bcrypt(str_random(16)),
+                'password' => bcrypt($password),
                 'role_id' => 2,
             ]);
+
+            new UserRegister($user, $password);
 
             Auth::login($user);
         }
@@ -66,21 +65,12 @@ class CheckoutController extends Controller
             'user_id' => $user->id,
             'delivery' => $request->get('delivery'),
             'message' => $request->get('message'),
+            'city' => $request->get('city'),
+            'warehouse' => $request->get('warehouse'),
+            'address' => $request->get('address'),
         ]);
 
-        $cart->map(function ($item) use ($user, $order) {
-            Checkout::find($item->id)->update([
-                'user_id' => $user->id,
-                'order_id' => $order->id,
-                'status' => 'finished',
-            ]);
-        });
-
-        if ($request->get('delivery') === 'np') {
-            $order->update($request->only('city', 'warehouse'));
-        } elseif ($request->get('delivery') === 'courier') {
-            $order->update($request->only('address'));
-        }
+        (new Cart())->complete($user, $order);
 
         return \redirect()->route('app.checkout.details');
     }

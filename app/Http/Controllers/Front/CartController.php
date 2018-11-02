@@ -9,6 +9,7 @@ use App\Models\Order\Checkout;
 use App\Models\Product\Favourite;
 use App\Models\Product\Kit;
 use App\Models\Product\Product;
+use App\Services\Cart;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -18,7 +19,7 @@ class CartController extends Controller
     public function index(): View
     {
         return \view('app.cart.cart', [
-            'cart' => self::handleUserCart(),
+            'cart' => (new Cart())->items(),
             'viewed' => ProductController::handleViewedProducts(),
         ]);
     }
@@ -30,20 +31,13 @@ class CartController extends Controller
      */
     public function getCart(): JsonResponse
     {
-        $cart = self::handleUserCart();
+        $cart = new Cart();
 
         return response()->json([
-            'cart' => CartResource::collection($cart),
+            'cart' => CartResource::collection($cart->items()),
             'summary' => [
-                'count' => $cart->sum('quantity'),
-                'amount' => $cart->map(function ($item) {
-                    if ($item->product_id) {
-                        $amount = $item->product->computed_price * $item->quantity;
-                    } else {
-                        $amount = $item->kit->amount * $item->quantity;
-                    }
-                    return $amount;
-                })->sum(),
+                'count' => $cart->items()->sum('quantity'),
+                'amount' => $cart->amount(),
             ],
             'favourites' => FavouriteResource::collection(Favourite::favourites()),
         ]);

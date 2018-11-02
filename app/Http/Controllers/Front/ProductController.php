@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\FastBuyRequest;
-use App\Mail\FashBuy;
+use App\Mail\FastBuy;
 use App\Models\Meta\Meta;
 use App\Models\Product\Brand;
 use App\Models\Product\Category;
@@ -190,7 +190,7 @@ class ProductController extends Controller
     {
         $user = Auth::check() ? Auth::user()->toArray() : $request->only('name', 'email', 'phone');
 
-        Mail::to(env('ADMIN_EMAIL'))->send(new FashBuy($product, $user));
+        Mail::to(env('ADMIN_EMAIL'))->send(new FastBuy($product, $user));
     }
 
     /**
