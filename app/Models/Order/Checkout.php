@@ -56,17 +56,6 @@ class Checkout extends Model
     }
 
     /**
-     * Returns anonymous user checkout
-     *
-     * @return mixed
-     */
-    public static function anonymous()
-    {
-        return self::where('user_id', session()->getId())
-                   ->whereStatus('in_progress');
-    }
-
-    /**
      * @return BelongsTo
      */
     public function order(): BelongsTo

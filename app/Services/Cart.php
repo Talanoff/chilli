@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-
 use App\Models\Order\Checkout;
 use App\Models\Order\Order;
 use App\Models\User\User;
@@ -31,9 +30,9 @@ class Cart
     }
 
     /**
-     * @return int
+     * @return mixed
      */
-    public function amount(): int
+    public function amount()
     {
         return $this->items()->reduce(function ($total, $item) {
             return $total + ($item->price * $item->quantity);
@@ -48,7 +47,7 @@ class Cart
      */
     public function complete(User $user, Order $order)
     {
-        $this->items()->map(function ($item) use ($user, $order) {
+        $this->items()->each(function (Checkout $item) use ($user, $order) {
             $item->update([
                 'user_id' => $user->id,
                 'order_id' => $order->id,

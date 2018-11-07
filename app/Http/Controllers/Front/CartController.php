@@ -49,15 +49,12 @@ class CartController extends Controller
      */
     public function addProductToCart(Product $product): JsonResponse
     {
-        $cart = self::handleUserCart();
+        $cart = (new Cart())->items();
 
-        if (in_array($product->id, $cart->pluck('product_id')->toArray())) {
-            $checkout = Auth::check() ? Auth::user()->checkout() : Checkout::anonymous();
-
-            $checkout = $checkout->whereProductId($product->id)->first();
-
-            $checkout->update([
-                'quantity' => $checkout->quantity + 1,
+        if ($cart->count() && $cart->keyBy('product_id')->has($product->getKey())) {
+            $item = $cart->where('product_id', $product->getkey())->first();
+            $item->update([
+                'quantity' => $item->quantity + 1,
             ]);
         } else {
             Checkout::query()->create([
@@ -77,15 +74,12 @@ class CartController extends Controller
      */
     public function addKitToCart(Kit $kit): JsonResponse
     {
-        $cart = self::handleUserCart();
+        $cart = (new Cart())->items();
 
-        if (count($cart) && in_array($kit->id, $cart->pluck('kit_id')->toArray())) {
-            $checkout = Auth::check() ? Auth::user()->checkout() : Checkout::anonymous();
-
-            $checkout = $checkout->whereKitId($kit->id)->first();
-
-            $checkout->update([
-                'quantity' => $checkout->quantity + 1,
+        if ($cart->count() && $cart->keyBy('kit_id')->has($kit->getKey())) {
+            $item = $cart->where('kit_id', $kit->getkey())->first();
+            $item->update([
+                'quantity' => $item->quantity + 1,
             ]);
         } else {
             Checkout::query()->create([
@@ -131,13 +125,5 @@ class CartController extends Controller
         $checkout->delete();
 
         return $this->getCart();
-    }
-
-    /**
-     * @return mixed
-     */
-    public static function handleUserCart()
-    {
-        return Auth::check() ? Auth::user()->cart()->latest()->get() : Checkout::anonymous()->latest()->get();
     }
 }
