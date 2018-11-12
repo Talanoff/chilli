@@ -19,7 +19,7 @@
                 @csrf
                 <div class="d-flex">
                     <div class="flex-grow-1 mr-2">
-                        <input type="search" name="search" placeholder="Артикл"
+                        <input type="search" name="search" placeholder="Артикул"
                                class="form-control" value="{{ $search ?? '' }}">
                     </div>
                     <div>

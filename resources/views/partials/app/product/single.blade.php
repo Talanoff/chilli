@@ -15,7 +15,13 @@
             </h6>
 
             @if ($product->subtitle)
-                <p class="small text-muted text-uppercase">{{ $product->subtitle }}</p>
+                <div class="small text-muted text-uppercase">{{ $product->subtitle }}</div>
+            @endif
+
+            @if ($product->tag)
+                <div class="pt-1">
+                    <span class="product-item__tag py-1 px-2">{{ App\Models\Product\Product::$TAGS[$product->tag] }}</span>
+                </div>
             @endif
 
             <div class="my-4">

@@ -26,7 +26,7 @@
                 <p class="text-uppercase smaller text-primary">{{ $product->subtitle }}</p>
             @endif
 
-            <p class="text-muted mt-4 text-uppercase">Артикл № {{ $product->sku }}</p>
+            <p class="text-muted mt-4 text-uppercase">Артикул № {{ $product->sku }}</p>
 
             <hr class="my-4">
 

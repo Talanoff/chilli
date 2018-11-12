@@ -3,7 +3,7 @@
 namespace App\Traits;
 
 
-trait Slugable
+trait Sluggable
 {
     /**
      * Set key for model

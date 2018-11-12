@@ -82,7 +82,7 @@
                             </a>
                         </td>
                         <td>
-                            <p class="small text-muted mb-3">Артикл № {{ $item->product->sku }}</p>
+                            <p class="small text-muted mb-3">Артикул № {{ $item->product->sku }}</p>
                             <h6 class="text-uppercase mb-0">
                                 <a href="{{ route('app.product.show', $item->product) }}"
                                    class="link link-underline">{{ $item->product->title }}</a>

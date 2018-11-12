@@ -32,32 +32,6 @@ class CommonController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return View
-     */
-    public function search(Request $request): View
-    {
-        $search = trim($request->get('search'));
-
-        $products = Product::query();
-
-        if (intval($search) > 0) {
-            $products = $products->where('id', '=', intval($search) - 1000);
-        } else {
-            $products = $products->orWhere('title', 'like', "%{$search}%")
-                                 ->orWhere('subtitle', 'like', "%{$search}%")
-                                 ->orWhereHas('brand', function ($q) use ($search) {
-                                     $q->where('name', 'like', "%{$search}%");
-                                 });
-        }
-
-        return \view('app.search.index', [
-            'products' => $products->paginate(12),
-            'viewed' => ProductController::handleViewedProducts(),
-        ]);
-    }
-
-    /**
      * @param SubscribeRequest $request
      * @return RedirectResponse
      */

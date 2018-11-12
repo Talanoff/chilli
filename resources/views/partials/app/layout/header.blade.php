@@ -8,7 +8,7 @@
             @include('partials.app.layout.nav-desktop')
 
             <div class="column flex align-center justify-end">
-                <form action="{{ route('app.search') }}" method="post" class="flex-1 none block-lg">
+                <form action="{{ route('app.product.search') }}" method="post" class="flex-1 none block-lg">
                     @csrf
                     <app-search></app-search>
                 </form>

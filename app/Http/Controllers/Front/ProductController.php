@@ -22,73 +22,77 @@ use Illuminate\View\View;
 class ProductController extends Controller
 {
     /**
+     * Show products default view
      * @param Request $request
      * @return View
      */
     public function index(Request $request): View
     {
         $title = 'Каталог';
-
         $latest = null;
-        $series = [];
-        $query = Product::query();
 
-        if ($request->filled('price')) {
-            $query = $query->orderBy('price', $request->get('price'));
+        list($latest, $products, $series) = $this->filters($request, Product::latest());
+
+        return \view('app.product.index', $this->indexViewData($products, $latest, $title, $series));
+    }
+
+    /**
+     * Show products which in stock
+     * @param Request $request
+     * @return View
+     */
+    public function promotions(Request $request): View
+    {
+        $title = 'Акции';
+        $latest = null;
+
+        $products = Product::whereInStock(true)->where('id', '!=' ,optional($latest)->id);
+
+        list($latest, $products, $series) = $this->filters($request, $products);
+
+        return \view('app.product.index', $this->indexViewData($products, $latest, $title, $series));
+    }
+
+    /**
+     * Show novelties
+     * @param Request $request
+     * @return View
+     */
+    public function novelties(Request $request): View
+    {
+        $title = 'Новинки';
+        $latest = null;
+
+        $products = Product::whereTag('newest')->where('id', '!=', optional($latest)->id);
+
+        list($latest, $products, $series) = $this->filters($request, $products);
+
+        return \view('app.product.index', $this->indexViewData($products, $latest, $title, $series));
+    }
+
+    /**
+     * @param Request $request
+     * @return View
+     */
+    public function search(Request $request): View
+    {
+        $search = trim($request->get('search'));
+
+        $products = Product::query();
+
+        if (intval($search) > 0) {
+            $products = $products->where('id', '=', intval($search) - 1000);
         }
 
-        if ($request->filled('brand')) {
-            $query = $query->whereHas('brand', function ($q) use ($request) {
-                $q->whereSlug($request->get('brand'));
-            });
+        $products = $products->orWhere('title', 'like', "%{$search}%")
+                             ->orWhere('subtitle', 'like', "%{$search}%")
+                             ->orWhereHas('brand', function ($q) use ($search) {
+                                 $q->where('title', 'like', "%{$search}%");
+                             });
 
-            $series = Series::has('products')
-                            ->whereHas('brand', function ($q) use ($request) {
-                                $q->whereSlug($request->get('brand'));
-                            })->get();
-        }
-
-        if ($request->filled('model') && $request->get('model') !== 'any') {
-            $query = $query->whereHas('series', function ($q) use ($request) {
-                $q->whereSlug($request->get('model'));
-            });
-        }
-
-        if ($request->filled('category')) {
-            $query = $query->whereHas('category', function ($q) use ($request) {
-                $q->whereSlug($request->get('category'));
-            });
-        }
-
-        $latest = $query->latest()->first();
-        $products = $query->where('id', '!=', optional($latest)->id);
-
-        if ($request->filled('leaders')) {
-            $products = $products->leaders();
-        } else {
-            $query = $query->latest();
-        }
-
-        if (app('router')->currentRouteNamed('app.promotions')) {
-            $title = 'Акции';
-            $products = $products->whereInStock(true);
-            $latest = $query->whereInStock(true)->first();
-        }
-
-        if (app('router')->currentRouteNamed('app.novelties')) {
-            $title = 'Новинки';
-            $products = $products->whereTag('newest');
-            $latest = $query->whereTag('newest')->first();
-        }
-
-        return \view('app.product.index', [
+        return \view('app.search.index', [
             'products' => $products->paginate(12),
-            'latest' => $latest,
-            'title' => $title,
-            'viewed' => $this::handleViewedProducts(),
-            'filters' => $this::createFilters(),
-            'meta' => Meta::whereMetableId(0)->whereMetableType(Product::class)->first(),
-            'series' => $series,
+            'viewed' => ProductController::handleViewedProducts(),
         ]);
     }
 
@@ -186,6 +190,10 @@ class ProductController extends Controller
         return $viewed;
     }
 
+    /**
+     * @param FastBuyRequest $request
+     * @param Product $product
+     */
     public function fastBuy(FastBuyRequest $request, Product $product)
     {
         $user = Auth::check() ? Auth::user()->toArray() : $request->only('name', 'email', 'phone');
@@ -228,5 +236,71 @@ class ProductController extends Controller
         ]));
 
         return $filters;
+    }
+
+    /**
+     * @param Request $request
+     * @param $products
+     * @return array
+     */
+    private function filters(Request $request, $products): array
+    {
+        $series = collect([]);
+
+        if ($request->filled('price')) {
+            $products = $products->orderBy('price', $request->get('price'));
+        }
+
+        if ($request->filled('brand')) {
+            $products = $products->whereHas('brand', function ($q) use ($request) {
+                $q->whereSlug($request->get('brand'));
+            });
+
+            $series = Series::has('products')
+                            ->whereHas('brand', function ($q) use ($request) {
+                                $q->whereSlug($request->get('brand'));
+                            })->get();
+        }
+
+        if ($request->filled('model') && $request->get('model') !== 'any') {
+            $products = $products->whereHas('series', function ($q) use ($request) {
+                $q->whereSlug($request->get('model'));
+            });
+        }
+
+        if ($request->filled('category')) {
+            $products = $products->whereHas('category', function ($q) use ($request) {
+                $q->whereSlug($request->get('category'));
+            });
+        }
+
+        if ($request->has('leaders')) {
+            $products = $products->leaders();
+        }
+
+        $latest = $products->first();
+        $products = $products->where('id', '!=', optional($latest)->id);
+
+        return [$latest, $products, $series];
+    }
+
+    /**
+     * @param $products
+     * @param $latest
+     * @param $title
+     * @param $series
+     * @return array
+     */
+    private function indexViewData($products, $latest, $title, $series): array
+    {
+        return [
+            'products' => $products->paginate(12),
+            'latest' => $latest,
+            'title' => $title,
+            'viewed' => $this::handleViewedProducts(),
+            'filters' => $this::createFilters(),
+            'meta' => Meta::whereMetableId(0)->whereMetableType(Product::class)->first(),
+            'series' => $series,
+        ];
     }
 }

@@ -5,7 +5,7 @@ namespace App\Models\Review;
 use App\Models\Comment\Comment;
 use App\Models\Meta\Meta;
 use App\Models\Product\Product;
-use App\Traits\Slugable;
+use App\Traits\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -17,7 +17,7 @@ use Spatie\MediaLibrary\Models\Media;
 
 class Review extends Model implements HasMedia
 {
-    use Slugable;
+    use Sluggable;
     use HasMediaTrait;
 
     public static $CATEGORIES = [

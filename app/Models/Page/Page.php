@@ -3,7 +3,7 @@
 namespace App\Models\Page;
 
 use App\Models\Meta\Meta;
-use App\Traits\Slugable;
+use App\Traits\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 

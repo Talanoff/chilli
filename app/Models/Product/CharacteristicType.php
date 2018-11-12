@@ -2,13 +2,13 @@
 
 namespace App\Models\Product;
 
-use App\Traits\Slugable;
+use App\Traits\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CharacteristicType extends Model
 {
-    use Slugable;
+    use Sluggable;
 
     public static $TYPES = [
         'color' => 'Цвет',

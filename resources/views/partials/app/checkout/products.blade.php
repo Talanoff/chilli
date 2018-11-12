@@ -12,7 +12,7 @@
                     <h6 class="text-uppercase mb-0">
                         <a href="{{ route('app.product.show', $item->product) }}">{{ $item->product->title }}</a>
                     </h6>
-                    <p class="mb-0 small">Артикл № {{ $item->product->sku }}</p>
+                    <p class="mb-0 small">Артикул № {{ $item->product->sku }}</p>
                 </td>
                 <td class="text-right">
                     <p class="small text-muted mb-1">Цена</p>

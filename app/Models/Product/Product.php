@@ -7,7 +7,7 @@ use App\Models\Comment\Comment;
 use App\Models\Meta\Meta;
 use App\Models\Order\Checkout;
 use App\Models\Review\Review;
-use App\Traits\Slugable;
+use App\Traits\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -22,7 +22,7 @@ use Spatie\MediaLibrary\{HasMedia\HasMedia, HasMedia\HasMediaTrait, Models\Media
 class Product extends Model implements HasMedia
 {
     use HasMediaTrait;
-    use Slugable;
+    use Sluggable;
 
     protected $fillable = [
         'slug',
@@ -289,6 +289,11 @@ class Product extends Model implements HasMedia
     protected static function boot()
     {
         parent::boot();
+
+        static::saving(function ($model) {
+            $model->slug = str_slug($model->title);
+        });
+
         if (!app('router')->currentRouteNamed('admin.*')) {
             static::addGlobalScope('active', function (Builder $builder) {
                 $builder->where('is_published', 1);

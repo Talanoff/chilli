@@ -2,7 +2,7 @@
 
 namespace App\Models\Product;
 
-use App\Traits\Slugable;
+use App\Traits\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Image\Manipulations;
@@ -10,7 +10,7 @@ use Spatie\MediaLibrary\{HasMedia\HasMedia, HasMedia\HasMediaTrait, Models\Media
 
 class Brand extends Model implements HasMedia
 {
-    use Slugable;
+    use Sluggable;
     use HasMediaTrait;
 
     protected $fillable = [

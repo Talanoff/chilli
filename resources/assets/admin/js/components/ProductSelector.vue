@@ -11,7 +11,7 @@
             placeholder="Выберите товар"
             @select="product = $event"/>
 
-        <input type="hidden" name="product_id" :value="product.id">
+        <input type="hidden" name="product_id" v-if="!!product.id" :value="product.id">
     </div>
 </template>
 
