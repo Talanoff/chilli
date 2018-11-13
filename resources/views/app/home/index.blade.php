@@ -118,7 +118,19 @@
 
             <p class="mb-0">{!! nl2br($settings['mission'][0]->value) !!}</p>
         </div>
-        <div class="w-md-1/2"></div>
+
+        @if (count($settings['advantages']))
+        <div class="w-md-1/2">
+            <div class="row">
+                @foreach($settings['advantages'] as $advantage)
+                <div class="column w-md-1/2">
+                    <h4>{{ $advantage['name'] }}</h4>
+                    <p>{{ $advantage['value'] }}</p>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        @endif
     </section>
 
 @endsection
