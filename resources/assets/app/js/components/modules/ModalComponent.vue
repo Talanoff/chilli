@@ -20,7 +20,7 @@
             maxWidth: {
                 type: String,
                 default() {
-                    return '60vw';
+                    return '50vw';
                 }
             }
         }
@@ -92,16 +92,6 @@
 
             &::after {
                 transform: rotate(-45deg);
-            }
-
-            @media (min-width: 1000px) {
-                width: 80px;
-                height: 80px;
-
-                &::before, &::after {
-                    width: 34px;
-                    margin-left: -17px;
-                }
             }
         }
     }

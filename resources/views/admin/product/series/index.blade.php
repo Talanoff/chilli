@@ -3,12 +3,21 @@
 @section('content')
 
     <section class="content">
-        <h1 class="mb-5 h2 d-flex align-items-center">
+        <h1 class="mb-4 h2 d-flex align-items-center">
             Модели
             <a href="{{ route('admin.product.series.create') }}" class="btn btn-secondary ml-3">
                 Создать модель
             </a>
         </h1>
+
+        <div class="mb-4 d-flex flex-wrap justify-content-center">
+            @foreach($brands as $brand)
+                <a href="{{ route('admin.product.series.index', ['brand' => $brand->id]) }}"
+                   class="btn btn-dark mx-1 my-1">
+                    <img src="{{ $brand->getFirstMediaUrl('brand') }}" style="height: 20px;" alt="">
+                </a>
+            @endforeach
+        </div>
 
         <div class="row">
             @forelse($series as $item)
@@ -20,14 +29,6 @@
                                     <a href="{{ route('admin.product.series.edit', $item) }}"
                                        class="link-underline link">{{ $item->title }}</a>
                                 </h4>
-
-                                <p class="mb-0 d-flex align-items-center">
-                                    <strong>Бренд:</strong>
-                                    <a href="{{ route('admin.product.series.index', ['brand' => $item->brand->id]) }}" class="ml-2">
-                                        <img src="{{ $item->brand->getFirstMediaUrl('brand') }}"
-                                             style="max-height: 24px; max-width: 100px;">
-                                    </a>
-                                </p>
                             </div>
 
                             <div class="col-auto text-right">
@@ -49,6 +50,26 @@
                                       id="delete-form-{{ $item->id }}" method="post" style="display: none;">
                                     @csrf
                                     @method('delete')
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <div class="flex-shrink-0">
+                                Бренд:
+                                <a href="{{ route('admin.product.series.index', ['brand' => $item->brand->id]) }}"
+                                   class="ml-2 font-weight-bold">
+                                    {{ $item->brand->title }}
+                                </a>
+                            </div>
+
+                            <div class="d-flex align-items-center ml-auto">
+                                Порядок:
+                                <form action="{{ route('admin.product.series.update', $item) }}" class="ml-2" method="post">
+                                    @csrf
+                                    @method('patch')
+                                    <input type="number" name="order" class="form-control d-inline-flex"
+                                           onchange="this.parentElement.submit()" value="{{ old('order') ?? $item->order }}" style="width: 100px;">
                                 </form>
                             </div>
                         </div>

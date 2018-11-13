@@ -1,6 +1,6 @@
 import IMask from "imask";
 
-const phone = document.querySelector('[name="phone"]');
+const phone = document.querySelector('[type="tel"]');
 if (!!phone) {
     phone.addEventListener('focus', (e) => {
         if (e.target.value === '')

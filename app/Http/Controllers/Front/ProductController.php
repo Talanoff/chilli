@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
-use App\Http\Requests\FastBuyRequest;
-use App\Mail\FastBuy;
 use App\Models\Meta\Meta;
 use App\Models\Product\Brand;
 use App\Models\Product\Category;
@@ -16,7 +14,6 @@ use App\Models\User\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class ProductController extends Controller
@@ -46,7 +43,7 @@ class ProductController extends Controller
         $title = 'Акции';
         $latest = null;
 
-        $products = Product::whereInStock(true)->where('id', '!=' ,optional($latest)->id);
+        $products = Product::whereInStock(true)->where('id', '!=', optional($latest)->id);
 
         list($latest, $products, $series) = $this->filters($request, $products);
 
@@ -180,6 +177,7 @@ class ProductController extends Controller
     public static function handleViewedProducts()
     {
         $viewed = [];
+
         if (session()->has('viewed')) {
             $items = array_reverse(session()->get('viewed'));
 
@@ -187,18 +185,8 @@ class ProductController extends Controller
                              ->whereIn('id', array_slice($items, 0, 4))
                              ->take(4)->get();
         }
+
         return $viewed;
-    }
-
-    /**
-     * @param FastBuyRequest $request
-     * @param Product $product
-     */
-    public function fastBuy(FastBuyRequest $request, Product $product)
-    {
-        $user = Auth::check() ? Auth::user()->toArray() : $request->only('name', 'email', 'phone');
-
-        Mail::to(env('ADMIN_EMAIL'))->send(new FastBuy($product, $user));
     }
 
     /**

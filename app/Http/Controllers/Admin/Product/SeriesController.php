@@ -17,14 +17,15 @@ class SeriesController extends Controller
      */
     public function index(Request $request)
     {
-        $series = Series::with('brand');
+        $series = Series::with('brand')->latest('order');
 
         if ($request->filled('brand')) {
             $series = $series->where('brand_id', $request->get('brand'));
         }
 
         return \view('admin.product.series.index', [
-            'series' => $series->paginate(40)
+            'series' => $series->paginate(40),
+            'brands' => Brand::latest()->get(),
         ]);
     }
 
@@ -45,7 +46,7 @@ class SeriesController extends Controller
     public function create()
     {
         return \view('admin.product.series.create', [
-            'brands' => Brand::get()
+            'brands' => Brand::get(),
         ]);
     }
 
@@ -60,7 +61,7 @@ class SeriesController extends Controller
         $series = Series::create($request->only('title', 'brand_id'));
 
         return \redirect()->route('admin.product.series.edit', $series)
-            ->with('success', 'Модель успешно добавлена.');
+                          ->with('success', 'Модель успешно добавлена.');
     }
 
     /**
@@ -73,7 +74,7 @@ class SeriesController extends Controller
     {
         return \view('admin.product.series.edit', [
             'brands' => Brand::get(),
-            'series' => $series
+            'series' => $series,
         ]);
     }
 
@@ -86,7 +87,7 @@ class SeriesController extends Controller
      */
     public function update(Request $request, Series $series)
     {
-        $series->update($request->only('title', 'brand_id'));
+        $series->update($request->only('title', 'brand_id', 'order'));
 
         return \redirect()->route('admin.product.series.edit', $series)
                           ->with('success', 'Модель успешно обновлена.');

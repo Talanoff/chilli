@@ -71,6 +71,9 @@ const app = new Vue({
         // Phone mask
         require('./modules/phone-mask');
 
+        // Models filter
+        require('./modules/models');
+
         // LazyLoad
         const observer = lozad();
         observer.observe();

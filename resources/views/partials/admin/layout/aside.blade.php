@@ -22,7 +22,7 @@
                             class="submenu text-left collapse list-unstyled mb-0{{ app('router')->currentRouteNamed($item['compare']) ? ' show' : ''}}"
                             aria-labelledby="submenu-heading-{{ $loop->iteration }}" data-parent="#app-aside">
                             @foreach($item['submenu'] as $submenu)
-                                <li class="submenu-item">
+                                <li class="submenu-item {{ app('router')->currentRouteNamed('') }}">
                                     <a href="{!! route($submenu['route']) !!}">
                                         {{ $submenu['name'] }}
                                     </a>

@@ -16,11 +16,11 @@ class FastBuy extends Mailable
     /**
      * @var array
      */
-    private $user;
+    public $user;
     /**
      * @var Product
      */
-    private $product;
+    public $product;
 
     /**
      * Create a new message instance.
@@ -30,7 +30,7 @@ class FastBuy extends Mailable
      */
     public function __construct(Product $product, $user)
     {
-        $this->user = $user;
+        $this->user = new User($user);
         $this->product = $product;
     }
 

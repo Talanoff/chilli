@@ -21,15 +21,33 @@
                                                      class="models-menu__brand">
                                             </a>
                                         </div>
-                                        <ul>
-                                            @foreach($submenu['models']['series'] as $model)
-                                                <li>
-                                                    <a href="{{ build_filter_url(['brand' => $submenu['brand'], 'model' => $model['model']], 'app.product.index') }}">
-                                                        {{ $model['name'] }}
-                                                    </a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
+
+                                        @if (!empty($submenu['models']['series']))
+                                            <div class="row smaller">
+                                                @foreach($submenu['models']['series'] as $models)
+                                                    @if ($loop->index === 3)
+                                                        <div class="my-3">
+                                                            <button class="btn btn-primary">
+                                                                Показать больше моделей
+                                                            </button>
+                                                        </div>
+                                                    @endif
+
+                                                    <div
+                                                        class="column w-md-1/2{{ count($submenu['models']['series']) > 2 ? ' w-lg-1/3' : '' }}{{ $loop->index > 2 ? ' extra-models' : '' }}">
+                                                        <ul class="unstyled">
+                                                            @foreach($models as $model)
+                                                                <li>
+                                                                    <a href="{{ build_filter_url(['brand' => $submenu['brand'], 'model' => $model->slug], 'app.product.index') }}">
+                                                                        {{ $model->title }}
+                                                                    </a>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        @endif
                                     </div>
                                 @endif
                             </li>

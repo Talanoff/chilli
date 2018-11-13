@@ -31,24 +31,18 @@ class RouteServiceProvider extends ServiceProvider
         View::composer(['app.*', 'auth.*'], function () {
             $submenu = [];
 
-            foreach (Brand::has('products')->get() as $brand) {
+            foreach (Brand::has('products')->orderBy('order')->get() as $brand) {
                 $item = [
                     'name' => $brand->title,
                     'brand' => $brand->slug,
                 ];
 
-                $series = $brand->series()->has('products')->get();
+                $series = $brand->series()->has('products')->orderBy('order')->get();
 
                 if ($series->count()) {
                     $item['models'] = [];
-                    $item['models']['series'] = [];
                     $item['models']['brand'] = $brand->getFirstMediaUrl('brand');
-                    foreach ($series as $serie) {
-                        array_push($item['models']['series'], [
-                            'model' => $serie->slug,
-                            'name' => $serie->title,
-                        ]);
-                    }
+                    $item['models']['series'] = $series->chunk(15)->all();
                 }
 
                 array_push($submenu, $item);

@@ -17,19 +17,19 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <input type="email" name="email" class="form-control"
-                                   placeholder="E-mail" value="{{ old('email') }}" required>
-                            <div class="small text-danger">
-                                {{ $errors->has('email') ? $errors->get('email')[0] : '' }}
-                            </div>
-                        </div>
-
                         <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
                             <input type="tel" name="phone" class="form-control"
                                    placeholder="Телефон" value="{{ old('phone') }}" required>
                             <div class="small text-danger">
                                 {{ $errors->has('phone') ? $errors->get('phone')[0] : '' }}
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <input type="email" name="email" class="form-control"
+                                   placeholder="E-mail (не обязательно)" value="{{ old('email') }}">
+                            <div class="small text-danger">
+                                {{ $errors->has('email') ? $errors->get('email')[0] : '' }}
                             </div>
                         </div>
                     @else

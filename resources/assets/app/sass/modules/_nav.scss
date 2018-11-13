@@ -33,14 +33,16 @@
     }
 
     ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        columns: 3 auto;
-
         li {
             padding: 5px 0;
             line-height: 1.15;
+        }
+    }
+
+    .extra-models {
+        display: none;
+        &.is-visible {
+            display: block;
         }
     }
 }

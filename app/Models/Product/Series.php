@@ -15,6 +15,7 @@ class Series extends Model
         'slug',
         'title',
         'brand_id',
+        'order',
     ];
 
     /**

@@ -13,9 +13,9 @@
         <div class="row">
             @forelse($brands as $brand)
                 <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="item">
+                    <div class="item bg-dark">
                         <div class="item-header">
-                            <div>
+                            <div class="text-white">
                                 <a href="{{ route('admin.product.brand.edit', $brand) }}"
                                    class="d-flex align-items-center justify-content-center mx-auto mb-3" style=",max-width: 200px; height: 200px;">
                                     @if($brand->getFirstMediaUrl('brand'))
@@ -28,6 +28,15 @@
                             </div>
 
                             <div class="text-center">
+                                <div class="mb-2 mx-auto">
+                                    <form action="{{ route('admin.product.brand.update', $brand) }}" method="post">
+                                        @csrf
+                                        @method('patch')
+                                        <input type="number" name="order" class="form-control d-inline-flex"
+                                            onchange="this.parentElement.submit()" value="{{ old('order') ?? $brand->order }}" style="width: 100px;">
+                                    </form>
+                                </div>
+
                                 <a href="{{ route('admin.product.brand.edit', $brand) }}"
                                    class="btn btn-warning btn-sm">
                                     <svg width="23" height="23">

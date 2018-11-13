@@ -34,7 +34,10 @@ class ProductController extends Controller
 
         if ($request->filled('search')) {
             $products = Product::where('id', ltrim($request->get('search'), '0'))
-                               ->orWhere('title', 'like', '%' . $request->get('search') . '%');
+                               ->orWhere('title', 'like', '%' . $request->get('search') . '%')
+                               ->orWhereHas('brand', function ($q) use ($request) {
+                                   $q->where('title', 'like', '%' . $request->get('search') . '%');
+                               });
         }
 
         return \view('admin.product.index', [

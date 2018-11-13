@@ -65,7 +65,7 @@ class BrandController extends Controller
      */
     public function update(Request $request, Brand $brand): RedirectResponse
     {
-        $brand->update($request->only('title'));
+        $brand->update($request->only('title', 'order'));
 
         if ($request->hasFile('image')) {
             $brand->clearMediaCollection('brand');

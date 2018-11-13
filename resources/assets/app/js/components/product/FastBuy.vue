@@ -5,7 +5,7 @@
             Быстрая покупка
         </button>
 
-        <modal v-if="showModal" @close="showModal = false">
+        <modal v-if="showModal" @close="showModal = false" max-width="480px">
             <slot></slot>
         </modal>
     </div>

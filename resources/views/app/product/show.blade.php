@@ -77,7 +77,7 @@
                 <div class="column w-xxl-1/2 flex mt-xl-3">
                     @if ($product->quantity)
                         <fast-buy opened="{{ count($errors) }}">
-                            <form action="{{ route('app.product.fast-buy', $product) }}" method="post">
+                            <form action="{{ route('app.fast-buy.send', $product) }}" method="post">
                                 @csrf
 
                                 @guest
@@ -111,9 +111,9 @@
 
                                     <p>Вы авторизированы, как {{ auth()->user()->name }}. Для оформления заказа будут
                                         использованы Ваши контактные данные.</p>
-
-                                    <button class="btn btn-secondary">Продолжить</button>
                                 @endguest
+
+                                <button class="btn btn-secondary">Продолжить</button>
                             </form>
                         </fast-buy>
 

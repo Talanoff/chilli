@@ -25,8 +25,8 @@ class Order extends Model
     ];
 
     public static $PAYMENT = [
-        'receipt' => 'Оплата при получении',
-        'transfer' => 'Оплата на карту',
+        'receipt' => 'Наложенный платеж',
+        'transfer' => 'Оплата на карту Приватбанка',
     ];
 
     protected $fillable = [

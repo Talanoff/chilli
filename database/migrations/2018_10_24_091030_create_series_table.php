@@ -18,6 +18,7 @@ class CreateSeriesTable extends Migration
             $table->unsignedInteger('brand_id');
             $table->string('slug');
             $table->string('title');
+            $table->integer('order')->default(1);
             $table->timestamps();
         });
     }
