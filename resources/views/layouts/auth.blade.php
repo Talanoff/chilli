@@ -10,6 +10,8 @@
     <title>{{ config('app.name', 'Chilli') . (isset($app_title) ? ' | ' . $app_title : '') }}</title>
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    @include('partials.app.layout.icons')
 </head>
 <body>
 <div id="app">

@@ -20,3 +20,5 @@
     <meta property="og:image:width" content="279">
     <meta property="og:image:height" content="279">
     <meta property="og:url" content="{{ url()->current() }}">
+
+    <link rel="canonical" href="{{ url()->current() }}"/>
