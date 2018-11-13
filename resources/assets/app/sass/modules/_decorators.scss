@@ -18,4 +18,12 @@
             right: 0;
         }
     }
+
+    &--left {
+        padding-left: 45px;
+
+        &::after {
+            left: 0;
+        }
+    }
 }
