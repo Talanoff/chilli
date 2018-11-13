@@ -50,9 +50,9 @@
 
             @if ($loop->index === 1)
                 <div class="is-medium">
-            @endif
+                    @endif
 
-            @if ($loop->index === 3)
+                    @if ($loop->index === 3)
                 </div><!-- 2/3 close -->
 
                 <div class="product-item-wrapper is-large">
@@ -102,38 +102,32 @@
 
     <section class="about flex py-8">
         <div class="w-md-1/2 pr-8">
-            <h3 class="text-uppercase text-white">
-                <span class="decorator decorator--right">
-                    {{ $settings['about'][0]->name }}
-                </span>
+            <h3 class="text-uppercase text-white decorator decorator--right">
+                {{ $settings['about'][0]->name }}
             </h3>
 
             <p class="mb-0">{!! nl2br($settings['about'][0]->value) !!}</p>
 
-            <h3 class="text-uppercase text-white mt-10">
-                <span class="decorator decorator--right">
-                    {{ $settings['mission'][0]->name }}
-                </span>
+            <h3 class="text-uppercase text-white mt-10 decorator decorator--right">
+                {{ $settings['mission'][0]->name }}
             </h3>
 
             <p class="mb-0">{!! nl2br($settings['mission'][0]->value) !!}</p>
         </div>
 
         @if (count($settings['advantages']))
-        <div class="w-md-1/2">
-            <div class="row">
-                @foreach($settings['advantages'] as $advantage)
-                <div class="column w-md-1/2">
-                    <h4>
-                        <span class="decorator decorator--left">
-                            {{ $advantage['name'] }}
-                        </span>
-                    </h4>
-                    <p>{{ $advantage['value'] }}</p>
+            <div class="w-md-1/2">
+                <div class="row">
+                    @foreach($settings['advantages'] as $advantage)
+                        <div class="column w-md-1/2">
+                            <h4 class="decorator decorator--left">
+                                {{ $advantage['name'] }}
+                            </h4>
+                            <p>{{ $advantage['value'] }}</p>
+                        </div>
+                    @endforeach
                 </div>
-                @endforeach
             </div>
-        </div>
         @endif
     </section>
 
