@@ -22,15 +22,23 @@ class FastBuyController extends Controller
 
         Mail::send(new FastBuy($product, $user));
 
+        session()->put('product', $product->getKey());
+
         return redirect()->route('app.fast-buy.details', $product);
     }
 
     /**
-     * @param Product $product
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function details(Product $product)
+    public function details()
     {
+        if (!session()->get('product')) {
+            return redirect()->route('app.home');
+        }
+
+        $product = Product::find(session()->get('product'));
+        session()->forget('product');
+
         return \view('app.cart.fast-buy', compact('product'));
     }
 }
