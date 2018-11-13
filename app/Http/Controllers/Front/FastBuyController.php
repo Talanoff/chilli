@@ -24,7 +24,7 @@ class FastBuyController extends Controller
 
         session()->put('product', $product->getKey());
 
-        return redirect()->route('app.fast-buy.details', $product);
+        return redirect()->route('app.fast-buy.details');
     }
 
     /**
