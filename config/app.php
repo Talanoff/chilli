@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'email' => env('ADMIN_EMAIL', 'info@chilli.com.ua'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
