@@ -20,7 +20,7 @@ class FastBuyController extends Controller
     {
         $user = Auth::check() ? Auth::user()->toArray() : $request->only('name', 'email', 'phone');
 
-        Mail::to(env('ADMIN_EMAIL'))->send(new FastBuy($product, $user));
+        Mail::to(config('app.email'))->send(new FastBuy($product, $user));
 
         return redirect()->route('app.fast-buy.details', $product);
     }
