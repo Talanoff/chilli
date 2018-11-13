@@ -124,10 +124,8 @@
                 <div class="row">
                     @foreach($settings['advantages'] as $advantage)
                         <div class="column w-md-1/2">
-                            <h4>
-                                <span class="decorator decorator--right">
+                            <h4 class="text-white">
                                 {{ $advantage['name'] }}
-                                </span>
                             </h4>
                             <p>{{ $advantage['value'] }}</p>
                         </div>
