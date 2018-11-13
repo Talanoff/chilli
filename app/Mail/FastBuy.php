@@ -5,10 +5,8 @@ namespace App\Mail;
 use App\Models\Product\Product;
 use App\Models\User\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Http\Request;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class FastBuy extends Mailable
 {
@@ -41,7 +39,9 @@ class FastBuy extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.fast-buy')
-            ->subject('Быстрый заказ');
+        return $this
+            ->to(config('app.email'))
+            ->subject('Быстрый заказ')
+            ->view('mail.fast-buy');
     }
 }
