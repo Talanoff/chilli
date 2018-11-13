@@ -102,14 +102,18 @@
 
     <section class="about flex py-8">
         <div class="w-md-1/2 pr-8">
-            <h3 class="text-uppercase text-white decorator decorator--right">
-                {{ $settings['about'][0]->name }}
+            <h3 class="text-uppercase text-white">
+                <span class="decorator decorator--right">
+                    {{ $settings['about'][0]->name }}
+                </span>
             </h3>
 
             <p class="mb-0">{!! nl2br($settings['about'][0]->value) !!}</p>
 
-            <h3 class="text-uppercase text-white mt-10 decorator decorator--right">
-                {{ $settings['mission'][0]->name }}
+            <h3 class="text-uppercase text-white mt-10">
+                <span class="decorator decorator--right">
+                    {{ $settings['mission'][0]->name }}
+                </span>
             </h3>
 
             <p class="mb-0">{!! nl2br($settings['mission'][0]->value) !!}</p>
