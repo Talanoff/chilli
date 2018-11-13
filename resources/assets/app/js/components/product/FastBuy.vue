@@ -5,7 +5,7 @@
             Быстрая покупка
         </button>
 
-        <modal v-if="showModal" @close="showModal = false" max-width="480px">
+        <modal :style="styles" @close="showModal = false" max-width="480px">
             <slot></slot>
         </modal>
     </div>
@@ -24,6 +24,17 @@
         data() {
             return {
                 showModal: +this.opened
+            }
+        },
+        computed: {
+            styles() {
+                if (!this.showModal) {
+                    return {
+                        opacity: 0,
+                        visibility: 'hidden',
+                        pointerEvents: 'none'
+                    }
+                }
             }
         }
     }

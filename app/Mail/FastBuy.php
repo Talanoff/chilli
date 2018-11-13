@@ -32,6 +32,8 @@ class FastBuy extends Mailable
     {
         $this->user = new User($user);
         $this->product = $product;
+
+        dd($this->user, $this->product);
     }
 
     /**
