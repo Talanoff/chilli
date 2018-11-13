@@ -40,8 +40,6 @@ class FastBuy extends Mailable
     public function build()
     {
         return $this
-//            ->to(config('app.email'))
-            ->to('talanov.o@gmail.com')
             ->subject('Быстрый заказ')
             ->view('mail.fast-buy');
     }
