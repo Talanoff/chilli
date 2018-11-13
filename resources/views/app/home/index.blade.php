@@ -100,8 +100,8 @@
         </section>
     @endif
 
-    <section class="about flex">
-        <div class="w-md-1/2 py-8 pr-8">
+    <section class="about flex py-8">
+        <div class="w-md-1/2 pr-8">
             <h3 class="text-uppercase text-white">
                 <span class="decorator decorator--right">
                     {{ $settings['about'][0]->name }}
@@ -124,7 +124,11 @@
             <div class="row">
                 @foreach($settings['advantages'] as $advantage)
                 <div class="column w-md-1/2">
-                    <h4>{{ $advantage['name'] }}</h4>
+                    <h4>
+                        <span class="decorator decorator--left">
+                            {{ $advantage['name'] }}
+                        </span>
+                    </h4>
                     <p>{{ $advantage['value'] }}</p>
                 </div>
                 @endforeach
