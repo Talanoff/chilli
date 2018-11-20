@@ -41,15 +41,15 @@
                 </div>
             @endif
 
-            @if ($product->review()->count())
-                <svg width="24" height="24" class="product-item__video">
-                    <use xlink:href="#video"></use>
-                </svg>
-            @endif
-
             <add-to-cart-button
                 class="btn-secondary"
                 action="{{ route('app.cart.add', $product) }}"></add-to-cart-button>
         </div>
+
+        @if ($product->review()->count())
+            <svg width="24" height="24" class="product-item__video">
+                <use xlink:href="#video"></use>
+            </svg>
+        @endif
     </a>
 </div>
