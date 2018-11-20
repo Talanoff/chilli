@@ -296,6 +296,7 @@ class ProductController extends Controller
             'products' => $products->orderByRaw("FIELD(tag , 'absolute_hit') DESC")
                                    ->orderByRaw("FIELD(tag , 'special_offer') DESC")
                                    ->orderByRaw("FIELD(tag , 'newest') DESC")
+                                   ->orderByDesc('price')
                                    ->paginate(12),
             'latest' => $latest,
             'title' => $title,
