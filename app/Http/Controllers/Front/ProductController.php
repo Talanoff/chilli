@@ -28,7 +28,7 @@ class ProductController extends Controller
         $title = 'Каталог';
         $latest = null;
 
-        list($latest, $products, $series) = $this->filters($request, Product::latest());
+        list($latest, $products, $series) = $this->filters($request, Product::orderByRaw("FIELD(tag , 'absolute_hit') DESC")->orderByRaw("FIELD(tag , 'special_offer') DESC")->orderByRaw("FIELD(tag , 'newest') DESC")->orderByDesc('price')->latest());
 
         return \view('app.product.index', $this->indexViewData($products, $latest, $title, $series));
     }
@@ -293,11 +293,7 @@ class ProductController extends Controller
     private function indexViewData($products, $latest, $title, $series): array
     {
         return [
-            'products' => $products->orderByRaw("FIELD(tag , 'absolute_hit') DESC")
-                                   ->orderByRaw("FIELD(tag , 'special_offer') DESC")
-                                   ->orderByRaw("FIELD(tag , 'newest') DESC")
-                                   ->orderByDesc('price')
-                                   ->paginate(12),
+            'products' => $products->paginate(12),
             'latest' => $latest,
             'title' => $title,
             'viewed' => $this::handleViewedProducts(),
