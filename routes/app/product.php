@@ -11,9 +11,10 @@ Route::post('fast-buy/{product}', 'FastBuyController@send')->name('.fast-buy.sen
 
 Route::group([
     'as' => '.product',
-    'prefix' => 'product',
+    'prefix' => 'products',
 ], function () {
 
+    Route::get('{brand}/models', 'ProductController@models')->name('.models');
     Route::post('search', 'ProductController@search')->name('.search');
     Route::post('{product}/comment', 'ProductController@comment')->name('.comment');
     Route::post('{product}/rate', 'ProductController@rate')->name('.rate');

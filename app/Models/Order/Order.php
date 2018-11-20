@@ -25,7 +25,7 @@ class Order extends Model
     ];
 
     public static $PAYMENT = [
-        'receipt' => 'Наложенный платеж',
+        'receipt' => 'Наложенный платёж (оплата при получении)',
         'transfer' => 'Оплата на карту Приватбанка',
     ];
 

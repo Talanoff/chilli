@@ -10,7 +10,7 @@
                     <ul class="submenu">
                         @foreach($item['submenu'] as $submenu)
                             <li class="{{ !empty($submenu['models']) ? 'has-submenu' : '' }}">
-                                <a href="{{ build_filter_url(['brand' => $submenu['brand'], 'model' => 'any'], 'app.product.index') }}">
+                                <a href="{{ route('app.product.models', $submenu['brand']) }}">
                                     {{ $submenu['name'] }}
                                 </a>
                                 @if (!empty($submenu['models']))

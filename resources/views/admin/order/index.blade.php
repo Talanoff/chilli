@@ -4,9 +4,23 @@
 
     <section class="content">
 
-        <h1 class="mb-5 h2 d-flex align-items-center">
-            Заказы
-        </h1>
+        <div class="mb-5 d-lg-flex align-items-center">
+            <h1 class="h2 mb-0">Заказы</h1>
+
+            <form method="post" action="{{ route('admin.order.search') }}"
+                  class="ml-lg-5 flex-grow-1">
+                @csrf
+                <div class="d-flex">
+                    <div class="flex-grow-1 mr-2">
+                        <input type="search" name="search" placeholder="№ заказа или имя пользователя"
+                               class="form-control" value="{{ $search ?? '' }}">
+                    </div>
+                    <div>
+                        <button class="btn btn-secondary">Найти</button>
+                    </div>
+                </div>
+            </form>
+        </div>
 
         @forelse($orders as $order)
             <div class="item">
@@ -35,7 +49,7 @@
                         <h3 class="font-weight-bold">{{ $order->amount }} грн</h3>
                         <p>
                             <span
-                                class="rounded px-2 py-1 bg-{{ $order->status !== 'declined' ? 'warning' : ($order->status === 'finished' ? 'success' : 'danger') }}">
+                                class="rounded px-2 py-1 bg-{{ $order->status === 'declined' ? 'danger' : ($order->status === 'finished' ? 'success' : 'warning') }}">
                             {{ App\Models\Order\Order::$STATUSES[$order->status] }}
                             </span>
                         </p>
@@ -43,7 +57,11 @@
                 </div>
             </div>
         @empty
-            <em>Заказов пока нет... <strong>Работаем усердней!</strong></em>
+            @if (!$search)
+                <em>Заказов пока нет... <strong>Работаем усердней!</strong></em>
+            @else
+                <em>Такого заказа не найдено.</em>
+            @endif
         @endforelse
 
     </section>

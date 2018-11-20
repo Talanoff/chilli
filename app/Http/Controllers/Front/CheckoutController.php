@@ -47,8 +47,8 @@ class CheckoutController extends Controller
             $password = str_random(8);
 
             $user = User::query()->create([
-                'name' => $request->get('name'),
-                'email' => $request->get('email'),
+                'name' => $request->input('name'),
+                'email' => $request->get('email', $password . '@chilli.com.ua'),
                 'phone' => str_replace([' ', '(', ')', '-'], '', $request->get('phone')),
                 'password' => bcrypt($password),
                 'role_id' => 2,

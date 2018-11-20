@@ -1,3 +1,5 @@
+$text-shadow: 0 1px 1px #fff, 0 1px 4px #fff, 0 2px 8px rgba(#fff, 0.4);
+
 .products {
     margin: 1px -1px;
 
@@ -81,12 +83,6 @@
         left: 20px;
         right: 20px;
         top: 20px;
-
-        @media (min-width: map_get($grid-breakpoints, lg)) {
-            left: 30px;
-            right: 30px;
-            top: 30px;
-        }
     }
 
     &__tag {
@@ -102,6 +98,7 @@
         position: relative;
         color: $product-text-color;
         line-height: 1;
+        text-shadow: $text-shadow;
 
         &::before {
             position: absolute;
@@ -114,7 +111,9 @@
         }
     }
 
-    &__title {
+    &__title,
+    &__subtitle {
+        text-shadow: $text-shadow;
         a {
             color: inherit;
         }
@@ -170,14 +169,6 @@
         justify-content: flex-end;
         align-items: flex-start;
         height: 100%;
-
-        //@media (min-width: map_get($grid-breakpoints, lg)) {
-        //    padding: rem-calc(60);
-        //}
-
-        //@media (min-width: map_get($grid-breakpoints, xxl)) {
-        //    padding: rem-calc(80);
-        //}
     }
 
     &--leaders {

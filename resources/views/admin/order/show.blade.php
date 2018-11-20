@@ -10,7 +10,7 @@
 
         <p>
             <span
-                class="rounded px-2 py-1 bg-{{ $order->status !== 'declined' ? 'warning' : ($order->status === 'finished' ? 'success' : 'danger') }}">
+                class="rounded px-2 py-1 bg-{{ $order->status === 'declined' ? 'danger' : ($order->status === 'finished' ? 'success' : 'warning') }}">
             {{ App\Models\Order\Order::$STATUSES[$order->status] }}
             </span>
         </p>
@@ -143,7 +143,7 @@
 
                 <select name="status" id="status" class="form-control mr-2">
                     @foreach(App\Models\Order\Order::$STATUSES as $key => $status)
-                        <option value="{{ $key }}" {{ $key === $order->$status ? 'selected' : '' }}>
+                        <option value="{{ $key }}" {{ $key === $order->status ? 'selected' : '' }}>
                             {{ $status }}
                         </option>
                     @endforeach

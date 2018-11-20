@@ -8,9 +8,9 @@
             <use xlink:href="#cart"></use>
         </svg>
 
-        <div class="cart-mask" v-if="cartVisible" @click="cartVisible = false"></div>
+        <div class="cart-mask" v-show="cartVisible" @click="cartVisible = false"></div>
 
-        <div class="cart-entry" v-if="cartVisible" ref="cart">
+        <div class="cart-entry" v-show="cartVisible" ref="cart">
             <div class="cart-entry-header p-4 px-md-8 py-md-6" v-if="cart.length">
                 <div class="row flex-no-wrap align-center">
                     <div class="column-auto text-uppercase">
@@ -72,7 +72,7 @@
 </template>
 
 <script>
-    import AppCartItem from './AppCartItem'
+    import AppCartItem from './AppCartItem';
 
     export default {
         components: {
@@ -95,19 +95,9 @@
             }
         },
         mounted() {
-            VBUS.$on('openCart', () => {
-                this.cartVisible = true;
-            });
-
-            document.addEventListener('keyup', (e) => {
-                if (e.keyCode === 27) {
-                    this.cartVisible = false;
-                }
-            });
-
-            document.addEventListener('scroll', (e) => {
+            const cart = this.$refs.cart;
+            const cartPosition = () => {
                 if (this.cartVisible) {
-                    const cart = this.$refs.cart;
                     if (window.pageYOffset > 40) {
                         cart.style.marginTop = window.pageYOffset - 40 + 'px';
                         cart.classList.add('is-fixed');
@@ -116,7 +106,20 @@
                         cart.classList.remove('is-fixed');
                     }
                 }
-            })
+            };
+
+            VBUS.$on('openCart', () => {
+                this.cartVisible = true;
+                cartPosition();
+            });
+
+            document.addEventListener('keyup', (e) => {
+                if (e.keyCode === 27) {
+                    this.cartVisible = false;
+                }
+            });
+
+            document.addEventListener('scroll', cartPosition)
         }
     }
 </script>

@@ -172,6 +172,17 @@ class ProductController extends Controller
     }
 
     /**
+     * @param Brand $brand
+     * @return View
+     */
+    public function models(Brand $brand): View
+    {
+        $models = $brand->series()->has('products')->orderBy('order')->get()->chunk(15);
+
+        return \view('app.product.models', compact('models', 'brand'));
+    }
+
+    /**
      * @return array|\Illuminate\Support\Collection
      */
     public static function handleViewedProducts()

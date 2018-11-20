@@ -4,19 +4,18 @@
             <div class="row no-gutters align-center">
                 <div class="column-auto">
                     <a :href="item.product.url" class="cart-entry-item__thumbnail">
-                        <img :src="item.product.thumbnail"
-                             :alt="item.product.title">
+                        <img :src="item.product.thumbnail" alt="">
                     </a>
                 </div>
 
                 <div class="column pl-4">
                     <div class="flex flex-no-wrap align-center">
                         <div class="flex-1">
-                            <h4 class="text-uppercase mb-1 text-normal">
+                            <h5 class="text-uppercase mb-1 text-normal">
                                 <a :href="item.product.url">
                                     {{ item.product.title }}
                                 </a>
-                            </h4>
+                            </h5>
                             <p class="mb-0 text-muted smaller text-uppercase">
                                 Артикул № {{ item.product.sku }}
                             </p>
@@ -46,16 +45,16 @@
                 <div class="column pl-4">
                     <div class="flex flex-no-wrap align-center">
                         <div :style="{flex: `1 1 auto`}">
-                            <h4 class="text-uppercase mb-1 text-normal">
+                            <h6 class="text-uppercase mb-1 text-normal">
                                 <a :href="item.kit.product.url">
                                     {{ item.kit.product.title }}
                                 </a>
-                            </h4>
-                            <h4 class="text-uppercase mb-1 text-normal">
+                            </h6>
+                            <h6 class="text-uppercase mb-1 text-normal">
                                 <a :href="item.kit.related.url">
                                     {{ item.kit.related.title }}
                                 </a>
-                            </h4>
+                            </h6>
                             <p class="mb-0 text-muted smaller text-uppercase">
                                 Набор № {{ item.kit.sku }}
                             </p>

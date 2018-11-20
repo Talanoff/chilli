@@ -80,7 +80,8 @@
         },
         methods: {
             add(id) {
-                this.$store.dispatch('addKitToCart', id)
+                this.$store.dispatch('addKitToCart', id);
+                VBUS.$emit('openCart');
             },
             nextItem() {
                 if (this.current !== this.items.length - 1) {

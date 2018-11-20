@@ -15,7 +15,7 @@
             </h6>
 
             @if ($product->subtitle)
-                <div class="small text-muted text-uppercase">{{ $product->subtitle }}</div>
+                <div class="product-item__subtitle small text-muted text-uppercase">{{ $product->subtitle }}</div>
             @endif
 
             @if ($product->tag)

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\FastBuyRequest;
 use App\Mail\FastBuy;
 use App\Models\Product\Product;
+use App\Models\User\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -18,7 +19,7 @@ class FastBuyController extends Controller
      */
     public function send(FastBuyRequest $request, Product $product)
     {
-        $user = Auth::check() ? Auth::user()->toArray() : $request->only('name', 'email', 'phone');
+        $user = Auth::check() ? Auth::user() : new User($request->only('name', 'email', 'phone'));
 
         Mail::send(new FastBuy($product, $user));
 

@@ -24,11 +24,11 @@ class FastBuy extends Mailable
      * Create a new message instance.
      *
      * @param Product $product
-     * @param array $user
+     * @param User $user
      */
-    public function __construct(Product $product, $user)
+    public function __construct(Product $product, User $user)
     {
-        $this->user = new User($user);
+        $this->user = $user;
         $this->product = $product;
     }
 

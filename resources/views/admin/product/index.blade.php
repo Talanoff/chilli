@@ -62,8 +62,16 @@
                         </ul>
                     </div>
 
+                    @if($product->review()->count())
+                        <div class="col-auto px-3">
+                            <svg width="40" height="40">
+                                <use xlink:href="#video"></use>
+                            </svg>
+                        </div>
+                    @endif
+
                     @if ($product->in_stock)
-                        <div class="col ml-auto">
+                        <div class="col-auto ml-auto px-3">
                             <div><span class="bg-success text-white rounded px-2 py-1">Акционный</span></div>
                             <div>Скидка в <strong>{{ $product->discount ?? 0 }}%</strong></div>
                         </div>

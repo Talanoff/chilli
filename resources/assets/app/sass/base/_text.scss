@@ -38,6 +38,10 @@ $colors: white #fff, primary $primary, danger $danger, secondary $secondary, dar
     .text-#{$name} {
         color: #{$color} !important;
     }
+
+    .text\:hover-#{$name}:hover {
+        color: #{$color} !important;
+    }
 }
 
 .text-muted {

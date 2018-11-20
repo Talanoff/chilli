@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class FastBuyRequest extends FormRequest
 {
@@ -23,11 +24,15 @@ class FastBuyRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' => 'required|min:2',
-            'email' => 'required|email',
-            'phone' => 'required|min:12',
-        ];
+        $rules = [];
+        if (!Auth::check()) {
+            $rules = [
+                'name' => 'required|min:2',
+                'email' => 'required|email',
+                'phone' => 'required|min:12',
+            ];
+        }
+        return $rules;
     }
 
     public function messages()
