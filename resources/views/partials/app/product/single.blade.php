@@ -41,7 +41,7 @@
                 </div>
             @endif
 
-            @if ($product->review->count())
+            @if ($product->review()->count())
                 <svg width="24" height="24" class="product-item__video">
                     <use xlink:href="#video"></use>
                 </svg>
