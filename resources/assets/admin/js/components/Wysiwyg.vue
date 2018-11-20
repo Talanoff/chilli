@@ -41,7 +41,7 @@
                             [{'list': 'ordered'}, {'list': 'bullet'}],
                             ['bold', 'italic', 'strike'],
                             [{script: 'sub'}, {script: 'super'}],
-                            ['link'],
+                            ['link', 'clean'],
                         ]
                     },
                     placeholder: 'Описание'
