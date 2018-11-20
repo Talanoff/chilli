@@ -52,10 +52,6 @@ $text-shadow: 0 1px 1px #fff, 0 1px 4px #fff, 0 2px 8px rgba(#fff, 0.4);
     z-index: 10;
     min-height: 280px;
 
-    @media (min-width: map_get($grid-breakpoints, lg)) {
-        padding: rem-calc(30);
-    }
-
     figure {
         @extend %abs;
         margin: 0;
@@ -117,6 +113,12 @@ $text-shadow: 0 1px 1px #fff, 0 1px 4px #fff, 0 2px 8px rgba(#fff, 0.4);
         a {
             color: inherit;
         }
+    }
+
+    &__video {
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
     }
 
     &__stars {

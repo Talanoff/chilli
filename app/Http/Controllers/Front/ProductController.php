@@ -293,7 +293,10 @@ class ProductController extends Controller
     private function indexViewData($products, $latest, $title, $series): array
     {
         return [
-            'products' => $products->paginate(12),
+            'products' => $products->orderByRaw("FIELD(tag , 'absolute_hit') DESC")
+                                   ->orderByRaw("FIELD(tag , 'special_offer') DESC")
+                                   ->orderByRaw("FIELD(tag , 'newest') DESC")
+                                   ->paginate(12),
             'latest' => $latest,
             'title' => $title,
             'viewed' => $this::handleViewedProducts(),
