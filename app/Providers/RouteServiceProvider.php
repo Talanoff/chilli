@@ -76,12 +76,6 @@ class RouteServiceProvider extends ServiceProvider
         View::composer('admin.*', function () {
             $nav = [
                 [
-                    'route' => 'admin.dashboard.index',
-                    'compare' => 'admin.dashboard.*',
-                    'name' => 'Панель',
-                    'icon' => 'dashboard',
-                ],
-                [
                     'route' => 'admin.product.index',
                     'compare' => 'admin.product.*',
                     'name' => 'Товары',
