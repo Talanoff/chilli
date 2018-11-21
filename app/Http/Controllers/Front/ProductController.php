@@ -27,8 +27,13 @@ class ProductController extends Controller
     {
         $title = 'Каталог';
         $latest = null;
+        $products = Product::orderByRaw("FIELD(tag , 'absolute_hit') DESC")
+                           ->orderByRaw("FIELD(tag , 'special_offer') DESC")
+                           ->orderByRaw("FIELD(tag , 'newest') DESC")
+                           ->orderByDesc('price')
+                           ->latest();
 
-        list($latest, $products, $series) = $this->filters($request, Product::orderByRaw("FIELD(tag , 'absolute_hit') DESC")->orderByRaw("FIELD(tag , 'special_offer') DESC")->orderByRaw("FIELD(tag , 'newest') DESC")->orderByDesc('price')->latest());
+        list($latest, $products, $series) = $this->filters($request, $products);
 
         return \view('app.product.index', $this->indexViewData($products, $latest, $title, $series));
     }

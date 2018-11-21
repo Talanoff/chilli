@@ -4,11 +4,11 @@
 
     <section class="checkout-details w-lg-3/4 w-xl-1/2 mx-auto">
         @if($order)
-            <h1 class="h2 text-center mb-0 text-white">Спасибо!</h1>
-            <h4 class="text-center">Ваш заказ принят!</h4>
+            <h1 class="h2 text-center mb-0 text-white">Спасибо за Ваш заказ!</h1>
+            <h4 class="text-center text-white">Ожидайте звонок оператора для уточнения деталей.</h4>
 
             <div class="flex">
-                <h4>ID заказа: <span class="text-white">{{ $order->id }}</span></h4>
+                <h4 class="text-white">№ заказа: {{ $order->id }}</h4>
 
                 <div class="ml-6">
                 <span class="order-status order-status--{{ $order->status }}">
