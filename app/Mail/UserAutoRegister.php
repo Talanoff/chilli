@@ -8,14 +8,14 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class UserRegister extends Mailable
+class UserAutoRegister extends Mailable
 {
     use Queueable, SerializesModels;
     /**
      * @var User
      */
-    private $user;
-    private $password;
+    public $user;
+    public $password;
 
     /**
      * Create a new message instance.

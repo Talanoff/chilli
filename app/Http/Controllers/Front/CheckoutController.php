@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use App\Mail\UserRegister;
+use App\Mail\UserAutoRegister;
 use App\Models\Order\Order;
 use App\Models\User\User;
 use App\Services\Cart;
@@ -54,7 +54,7 @@ class CheckoutController extends Controller
                 'role_id' => 2,
             ]);
 
-            Mail::send(new UserRegister($user, $password));
+            Mail::send(new UserAutoRegister($user, $password));
 
             Auth::login($user);
         }
