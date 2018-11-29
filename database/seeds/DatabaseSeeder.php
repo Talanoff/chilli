@@ -15,7 +15,6 @@ class DatabaseSeeder extends Seeder
             AdminUserSeeder::class,
             RolesSeeder::class,
             BrandsTableSeeder::class,
-            ProductCharacteristicSeeder::class,
             SettingsSeeder::class,
             PageSeeder::class,
         ]);
@@ -26,6 +25,7 @@ class DatabaseSeeder extends Seeder
                 ProductCategorySeeder::class,
                 ProductSeeder::class,
                 ReviewSeeder::class,
+                ProductCharacteristicSeeder::class,
             ]);
         }
     }

@@ -15,7 +15,6 @@ class ProductCategorySeeder extends Seeder
             'Бамперы',
             'Чехлы',
             'Защитные стекла',
-            'Наушники',
         ]);
 
         $categories->map(function ($category) {
