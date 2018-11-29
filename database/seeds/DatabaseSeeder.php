@@ -22,10 +22,10 @@ class DatabaseSeeder extends Seeder
         if (config('app.env') === 'local') {
             $this->call([
                 SeriesTableSeeder::class,
+                ProductCharacteristicSeeder::class,
                 ProductCategorySeeder::class,
                 ProductSeeder::class,
                 ReviewSeeder::class,
-                ProductCharacteristicSeeder::class,
             ]);
         }
     }
