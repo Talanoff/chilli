@@ -24,13 +24,9 @@
                 </div>
             @endif
 
-            <div class="my-4">
+            <div class="my-3">
                 @include('partials.app.product.stars', ['stars' => $product->stars])
             </div>
-
-            <h4 class="product-item__price mb-4">
-                {{ $product->computed_price }} грн
-            </h4>
 
             @if (count($product->colors))
                 <div class="product-item__colors flex mb-5">
@@ -40,6 +36,12 @@
                     @endforeach
                 </div>
             @endif
+        </div>
+
+        <div class="product-item__pricy">
+            <h4 class="product-item__price mb-3">
+                {{ $product->computed_price }} грн
+            </h4>
 
             <add-to-cart-button
                 class="btn-secondary"
@@ -47,7 +49,7 @@
         </div>
 
         @if ($product->review()->count())
-            <svg width="24" height="24" class="product-item__video">
+            <svg width="36" height="36" class="product-item__video">
                 <use xlink:href="#video"></use>
             </svg>
         @endif

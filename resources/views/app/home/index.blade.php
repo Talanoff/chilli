@@ -87,7 +87,7 @@
     </section>
 
     @if (count($reviews))
-        <section class="reviews-promo flex">
+        <section class="reviews-promo flex-md">
             <div class="reviews-promo__slider">
                 <carousel id="reviews-carousel">
                     @each('partials.app.review.promo', $reviews, 'review')
@@ -117,13 +117,21 @@
             </h3>
 
             <p class="mb-0">{!! nl2br($settings['mission'][0]->value) !!}</p>
+
+            <h3 class="text-uppercase text-white mt-10">
+                <span class="decorator decorator--right">
+                    {{ $settings['schedule'][0]->name }}
+                </span>
+            </h3>
+
+            <p class="mb-0">{!! nl2br($settings['schedule'][0]->value) !!}</p>
         </div>
 
         @if (count($settings['advantages']))
             <div class="w-md-1/2">
-                <div class="row">
+                <div class="row mt-6 mt-md-0">
                     @foreach($settings['advantages'] as $advantage)
-                        <div class="column w-md-1/2">
+                        <div class="column w-md-1/2 w-100">
                             <h4 class="text-white">
                                 {{ $advantage['name'] }}
                             </h4>

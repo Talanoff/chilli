@@ -5,6 +5,8 @@ import {store} from './store';
 import lozad from 'lozad'; // Lazy load
 import SimpleBar from 'simplebar';
 import 'simplebar/dist/simplebar.css';
+import vueSmoothScroll from 'vue2-smooth-scroll';
+Vue.use(vueSmoothScroll);
 window.SimpleBar = SimpleBar;
 
 import AppCart from './components/cart/AppCart';
@@ -16,6 +18,7 @@ import StarRating from './components/product/StarRating';
 import ProductSlider from './components/product/ProductSlider';
 import FastBuy from './components/product/FastBuy';
 import KitsCarousel from './components/product/KitsCarousel';
+import DescriptionToggle from './components/product/DescriptionToggle';
 
 import FavouritesList from './components/favourites/FavouritesList';
 import AppFavourites from './components/favourites/AppFavourites';
@@ -46,7 +49,8 @@ const app = new Vue({
         AppFavourites,
         AddToFavouritesButton,
         KitsCarousel,
-        AppMobileNav
+        AppMobileNav,
+        DescriptionToggle
     },
     methods: {
         getCart() {

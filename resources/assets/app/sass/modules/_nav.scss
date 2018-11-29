@@ -18,7 +18,8 @@
     position: absolute;
     left: 100%;
     top: -10px;
-    background-color: darken($body-bg, 2%);
+    //background-color: darken($body-bg, 2%);
+    background-color: rgba($body-bg, 0.9);
     padding: 10px 20px;
 
     opacity: 0;
@@ -88,7 +89,7 @@
         left: -20px;
         top: -10px;
         padding: 50px 0 20px;
-        background-color: darken($body-bg, 2%);
+        background-color: $body-bg;
         z-index: -1;
         list-style: none;
 

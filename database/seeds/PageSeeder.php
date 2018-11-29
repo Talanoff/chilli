@@ -20,10 +20,24 @@ class PageSeeder extends Seeder
             'body' => '<p>' . implode('</p><p>', $faker->sentences(2)) . '</p>',
         ]);
 
-        // Create warranty page
+        // Create exchange page
         App\Models\Page\Page::create([
-            'title' => 'Гарантии',
-            'slug' => 'warranty',
+            'title' => 'Обмен и возврат',
+            'slug' => 'exchange',
+            'body' => '<p>' . implode('</p><p>', $faker->sentences(8)) . '</p>',
+        ]);
+
+        // Create privacy page
+        App\Models\Page\Page::create([
+            'title' => 'Политика конфиденциальности',
+            'slug' => 'privacy',
+            'body' => '<p>' . implode('</p><p>', $faker->sentences(8)) . '</p>',
+        ]);
+
+        // Create advantages page
+        App\Models\Page\Page::create([
+            'title' => 'Преимущества',
+            'slug' => 'advantages',
             'body' => '<p>' . implode('</p><p>', $faker->sentences(8)) . '</p>',
         ]);
 

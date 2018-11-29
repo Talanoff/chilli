@@ -52,7 +52,7 @@
             <div class="column w-md-1/3 checkout-products">
                 <h6 class="text-uppercase">В корзине:</h6>
 
-                @include('partials.app.checkout.products', ['size' => 50])
+                @include('partials.app.checkout.products', ['size' => 80])
 
                 <div class="text-center">
                     <a href="{{ route('app.cart.index') }}" class="btn btn-secondary">

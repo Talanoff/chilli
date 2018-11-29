@@ -59,22 +59,22 @@
         }
 
         &__icon {
-            width: 16px;
-            height: 16px;
+            width: 24px;
+            height: 24px;
             fill: #fff;
-            margin: 6px;
+            margin: 2px;
             position: relative;
         }
 
         &__check {
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
             fill: #fff;
             transform: translateY(300%);
             position: absolute;
             left: 50%;
             top: 50%;
-            margin: -9px 0 0 -10px;
+            margin: -9px 0 0 -8px;
             opacity: 0;
         }
 

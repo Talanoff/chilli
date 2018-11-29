@@ -35,7 +35,7 @@
                                                        value="{{ $item->value }}">
                                             </div>
                                         </div>
-                                    @elseif(in_array($key, ['about', 'mission', 'advantages']))
+                                    @else
                                         <input type="text" name="name" class="form-control mb-2"
                                                value="{{ $item->name }}">
                                         <textarea name="value" rows="3"

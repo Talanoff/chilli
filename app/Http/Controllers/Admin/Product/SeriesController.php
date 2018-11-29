@@ -58,7 +58,7 @@ class SeriesController extends Controller
      */
     public function store(Request $request)
     {
-        $series = Series::create($request->only('title', 'brand_id'));
+        $series = Series::create($request->only('title', 'description', 'brand_id', 'order'));
 
         return \redirect()->route('admin.product.series.edit', $series)
                           ->with('success', 'Модель успешно добавлена.');
@@ -87,7 +87,7 @@ class SeriesController extends Controller
      */
     public function update(Request $request, Series $series)
     {
-        $series->update($request->only('title', 'brand_id', 'order'));
+        $series->update($request->only('title', 'description', 'brand_id', 'order'));
 
         return \redirect()->route('admin.product.series.edit', $series)
                           ->with('success', 'Модель успешно обновлена.');

@@ -15,6 +15,8 @@
                 <input type="text" id="title" name="title" class="form-control" value="{{ old('title') }}" required>
             </div>
 
+            <wysiwyg id="body" name="description" label="Описание" content="{{ old('description') }}"></wysiwyg>
+
             <div class="form-group{{ $errors->has('brand_id') ? ' is-invalid' : '' }}">
                 <label for="brand">Бренд</label>
                 <select name="brand_id" id="brand" class="form-control">

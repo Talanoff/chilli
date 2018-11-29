@@ -10,15 +10,16 @@
         </div>
 
         <transition name="carousel">
-            <div class="kits-item flex justify-between"
+            <div class="kits-item flex-md justify-between"
                  v-for="(kit, index) in items"
                  v-if="current === index"
                  :kit="kit"
                  :key="kit.id">
+
                 <product :product="kit.product"></product>
 
                 <div class="flex flex-column justify-center mx-6">
-                    <svg width="46" height="46">
+                    <svg width="46" height="46" class="mx-auto">
                         <use xlink:href="#add"></use>
                     </svg>
                 </div>
@@ -26,13 +27,13 @@
                 <product :product="kit.related"></product>
 
                 <div class="flex flex-column justify-center mx-6">
-                    <svg width="46" height="46">
+                    <svg width="46" height="46" class="mx-auto">
                         <use xlink:href="#equal"></use>
                     </svg>
                 </div>
 
                 <div class="w-md-1/2 w-lg-1/3 w-xl-1/4">
-                    <div class="kit-total text-center flex flex-column justify-center">
+                    <div class="kit-total py-4 text-center flex flex-column justify-center">
                         <div class="kit-sku small text-bold text-uppercase text-muted">Код комплекта {{ kit.sku }}</div>
 
                         <h5 class="mb-0"><s class="text-muted">{{ kit.old_price }} грн</s></h5>

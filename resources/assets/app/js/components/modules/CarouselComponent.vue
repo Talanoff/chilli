@@ -31,16 +31,28 @@
 
 <style lang="scss">
     .flickity-page-dots {
-        bottom: 30px;
+        bottom: 10px;
+
+        @media (min-width: 768px) {
+            bottom: 30px;
+        }
 
         .dot {
             width: 100%;
-            max-width: 75px;
+            max-width: 20px;
             height: 3px;
             background-color: #636568;
             opacity: 0.5;
             border-radius: 0;
             margin: 0;
+
+            @media (min-width: 768px) {
+                max-width: 35px;
+            }
+
+            @media (min-width: 1200px) {
+                max-width: 75px;
+            }
 
             &.is-selected {
                 background-color: #f9c66d;
@@ -54,7 +66,8 @@
         bottom: 15px;
         transition: 0.3s ease;
         transform: none;
-        z-index: 10;
+        z-index: 20;
+        display: block;
 
         svg {
             fill: #fff;

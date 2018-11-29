@@ -14,6 +14,7 @@ class Series extends Model
     protected $fillable = [
         'slug',
         'title',
+        'description',
         'brand_id',
         'order',
     ];

@@ -13,6 +13,21 @@
 
     @include('partials.app.product.filters')
 
+    @if (request()->has('model'))
+        <h1 class="h3 text-white">
+            @if (request()->has('category'))
+                {{ \App\Models\Product\Category::whereSlug(request()->get('category'))->first()->title }}
+            @else
+                Чехлы
+            @endif
+            для {{ $series->first()->title }}
+
+            @if (!request()->has('category'))
+                и защитные стекла
+            @endif
+        </h1>
+    @endif
+
     <section class="products products-list flex">
         @if (count($products) || $latest)
             @if (request()->get('page') < 2 && $latest)
@@ -30,6 +45,12 @@
     </section>
 
     {{ $products->appends(request()->except('page'))->links() }}
+
+    @if (request()->has('model') && $series->first()->description)
+        <div class="my-8">
+            {!! $series->first()->description !!}
+        </div>
+    @endif
 
     @if (count($viewed))
         <h3 class="mt-8 text-white text-uppercase">

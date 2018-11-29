@@ -25,18 +25,18 @@
                 @endif
             </div>
             <div class="column w-md-4/5">
-                <nav>
+                <nav class="smaller">
                     <ul class="nav block flex-md flex-wrap text-uppercase justify-between my-5">
                         @foreach($nav as $item)
-                            <li class="nav-item my-3 my-md-0 text-center text-md-left">
+                            <li class="nav-item my-3 my-md-0 text-center text-md-left {{ $loop->index === 0 ? 'ml-0' : '' }}">
                                 <a href="{{ route($item['route']) }}">
                                     {{ $item['name'] }}
                                 </a>
                             </li>
                         @endforeach
                         <li class="nav-item my-3 my-md-0 text-center text-md-left">
-                            <a href="{{ route('app.page', ['page' => 'warranty']) }}">
-                                Гарантии
+                            <a href="{{ route('app.page', ['page' => 'contacts']) }}">
+                                Контакты
                             </a>
                         </li>
                         <li class="nav-item my-3 my-md-0 text-center text-md-left">
@@ -44,9 +44,9 @@
                                 Оплата и доставка
                             </a>
                         </li>
-                        <li class="nav-item my-3 my-md-0 text-center text-md-left">
-                            <a href="{{ route('app.page', ['page' => 'contacts']) }}">
-                                Контакты
+                        <li class="nav-item my-3 my-md-0 text-center text-md-left mr-0">
+                            <a href="{{ route('app.page', ['page' => 'exchange']) }}">
+                                Обмен и возврат
                             </a>
                         </li>
                     </ul>
@@ -92,7 +92,12 @@
 
         <div class="text-center">
             <div>Дизайн и разработка <a href="#" class="text-bold text-uppercase">Impression bureau</a></div>
-            <div>&copy; {{ date('Y') }} Все права защищены</div>
+            <div>
+                &copy; {{ date('Y') }} Все права защищены.
+                <a href="{{ route('app.page', ['page' => 'privacy']) }}" class="ml-4">
+                    Политика конфиденциальности
+                </a>
+            </div>
         </div>
     </div>
 </footer>

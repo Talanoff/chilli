@@ -38,6 +38,9 @@
         <template v-if="!!item.kit">
             <div class="row no-gutters flex-no-wrap align-center">
                 <div class="column-auto position-relative" style="width: 100px; height: 100px;">
+                    <svg width="30" height="30" class="add-sign">
+                        <use xlink:href="#add"></use>
+                    </svg>
                     <img :src="item.kit.product.thumbnail" class="kit-images" alt="">
                     <img :src="item.kit.related.thumbnail" class="kit-images kit-images__related" alt="">
                 </div>
@@ -90,3 +93,14 @@
         }
     }
 </script>
+
+<style scoped>
+    .add-sign {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 50;
+        margin: -15px !important;
+        fill: #f9c66d;
+    }
+</style>

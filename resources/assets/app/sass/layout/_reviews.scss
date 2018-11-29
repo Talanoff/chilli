@@ -87,16 +87,28 @@
     }
 
     &__all {
-        flex: 0 0 160px;
-        max-width: 160px;
+        display: block;
         position: relative;
-        background: url("../../images/reviews-all-bg.png") 100% 50% / auto 100% no-repeat;
+        background: url("../../images/reviews-all-bg.png") 50% 50% / cover no-repeat;
+        padding: 20px;
+        text-align: center;
+
+        @media (min-width: map_get($grid-breakpoints, md)) {
+            flex: 0 0 160px;
+            max-width: 160px;
+            background-position: 100% 50%;
+            background-size: auto 100%;
+            padding: 0;
+            text-align: left;
+        }
 
         strong {
-            position: absolute;
-            left: 0;
-            top: 0;
-            transform: rotate(-90deg) translate(-100%, -300%);
+            @media (min-width: map_get($grid-breakpoints, md)) {
+                position: absolute;
+                left: 0;
+                top: 0;
+                transform: rotate(-90deg) translate(-100%, -300%);
+            }
             white-space: nowrap;
         }
     }

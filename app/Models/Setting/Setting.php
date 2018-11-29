@@ -12,7 +12,8 @@ class Setting extends Model
         'email' => 'E-mail',
         'about' => 'О нас',
         'mission' => 'Наша миссия',
-        'advantages' => 'Преимущества'
+        'advantages' => 'Преимущества',
+        'schedule' => 'График работы'
     ];
 
     protected $guarded = [];

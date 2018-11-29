@@ -43,6 +43,10 @@ $items-align: stretch stretch, center center, start flex-start, end flex-end, ba
             flex-wrap: wrap;
         }
 
+        .flex-#{$breakpoint} {
+            display: flex;
+        }
+
         @each $j, $f in $justify {
             .justify-#{$breakpoint}-#{$j} {
                 justify-content: #{$f} !important;

@@ -12,9 +12,11 @@
     }
 
     &-sku {
-        position: absolute;
-        left: 20px;
-        top: 20px;
+        @media (min-width: map_get($grid-breakpoints, md)) {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+        }
     }
 
     &-images {

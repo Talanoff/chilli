@@ -8,32 +8,49 @@
         </div>
     @endif
 
-    <section class="product flex justify-between">
-        <product-slider class="w-lg-1/2" images="{{ $images }}" thumbnails="{{ $thumbnails }}">
-            @if ($product->tag)
-                <span class="product-tag">{{ App\Models\Product\Product::$TAGS[$product->tag] }}</span>
-            @endif
+    <section class="product flex-md justify-between">
+        <div class="w-md-1/2">
+            <product-slider images="{{ $images }}" thumbnails="{{ $thumbnails }}">
+                @if ($product->tag)
+                    <span class="product-tag">{{ App\Models\Product\Product::$TAGS[$product->tag] }}</span>
+                @endif
 
-            <div class="product-shared">
-                <add-to-favourites-button product="{{ $product->slug }}"></add-to-favourites-button>
+                <div class="product-shared">
+                    <add-to-favourites-button product="{{ $product->slug }}"></add-to-favourites-button>
+                </div>
+            </product-slider>
+        </div>
+
+        <div class="product-details w-md-1/2">
+            <div class="flex">
+                <div class="flex-1">
+                    <h1 class="h3 mb-0 text-uppercase">{{ $product->title }}</h1>
+                    @if ($product->subtitle)
+                        <p class="text-uppercase smaller text-primary">{{ $product->subtitle }}</p>
+                    @endif
+                    <p class="text-muted mt-4 text-uppercase">Артикул № {{ $product->sku }}</p>
+                </div>
+                @if ($product->review()->count())
+                    <a href="#review" class="ml-3 text-center text-danger" v-smooth-scroll="{ duration: 1000 }">
+                        <svg width="50" height="50" style="fill: currentColor">
+                            <use xlink:href="#video"></use>
+                        </svg>
+                        <div>
+                            <small>Видеообзор</small>
+                        </div>
+                    </a>
+                @endif
             </div>
-        </product-slider>
-
-        <div class="product-details w-lg-1/2">
-            <h1 class="h3 mb-0 text-uppercase">{{ $product->title }}</h1>
-
-            @if ($product->subtitle)
-                <p class="text-uppercase smaller text-primary">{{ $product->subtitle }}</p>
-            @endif
-
-            <p class="text-muted mt-4 text-uppercase">Артикул № {{ $product->sku }}</p>
 
             <hr class="my-4">
 
             @if ($product->description)
                 <div class="mb-6">
                     <h4 class="text-uppercase">Описание</h4>
-                    {!! $product->description !!}
+
+                    <description-toggle>
+                        {!! $product->description !!}
+                    </description-toggle>
                 </div>
             @endif
 
@@ -68,83 +85,82 @@
                 </div>
             @endif
 
-            <div class="row">
-                <div class="column w-xxl-1/2 flex align-center">
-                    <span class="mr-3 text-uppercase">Цена</span>
-                    <h3 class="mb-0 {{ $product->quantity < 1 ? 'text-muted' : 'text-dark' }} product-price">{{ $product->computed_price }}
-                        грн</h3>
-                </div>
-                <div class="column w-xxl-1/2 flex mt-xl-3">
-                    @if ($product->quantity)
-                        <fast-buy opened="{{ count($errors) }}">
-                            <form action="{{ route('app.fast-buy.send', $product) }}" method="post">
-                                @csrf
+            <div class="flex align-center">
+                <span class="mr-3 text-uppercase">Цена</span>
+                <h3 class="mb-0 {{ $product->quantity < 1 ? 'text-muted' : 'text-dark' }} product-price">
+                    {{ $product->computed_price }} грн
+                </h3>
+            </div>
+            <div class="flex mt-3">
+                @if ($product->quantity)
+                    <fast-buy opened="{{ count($errors) }}">
+                        <form action="{{ route('app.fast-buy.send', $product) }}" method="post">
+                            @csrf
 
-                                @guest
-                                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                        <input type="text" name="name" class="form-control"
-                                               placeholder="Ваше имя" value="{{ old('name') }}" required>
-                                        <div class="small text-danger">
-                                            {{ $errors->has('name') ? $errors->get('name')[0] : '' }}
+                            @guest
+                                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                                    <input type="text" name="name" class="form-control"
+                                           placeholder="Ваше имя" value="{{ old('name') }}" required>
+                                    <div class="small text-danger">
+                                        {{ $errors->has('name') ? $errors->get('name')[0] : '' }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                    <input type="email" name="email" class="form-control"
+                                           placeholder="E-mail" value="{{ old('email') }}" required>
+                                    <div class="small text-danger">
+                                        {{ $errors->has('email') ? $errors->get('email')[0] : '' }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                                    <input type="tel" name="phone" class="form-control"
+                                           placeholder="Телефон" value="{{ old('phone') }}" required>
+                                    <div class="small text-danger">
+                                        {{ $errors->has('phone') ? $errors->get('phone')[0] : '' }}
+                                    </div>
+                                </div>
+                            @else
+                                <h5 class="text-uppercase">
+                                    Быстрая покупка
+                                </h5>
+
+                                <p>Вы авторизированы, как {{ auth()->user()->name }}. Для оформления заказа будут
+                                    использованы Ваши контактные данные.</p>
+                            @endguest
+
+                            <button class="btn btn-secondary">Продолжить</button>
+                        </form>
+                    </fast-buy>
+
+                    <add-to-cart-button
+                        class="btn-secondary ml-md-1"
+                        action="{{ route('app.cart.add', $product) }}">
+                        В корзину
+                    </add-to-cart-button>
+                @else
+                    @if (auth()->check() && !auth()->user()->notifications()->count())
+                        <form action="{{ route('app.notification.add', $product) }}" method="post">
+                            @csrf
+
+                            @guest
+                                <div class="form-group{{ $errors->has('email') ? ' is-invalid' : '' }}">
+                                    <label for="email">Ваше e-mail</label>
+                                    <input type="text" class="form-control" id="email" name="email"
+                                           value="{{ old('email') }}" required>
+                                    @if($errors->has('email'))
+                                        <div class="mt-1 text-danger">
+                                            {{ $errors->first('email') }}
                                         </div>
-                                    </div>
+                                    @endif
+                                </div>
+                            @endguest
 
-                                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                        <input type="email" name="email" class="form-control"
-                                               placeholder="E-mail" value="{{ old('email') }}" required>
-                                        <div class="small text-danger">
-                                            {{ $errors->has('email') ? $errors->get('email')[0] : '' }}
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                                        <input type="tel" name="phone" class="form-control"
-                                               placeholder="Телефон" value="{{ old('phone') }}" required>
-                                        <div class="small text-danger">
-                                            {{ $errors->has('phone') ? $errors->get('phone')[0] : '' }}
-                                        </div>
-                                    </div>
-                                @else
-                                    <h5 class="text-uppercase">
-                                        Быстрая покупка
-                                    </h5>
-
-                                    <p>Вы авторизированы, как {{ auth()->user()->name }}. Для оформления заказа будут
-                                        использованы Ваши контактные данные.</p>
-                                @endguest
-
-                                <button class="btn btn-secondary">Продолжить</button>
-                            </form>
-                        </fast-buy>
-
-                        <add-to-cart-button
-                            class="btn-secondary ml-1"
-                            action="{{ route('app.cart.add', $product) }}">
-                            В корзину
-                        </add-to-cart-button>
-                    @else
-                        @if (auth()->check() && !auth()->user()->notifications()->count())
-                            <form action="{{ route('app.notification.add', $product) }}" method="post">
-                                @csrf
-
-                                @guest
-                                    <div class="form-group{{ $errors->has('email') ? ' is-invalid' : '' }}">
-                                        <label for="email">Ваше e-mail</label>
-                                        <input type="text" class="form-control" id="email" name="email"
-                                               value="{{ old('email') }}" required>
-                                        @if($errors->has('email'))
-                                            <div class="mt-1 text-danger">
-                                                {{ $errors->first('email') }}
-                                            </div>
-                                        @endif
-                                    </div>
-                                @endguest
-
-                                <button class="btn btn-primary">Уведомить о наличии</button>
-                            </form>
-                        @endif
+                            <button class="btn btn-primary">Уведомить о наличии</button>
+                        </form>
                     @endif
-                </div>
+                @endif
             </div>
         </div>
     </section>
@@ -165,7 +181,7 @@
             @endif
 
             @if ($product->review)
-                <section class="reviews reviews--single">
+                <section class="reviews reviews--single" id="review">
                     @include('partials.app.review.promo', ['review' => $product->review])
                 </section>
     @endif

@@ -68,6 +68,15 @@
 
     .product-slider {
         position: relative;
+        height: 320px;
+
+        @media (min-width: map_get($grid-breakpoints, md)) {
+            height: 480px;
+        }
+
+        @media (min-width: map_get($grid-breakpoints, lg)) {
+            height: 530px;
+        }
 
         &-nav {
             flex: 0 0 90px;
@@ -101,7 +110,7 @@
         &-items {
             position: relative;
             height: 100%;
-            min-height: 400px;
+            min-height: 320px;
             max-height: 600px;
             flex: 1 0 auto;
             max-width: 100%;
