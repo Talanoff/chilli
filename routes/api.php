@@ -19,4 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/bitrix', function() {
     return true;
-});
+})->middleware('api');
