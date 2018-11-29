@@ -16,7 +16,3 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::get('/bitrix', function() {
-    return response(\App\Models\Setting\Setting::get()->all(), 200, ['Content-Type', 'text/plain']);
-});

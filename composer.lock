@@ -4,82 +4,36 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "af7808652b5be70755559fbda9000e50",
+    "content-hash": "596baaedad5524e302c8b17155fc59a8",
     "packages": [
         {
-            "name": "balping/json-raw-encoder",
-            "version": "v1.0.0",
+            "name": "bigperson/exchange1c",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/balping/json-raw-encoder.git",
-                "reference": "c404b7fc0e04ddf5d298e53105c5fc306f523195"
+                "url": "https://github.com/bigperson/exchange1c.git",
+                "reference": "dc6a06b13ede27386dd3523b66766552f2ca19c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/balping/json-raw-encoder/zipball/c404b7fc0e04ddf5d298e53105c5fc306f523195",
-                "reference": "c404b7fc0e04ddf5d298e53105c5fc306f523195",
+                "url": "https://api.github.com/repos/bigperson/exchange1c/zipball/dc6a06b13ede27386dd3523b66766552f2ca19c1",
+                "reference": "dc6a06b13ede27386dd3523b66766552f2ca19c1",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.0"
+                "carono/commerceml": "^0.2.3",
+                "php": ">=7.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "^7.1"
+                "illuminate/session": "^5.7",
+                "phpunit/phpunit": "^7",
+                "symfony/event-dispatcher": "^4.1",
+                "symfony/http-foundation": "^4.1"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Balping\\JsonRaw\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0-only"
-            ],
-            "authors": [
-                {
-                    "name": "Balázs Dura-Kovács"
-                }
-            ],
-            "description": "Encode arrays to json with raw JS objects (eg. callbacks) in them",
-            "keywords": [
-                "callback",
-                "encode",
-                "json"
-            ],
-            "time": "2018-05-04T15:38:02+00:00"
-        },
-        {
-            "name": "consoletvs/charts",
-            "version": "6.3.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ConsoleTVs/Charts.git",
-                "reference": "37763eb404524296d6adc1bcfba11e01882cc11b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ConsoleTVs/Charts/zipball/37763eb404524296d6adc1bcfba11e01882cc11b",
-                "reference": "37763eb404524296d6adc1bcfba11e01882cc11b",
-                "shasum": ""
-            },
-            "require": {
-                "balping/json-raw-encoder": "^1.0",
-                "illuminate/console": "5.*",
-                "illuminate/support": "5.*",
-                "php": ">=7.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "ConsoleTVs\\Charts\\ChartsServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "ConsoleTVs\\Charts\\": "src/"
+                    "Bigperson\\Exchange1C\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -88,12 +42,125 @@
             ],
             "authors": [
                 {
-                    "name": "Èrik Campobadal Forés",
-                    "email": "soc@erik.cat"
+                    "name": "Anton Kartsev",
+                    "role": "Developer"
                 }
             ],
-            "description": "The laravel charting package",
-            "time": "2018-10-13T12:27:03+00:00"
+            "description": "Catalog Loader from 1c - CommerceML protocol",
+            "homepage": "https://github.com/bigperson",
+            "keywords": [
+                "1c",
+                "1c-exchange",
+                "1c-php",
+                "commerceml"
+            ],
+            "time": "2018-10-23T09:52:50+00:00"
+        },
+        {
+            "name": "bigperson/laravel-exchange1c",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bigperson/laravel-exchange1c.git",
+                "reference": "810bc1762c3b903736c2ec86e35124749cf6b5da"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bigperson/laravel-exchange1c/zipball/810bc1762c3b903736c2ec86e35124749cf6b5da",
+                "reference": "810bc1762c3b903736c2ec86e35124749cf6b5da",
+                "shasum": ""
+            },
+            "require": {
+                "bigperson/exchange1c": "^1.1",
+                "laravel/framework": "^5.4",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.2",
+                "orchestra/testbench": "~3.0",
+                "phpunit/phpunit": "^7"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Bigperson\\LaravelExchange1C\\Exchange1CServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Bigperson\\LaravelExchange1C\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anton Kartsev",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Catalog Loader from 1c - CommerceML with laravel",
+            "homepage": "https://github.com/bigperson",
+            "keywords": [
+                "1c",
+                "commerceml",
+                "laravel"
+            ],
+            "time": "2018-10-30T10:59:15+00:00"
+        },
+        {
+            "name": "carono/commerceml",
+            "version": "0.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/carono/php-commerceml.git",
+                "reference": "5c9cf7e46349b178866f3f9444ca7bb404055dc6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/carono/php-commerceml/zipball/5c9cf7e46349b178866f3f9444ca7bb404055dc6",
+                "reference": "5c9cf7e46349b178866f3f9444ca7bb404055dc6",
+                "shasum": ""
+            },
+            "require": {
+                "ext-simplexml": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Zenwalker\\CommerceML\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maxim Poletaev",
+                    "email": "zenwalker2@gmail.com",
+                    "homepage": "http://zenwalker.ru"
+                },
+                {
+                    "name": "Aleksandr Kasyanov",
+                    "email": "info@carono.ru",
+                    "homepage": "http://carono.ru"
+                }
+            ],
+            "description": "Library for parsing CommerceML files",
+            "homepage": "https://github.com/zenwalker/php-commerceml",
+            "keywords": [
+                "1c",
+                "commerceml"
+            ],
+            "time": "2018-10-16T17:10:48+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -3066,6 +3133,49 @@
     ],
     "packages-dev": [
         {
+            "name": "balping/json-raw-encoder",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/balping/json-raw-encoder.git",
+                "reference": "c404b7fc0e04ddf5d298e53105c5fc306f523195"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/balping/json-raw-encoder/zipball/c404b7fc0e04ddf5d298e53105c5fc306f523195",
+                "reference": "c404b7fc0e04ddf5d298e53105c5fc306f523195",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Balping\\JsonRaw\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Balázs Dura-Kovács"
+                }
+            ],
+            "description": "Encode arrays to json with raw JS objects (eg. callbacks) in them",
+            "keywords": [
+                "callback",
+                "encode",
+                "json"
+            ],
+            "time": "2018-05-04T15:38:02+00:00"
+        },
+        {
             "name": "barryvdh/laravel-debugbar",
             "version": "v3.2.0",
             "source": {
@@ -3132,6 +3242,52 @@
                 "webprofiler"
             ],
             "time": "2018-08-22T11:06:19+00:00"
+        },
+        {
+            "name": "consoletvs/charts",
+            "version": "6.3.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ConsoleTVs/Charts.git",
+                "reference": "37763eb404524296d6adc1bcfba11e01882cc11b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ConsoleTVs/Charts/zipball/37763eb404524296d6adc1bcfba11e01882cc11b",
+                "reference": "37763eb404524296d6adc1bcfba11e01882cc11b",
+                "shasum": ""
+            },
+            "require": {
+                "balping/json-raw-encoder": "^1.0",
+                "illuminate/console": "5.*",
+                "illuminate/support": "5.*",
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ConsoleTVs\\Charts\\ChartsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ConsoleTVs\\Charts\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Èrik Campobadal Forés",
+                    "email": "soc@erik.cat"
+                }
+            ],
+            "description": "The laravel charting package",
+            "time": "2018-10-13T12:27:03+00:00"
         },
         {
             "name": "doctrine/instantiator",
