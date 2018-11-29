@@ -18,5 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/bitrix', function() {
-    return response([], 200, ['Content-Type', 'text/plain']);
+    return response(\App\Models\Product\Product::latest()->get(), 200, ['Content-Type', 'text/plain']);
 });
