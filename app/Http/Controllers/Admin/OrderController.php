@@ -16,6 +16,8 @@ class OrderController extends Controller
      */
     public function index(Request $request): View
     {
+        $orders = Order::latest();
+
         if ($request->filled('search')) {
             $orders = Order::where('id', ltrim($request->input('search'), '0'))
                            ->orWhereHas('user', function ($q) use ($request) {
