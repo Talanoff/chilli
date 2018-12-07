@@ -16,3 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::any('bitrix', function(Request $request) {
+    return \Illuminate\Support\Facades\Log::log('abc', json_encode($request->all()));
+});
