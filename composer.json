@@ -11,6 +11,7 @@
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
         "lis-dev/nova-poshta-api-2": "dev-master",
+        "mavsan/laravel-1c-protocol": "^0.0.13",
         "spatie/laravel-medialibrary": "^7.0.0",
         "tightenco/ziggy": "^0.6.7"
     },
