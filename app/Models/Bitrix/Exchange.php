@@ -28,6 +28,7 @@ class Exchange extends Model implements Import
     public function import($fileName)
     {
         // TODO: Implement import() method.
+        \Log::debug('file='. $fileName);
     }
 
     /**
