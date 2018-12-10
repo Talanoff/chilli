@@ -10,8 +10,8 @@ declare(strict_types=1);
 return [
     'exchange_path' => '1c_exchange',
     'import_dir' => storage_path('app/1c_exchange'),
-    'login' => env('1C_USER_LOGIN'),
-    'password' => env('1C_USER_PASSWORD'),
+    'login' => 'Oleg',
+    'password' => '123456',
     'use_zip' => false,
     'file_part' => 0,
     'models' => [
