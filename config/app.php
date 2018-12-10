@@ -152,7 +152,7 @@ return [
         /*
          * Package Service Providers...
          */
-        Bigperson\LaravelExchange1C\Exchange1CServiceProvider::class,
+//        Bigperson\LaravelExchange1C\Exchange1CServiceProvider::class,
 
         /*
          * Application Service Providers...
