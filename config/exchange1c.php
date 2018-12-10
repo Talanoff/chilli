@@ -9,14 +9,14 @@ declare(strict_types=1);
 
 return [
     'exchange_path' => '1c_exchange',
-    'import_dir'    => storage_path('app/1c_exchange'),
-    'login'         => 'admin',
-    'password'      => 'admin',
-    'use_zip'       => false,
-    'file_part'     => 0,
-    'models'        => [
-        \Bigperson\Exchange1C\Interfaces\GroupInterface::class   => \App\Models\Product\Category::class,
+    'import_dir' => storage_path('app/1c_exchange'),
+    'login' => env('1C_USER_LOGIN'),
+    'password' => env('1C_USER_PASSWORD'),
+    'use_zip' => false,
+    'file_part' => 0,
+    'models' => [
+        \Bigperson\Exchange1C\Interfaces\GroupInterface::class => \App\Models\Product\Category::class,
         \Bigperson\Exchange1C\Interfaces\ProductInterface::class => \App\Models\Product\Product::class,
-        \Bigperson\Exchange1C\Interfaces\OfferInterface::class   => \App\Models\Order\Order::class,
+        \Bigperson\Exchange1C\Interfaces\OfferInterface::class => \App\Models\Order\Order::class,
     ],
 ];
