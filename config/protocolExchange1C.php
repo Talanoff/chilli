@@ -36,8 +36,8 @@ return [
      * Имя пользователя и пароль для тестов, если пользователя нет - будет
      * создан, после успешного окончания тестов - удален НЕ БУДЕТ.
      */
-    'userEmailToTest'    => 'test1CExchangeProtocol',
-    'userPasswordToTest' => env('APP_KEY'),
+    'userEmailToTest'    => env('1C_USER_LOGIN'),
+    'userPasswordToTest' => env('1C_USER_PASSWORD'),
 
     /*
      * Модель, которая будет выполнять обработку принятого каталога от 1С.
