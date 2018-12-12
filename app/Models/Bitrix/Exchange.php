@@ -27,8 +27,9 @@ class Exchange extends Model implements Import
      */
     public function import($fileName)
     {
+    	\Log::debug(json_encode(['file'=>$fileName]));
+    	return self::answerSuccess;
         // TODO: Implement import() method.
-        \Log::debug('file='. $fileName);
     }
 
     /**
