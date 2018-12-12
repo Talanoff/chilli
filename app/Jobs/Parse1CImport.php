@@ -11,16 +11,17 @@ use Illuminate\Foundation\Bus\Dispatchable;
 class Parse1CImport implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+	private $file;
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct()
+	/**
+	 * Create a new job instance.
+	 *
+	 * @param $file
+	 */
+    public function __construct($file)
     {
-        //
-    }
+		$this->file = $file;
+	}
 
     /**
      * Execute the job.
