@@ -37,7 +37,7 @@ class Exchange extends Model implements Import
 			new Parse1COffers($fileName);
 		}
 
-		return self::answerProgress;
+		return self::answerSuccess;
 	}
 
 	/**
