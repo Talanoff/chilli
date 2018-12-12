@@ -27,8 +27,9 @@ class Exchange extends Model implements Import
      */
     public function import($fileName)
     {
-    	\Log::debug($fileName);
-        // TODO: Implement import() method.
+    	$type = substr($fileName, -4, 6);
+\Log::debug($type);
+        return self::answerSuccess;
     }
 
     /**
