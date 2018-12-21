@@ -61,6 +61,8 @@
                 </div>
             </div>
         </div>
+
+        <button class="btn btn-primary">Оформить заказ</button>
     </section>
 
 @endsection

@@ -52,10 +52,6 @@
             <label for="message">Сообщение (не обязательно)</label>
             <textarea name="message" id="message" rows="4" class="form-control"></textarea>
         </div>
-
-        <button class="btn btn-primary"
-                :disabled="cantSendCheckout">Оформить заказ
-        </button>
     </div>
 </template>
 
