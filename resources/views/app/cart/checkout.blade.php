@@ -62,7 +62,9 @@
             </div>
         </div>
 
-        <button class="btn btn-primary">Оформить заказ</button>
+        <div class="mt-4 text-center text-lg-left">
+            <button class="btn btn-primary">Оформить заказ</button>
+        </div>
     </section>
 
 @endsection
