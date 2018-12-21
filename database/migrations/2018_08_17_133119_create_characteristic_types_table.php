@@ -15,10 +15,9 @@ class CreateCharacteristicTypesTable extends Migration
     {
         Schema::create('characteristic_types', function (Blueprint $table) {
             $table->increments('id');
-
             $table->string('slug')->unique();
             $table->string('title');
-
+			$table->string('1c_id')->nullable();
             $table->timestamps();
         });
     }

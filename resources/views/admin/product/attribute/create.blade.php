@@ -7,7 +7,7 @@
             Новый атрибут
         </h1>
 
-        <form action="{{ route('admin.product.attribute.store') }}" method="post">
+        <form action="{{ route('admin.product.characteristic.store') }}" method="post">
             @csrf
 
             <attribute-creator :types="{{ $selectors }}"></attribute-creator>

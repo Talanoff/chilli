@@ -18,6 +18,7 @@ class CreateBrandsTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->integer('order')->default(1);
+			$table->string('1c_id')->nullable();
             $table->timestamps();
         });
     }

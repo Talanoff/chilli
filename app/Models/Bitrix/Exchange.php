@@ -32,9 +32,9 @@ class Exchange extends Model implements Import
 		$type = substr($fileName, -10, 6);
 
 		if ($type === 'import') {
-			new Parse1CImport($fileName);
+			Parse1CImport::dispatch($fileName);
 		} else {
-			new Parse1COffers($fileName);
+			Parse1COffers::dispatch($fileName);
 		}
 
 		return self::answerSuccess;

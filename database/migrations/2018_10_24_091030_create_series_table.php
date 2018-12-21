@@ -20,6 +20,7 @@ class CreateSeriesTable extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->integer('order')->default(1);
+			$table->string('1c_id')->nullable();
             $table->timestamps();
         });
     }

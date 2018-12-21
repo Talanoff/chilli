@@ -152,7 +152,6 @@ return [
         /*
          * Package Service Providers...
          */
-//        Bigperson\LaravelExchange1C\Exchange1CServiceProvider::class,
         Mavsan\LaProtocol\Providers\ProtocolProvider::class,
         Chumper\Zipper\ZipperServiceProvider::class,
 

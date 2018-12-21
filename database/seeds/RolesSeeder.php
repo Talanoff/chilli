@@ -7,6 +7,7 @@ class RolesSeeder extends Seeder
     protected $roles = [
         'administrator' => 'Администратор',
         'customer' => 'Покупатель',
+		'import' => '1C пользователь'
     ];
 
     /**
