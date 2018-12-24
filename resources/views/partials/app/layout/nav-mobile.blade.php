@@ -3,7 +3,7 @@
         @foreach($nav as $item)
             <li>
                 <a href="{{ route($item['route']) }}"
-                        {{ $item['route'] == 'app.product.index' ? 'btn-catalog' : '' }}>
+                   class="{{ $item['route'] == 'app.product.index' ? 'btn-catalog' : '' }}">
                     {{ $item['name'] }}
                 </a>
 
