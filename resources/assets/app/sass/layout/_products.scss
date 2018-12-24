@@ -78,7 +78,8 @@ $text-shadow: 0 1px 1px #fff, 0 1px 4px #fff, 0 2px 8px rgba(#fff, 0.4);
         }
     }
 
-    &-content {
+    &-content,
+    &__content {
         position: absolute;
         left: 20px;
         right: 20px;
@@ -115,6 +116,10 @@ $text-shadow: 0 1px 1px #fff, 0 1px 4px #fff, 0 2px 8px rgba(#fff, 0.4);
         position: absolute !important;
         left: rem-calc(20);
         bottom: rem-calc(20);
+    }
+
+    &__title {
+        font-size: 1rem;
     }
 
     &__title,
@@ -176,27 +181,56 @@ $text-shadow: 0 1px 1px #fff, 0 1px 4px #fff, 0 2px 8px rgba(#fff, 0.4);
     }
 
     &--promo {
-        padding: 2.5rem;
+        padding: 100% 0 0;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
         align-items: flex-start;
         height: 100%;
+
+        @media (min-width: map_get($grid-breakpoints, md)) {
+            padding: 2.5rem;
+
+            .product-item__content,
+            .product-item__pricy {
+                position: static !important;
+            }
+
+            .product-item__title {
+                font-size: 1.5rem;
+            }
+        }
     }
 
     &--leaders {
-        height: 320px;
+        height: 150px;
+        padding: 0;
+        min-height: initial;
+
+        @media (min-width: map_get($grid-breakpoints, md)) {
+            height: 320px;
+        }
 
         figure {
+            top: 0;
+            left: 0;
             background: #fff url("../../images/leaders-bg.png") 130% 30% / 75% auto no-repeat;
         }
     }
 
     &--all {
-        height: 420px;
-        margin-bottom: -100px;
+        height: 150px;
+        padding: 0;
+        min-height: initial;
+
+        @media (min-width: map_get($grid-breakpoints, md)) {
+            height: 420px;
+            margin-bottom: -100px;
+        }
 
         figure {
+            top: 0;
+            left: 0;
             background: #fff url("../../images/catalog-bg.jpg") 100% 50% / auto 105% no-repeat;
         }
     }

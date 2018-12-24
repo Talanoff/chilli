@@ -5,7 +5,7 @@
     <section class="checkout">
         <div class="row">
             <div class="column w-md-2/3">
-                <form action="{{ route('app.checkout.store') }}" method="post">
+                <form action="{{ route('app.checkout.store') }}" method="post" id="checkout">
                     @csrf
 
                     @guest
@@ -62,7 +62,7 @@
             </div>
         </div>
 
-        <div class="mt-4 text-center text-lg-left">
+        <div class="mt-4 text-center text-lg-left" onclick="document.getElementById('checkout').submit()">
             <button class="btn btn-primary">Оформить заказ</button>
         </div>
     </section>

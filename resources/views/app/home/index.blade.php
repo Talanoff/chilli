@@ -59,10 +59,12 @@
                     <a href="{{ route('app.product.index', ['leaders' => 'true']) }}"
                        class="product-item product-item--promo product-item--leaders justify-start">
                         <figure class="product-item__link"></figure>
-                        <h3 class="product-item__title text-uppercase mb-3">Лидеры продаж</h3>
-                        <p class="text-muted small text-uppercase">
-                            Самые продаваемы товары
-                        </p>
+                        <div class="product-item__content">
+                            <h3 class="product-item__title text-uppercase mb-3">Лидеры продаж</h3>
+                            <p class="text-muted small text-uppercase">
+                                Самые продаваемы товары
+                            </p>
+                        </div>
                     </a>
                 </div>
 
@@ -70,10 +72,12 @@
                     <a href="{{ route('app.product.index') }}"
                        class="product-item product-item--promo product-item--all justify-start">
                         <figure class="product-item__link"></figure>
-                        <h3 class="product-item__title text-uppercase mb-3">Смотреть все товары</h3>
-                        <p class="text-muted small text-uppercase">
-                            Перейти в каталог
-                        </p>
+                        <div class="product-item__content">
+                            <h3 class="product-item__title text-uppercase mb-3">Смотреть все товары</h3>
+                            <p class="text-muted small text-uppercase">
+                                Перейти в каталог
+                            </p>
+                        </div>
                     </a>
                 </div>
             @endif

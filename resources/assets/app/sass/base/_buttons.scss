@@ -102,12 +102,24 @@
             left: 7px;
             top: 50%;
         }
+
         &::before {
             margin-top: -5px;
         }
 
         &::after {
             margin-top: 3px;
+        }
+
+        &.is-open {
+            &::before {
+                transform: rotate(45deg);
+                margin: -1px 0 0 0;
+            }
+            &::after {
+                transform: rotate(-45deg);
+                margin: -1px 0 0 0;
+            }
         }
     }
 

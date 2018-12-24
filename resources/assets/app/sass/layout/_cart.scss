@@ -47,14 +47,15 @@
 
 .remove-cart-item {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 30px;
-    height: 30px;
     border-radius: 50%;
     border: 1px solid $secondary;
     transform: rotate(45deg);
     background-color: transparent;
+
+    top: 15px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
 
     &::before,
     &::after {
@@ -63,12 +64,26 @@
         top: 50%;
         content: '';
         border-bottom: 1px solid $secondary;
-        width: 15px;
-        margin-left: -7px;
+        width: 10px;
+        margin-left: -5px;
+        margin-top: -1px;
     }
 
     &::after {
         transform: rotate(90deg);
+    }
+
+    @media (min-width: map_get($grid-breakpoints, md)) {
+        top: 15px;
+        right: 15px;
+        width: 30px;
+        height: 30px;
+
+        &::before, &::after {
+            width: 15px;
+            margin-left: -7px;
+            margin-top: 0;
+        }
     }
 
     &:hover {
@@ -81,20 +96,30 @@
     }
 
     &.in-preview {
-        top: -4px;
+        top: 0;
+        @media (min-width: map_get($grid-breakpoints, md)) {
+            top: -4px;
+        }
     }
 }
 
 .cart-entry {
     position: absolute;
-    right: -40px;
+    right: -5px;
+    width: 97vw;
     top: 100%;
     background-color: #fff;
-    width: 100vw;
     max-width: 650px;
     color: $dark;
     margin-top: 20px;
     box-shadow: -5px 20px 60px rgba(#000, 0.2);
+    z-index: 1000;
+    max-height: 88vh;
+    overflow-y: auto;
+
+    @media (min-width: map_get($grid-breakpoints, md)) {
+        right: -40px;
+    }
 
     @media (min-width: map_get($grid-breakpoints, xxl)) {
         max-width: 900px;
@@ -105,10 +130,15 @@
         width: 10px;
         height: 10px;
         top: -5px;
-        right: 49px;
+        right: 15px;
         content: '';
         background-color: #fff;
         transform: rotate(45deg);
+        max-height: 95vh;
+
+        @media (min-width: map_get($grid-breakpoints, md)) {
+            right: 49px;
+        }
     }
 
     &.is-fixed::before {
@@ -138,15 +168,6 @@
         background-color: #fff;
     }
 
-    &-items {
-        max-height: 400px;
-        overflow-y: auto;
-
-        @media (min-width: map_get($grid-breakpoints, xxl)) {
-            max-height: 600px;
-        }
-    }
-
     &-item {
         min-height: 100px;
         margin-bottom: 2px;
@@ -173,10 +194,19 @@
             background-color: #fff;
 
             img {
-                width: 100px;
+                width: 60px;
 
                 @media (min-width: map_get($grid-breakpoints, xxl)) {
                     width: 200px;
+                }
+            }
+        }
+
+        &__content {
+            flex-grow: 1;
+            @media (max-width: map_get($grid-breakpoints, lg)) {
+                h5, h6 {
+                    font-size: 1rem;
                 }
             }
         }

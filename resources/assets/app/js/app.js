@@ -4,7 +4,6 @@ import Vue from 'vue';
 import {store} from './store';
 import lozad from 'lozad'; // Lazy load
 import SimpleBar from 'simplebar';
-import 'simplebar/dist/simplebar.css';
 import vueSmoothScroll from 'vue2-smooth-scroll';
 Vue.use(vueSmoothScroll);
 window.SimpleBar = SimpleBar;

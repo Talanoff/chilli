@@ -1,8 +1,12 @@
 header {
-    padding: 20px 0;
+    padding: 0 0 20px;
     font-size: rem-calc(14);
     position: relative;
     z-index: 10000;
+
+    @media (min-width: map_get($grid-breakpoints, lg)) {
+        padding: 20px 0;
+    }
 
     .nav,
     .phones {
@@ -28,7 +32,10 @@ header {
         }
 
         img {
-            height: 108px;
+            height: 80px;
+            @media (min-width: map_get($grid-breakpoints, lg)) {
+                height: 108px;
+            }
         }
     }
 }

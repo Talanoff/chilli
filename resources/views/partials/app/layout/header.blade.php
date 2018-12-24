@@ -7,8 +7,8 @@
 
             @include('partials.app.layout.nav-desktop')
 
-            <div class="column flex align-center justify-end">
-                <form action="{{ route('app.product.search') }}" method="post" class="flex-1 none block-lg">
+            <div class="column-auto ml-auto flex align-center justify-end">
+                <form action="{{ route('app.product.search') }}" method="post" class="flex-1 none block-lg" name="search-form">
                     @csrf
                     <app-search></app-search>
                 </form>
@@ -16,7 +16,11 @@
                 <app-favourites class="ml-3"></app-favourites>
 
                 <app-cart class="ml-3"></app-cart>
+            </div>
+        </div>
 
+        <div class="flex none-lg mt-2">
+            <div class="w-100">
                 @include('partials.app.layout.nav-mobile')
             </div>
         </div>

@@ -1,16 +1,16 @@
 <template>
     <div class="cart-entry-item">
         <template v-if="!!item.product">
-            <div class="row no-gutters align-center">
-                <div class="column-auto">
-                    <a :href="item.product.url" class="cart-entry-item__thumbnail">
+            <div class="flex flex-no-wrap align-center">
+                <div>
+                    <a :href="item.product.url" class="cart-entry-item__thumbnail pr-2">
                         <img :src="item.product.thumbnail" alt="">
                     </a>
                 </div>
 
-                <div class="column pl-4">
-                    <div class="flex flex-no-wrap align-center">
-                        <div class="flex-1">
+                <div class="cart-entry-item__content">
+                    <div class="flex align-center">
+                        <div class="mr-2">
                             <h5 class="text-uppercase mb-1 text-normal">
                                 <a :href="item.product.url">
                                     {{ item.product.title }}
@@ -21,7 +21,7 @@
                             </p>
                         </div>
 
-                        <div class="position-relative pr-10">
+                        <div class="position-relative ml-auto pr-10">
                             <h4 class="mb-0 text-normal text-dark no-wrap">
                                 <small>{{ item.quantity }} &times;</small>
                                 {{ item.product.price }} грн

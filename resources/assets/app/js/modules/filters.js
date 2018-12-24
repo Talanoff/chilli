@@ -34,9 +34,12 @@ module.exports = function (app) {
             event.preventDefault();
             filters.classList.toggle('is-active');
         });
-
         const filterOuter = document.addEventListener('click', event => {
-            if (!filters.contains(event.target) && event.target !== app.$refs.filter && event.target !== app.$refs.filterDesktop) {
+            const el = event.target;
+
+            if ((!filters.contains(el) || !filters.contains(el.parentNode))
+              && (!app.$refs.filter.contains(el) && !app.$refs.filter.contains(el.parentNode))
+              && (!app.$refs.filterDesktop.contains(el) && !app.$refs.filterDesktop.contains(el.parentNode))) {
                 filters.classList.remove('is-active');
                 removeEventListener('click', filterOuter);
             }

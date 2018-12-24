@@ -28,10 +28,8 @@
                 <nav class="smaller">
                     <ul class="nav block flex-md flex-wrap text-uppercase justify-between my-5">
                         @foreach($nav as $item)
-                            <li class="nav-item my-3 my-md-0 text-center text-md-left {{ $loop->index === 0 ? 'ml-0' : '' }}">
-                                <a href="{{ route($item['route']) }}">
-                                    {{ $item['name'] }}
-                                </a>
+                            <li class="nav-item my-3 my-md-0 text-center text-md-left {{ $loop->index === 0 ? 'ml-lg-0' : '' }}">
+                                <a href="{{ route($item['route']) }}">{{ $item['name'] }}</a>
                             </li>
                         @endforeach
                         <li class="nav-item my-3 my-md-0 text-center text-md-left">

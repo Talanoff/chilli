@@ -12,14 +12,14 @@
 
         <div class="cart-entry" v-show="cartVisible" ref="cart">
             <div class="cart-entry-header p-4 px-md-8 py-md-6" v-if="cart.length">
-                <div class="row flex-no-wrap align-center">
-                    <div class="column-auto text-uppercase">
-                        <h4 class="mb-0">
+                <div class="row align-center">
+                    <div class="column text-uppercase">
+                        <h4 class="mb-0 none block-md">
                             Вы добавили товар в корзину
                         </h4>
                     </div>
                     <div class="column-auto">
-                        <a href="/cart" class="btn btn-link pr-0">
+                        <a href="/cart" class="btn btn-link px-0">
                             В корзину
                             <svg width="20" height="20" class="ml-3">
                                 <use xlink:href="#rarr"></use>
@@ -53,7 +53,7 @@
                         </button>
                     </div>
 
-                    <div class="column-auto mx-3">
+                    <div class="column-auto ml-auto pr-0">
                         <h4 class="text-normal mb-0">
                             <span class="text-muted text-uppercase mr-3">Итого</span>
                             {{ amount }} грн

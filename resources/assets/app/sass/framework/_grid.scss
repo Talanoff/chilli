@@ -13,6 +13,7 @@
     padding-left: rem-calc(10);
     padding-right: rem-calc(10);
     min-height: 1px;
+    width: 100%;
 
     @media (min-width: map_get($grid-breakpoints, md)) {
         padding-left: $gutter/2;
@@ -22,7 +23,7 @@
 
 .column {
     @extend %column;
-    flex: 1 1 auto;
+    flex: 0 0 100%;
     max-width: 100%;
 }
 

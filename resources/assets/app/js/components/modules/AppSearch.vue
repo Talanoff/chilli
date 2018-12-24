@@ -1,7 +1,6 @@
 <template>
     <div class="flex flex-no-wrap align-center">
-        <a href="/search" class="btn btn-search ml-auto"
-           @click.prevent="show = !show">
+        <a href="/search" class="btn btn-search ml-auto" @click.prevent="handleIcon">
             <svg width="16" height="16">
                 <use xlink:href="#glass"></use>
             </svg>
@@ -21,48 +20,63 @@
 </template>
 
 <script>
-    const words = [
-        'apple',
-        'samsung',
-        'xiaomi',
-        'meizu',
-        'motorola',
-        'huawei',
-        'nokia',
-        'lenovo',
-        'doogee',
-        'blackview',
-        'homtom',
-        'honor',
-        'onex'
-    ];
+  const words = [
+    'apple',
+    'samsung',
+    'xiaomi',
+    'meizu',
+    'motorola',
+    'huawei',
+    'nokia',
+    'lenovo',
+    'doogee',
+    'blackview',
+    'homtom',
+    'honor',
+    'onex'
+  ];
 
-    export default {
-        data() {
-            return {
-                input: '',
-                word: '',
-                show: false
-            }
-        },
-        methods: {
-            autocomplete() {
-                const result = words.filter(w => {
-                    return this.input.toUpperCase() === w.substr(0, this.input.length).toUpperCase();
-                });
+  export default {
+    props: {
+      open: {
+        type: Boolean,
+        default() {
+          return false;
+        }
+      }
+    },
+    data() {
+      return {
+        input: '',
+        word: '',
+        show: this.open
+      }
+    },
+    methods: {
+      handleIcon() {
+        if (this.show) {
+          const form = document.querySelector('[name="search-form"]');
+          if (this.word !== '') form.submit();
+        }
+      },
+      autocomplete() {
+        const result = words.filter(w => {
+          return this.input.toUpperCase() === w.substr(0, this.input.length).toUpperCase();
+        });
 
-                if (result.length) this.word = result[0];
-                else this.word = this.input;
+        if (result.length) this.word = result[0];
+        else this.word = this.input;
 
-                if (this.input.length === 0) this.word = '';
-            }
-        },
-    }
+        if (this.input.length === 0) this.word = '';
+      }
+    },
+  }
 </script>
 
 <style lang="scss">
     .autocomplete {
         transition: 0.35s ease;
+
         &-input {
             background-color: transparent !important;
             position: relative;
