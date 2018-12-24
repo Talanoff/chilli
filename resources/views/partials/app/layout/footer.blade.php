@@ -52,7 +52,7 @@
 
                 <div class="row text-uppercase text-center text-md-left contacts">
                     @if (count($settings['phone']))
-                        <div class="column column-md-auto my-3 my-md-0">
+                        <div class="column w-md-1/2 w-lg-1/4 my-3 my-md-0">
                             <p class="mb-1">Телефон</p>
                             <a class="text-bold text-white"
                                href="tel:{{ phone_link($settings['phone']->last()->value) }}">
@@ -61,14 +61,14 @@
                         </div>
                     @endif
                     @if ($settings['email'])
-                        <div class="column column-md-auto mb-3 mb-md-0">
+                        <div class="column w-md-1/2 w-lg-1/4 mb-3 mb-md-0">
                             <p class="mb-1">Почта</p>
                             <a class="text-bold text-white" href="mailto:{{ $settings['email']->first()->value }}">
                                 {{ $settings['email']->first()->value }}
                             </a>
                         </div>
                     @endif
-                    <div class="column w-lg-1/2 ml-auto">
+                    <div class="column w-lg-1/2">
                         <p class="text-white text-bold mb-1">
                             Подписаться на рассылку новинок
                         </p>
