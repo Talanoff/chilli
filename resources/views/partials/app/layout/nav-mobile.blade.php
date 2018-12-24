@@ -2,11 +2,12 @@
     <ul class="text-uppercase text-center">
         @foreach($nav as $item)
             <li>
-                <a href="{{ route($item['route']) }}">
+                <a href="{{ route($item['route']) }}"
+                        {{ $item['route'] == 'app.product.index' ? 'btn-catalog' : '' }}>
                     {{ $item['name'] }}
                 </a>
 
-                @if (!empty($item['submenu']))
+                @if ($item['route'] == 'app.product.index')
                     <div class="row" ref="brands">
                         @foreach($item['submenu'] as $submenu)
                             <div class="w-1/2 flex align-center justify-center brand column">
@@ -37,33 +38,33 @@
                 Контакты
             </a>
         </li>
-            @auth
-                <li>
-                    <hr class="my-3">
-                    @if (auth()->user()->hasRole('administrator'))
-                        <a href="{{ route('admin.dashboard.index') }}">
-                            Панель управления
-                        </a>
-                    @else
-                        <a href="{{ route('app.profile.index') }}">Профиль</a>
-                    @endif
-                </li>
-            @endauth
-
-            @guest
-                <li>
-                    <a href="{{ route('register') }}">Регистрация</a>
-                </li>
-                <li>
-                    <a href="{{ route('login') }}">Войти</a>
-                </li>
-            @else
-                <li>
-                    <a href="{{ route('logout') }}"
-                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        Выйти
+        @auth
+            <li>
+                <hr class="my-3">
+                @if (auth()->user()->hasRole('administrator'))
+                    <a href="{{ route('admin.dashboard.index') }}">
+                        Панель управления
                     </a>
-                </li>
-            @endguest
+                @else
+                    <a href="{{ route('app.profile.index') }}">Профиль</a>
+                @endif
+            </li>
+        @endauth
+
+        @guest
+            <li>
+                <a href="{{ route('register') }}">Регистрация</a>
+            </li>
+            <li>
+                <a href="{{ route('login') }}">Войти</a>
+            </li>
+        @else
+            <li>
+                <a href="{{ route('logout') }}"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Выйти
+                </a>
+            </li>
+        @endguest
     </ul>
 </app-mobile-nav>

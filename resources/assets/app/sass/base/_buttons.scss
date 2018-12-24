@@ -66,6 +66,12 @@
         }
     }
 
+    &-catalog {
+        padding: 1rem 1.25rem 0.85rem;
+        display: inline-block;
+        border: 1px solid;
+    }
+
     &-nav,
     &-favourites,
     &-search {
