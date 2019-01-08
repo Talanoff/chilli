@@ -34,7 +34,7 @@
   }
 </script>
 
-<style scoped>
+<style>
     .search-container {
         flex-grow: 1;
         margin-right: 20px;
