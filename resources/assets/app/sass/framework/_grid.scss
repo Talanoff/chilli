@@ -85,7 +85,7 @@
         }
 
         @for $column from 3 through ($columns / 2) {
-            .w-#{$breakpoint}-\2\/#{$column} {
+            .w-#{$breakpoint}-2\/#{$column} {
                 width: 100%;
                 flex: 0 0 100% / ($column / 2);
                 max-width: 100% / ($column / 2);
@@ -93,14 +93,14 @@
         }
 
         @for $column from 4 through ($columns / 3) {
-            .w-#{$breakpoint}-\3\/#{$column} {
+            .w-#{$breakpoint}-3\/#{$column} {
                 width: 100%;
                 flex: 0 0 100% / ($column / 3);
                 max-width: 100% / ($column / 3);
             }
         }
         @for $column from 5 through ($columns / 4) {
-            .w-#{$breakpoint}-\4\/#{$column} {
+            .w-#{$breakpoint}-4\/#{$column} {
                 width: 100%;
                 flex: 0 0 100% / ($column / 4);
                 max-width: 100% / ($column / 4);
@@ -108,7 +108,7 @@
         }
 
         @for $column from 2 through $columns {
-            .w-#{$breakpoint}-\1\/#{$column} {
+            .w-#{$breakpoint}-1\/#{$column} {
                 width: 100%;
                 flex: 0 0 100% / $column;
                 max-width: 100% / $column;

@@ -2,11 +2,6 @@
     <ul class="text-uppercase text-center">
         @foreach($nav as $item)
             <li>
-                <a href="{{ route($item['route']) }}"
-                   class="{{ $item['route'] == 'app.product.index' ? 'btn-catalog' : '' }}">
-                    {{ $item['name'] }}
-                </a>
-
                 @if ($item['route'] == 'app.product.index')
                     <div class="row" ref="brands">
                         @foreach($item['submenu'] as $submenu)

@@ -12,7 +12,7 @@
 
                 <input type="text" v-model="input" @input="autocomplete"
                        class="form-control autocomplete-input text-uppercase"
-                       placeholder="Поиск">
+                       placeholder="Поиск" @keyup.enter="handleIcon">
                 <div class="autocomplete-result text-left">{{ word }}</div>
             </div>
         </transition>
@@ -57,6 +57,9 @@
         if (this.show) {
           const form = document.querySelector('[name="search-form"]');
           if (this.word !== '') form.submit();
+        } else {
+          this.show = !this.show;
+
         }
       },
       autocomplete() {

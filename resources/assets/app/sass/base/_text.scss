@@ -32,7 +32,7 @@ $transforms: none uppercase lowercase capitalize;
     }
 }
 
-$colors: white #fff, primary $primary, danger $danger, secondary $secondary, dark $dark;
+$colors: 'white' #fff, primary $primary, danger $danger, secondary $secondary, dark $dark;
 
 @each $name, $color in $colors {
     .text-#{$name} {
