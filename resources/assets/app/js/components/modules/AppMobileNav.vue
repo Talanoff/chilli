@@ -37,11 +37,12 @@
 <style>
     .search-container {
         flex-grow: 1;
-        margin-right: 20px;
+        margin-right: 10px;
     }
 
     .search-container .autocomplete-input {
         padding: 8px 12px;
         border: 1px solid rgba(255, 255, 255, 0.65);
+        border-radius: 15px;
     }
 </style>
