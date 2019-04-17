@@ -8,9 +8,9 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
-class CharacteristicsProcess implements ShouldQueue
+class CharacteristicsProcess
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, SerializesModels;
 	private $props;
 
 	/**

@@ -8,9 +8,9 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class Parse1CImport implements ShouldQueue
+class Parse1CImport
 {
-	use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+	use Dispatchable, SerializesModels;
 	private $file;
 
 	/**
