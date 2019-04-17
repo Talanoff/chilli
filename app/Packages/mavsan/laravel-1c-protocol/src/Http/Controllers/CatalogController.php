@@ -237,7 +237,7 @@ class CatalogController extends BaseController
 		}
 
 		$path = config('protocolExchange1C.inputPath');
-\Log::info($path . '/' . $workDirName . '/' . $fileName);
+
 		return $path . '/' . $workDirName . '/' . $fileName;
 	}
 
