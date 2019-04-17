@@ -2,6 +2,13 @@
 
 Auth::routes();
 
+Route::get('dd', function() {
+	$record = App\Models\Bitrix\Exchange::latest('id')->first();
+	$pos = strrpos($record->path, '/');
+	$path = substr($record->path, 0, $pos);
+	dd($path);
+});
+
 Route::group([
     'as' => 'admin',
     'prefix' => 'admin',

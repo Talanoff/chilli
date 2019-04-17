@@ -9,6 +9,11 @@ use Mavsan\LaProtocol\Interfaces\Import;
 
 class Exchange extends Model implements Import
 {
+	protected $fillable = [
+		'path',
+		'status'
+	];
+
 	/**
 	 * Обработка данных
 	 *

@@ -59,8 +59,9 @@ class ProtocolProvider extends ServiceProvider
 			function () {
 				Route::match(['get', 'post'],
 					config('protocolExchange1C.1cRouteNameCatalog'),
-					'CatalogController@catalogIn')->name('1sProtocolCatalog')
-					 ->middleware('api');
+					'CatalogController@catalogIn')
+					 ->name('1sProtocolCatalog')
+					 ->middleware('web');
 			});
 	}
 }
