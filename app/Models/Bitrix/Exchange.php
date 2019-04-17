@@ -2,8 +2,8 @@
 
 namespace App\Models\Bitrix;
 
-use App\Jobs\Parse1CImport;
-use App\Jobs\Parse1COffers;
+
+use App\Services\Parse1CImport;
 use Illuminate\Database\Eloquent\Model;
 use Mavsan\LaProtocol\Interfaces\Import;
 
@@ -11,7 +11,7 @@ class Exchange extends Model implements Import
 {
 	protected $fillable = [
 		'path',
-		'status'
+		'status',
 	];
 
 	/**
@@ -37,9 +37,9 @@ class Exchange extends Model implements Import
 		$type = substr($fileName, -10, 6);
 
 		if ($type === 'import') {
-			Parse1CImport::dispatch($fileName);
+			(new Parse1CImport($fileName))->handle();
 		} else {
-			Parse1COffers::dispatch($fileName);
+			//			Parse1COffers::dispatch($fileName);
 		}
 
 		return self::answerSuccess;
