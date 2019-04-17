@@ -58,6 +58,6 @@ class Exchange extends Model implements Import
 	 */
 	public function getAnswerDetail()
 	{
-		// TODO: Implement getAnswerDetail() method.
+		return self::answerSuccess;
 	}
 }
