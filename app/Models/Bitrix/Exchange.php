@@ -4,6 +4,7 @@ namespace App\Models\Bitrix;
 
 
 use App\Services\Parse1CImport;
+use App\Services\Parse1COffers;
 use Illuminate\Database\Eloquent\Model;
 use Mavsan\LaProtocol\Interfaces\Import;
 
@@ -39,7 +40,7 @@ class Exchange extends Model implements Import
 		if ($type === 'import') {
 			(new Parse1CImport($fileName))->handle();
 		} else {
-			//			Parse1COffers::dispatch($fileName);
+			(new Parse1COffers($fileName))->handle();
 		}
 
 		return self::answerSuccess;
@@ -58,6 +59,6 @@ class Exchange extends Model implements Import
 	 */
 	public function getAnswerDetail()
 	{
-		return self::answerSuccess;
+		return '';
 	}
 }

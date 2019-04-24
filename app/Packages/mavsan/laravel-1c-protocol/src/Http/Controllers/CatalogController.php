@@ -1,16 +1,8 @@
 <?php
-/**
- * ProtocolController.php
- * Date: 16.05.2017
- * Time: 16:09
- * Author: Maksim Klimenko
- * Email: mavsan@gmail.com
- */
 
 namespace Mavsan\LaProtocol\Http\Controllers;
 
 use App\Models\Bitrix\Exchange;
-use App\Models\User\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
@@ -331,12 +323,12 @@ class CatalogController extends BaseController
 		}
 
 		// проверка валидности имени файла
-		$fileName = $this->importGetFileName($this->request->get('filename'));
-		if (empty($fileName)) {
-			return $this->failure('Mode: ' . $this->stepImport
-								  . ' wrong file name: '
-								  . $this->request->get('filename'));
-		}
+//		$fileName = $this->importGetFileName($this->request->get('filename'));
+//		if (empty($fileName)) {
+//			return $this->failure('Mode: ' . $this->stepImport
+//								  . ' wrong file name: '
+//								  . $this->request->get('filename'));
+//		}
 
 		$modelCLass = config('protocolExchange1C.catalogWorkModel');
 		// проверка модели
@@ -354,7 +346,8 @@ class CatalogController extends BaseController
 		}
 
 		try {
-			$fullPath = $this->getFullPathToFile($fileName);
+			$record = Exchange::latest('id')->first();
+			$fullPath = $this->extractPath($record).'/'.$this->request->get('filename');
 
 			if (!\File::isFile($fullPath)) {
 				return $this->failure('Mode: ' . $this->stepImport . ', file '
@@ -408,6 +401,11 @@ class CatalogController extends BaseController
 		//		session(['inputZipped' => $files]);
 
 		$record = Exchange::latest('id')->first();
+
+		if ($record->status === 'extracted') {
+			return '';
+		}
+
 		$file = $record->path;
 
 		/** @var \Chumper\Zipper\Zipper $zip */
@@ -421,13 +419,12 @@ class CatalogController extends BaseController
 		}
 
 		//		$path = config('protocolExchange1C.inputPath') . '/' . $this->checkInputPath();
-		$pos = strrpos($record->path, '/');
-		$path = substr($record->path, 0, $pos);
+		$path = $this->extractPath($record);
 
 		$zip->extractTo($path);
 
 		\File::delete($file);
-		$record->update(['status' => 'removed']);
+		$record->update(['status' => 'extracted']);
 
 		return 'more';
 	}
@@ -454,5 +451,16 @@ class CatalogController extends BaseController
 		}
 
 		return $modeFileName->getFileName();
+	}
+
+	/**
+	 * @param $record
+	 * @return bool|string
+	 */
+	protected function extractPath($record)
+	{
+		$pos = strrpos($record->path, '/');
+		$path = substr($record->path, 0, $pos);
+		return $path;
 	}
 }

@@ -3,10 +3,10 @@
 Auth::routes();
 
 Route::get('dd', function() {
-	$record = App\Models\Bitrix\Exchange::latest('id')->first();
-	$pos = strrpos($record->path, '/');
-	$path = substr($record->path, 0, $pos);
-	dd($path);
+//	$import = simplexml_load_file('/Users/olegtalanov/Code/chilli/storage/1cExchange/2019-04-24_13:58_1556114302/import.xml');
+	$offers = simplexml_load_file('/Users/olegtalanov/Code/chilli/storage/1cExchange/2019-04-24_14:49_1556117386/offers.xml');
+
+	dd($offers);
 });
 
 Route::group([

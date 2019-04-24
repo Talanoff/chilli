@@ -14,17 +14,11 @@ class CreateProductSeriesTable extends Migration
     public function up()
     {
         Schema::create('product_series', function (Blueprint $table) {
-            $table->increments('id');
             $table->unsignedInteger('product_id');
             $table->unsignedInteger('series_id');
 
-            $table->foreign('product_id')
-                  ->references('id')->on('products')
-                  ->onDelete('cascade');
-
-            $table->foreign('series_id')
-                  ->references('id')->on('series')
-                  ->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('series_id')->references('id')->on('series')->onDelete('cascade');
         });
     }
 

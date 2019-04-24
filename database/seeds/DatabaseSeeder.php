@@ -17,12 +17,12 @@ class DatabaseSeeder extends Seeder
             BrandsTableSeeder::class,
             SettingsSeeder::class,
             PageSeeder::class,
+			ProductCharacteristicSeeder::class,
         ]);
 
         if (config('app.env') === 'local') {
             $this->call([
                 SeriesTableSeeder::class,
-                ProductCharacteristicSeeder::class,
                 ProductCategorySeeder::class,
                 ProductSeeder::class,
                 ReviewSeeder::class,

@@ -1,41 +1,38 @@
 header {
-    padding: 0 0 20px;
-    font-size: rem-calc(14);
-    position: relative;
-    z-index: 10000;
+	padding: 0 0 20px;
+	font-size: rem-calc(14);
+	position: relative;
+	z-index: 10000;
 
-    @media (min-width: map_get($grid-breakpoints, lg)) {
-        padding: 20px 0;
-    }
+	.nav,
+	.phones {
+		a {
+			color: $light;
 
-    .nav,
-    .phones {
-        a {
-            color: $light;
-            &:hover {
-                color: $primary;
-            }
-        }
-    }
+			&:hover {
+				color: $primary;
+			}
+		}
+	}
 
-    .logo {
-        @media (min-width: map_get($grid-breakpoints, lg)) {
-            margin-left: -60px;
-        }
+	.logo {
+		@media (min-width: map_get($grid-breakpoints, lg)) {
+			margin-left: -60px;
+		}
 
-        @media (min-width: map_get($grid-breakpoints, xl)) {
-            margin-left: -80px;
-        }
+		@media (min-width: map_get($grid-breakpoints, xl)) {
+			margin-left: -80px;
+		}
 
-        @media (min-width: map_get($grid-breakpoints, xxl)) {
-            margin-left: -120px;
-        }
+		@media (min-width: map_get($grid-breakpoints, xxl)) {
+			margin-left: -120px;
+		}
 
-        img {
-            height: 80px;
-            @media (min-width: map_get($grid-breakpoints, lg)) {
-                height: 108px;
-            }
-        }
-    }
+		img {
+			height: 80px;
+			@media (min-width: map_get($grid-breakpoints, lg)) {
+				height: 108px;
+			}
+		}
+	}
 }

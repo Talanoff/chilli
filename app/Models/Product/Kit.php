@@ -13,6 +13,7 @@ class Kit extends Model
         'product_id',
         'related_id',
         'amount',
+		'1c_id',
     ];
 
     protected $appends = [

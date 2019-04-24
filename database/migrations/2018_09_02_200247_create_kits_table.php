@@ -15,11 +15,10 @@ class CreateKitsTable extends Migration
     {
         Schema::create('kits', function (Blueprint $table) {
             $table->increments('id');
-
             $table->unsignedInteger('product_id');
             $table->unsignedInteger('related_id');
             $table->float('amount');
-
+			$table->string('1c_id')->nullable();
             $table->timestamps();
 
             $table->foreign('product_id')

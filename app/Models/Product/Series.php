@@ -2,14 +2,14 @@
 
 namespace App\Models\Product;
 
-use App\Traits\Sluggable;
+use App\Traits\SluggableTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Series extends Model
 {
-    use Sluggable;
+    use SluggableTrait;
 
     protected $fillable = [
         'slug',
@@ -17,6 +17,7 @@ class Series extends Model
         'description',
         'brand_id',
         'order',
+		'1c_id',
     ];
 
     /**

@@ -12,6 +12,7 @@ class Characteristic extends Model
         'value',
         'type',
         'type_id',
+		'1c_id',
     ];
 
     public static $TYPES = [

@@ -26,7 +26,7 @@
         </div>
 
         @if (count($settings['phone']))
-            <ul class="flex justify-center justify-lg-end unstyled phones mt-8 mt-lg-0    ">
+            <ul class="flex justify-center justify-lg-end unstyled phones mt-8 mt-lg-4">
                 @foreach($settings['phone'] as $phone)
                     <li class="mx-2 {{ $loop->last ? ' mr-lg-0' : '' }}">
                         <svg width="14" height="14" style="margin-top: -2px;">

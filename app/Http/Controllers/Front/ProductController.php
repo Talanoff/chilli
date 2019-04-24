@@ -232,7 +232,7 @@ class ProductController extends Controller
         $filters = collect([]);
 
         $filters->put('brands', Brand::query()->has('products')->get());
-        $filters->put('categories', Category::query()->has('product')->get());
+//        $filters->put('categories', Category::query()->has('product')->get());
 
         $filters->put('price', collect([
             'asc' => 'От дешевых к дорогим',
@@ -272,11 +272,11 @@ class ProductController extends Controller
             });
         }
 
-        if ($request->filled('category')) {
-            $products = $products->whereHas('category', function ($q) use ($request) {
-                $q->whereSlug($request->get('category'));
-            });
-        }
+//        if ($request->filled('category')) {
+//            $products = $products->whereHas('category', function ($q) use ($request) {
+//                $q->whereSlug($request->get('category'));
+//            });
+//        }
 
         if ($request->has('leaders')) {
             $products = $products->leaders();

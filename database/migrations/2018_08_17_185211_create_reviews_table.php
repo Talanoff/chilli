@@ -16,7 +16,7 @@ class CreateReviewsTable extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('slug')->unique();
+            $table->string('slug');
             $table->enum('type', array_keys(App\Models\Review\Review::$CATEGORIES))
                 ->default(array_keys(App\Models\Review\Review::$CATEGORIES)[0]);
 

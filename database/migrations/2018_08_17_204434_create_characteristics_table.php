@@ -18,6 +18,7 @@ class CreateCharacteristicsTable extends Migration
             $table->enum('type', array_keys(\App\Models\Product\Characteristic::$TYPES))->default('text');
             $table->string('value');
             $table->unsignedInteger('type_id');
+			$table->string('1c_id')->nullable();
             $table->timestamps();
 
             $table->foreign('type_id')
