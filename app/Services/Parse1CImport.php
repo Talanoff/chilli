@@ -34,7 +34,9 @@ class Parse1CImport
 		$this->handleProducts();
 	}
 
-
+	/**
+	 * Handle brands
+	 */
 	private function handleBrands(): void
 	{
 		foreach ($this->xml->Классификатор->Группы->Группа as $group) {
@@ -48,6 +50,9 @@ class Parse1CImport
 		}
 	}
 
+	/**
+	 * Handle types of characteristics
+	 */
 	private function handleCharacteristicsTypes(): void
 	{
 		foreach ($this->xml->Классификатор->Свойства->СвойствоНоменклатуры as $type) {
@@ -65,7 +70,7 @@ class Parse1CImport
 	 * @param $group
 	 * @param Brand $brand
 	 */
-	private function handleSeries($group, Brand $brand)
+	private function handleSeries($group, Brand $brand): void
 	{
 		foreach ($group->Группы->Группа as $series) {
 			Series::updateOrCreate([
@@ -77,7 +82,10 @@ class Parse1CImport
 		}
 	}
 
-	private function prependProducts()
+	/**
+	 * @return array
+	 */
+	private function prependProducts(): array
 	{
 		$products = collect([]);
 
@@ -90,8 +98,10 @@ class Parse1CImport
 
 			if (isset($product->ЗначенияСвойств)) {
 				$props = [];
-				foreach ($product->ЗначенияСвойств->ЗначенияСвойства as $prop) {
-					$prop[$prop->Ид] = $prop->Значение;
+				foreach (json_decode(json_encode($product->ЗначенияСвойств)) as $propList) {
+					foreach ($propList as $prop) {
+						$props[$prop->Ид] = $prop->Значение;
+					}
 				}
 			}
 
@@ -100,7 +110,11 @@ class Parse1CImport
 			}
 
 			if (isset($product->Картинка)) {
-				$image = new File(str_replace('import.xml', '', $this->file) . $product->Картинка);
+				$path = str_replace('import.xml', '', $this->file) . $product->Картинка;
+
+				if (file_exists($path)) {
+					$image = new File($path);
+				}
 			}
 
 			$products->push([
@@ -118,7 +132,10 @@ class Parse1CImport
 		return $products->all();
 	}
 
-	private function handleProducts()
+	/**
+	 * Handle products
+	 */
+	private function handleProducts(): void
 	{
 		$products = $this->prependProducts();
 
@@ -149,14 +166,16 @@ class Parse1CImport
 				foreach ($item['props'] as $id => $prop) {
 					$type = CharacteristicType::where('1c_id', $id)->first();
 
-					$characteristic = Characteristic::firstOrCreate([
-						'type_id' => $type->id,
-						'value' => $prop,
-					], [
-						'type' => 'text',
-					]);
+					if ($type) {
+						$characteristic = Characteristic::firstOrCreate([
+							'type_id' => $type->id,
+							'value' => $prop,
+						], [
+							'type' => 'text',
+						]);
 
-					array_push($characteristics, $characteristic->id);
+						array_push($characteristics, $characteristic->id);
+					}
 				}
 			}
 
@@ -181,7 +200,11 @@ class Parse1CImport
 		}
 	}
 
-	private function detectColor($color)
+	/**
+	 * @param $color
+	 * @return string
+	 */
+	private function detectColor($color): string
 	{
 		switch ($color) {
 			case 'Красный':

@@ -7,10 +7,12 @@ use App\Http\Requests\CommentRequest;
 use App\Models\Meta\Meta;
 use App\Models\Product\Brand;
 use App\Models\Product\Category;
+use App\Models\Product\Characteristic;
 use App\Models\Product\CharacteristicType;
 use App\Models\Product\Product;
 use App\Models\Product\Series;
 use App\Models\User\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -232,7 +234,9 @@ class ProductController extends Controller
         $filters = collect([]);
 
         $filters->put('brands', Brand::query()->has('products')->get());
-//        $filters->put('categories', Category::query()->has('product')->get());
+        $filters->put('categories', Characteristic::whereHas('type', function(Builder $builder) {
+        	$builder->whereTitle('Тип товара');
+		})->get());
 
         $filters->put('price', collect([
             'asc' => 'От дешевых к дорогим',

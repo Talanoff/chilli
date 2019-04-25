@@ -3,10 +3,9 @@
 Auth::routes();
 
 Route::get('dd', function() {
-//	$import = simplexml_load_file('/Users/olegtalanov/Code/chilli/storage/1cExchange/2019-04-24_13:58_1556114302/import.xml');
-	$offers = simplexml_load_file('/Users/olegtalanov/Code/chilli/storage/1cExchange/2019-04-24_14:49_1556117386/offers.xml');
+	$imports = simplexml_load_file('/Users/olegtalanov/Code/chilli/storage/1cExchange/2019-04-25_09:48_1556185697/import.xml');
 
-	dd($offers);
+dd($imports->Каталог->Товары->Товар);
 });
 
 Route::group([
