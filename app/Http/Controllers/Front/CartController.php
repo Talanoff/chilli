@@ -60,6 +60,8 @@ class CartController extends Controller
             Checkout::query()->create([
                 'user_id' => Auth::check() ? Auth::user()->id : session()->getId(),
                 'product_id' => $product->id,
+                '1c_id' => $product['1c_id'],
+                '1c_attr_id' => '', // @TODO
                 'quantity' => 1,
                 'price' => $product->computed_price,
             ]);
